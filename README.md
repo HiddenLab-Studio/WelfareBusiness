@@ -17,6 +17,7 @@
     SERVER_PORT = 4000
     SERVER_ENV = production
 
+    SESSION_NAME = session.sid
     SESSION_KEY = STRING
 
     DATABASE_NAME = WelfareBusiness

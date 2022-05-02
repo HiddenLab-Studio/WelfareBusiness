@@ -16,9 +16,12 @@
 
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #393f58;
-  min-height: 100vh;
+@font-face {
+  font-family: "Minecraft";
+  src: url("../../public/assets/fonts/Minecraft.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "VAGRBlack";
+  src: url("../../public/assets/fonts/VAG_Rounded_Black.ttf") format("truetype");
 }

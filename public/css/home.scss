@@ -1,0 +1,25 @@
+/*=====================================================
+ *                      H O M E
+ *
+ *  All home css rules
+ *
+ *=====================================================*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121d27;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: auto;
+  font-family: "Minecraft", sans-serif;
+  //background: url("../../public/assets/img/header/mainBackground.png") no-repeat;
+  h1 {
+    font-size: var(--fs-xl);
+    color: white;
+  }
+}

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/HiddenLab-Studio/WelfareBusiness/issues"
   },
-  "homepage": "https://github.com/HiddenLab-Studio/WelfareBusiness#readme"
+  "homepage": "https://github.com/HiddenLab-Studio/WelfareBusiness#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }

@@ -13,16 +13,16 @@ var config = {
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.image('theo', 'img/a-theo_emote.png/')
+    this.load.image('theo', '../img/a-theo_emote.png')
 }
 
 function create() {
     //Créer un objet avec un event on click
-    /*let theo = this.add.sprite(400, 100, 'theo').setOrigin(0, 0).setInteractive();
+    let theo = this.add.sprite(400, 100, 'theo').setOrigin(0, 0).setInteractive();
 
     theo.on('pointerdown', function () {
         console.log("clickthéo");
-    });*/
+    });
 
     //Hauteur de la barre de menu du haut
     let topbarHeight = 71;

@@ -1,15 +1,3 @@
-/**
- * Simple web server based on 
- * http://expressjs.com/en/starter/hello-world.html
- *
- * Prerequisites:
- *  - Node
- *  - Express (npm install express)
- * 
- * To use, save as a file (e.g. SimpleServer.js) and run with:
- *  node SimpleServer.js /PATH/TO/WWW/
- */
- 
 // Parameters
 var sitePath = process.argv[2] || ".";
 var port = 4242;

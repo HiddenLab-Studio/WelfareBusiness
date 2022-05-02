@@ -1,20 +1,19 @@
 {
   "name": "welfarebusiness",
-  "version": "1.0.0",
-  "description": "Cirious game",
-  "main": "server/app.js",
+  "version": "0.0.1",
+  "description": "Projet de fin d'année de CIR2",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "HiddenLab",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HiddenLab-Studio/WelfareBusiness.git"
+  },
+  "author": "Aurélien Rogé, Lucas Haboussi, Antoine Mignien, Guillaume Leroy, Théo Vangheluwe",
   "license": "ISC",
-  "dependencies": {
-    "compression": "^1.7.4",
-    "dotenv": "^16.0.0",
-    "ejs": "^3.1.7",
-    "express": "^4.17.3",
-    "express-session": "^1.17.2",
-    "mysql": "^2.18.1",
-    "nodemon": "^2.0.15"
-  }
+  "bugs": {
+    "url": "https://github.com/HiddenLab-Studio/WelfareBusiness/issues"
+  },
+  "homepage": "https://github.com/HiddenLab-Studio/WelfareBusiness#readme"
 }

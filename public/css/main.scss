@@ -5,6 +5,20 @@
  *
  *=====================================================*/
 
+:root {
+  // Responsive font size
+  --fs-xxl: 3rem;
+  --fs-xl: 2rem;
+  --fs-l: 1.75rem;
+  --fs-m: 1.5rem;
+  --fs-sm: 1.25rem;
+  --fs-s: 1rem;
+
+}
+
 body {
-  background-color: darkgrey;
+  margin: 0;
+  padding: 0;
+  background-color: #393f58;
+  min-height: 100vh;
 }

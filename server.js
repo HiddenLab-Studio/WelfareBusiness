@@ -1,3 +1,4 @@
+// Parameters
 var sitePath = process.argv[2] || ".";
 var port = 4242;
 

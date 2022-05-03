@@ -1,28 +1,6 @@
 {
-<<<<<<< Updated upstream
-  "name": "welfarebusiness",
-  "version": "0.0.1",
-  "description": "Projet de fin d'année de CIR2",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HiddenLab-Studio/WelfareBusiness.git"
-  },
-  "author": "Aurélien Rogé, Lucas Haboussi, Antoine Mignien, Guillaume Leroy, Théo Vangheluwe",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HiddenLab-Studio/WelfareBusiness/issues"
-  },
-  "homepage": "https://github.com/HiddenLab-Studio/WelfareBusiness#readme",
-  "dependencies": {
-    "express": "^4.18.1"
-=======
   "dependencies": {
     "express": "^4.18.1",
     "nodemon": "^2.0.16"
->>>>>>> Stashed changes
   }
 }

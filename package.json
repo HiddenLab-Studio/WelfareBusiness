@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "name": "welfarebusiness",
   "version": "0.0.1",
   "description": "Projet de fin d'année de CIR2",
@@ -18,5 +19,10 @@
   "homepage": "https://github.com/HiddenLab-Studio/WelfareBusiness#readme",
   "dependencies": {
     "express": "^4.18.1"
+=======
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+>>>>>>> Stashed changes
   }
 }

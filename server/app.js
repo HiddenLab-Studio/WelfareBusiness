@@ -7,6 +7,7 @@ const app = express();
 const path = require("path");
 const compression = require("compression");
 const dotenv = require("dotenv").config({path: "./.env"});
+const bodyParser = require("body-parser");
 
 // Configuration de notre session
 const session = require('express-session')({
@@ -19,6 +20,7 @@ const session = require('express-session')({
 // Configuration du serveur
 app.use(express.static(path.join(__dirname, "..")));
 app.use(compression());
+app.use(bodyParser.urlencoded({extended: false}));
 app.set("title", process.env.SERVER_NAME)
 app.set("port", process.env.SERVER_PORT);
 app.set("env", process.env.SERVER_ENV)
@@ -31,6 +33,9 @@ if(app.get("env") === "production"){
 app.get('/', (req, res) => {
     res.render(path.join(__dirname, "..", "views", "index"));
 })
+
+const auth = require("./controllers/authController");
+app.use("/", auth);
 
 // Lancement du serveur
 const server = http.createServer(app);

@@ -9,11 +9,14 @@
   "author": "HiddenLab",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
     "compression": "^1.7.4",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.7",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "helmet": "^5.0.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
     "rellax": "^1.12.1"

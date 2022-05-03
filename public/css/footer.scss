@@ -19,13 +19,14 @@ footer {
   }
 
   .footer__element__container {
+    padding-top: 50px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: "VAGRbLAC", sans-serif;
-    background-color: #273f54;
+    background-color: #192E3D;
 
     h1 {
       font-family: "Minecraft", sans-serif;
@@ -34,13 +35,6 @@ footer {
       font-size: var(--fs-xxl);
       color: white;
       letter-spacing: 5px;
-
-      mark {
-        color: inherit;
-        position: relative;
-        background: linear-gradient(120deg, rgba(var(--dark-mark-rgb), 1) 0%, rgba(var(--dark-mark-rgb), 1) 100%) no-repeat 0 75%;
-        background-size: 100% 8px;
-      }
     }
 
     .footer__text {
@@ -65,11 +59,12 @@ footer {
       }
 
       img {
+        cursor: pointer;
         width: 200px;
         height: auto;
 
         @media (max-width: 60em) {
-          width: 30%;
+          width: 50%;
         }
       }
 
@@ -80,13 +75,6 @@ footer {
         color: white;
         letter-spacing: 5px;
         font-family: "Minecraft", sans-serif;
-
-        mark {
-          color: inherit;
-          position: relative;
-          background: linear-gradient(120deg, rgba(var(--dark-mark-rgb), 1) 0%, rgba(var(--dark-mark-rgb), 1) 100%) no-repeat 0 70%;
-          background-size: 100% 5px;
-        }
       }
 
 
@@ -96,12 +84,15 @@ footer {
         align-items: center;
         flex-grow: 2;
         gap: 5px;
-        justify-content: center;
 
         a {
           color: white;
           text-decoration: none;
           font-size: var(--fs-s);
+          letter-spacing: 1px;
+          &:hover {
+            opacity: 0.5;
+          }
         }
 
       }
@@ -111,12 +102,15 @@ footer {
         flex-direction: column;
         align-items: center;
         gap: 5px;
-        justify-content: center;
 
         a {
           color: white;
           text-decoration: none;
           font-size: var(--fs-s);
+          letter-spacing: 1px;
+          &:hover {
+            opacity: 0.5;
+          }
         }
       }
 
@@ -137,6 +131,7 @@ footer {
         gap: 5px;
         color: white;
         font-size: var(--fs-s);
+        letter-spacing: 1px;
       }
     }
   }

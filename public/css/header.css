@@ -9,11 +9,11 @@ header {
   flex-direction: column;
   padding: 0;
   margin: 0;
-  min-height: 113vh;
-  background: url("../assets/img/header/headerBackground.png") no-repeat;
+  min-height: 100vh;
+  background-image: url("../assets/img/header/headerBackground.png");
   background-size: cover;
+  background-position: bottom;
   font-family: "Minecraft", sans-serif;
-  overflow: hidden;
 }
 header .nav__container {
   width: 100%;
@@ -53,7 +53,8 @@ header .nav__container .connection__container {
   flex-grow: 1;
 }
 header .nav__container .connection__container img {
-  height: 100px;
+  cursor: pointer;
+  height: 50px;
 }
 header .header__text {
   position: absolute;
@@ -71,7 +72,7 @@ header .header__text h1 {
   margin: 10px 0 10px 0;
   color: white;
   font-size: var(--fs-xxl);
-  letter-spacing: 5px;
+  letter-spacing: 7px;
 }
 header .header__text span {
   color: white;

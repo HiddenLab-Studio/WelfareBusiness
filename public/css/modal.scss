@@ -1,0 +1,197 @@
+/*=====================================================
+ *                      M O D A L S
+ *
+ *  All modal css rules
+ *
+ *=====================================================*/
+.account__modal__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+
+  .connection__container {
+    display: flex;
+    flex-direction: row;
+    height: 65vh;
+    width: 45vh;
+    border-radius: 10px;
+    background-color: #121D27;
+    box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+
+    @media (max-width: 40em){
+      width: max(20%, 37vh);
+    }
+
+    .close {
+      width: inherit;
+      display: flex;
+      justify-content: end;
+      position: absolute;
+
+      i {
+        cursor: pointer;
+        color: white;
+        font-size: 2.5rem;
+        padding: 15px;
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+
+    .connection__content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 15px;
+      width: 100%;
+      justify-content: center;
+      gap: 10px;
+
+      .text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        //margin: 35px 0 35px 0;
+        font-family: "Minecraft", sans-serif;
+
+        h1 {
+          color: white;
+          margin: 0;
+          font-size: var(--fs-m);
+          letter-spacing: 2px;
+        }
+        span {
+          color: white;
+          font-size: var(--fs-s);
+          letter-spacing: 1px;
+        }
+      }
+
+      .form {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 25px;
+        font-family: "Minecraft", sans-serif;
+
+        .element {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          span {
+            color: white;
+            font-size: var(--fs-s);
+            letter-spacing: 1px;
+          }
+
+          label {
+            display: flex;
+            input {
+              width: 100%;
+              padding: 12px 20px;
+              display: inline-block;
+              border: 2px solid #cd6f66;
+              border-radius: 5px;
+              box-sizing: border-box;
+              background-color: transparent;
+              color: white;
+
+              &:focus {
+                outline-style: none !important;
+              }
+
+              ::placeholder {
+                color: white;
+              }
+
+            }
+          }
+
+          .loginPasswordInput, .registerConfirmPasswordInput, .registerPasswordInput {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+
+            input {
+              padding-right: 30px;
+            }
+
+            i {
+              cursor: pointer;
+              position: absolute;
+              font-size: var(--fs-s);
+              padding-right: 10px;
+              color: white;
+
+              &:hover {
+                opacity: 0.75;
+              }
+
+            }
+          }
+        }
+
+        .connection__btn {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+
+          button {
+            cursor: pointer;
+            width: 90%;
+            height: 50px;
+            border: solid #8B352D 2px;
+            border-radius: 5px;
+            background-color: #cd6f66;
+            color: white;
+            font-size: var(--fs-m);
+            letter-spacing: 2px;
+            font-family: "Minecraft", sans-serif;
+          }
+        }
+      }
+
+      .register {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-family: "Minecraft", sans-serif;
+        color: white;
+        font-size: var(--fs-s);
+
+        p {
+          margin: 0;
+          letter-spacing: 1px;
+          span {
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+

@@ -8,6 +8,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="./public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/modal.css">
     <link rel="stylesheet" type="text/css" href="./public/css/home.css">
     <link rel="stylesheet" type="text/css" href="./public/css/header.css">
     <link rel="stylesheet" type="text/css" href="./public/css/footer.css">
@@ -15,20 +16,28 @@
     <!-- LIB CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="./public/css/libs/hover/hover.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet" type="text/css">
 
     <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/dixonandmoe/rellax@master/rellax.min.js"></script>
 
     <title>Welfare Business</title>
 </head>
 <body>
+
     <%- include("../views/partials/header") %>
-    <main style="height: 1000px">
-        <h1>Hi you</h1>
+    <%- include("../views/partials/connectModal") %>
+
+    <main>
+        <section class="welcome__container">
+            <h1>Welcome</h1>
+            <p>Lorem ipsum dolor sit amet. Qui porro nihil vel odio quisquam non aperiam ratione ut dignissimos numquam et assumenda atque aut obcaecati omnis qui facere saepe. Qui nobis iste sed soluta nemo in quia illum rem culpa iste dolores sunt et voluptas possimus?</p>
+        </section>
     </main>
+
     <%- include("../views/partials/footer") %>
 
     <script src="./public/js/header/main.js"></script>
-
 </body>
 </html>

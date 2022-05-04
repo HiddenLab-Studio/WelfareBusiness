@@ -66,7 +66,8 @@ router.get("/profile", (req, res) => {
     if(req.session.login){
         // On fait le rendu de notre page en passant en paramètre les différentes informations du joueur
         res.render(path.join(__dirname, "..", "..", "views", "profile"), {
-            username: req.session.username,
+            session: req.session.login,
+            username: req.session.username
         });
     } else {
         // On le redirige sur la page home

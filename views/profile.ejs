@@ -2,12 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>WB | Profile</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/home.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/header.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/footer.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet" type="text/css">
+
+    <!-- LIBS CSS -->
+    <link rel="stylesheet" type="text/css" href="../public/css/libs/hover/hover.css">
+
+    <!-- LIBS JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dixonandmoe/rellax@master/rellax.min.js"></script>
+
+    <title>WB | Play</title>
 </head>
 <body>
+
+<%- include("./partials/simplifiedHeader"); -%>
+
+<main>
     <h1><%= username %></h1>
+</main>
+
+<%- include("./partials/footer"); -%>
+
+<script>let rellax = new Rellax('.rellax');</script>
+
 </body>
 </html>

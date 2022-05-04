@@ -35,6 +35,14 @@ footer {
       font-size: var(--fs-xxl);
       color: white;
       letter-spacing: 5px;
+
+      @media (max-width: 31.25em){
+        font-size: var(--fs-l);
+      }
+      @media (max-width: 25em){
+        font-size: var(--fs-sl);
+      }
+
     }
 
     .footer__text {
@@ -45,6 +53,11 @@ footer {
         font-size: var(--fs-m);
         text-align: justify;
         letter-spacing: 1px;
+
+        @media (max-width: 25em){
+          font-size: var(--fs-sm);
+        }
+
       }
     }
 

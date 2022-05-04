@@ -81,6 +81,13 @@ app.get('/', (req, res) => {
 const auth = require("./controllers/authController");
 app.use("/", auth);
 
+// Page 404
+app.use((req, res) => {
+    res.status(404).render(path.join(__dirname, "..", "views", "errors", "404"), {
+        session: undefined,
+    });
+})
+
 // Lancement du serveur
 const server = http.createServer(app);
 server.listen(app.get("port"), () => {

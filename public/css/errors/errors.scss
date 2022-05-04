@@ -1,0 +1,113 @@
+//======================================================
+//                    E R R O R
+//
+//  This file contains all important css property
+//  for all http error like 404, 502 ...
+//
+//======================================================*
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #121d27;
+  background-image: url("../../assets/img/filter.png");
+  background-position: right;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+main {
+  width: 75%;
+  margin: auto auto 90px;
+}
+
+.error__container {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  font-family: "Minecraft", sans-serif;
+
+  .error__text {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      font-size: var(--fs-m);
+      font-weight: 200;
+      margin-bottom: 25px;
+      color: white;
+      text-align: justify;
+      transition: all ease-in-out 500ms;
+      max-width: 80%;
+
+      a {
+        font-weight: 600;
+        color: var(--dark-violet-hex);
+        text-decoration: none;
+        border-bottom: 2px dashed rgba(205, 111, 102, 1);
+        border-radius: 2px;
+
+        &:hover {
+          opacity: .75;
+        }
+
+        &:visited {
+          color: rgba(205, 111, 102, 1);
+        }
+      }
+    }
+
+    h1 {
+      padding: 0;
+      margin: 0;
+      color: white;
+      font-size: var(--fs-error);
+      letter-spacing: 2rem;
+      transition: all ease-in-out 500ms;
+
+      mark {
+        color: inherit;
+        position: relative;
+        background: linear-gradient(120deg, rgba(205, 111, 102, 1) 0%, rgba(205, 111, 102, 1) 100%) no-repeat 0 74%;
+        background-size: 100% 15px;
+      }
+
+    }
+
+    h2 {
+      padding: 0;
+      margin: 0;
+      font-weight: 0;
+      color: white;
+      font-size: var(--fs-xl);
+      letter-spacing: 5px;
+    }
+  }
+
+  .error__img {
+     img {
+      width: 500px;
+      height: auto;
+
+      @media (max-width: 80em){
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 80em){
+  .error__container {
+    animation: fadeIn 1s;
+
+    position: relative;
+    flex-direction: column;
+    gap: 50px;
+    z-index: 1;
+
+    .error__text {
+      align-items: center;
+    }
+  }
+}

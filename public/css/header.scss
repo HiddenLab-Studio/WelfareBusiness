@@ -5,15 +5,18 @@
  *
  *=====================================================*/
 
+.header__background {
+  background-image: url("../assets/img/header/headerBackground.png");
+  background-size: cover;
+  background-position: bottom;
+  min-height: 100vh;
+}
+
 header {
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
-  min-height: 100vh;
-  background-image: url("../assets/img/header/headerBackground.png");
-  background-size: cover;
-  background-position: bottom;
   font-family: "Minecraft", sans-serif;
 
   .nav__container {
@@ -57,6 +60,11 @@ header {
       img {
         cursor: pointer;
         height: 50px;
+      }
+      i {
+        cursor: pointer;
+        color: white;
+        font-size: var(--fs-xl);
       }
     }
   }

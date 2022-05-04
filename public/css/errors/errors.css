@@ -1,0 +1,94 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #121d27;
+  background-image: url("../../assets/img/filter.png");
+  background-position: right;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+main {
+  width: 75%;
+  margin: auto auto 90px;
+}
+
+.error__container {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  font-family: "Minecraft", sans-serif;
+}
+.error__container .error__text {
+  display: flex;
+  flex-direction: column;
+}
+.error__container .error__text p {
+  font-size: var(--fs-m);
+  font-weight: 200;
+  margin-bottom: 25px;
+  color: white;
+  text-align: justify;
+  transition: all ease-in-out 500ms;
+  max-width: 80%;
+}
+.error__container .error__text p a {
+  font-weight: 600;
+  color: var(--dark-violet-hex);
+  text-decoration: none;
+  border-bottom: 2px dashed #cd6f66;
+  border-radius: 2px;
+}
+.error__container .error__text p a:hover {
+  opacity: 0.75;
+}
+.error__container .error__text p a:visited {
+  color: #cd6f66;
+}
+.error__container .error__text h1 {
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-size: var(--fs-error);
+  letter-spacing: 2rem;
+  transition: all ease-in-out 500ms;
+}
+.error__container .error__text h1 mark {
+  color: inherit;
+  position: relative;
+  background: linear-gradient(120deg, #cd6f66 0%, #cd6f66 100%) no-repeat 0 74%;
+  background-size: 100% 15px;
+}
+.error__container .error__text h2 {
+  padding: 0;
+  margin: 0;
+  font-weight: 0;
+  color: white;
+  font-size: var(--fs-xl);
+  letter-spacing: 5px;
+}
+.error__container .error__img img {
+  width: 500px;
+  height: auto;
+}
+@media (max-width: 80em) {
+  .error__container .error__img img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 80em) {
+  .error__container {
+    animation: fadeIn 1s;
+    position: relative;
+    flex-direction: column;
+    gap: 50px;
+    z-index: 1;
+  }
+  .error__container .error__text {
+    align-items: center;
+  }
+}
+
+/*# sourceMappingURL=errors.css.map */

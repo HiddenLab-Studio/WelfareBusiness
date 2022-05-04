@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="FR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../../public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/errors/errors.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/header.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/footer.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet" type="text/css">
+
+    <!-- LIBS CSS -->
+    <link rel="stylesheet" type="text/css" href="../../public/css/libs/hover/hover.css">
+
+    <!-- LIBS JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dixonandmoe/rellax@master/rellax.min.js"></script>
+
+    <title>WB | Where you go ?</title>
+</head>
+<body>
+
+    <%- include("../partials/simplifiedHeader"); -%>
+
+    <main>
+        <div class="error__container">
+            <div class="error__text rellax" data-rellax-speed="2" >
+                <h1><mark>404</mark></h1>
+                <h2>OOPS! NOTHING WAS FOUND</h2>
+                <p>
+                    The page you are looking for might have been removed had its name changed or is temporarily unavailable
+                    <a href="/">Return to home page</a>
+                </p>
+            </div>
+            <div class="error__img rellax">
+                <img src="../../public/assets/img/errors/404.png" alt="404">
+            </div>
+        </div>
+    </main>
+
+    <%- include("../partials/footer"); -%>
+
+    <script>let rellax = new Rellax('.rellax');</script>
+
+</body>
+</html>

@@ -7,6 +7,7 @@
 
 :root {
   // Responsive font size
+  --fs-error: 7rem;
   --fs-xxl: 3rem;
   --fs-xl: 2.5rem;
   --fs-l: 2rem;
@@ -18,13 +19,14 @@
 
 @media (max-width: 40em){
   :root {
-    --fs-xxl: 1.75rem;
-    --fs-xl: 1.65rem;
-    --fs-l: 1.45rem;
-    --fs-sl: 1.25rem;
-    --fs-m: 1.15rem;
+    --fs-error: 5rem;
+    --fs-xxl: 2.5rem;
+    --fs-xl: 2rem;
+    --fs-l: 1.75rem;
+    --fs-sl: 1.5rem;
+    --fs-m: 1.25rem;
     --fs-sm: 1rem;
-    --fs-s: 0.9rem;
+    --fs-s: 0.85rem;
   }
 }
 

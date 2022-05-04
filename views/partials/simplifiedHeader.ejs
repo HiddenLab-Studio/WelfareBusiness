@@ -9,12 +9,10 @@
             <a class="hvr-grow" href="/leaderboard">Leaderboard</a>
         </div>
         <div class="connection__container">
-            <% if(session === undefined){ %>
-                <a href="/profile"><i class='bx bxs-user-account hvr-grow'></i></a>
-            <% } else if(!session) { %>
+            <% if(!session) { %>
                 <img id="connect" class="hvr-grow" src="../../public/assets/img/header/connectBtn.png" alt="Sign in">
             <% } else { %>
-                    <a href="/profile"><i class='bx bxs-user-account hvr-grow'></i></a>
+                <a href="/profile"><i class='bx bxs-user-account hvr-grow'></i></a>
             <% } %>
         </div>
     </nav>

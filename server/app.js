@@ -46,6 +46,20 @@ if(app.get("env") === "production"){
 global.flash = flash;
 global.pool = pool;
 
+// Flash message pour afficher si une erreur est détecté pour le login ou le register
+/*app.use(function(req, res, next) {
+    res.locals.registerError = req.flash("registerError", false);
+    res.locals.registerUsernameError = req.flash("registerUsernameError", undefined);
+    res.locals.registerPasswordError= req.flash("registerPasswordError", undefined);
+    res.locals.registerConfirmError = req.flash("registerConfirmError", undefined);
+    res.locals.registerUsernameAlreadyUsed = req.flash("registerUsernameAlreadyUsed", undefined);
+
+    //res.locals.loginError = req.flash("loginError", false);
+    res.locals.loginUsernameError = req.flash("loginUsernameError", undefined);
+    res.locals.loginPasswordError = req.flash("loginPasswordError", undefined);
+    next();
+});*/
+
 // Home page
 app.get('/', (req, res) => {
     // Si l'utilisateur n'est pas connecté
@@ -57,29 +71,27 @@ app.get('/', (req, res) => {
         });
     } else {
         // Si la session du joueur n'est pas défini on le met offline
-        if(req.session.login === undefined) req.session.login = false;
+        if(req.session.login === undefined){
+            /*console.log("[INFO] Session initialized")
+            req.flash("loginError", "TESSS")*/
+            req.session.login = false;
+        }
         // Flash message pour afficher si une erreur est détecté pour le login ou le register
-        const registerError = req.flash("registerError");
-        const registerUsernameError = req.flash("registerUsernameError");
-        const registerPasswordError = req.flash("registerPasswordError");
-        const registerConfirmError = req.flash("registerConfirmError");
-        const registerUsernameAlreadyUsed = req.flash("registerUsernameAlreadyUsed");
-        const loginError = req.flash("loginError");
-        const loginUsernameError = req.flash("loginUsernameError");
-        const loginPasswordError = req.flash("loginPasswordError");
+        console.log(req.flash())
         // Rendu de la page avec le bouton pour se connecter
         res.render(path.join(__dirname, "..", "views", "index"), {
             session: false,
-            login: {error: loginError[0], username: loginUsernameError[0], password: loginPasswordError[0]},
-            register: {error: registerError[0], username: registerUsernameError[0], password: registerPasswordError[0], confirm: registerConfirmError[0], user: registerUsernameAlreadyUsed[0]},
+            login: {error: req.flash("loginError"), username: true, password: true},
+            register: {error: true, username: true, password: true, confirm: true, user: true},
         });
-
     }
 })
 
 // Controllers
 const auth = require("./controllers/authController");
+const game = require("./controllers/gameController");
 app.use("/", auth);
+app.use("/", game);
 
 // Page 404
 app.use((req, res) => {

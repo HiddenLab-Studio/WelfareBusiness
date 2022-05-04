@@ -183,8 +183,9 @@ router.post("/api/login", (req, res) => {
                 } else {
                     // On modifie notre flash message
                     // On update notre message flash qui sera affiché à l'utilisateur pour lui rendre compte de l'erreur
-                    req.flash("loginError", true);
+                    req.flash("loginError",  "true");
                     req.flash("loginPasswordError", true)
+                    console.log("Login accepted: " + req.flash("loginError")[0])
                     res.redirect("/");
                 }
             } else {

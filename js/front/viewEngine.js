@@ -17,17 +17,27 @@ var open = false;
 function preload() {
     this.load.image('button_play', './img/bouton_play.png');
     this.load.image('chaise', './img/chaise_bureau.png');
-    this.load.image('button_settings', './img/settings.png');
-    this.load.image('menu', './img/menu.png');
+    this.load.image('windowBack', './img/HUD/fenetre.png');
     this.load.image('volume', './img/volume.png');
     this.load.audio('accueil', ['./audio/test.mp3', './audio/test.ogg']);
     this.load.image('theo', '../img/a-theo_emote.png');
+    this.load.image("tiles", "./map/tuxmon-sample-32px-extruded.png");
+    this.load.tilemapTiledJSON("map", "./map/tuxemon-town.json");
+    this.load.image('button_settings', './img/HUD/settings.png');
+    this.load.image('button_shop', './img/HUD/logo_shop.png');
+    this.load.image('argent_hud', './img/HUD/argent_hud.png');
+    this.load.image('bonheur_hud', './img/HUD/humeur_hud.png');
+    this.load.image('pause', './img/HUD/bouton_pause.png');
+    this.load.image('play', './img/HUD/bouton_play.png');
+    this.load.image('avance_rapide', './img/HUD/bouton_acc.png');
+    this.load.image('closeWindowBtn', './img/HUD/croix.png');
 }
 
 let hud;
 function create() {
     let game = this;
     hud = new hudObject(game, config);
+    
 
 }
 

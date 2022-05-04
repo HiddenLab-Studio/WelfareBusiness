@@ -27,7 +27,10 @@
 <body>
 
     <%- include("../views/partials/header") %>
-    <%- include("../views/partials/connectModal") %>
+
+    <% if(!session){ %>
+        <%- include("../views/partials/connectModal") %>
+    <% } %>
 
     <main>
         <section class="welcome__container">
@@ -38,6 +41,11 @@
 
     <%- include("../views/partials/footer") %>
 
+    <% if(!session){ %>
+        <script src="./public/js/header/connectionModal.js"></script>
+    <% } else { %>
+        <script src="./public/js/header/accountModal.js"></script>
+    <% } %>
     <script src="./public/js/header/main.js"></script>
 </body>
 </html>

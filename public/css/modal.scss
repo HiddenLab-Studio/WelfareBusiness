@@ -18,7 +18,7 @@
   .connection__container {
     display: flex;
     flex-direction: row;
-    height: 65vh;
+    //height: 65vh;
     width: 45vh;
     border-radius: 10px;
     background-color: #121D27;
@@ -50,10 +50,32 @@
       display: flex;
       align-items: center;
       flex-direction: column;
-      padding: 15px;
+      padding: 50px 10px 50px 10px;
       width: 100%;
       justify-content: center;
       gap: 10px;
+
+      .error {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border: #c0392b solid 1px;
+        border-radius: 5px;
+        background-color: #c0392b;
+        font-family: "Minecraft", sans-serif;
+
+        i {
+          color: white;
+          font-size: var(--fs-l);
+        }
+
+        ul {
+          padding-left: 25px;
+          margin: 0;
+          color: white;
+        }
+      }
 
       .text {
         display: flex;

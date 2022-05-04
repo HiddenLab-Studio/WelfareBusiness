@@ -4,12 +4,16 @@
             <img src="../../public/assets/img/logo.png" alt="Logo">
         </div>
         <div class="links__container">
-            <a class="hvr-grow" href="">Home</a>
-            <a class="hvr-grow" href="">Play</a>
-            <a class="hvr-grow" href="">Leaderboard</a>
+            <a class="hvr-grow" href="/">Home</a>
+            <a class="hvr-grow" href="/play">Play</a>
+            <a class="hvr-grow" href="/leaderboard">Leaderboard</a>
         </div>
         <div class="connection__container">
-            <img id="connect" class="hvr-grow" src="../../public/assets/img/header/connectBtn.png" alt="Sign in">
+            <% if(!session){ %>
+                <img id="connect" class="hvr-grow" src="../../public/assets/img/header/connectBtn.png" alt="Sign in">
+            <% } else { %>
+                <a class="hvr-grow" href="/profile">Account</a>
+            <% } %>
         </div>
     </nav>
     <div class="header__text">

@@ -1,119 +1,21 @@
-<div id="accountModal" class="account__modal__container" style="display: none;">
-    <div class="connection__container">
-        <div class="close"><i id="close" class='bx bx-x'></i></div>
-        <% if(register.error){ %>
-            <div id="connectContainer" class="connection__content" style="display: none;">
-                <div class="text">
-                    <span>Hi you</span>
-                    <h1>Log into your account</h1>
-                </div>
-                <% if(login.error){ %>
-                    <div class="error">
-                        <i class='bx bx-info-circle'></i>
-                        <ul>
-                            <% if(login.username){ %>
-                                <li>Incorrect username</li>
-                            <% } %>
-                            <% if(login.password){ %>
-                                <li>Incorrect password</li>
-                            <% } %>
-                        </ul>
-                    </div>
-                <% } %>
-                <form action="/api/login" method="POST" class="form">
-                    <div class="element">
-                        <span>Username</span>
-                        <label for="loginUsernameInput">
-                            <input name="username" id="loginUsernameInput" type="text" placeholder="Enter your username"
-                                   required>
-                        </label>
-                    </div>
-                    <div class="element">
-                        <span>Password</span>
-                        <label class="loginPasswordInput" for="loginPasswordInput">
-                            <input name="password" id="loginPasswordInput" type="password" placeholder="Enter your password"
-                                   required>
-                            <i class='bx bx-show show__password'></i>
-                        </label>
-                    </div>
-                    <div class="connection__btn">
-                        <button type="submit" id="loginBtn" class="hvr-grow">Sign In</button>
-                    </div>
-                </form>
-                <div class="register">
-                    <p>Not registered yet? <span id="registerSpan">Register<i class="bx bx-right-arrow-alt"></i></span></p>
-                </div>
-            </div>
-            <div id="registerContainer" class="connection__content">
-                <div class="text">
-                    <span>Welcome</span>
-                    <h1>Create an account</h1>
-                </div>
-                <% if(register.error){ %>
-                    <div class="error">
-                        <i class='bx bx-info-circle'></i>
-                        <ul>
-                            <% if(register.username){ %>
-                                <li>Incorrect username</li>
-                            <% } %>
-                            <% if(register.user){ %>
-                                <li>Username already used</li>
-                            <% } %>
-                            <% if(register.password){ %>
-                                <li>Incorrect password</li>
-                            <% } %>
-                            <% if(register.confirm){ %>
-                                <li>Password not match</li>
-                            <% } %>
-                        </ul>
-                    </div>
-                <% } %>
-                <form action="/api/register" method="POST" class="form">
-                    <div class="element">
-                        <span>Username</span>
-                        <label for="registerUsernameInput">
-                            <input name="username" id="registerUsernameInput" type="text" placeholder="Enter your username"
-                                   required>
-                        </label>
-                    </div>
-                    <div class="element">
-                        <span>Password</span>
-                        <label class="registerPasswordInput" for="registerPasswordInput">
-                            <input name="password" id="registerPasswordInput" type="password"
-                                   placeholder="Enter your password" required>
-                            <i class='bx bx-show show__password'></i>
-                        </label>
-                    </div>
-                    <div class="element">
-                        <span>Confirm password</span>
-                        <label class="registerConfirmPasswordInput" for="registerConfirmPasswordInput">
-                            <input name="passwordConfirm" id="registerConfirmPasswordInput" type="password"
-                                   placeholder="Confirm your password" required>
-                            <i class='bx bx-show show__password'></i>
-                        </label>
-                    </div>
-                    <div class="connection__btn">
-                        <button type="submit" id="registerBtn" class="hvr-grow">Sign up</button>
-                    </div>
-                </form>
-                <div class="register">
-                    <p>Already registered? <span id="connectSpan">Sign in<i class="bx bx-right-arrow-alt"></i></span></p>
-                </div>
-            </div>
-        <% } else { %>
+<% console.log(loginFlash.username) %>
+<% if(loginFlash.error.length > 0 || registerFlash.error.length > 0){ %>
+    <div id="accountModal" class="account__modal__container" style="display: none;">
+        <div class="connection__container">
+            <div class="close"><i id="close" class='bx bx-x'></i></div>
             <div id="connectContainer" class="connection__content">
                 <div class="text">
                     <span>Hi you</span>
                     <h1>Log into your account</h1>
                 </div>
-                <% if(login.error){ %>
+                <% if(loginFlash.error.length > 0){ %>
                     <div class="error">
                         <i class='bx bx-info-circle'></i>
                         <ul>
-                            <% if(login.username){ %>
+                            <% if(loginFlash.username.length > 0){ %>
                                 <li>Incorrect username</li>
                             <% } %>
-                            <% if(login.password){ %>
+                            <% if(loginFlash.password.length > 0){ %>
                                 <li>Incorrect password</li>
                             <% } %>
                         </ul>
@@ -123,8 +25,7 @@
                     <div class="element">
                         <span>Username</span>
                         <label for="loginUsernameInput">
-                            <input name="username" id="loginUsernameInput" type="text" placeholder="Enter your username"
-                                   required>
+                            <input name="username" id="loginUsernameInput" type="text" placeholder="Enter your username" required>
                         </label>
                     </div>
                     <div class="element">
@@ -180,187 +81,6 @@
                     <p>Already registered? <span id="connectSpan">Sign in<i class="bx bx-right-arrow-alt"></i></span></p>
                 </div>
             </div>
-        <% } %>
-    </div>
-</div>
-
-
-
-
-
-
-
-<!--<% if(login.error || register.error){ %>
-    <div id="accountModal" class="account__modal__container" style="display: flex;">
-        <div class="connection__container">
-            <div class="close"><i id="close" class='bx bx-x'></i></div>
-            <% if(register.error){ %>
-                <div id="connectContainer" class="connection__content" style="display: none;">
-                    <div class="text">
-                        <span>Hi you</span>
-                        <h1>Log into your account</h1>
-                    </div>
-                    <form action="/api/login" method="POST" class="form">
-                        <div class="element">
-                            <span>Username</span>
-                            <label for="loginUsernameInput">
-                                <input name="username" id="loginUsernameInput" type="text" placeholder="Enter your username"
-                                       required>
-                            </label>
-                        </div>
-                        <div class="element">
-                            <span>Password</span>
-                            <label class="loginPasswordInput" for="loginPasswordInput">
-                                <input name="password" id="loginPasswordInput" type="password" placeholder="Enter your password"
-                                       required>
-                                <i class='bx bx-show show__password'></i>
-                            </label>
-                        </div>
-                        <div class="connection__btn">
-                            <button type="submit" id="loginBtn" class="hvr-grow">Sign In</button>
-                        </div>
-                    </form>
-                    <div class="register">
-                        <p>Not registered yet? <span id="registerSpan">Register<i class="bx bx-right-arrow-alt"></i></span></p>
-                    </div>
-                </div>
-                <div id="registerContainer" class="connection__content">
-                    <div class="text">
-                        <span>Welcome</span>
-                        <h1>Create an account</h1>
-                    </div>
-                    <% if(register.error){ %>
-                        <div class="error">
-                            <i class='bx bx-info-circle'></i>
-                            <ul>
-                                <% if(register.username){ %>
-                                    <li>Incorrect username</li>
-                                <% } %>
-                                <% if(register.user){ %>
-                                    <li>Username already used</li>
-                                <% } %>
-                                <% if(register.password){ %>
-                                    <li>Incorrect password</li>
-                                <% } %>
-                                <% if(register.confirm){ %>
-                                    <li>Password not match</li>
-                                <% } %>
-                            </ul>
-                        </div>
-                    <% } %>
-                    <form action="/api/register" method="POST" class="form">
-                        <div class="element">
-                            <span>Username</span>
-                            <label for="registerUsernameInput">
-                                <input name="username" id="registerUsernameInput" type="text" placeholder="Enter your username"
-                                       required>
-                            </label>
-                        </div>
-                        <div class="element">
-                            <span>Password</span>
-                            <label class="registerPasswordInput" for="registerPasswordInput">
-                                <input name="password" id="registerPasswordInput" type="password"
-                                       placeholder="Enter your password" required>
-                                <i class='bx bx-show show__password'></i>
-                            </label>
-                        </div>
-                        <div class="element">
-                            <span>Confirm password</span>
-                            <label class="registerConfirmPasswordInput" for="registerConfirmPasswordInput">
-                                <input name="passwordConfirm" id="registerConfirmPasswordInput" type="password"
-                                       placeholder="Confirm your password" required>
-                                <i class='bx bx-show show__password'></i>
-                            </label>
-                        </div>
-                        <div class="connection__btn">
-                            <button type="submit" id="registerBtn" class="hvr-grow">Sign up</button>
-                        </div>
-                    </form>
-                    <div class="register">
-                        <p>Already registered? <span id="connectSpan">Sign in<i class="bx bx-right-arrow-alt"></i></span></p>
-                    </div>
-                </div>
-            <% } else { %>
-                <div id="connectContainer" class="connection__content">
-                    <div class="text">
-                        <span>Hi you</span>
-                        <h1>Log into your account</h1>
-                    </div>
-                    <% if(login.error){ %>
-                        <div class="error">
-                            <i class='bx bx-info-circle'></i>
-                            <ul>
-                                <% if(login.username){ %>
-                                    <li>Incorrect username</li>
-                                <% } %>
-                                <% if(login.password){ %>
-                                    <li>Incorrect password</li>
-                                <% } %>
-                            </ul>
-                        </div>
-                    <% } %>
-                    <form action="/api/login" method="POST" class="form">
-                        <div class="element">
-                            <span>Username</span>
-                            <label for="loginUsernameInput">
-                                <input name="username" id="loginUsernameInput" type="text" placeholder="Enter your username"
-                                       required>
-                            </label>
-                        </div>
-                        <div class="element">
-                            <span>Password</span>
-                            <label class="loginPasswordInput" for="loginPasswordInput">
-                                <input name="password" id="loginPasswordInput" type="password" placeholder="Enter your password"
-                                       required>
-                                <i class='bx bx-show show__password'></i>
-                            </label>
-                        </div>
-                        <div class="connection__btn">
-                            <button type="submit" id="loginBtn" class="hvr-grow">Sign In</button>
-                        </div>
-                    </form>
-                    <div class="register">
-                        <p>Not registered yet? <span id="registerSpan">Register<i class="bx bx-right-arrow-alt"></i></span></p>
-                    </div>
-                </div>
-                <div id="registerContainer" class="connection__content" style="display: none;">
-                    <div class="text">
-                        <span>Welcome</span>
-                        <h1>Create an account</h1>
-                    </div>
-                    <form action="/api/register" method="POST" class="form">
-                        <div class="element">
-                            <span>Username</span>
-                            <label for="registerUsernameInput">
-                                <input name="username" id="registerUsernameInput" type="text" placeholder="Enter your username"
-                                       required>
-                            </label>
-                        </div>
-                        <div class="element">
-                            <span>Password</span>
-                            <label class="registerPasswordInput" for="registerPasswordInput">
-                                <input name="password" id="registerPasswordInput" type="password"
-                                       placeholder="Enter your password" required>
-                                <i class='bx bx-show show__password'></i>
-                            </label>
-                        </div>
-                        <div class="element">
-                            <span>Confirm password</span>
-                            <label class="registerConfirmPasswordInput" for="registerConfirmPasswordInput">
-                                <input name="passwordConfirm" id="registerConfirmPasswordInput" type="password"
-                                       placeholder="Confirm your password" required>
-                                <i class='bx bx-show show__password'></i>
-                            </label>
-                        </div>
-                        <div class="connection__btn">
-                            <button type="submit" id="registerBtn" class="hvr-grow">Sign up</button>
-                        </div>
-                    </form>
-                    <div class="register">
-                        <p>Already registered? <span id="connectSpan">Sign in<i class="bx bx-right-arrow-alt"></i></span></p>
-                    </div>
-                </div>
-            <% } %>
         </div>
     </div>
 <% } else { %>
@@ -435,4 +155,5 @@
             </div>
         </div>
     </div>
-<% } %>-->
+<% } %>
+

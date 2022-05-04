@@ -71,18 +71,17 @@ app.get('/', (req, res) => {
         });
     } else {
         // Si la session du joueur n'est pas défini on le met offline
-        if(req.session.login === undefined){
-            /*console.log("[INFO] Session initialized")
-            req.flash("loginError", "TESSS")*/
-            req.session.login = false;
-        }
-        // Flash message pour afficher si une erreur est détecté pour le login ou le register
-        console.log(req.flash())
+        if(req.session.login === undefined) req.session.login = false;
         // Rendu de la page avec le bouton pour se connecter
         res.render(path.join(__dirname, "..", "views", "index"), {
             session: false,
-            login: {error: req.flash("loginError"), username: true, password: true},
-            register: {error: true, username: true, password: true, confirm: true, user: true},
+            /* TODO
+             *  - change login and register options
+             */
+            loginFlash: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
+            registerFlash: {error: true, display: []}
+            //login: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
+            //register: {error: true, username: true, password: true, confirm: true, user: true},
         });
     }
 })
@@ -95,6 +94,9 @@ app.use("/", game);
 
 // Page 404
 app.use((req, res) => {
+    /* TODO
+     *  - change login and register options
+     */
     res.status(404).render(path.join(__dirname, "..", "views", "errors", "404"), {
         session: undefined,
     });

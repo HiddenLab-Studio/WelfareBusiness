@@ -81,21 +81,29 @@ class windowObject {
     beEmployeeWindow(employee) {
         this.windowType = "employee";
 
-        this.employeeParameterGauge = new Array(3);
+        this.employeeParameterGauge = new Array(2);
         this.employeeName = this.game.add.text(400, 95, "Employee name", { font: "14px Arial", fill: "#000000" });
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 2; i++) {
             this.employeeParameterGauge[i] = {
-                bar: this.game.add.image(350, 150 + i*30, 'infobar').setOrigin(0, 0).setScale(1, 0.1),
+                bar: this.game.add.image(350, 150 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1),
+                percentage: this.game.add.text(620, 145 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }),
+                upgradeBtn: this.game.add.image(360, 200, 'infobar').setOrigin(0, 0).setScale(1, 1.5),
+                upgradeBtnText: this.game.add.text(395, 218, "Level MAX", { font: "14px Arial", fill: "#000000" }).setOrigin(0,0),
             }
 
         }
+
+        
     }
 
     closeEmployeeWindow() {
         this.employeeName.destroy();
-        for(let i = 0; i < 3; i++){
+        for (let i = 0; i < 2; i++) {
             this.employeeParameterGauge[i].bar.destroy();
+            this.employeeParameterGauge[i].percentage.destroy();
+            this.employeeParameterGauge[i].upgradeBtn.destroy();
+            this.employeeParameterGauge[i].upgradeBtnText.destroy();
         }
     }
 

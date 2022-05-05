@@ -119,10 +119,10 @@ class hudObject {
     createListeners() {
         let hud = this;
         this.settingsbtn.on('pointerdown', function () {
-            if(hud.window.isOpened()){
+            if (hud.window.isOpened()) {
                 hud.window.closeWindow()
             }
-            else{
+            else {
                 hud.window.createBackWindow();
                 hud.window.beSettingsWindow();
             }

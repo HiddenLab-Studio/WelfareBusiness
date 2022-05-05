@@ -114,7 +114,7 @@ class hudObject {
             }
             else{
                 hud.window.createBackWindow();
-                hud.window.beOptionWindow();
+                hud.window.beSettingsWindow();
             }
         });
 

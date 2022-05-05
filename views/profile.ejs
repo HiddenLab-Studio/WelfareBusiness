@@ -7,7 +7,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/home.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/profile.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/modal.css">
     <link rel="stylesheet" type="text/css" href="../public/css/header.css">
     <link rel="stylesheet" type="text/css" href="../public/css/footer.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet" type="text/css">
@@ -23,15 +24,24 @@
 </head>
 <body>
 
-<%- include("./partials/simplifiedHeader"); -%>
+    <%- include("./partials/simplifiedHeader"); -%>
 
-<main>
-    <h1><%= username %></h1>
-</main>
+    <main>
+        <div class="profile__container">
+            <div class="title">
+                <h1>Welcome back</h1>
+                <span><%= username %></span>
+            </div>
+        </div>
+    </main>
 
-<%- include("./partials/footer"); -%>
+    <%- include("./partials/footer"); -%>
 
-<script>let rellax = new Rellax('.rellax');</script>
+    <% if(!session){ %>
+        <script src="./public/js/header/connectionModal.js"></script>
+    <% } else { %>
+        <script src="./public/js/header/accountModal.js"></script>
+    <% } %>
 
 </body>
 </html>

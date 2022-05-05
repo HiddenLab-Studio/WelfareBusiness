@@ -22,7 +22,6 @@ function preload() {
     this.load.image('volumeLow', './img/HUD/son_min.png');
     this.load.image('volumeHigh', './img/HUD/son_max.png');
     this.load.audio('accueil', ['./audio/test.mp3', './audio/test.ogg']);
-    this.load.image('theo', '../img/a-theo_emote.png');
     this.load.image("tiles", "./map/tileset_1.png");
     this.load.tilemapTiledJSON("map", "./map/map_pres.json");
     this.load.image('button_settings', './img/HUD/settings.png');

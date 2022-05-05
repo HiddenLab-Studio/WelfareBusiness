@@ -21,7 +21,6 @@ class hudObject {
         this.playbtn = this.game.add.sprite(this.config.width * 0.5, 300, 'button_play').setInteractive();
         this.playbtn.on('pointerdown', function () {
 
-            console.log('click play');
             this.destroy();//Suppression du bouton play
 
 
@@ -48,8 +47,7 @@ class hudObject {
 
         //Barre d'argent
         this.moneyInfoBar = this.game.add.image(0, 0, 'argent_hud').setOrigin(0, 0).setScale(0.5);
-        //this.moneyIcon = this.game.add.image(32, 30, 'theo').setScale(0.04).setOrigin(0, 0).setInteractive();
-        this.moneyString = "73 558 $";
+        this.moneyString = "44 444 $";
         this.moneyText = this.game.add.text(60, 30, this.moneyString, { font: "18px Arial", fill: "#FFFFFF" });
 
         //Barre de bonheur
@@ -63,8 +61,32 @@ class hudObject {
         this.dateText = this.game.add.text(4 * this.arbitraryUnit + 3 * 20 + 15, 30, this.dateString, { font: "14px Arial", fill: "#000000" });
 
         //Icones gestion du temps
-        this.pausebtn = this.game.add.image(500, 20, 'pause').setOrigin(0, 0).setScale(0.25);
-        this.playbtn = this.game.add.image(540, 20, 'play').setOrigin(0, 0).setScale(0.25);
+        this.pausebtn = this.game.add.image(500, 20, 'pause').setOrigin(0, 0).setScale(0.25).setInteractive();
+
+        // A MODIFIER
+        this.pausebtn.on("pointerdown",function(){
+            if(hud.window.isOpened()){
+                hud.window.closeWindow()
+            }
+            else{
+                hud.window.createBackWindow();
+                hud.window.beEmployeeWindow();
+            }
+        });
+
+
+        this.playbtn = this.game.add.image(540, 20, 'play').setOrigin(0, 0).setScale(0.25).setInteractive();
+
+        this.playbtn.on("pointerdown",function(){
+            if(hud.window.isOpened()){
+                hud.window.closeWindow()
+            }
+            else{
+                hud.window.createBackWindow();
+                hud.window.beProjectChoiceWindow();
+            }
+        });
+
         this.avancerapidebtn = this.game.add.image(580, 20, 'avance_rapide').setOrigin(0, 0).setScale(0.25);
 
 
@@ -87,18 +109,17 @@ class hudObject {
     createListeners() {
         let hud = this;
         this.settingsbtn.on('pointerdown', function () {
-            console.log("clicksettings");
             if(hud.window.isOpened()){
                 hud.window.closeWindow()
             }
             else{
-                hud.window.createWindow();
+                hud.window.createBackWindow();
+                hud.window.beOptionWindow();
             }
         });
 
 
         this.shopbtn.on('pointerdown', function () {
-            console.log("clickshop");
             hud.progressbar.destroy();
             hud.progressbar = displayProgressBar(hud.game, 50, 1000);
 

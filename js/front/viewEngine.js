@@ -18,9 +18,10 @@ function preload() {
     this.load.image('button_play', './img/bouton_play.png');
     this.load.image('chaise', './img/chaise_bureau.png');
     this.load.image('windowBack', './img/HUD/fenetre.png');
-    this.load.image('volume', './img/volume.png');
+    this.load.image('volumeMute', './img/HUD/son_coupe.png');
+    this.load.image('volumeLow', './img/HUD/son_min.png');
+    this.load.image('volumeHigh', './img/HUD/son_max.png');
     this.load.audio('accueil', ['./audio/test.mp3', './audio/test.ogg']);
-    this.load.image('theo', '../img/a-theo_emote.png');
     this.load.image("tiles", "./map/tuxmon-sample-32px-extruded.png");
     this.load.tilemapTiledJSON("map", "./map/tuxemon-town.json");
     this.load.image('button_settings', './img/HUD/settings.png');

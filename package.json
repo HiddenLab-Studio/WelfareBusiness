@@ -18,8 +18,9 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
     "helmet": "^5.0.2",
+    "jquery": "^3.6.0",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.16",
     "rellax": "^1.12.1"
   }
 }

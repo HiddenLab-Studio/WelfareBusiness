@@ -59,10 +59,20 @@ header .nav__container .connection__container img {
   cursor: pointer;
   height: 50px;
 }
+header .nav__container .connection__container a {
+  text-decoration: none;
+  color: white;
+  font-size: var(--fs-l);
+  letter-spacing: 4px;
+  font-weight: 800;
+}
+header .nav__container .connection__container a:visited {
+  color: white;
+}
 header .nav__container .connection__container i {
   cursor: pointer;
   color: white;
-  font-size: var(--fs-xl);
+  font-size: var(--fs-sm);
 }
 header .header__text {
   position: absolute;

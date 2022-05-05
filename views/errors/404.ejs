@@ -8,6 +8,7 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../../public/css/main.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/errors/errors.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/modal.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/header.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/footer.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet" type="text/css">
@@ -25,6 +26,10 @@
 
     <%- include("../partials/simplifiedHeader"); -%>
 
+    <% if(!session){ %>
+        <%- include("../partials/connectModal") %>
+    <% } %>
+
     <main>
         <div class="error__container">
             <div class="error__text rellax" data-rellax-speed="2" >
@@ -41,8 +46,14 @@
         </div>
     </main>
 
+
     <%- include("../partials/footer"); -%>
 
+    <% if(!session){ %>
+        <script src="./public/js/header/connectionModal.js"></script>
+    <% } else { %>
+        <script src="./public/js/header/accountModal.js"></script>
+    <% } %>
     <script>let rellax = new Rellax('.rellax');</script>
 
 </body>

@@ -4,7 +4,7 @@
  *  All modal css rules
  *
  *=====================================================*/
-.account__modal__container {
+.connect__modal__container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@
         h1 {
           color: white;
           margin: 0;
-          font-size: var(--fs-m);
+          font-size: var(--fs-sm);
           letter-spacing: 2px;
         }
         span {
@@ -202,18 +202,82 @@
           }
         }
       }
-
     }
   }
 }
 
-@keyframes fadeIn {
-  0% { opacity:0; }
-  100% { opacity:1; }
-}
+.account__modal__container {
+  position: absolute;
+  width: inherit;
+  transform: translateY(50px);
+  z-index: 500;
+  .background {
+    width: 60%;
+    height: inherit;
+    margin: auto;
+    background-color: #121D27;
+    border-radius: 10px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+    h1 {
+      margin: 0;
+      text-align: center;
+      color: white;
+      font-size: var(--fs-sm);
+      letter-spacing: 2px;
+    }
+    .avatar__container {
+      width: 80%;
+      margin: auto;
+      display: flex;
+      gap: 10px;
+      .avatar {
+        border: solid white 2px;
+      }
+      .progress__bar__container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 5px;
+        .bar {
+          width: 100%;
+          height: 10%;
+          background-color: white;
+        }
+        .level {
+          span {
+            font-size: var(--fs-s);
+            color: white;
+          }
+        }
+      }
+    }
 
-@keyframes fadeOut {
-  0% { opacity:1; }
-  100% { opacity:0; }
-}
+    .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: var(--fs-s);
+        &:hover {
+          opacity: .5;
+        }
+        &:visited {
+          color: white;
+        }
+      }
+    }
 
+  }
+
+
+}

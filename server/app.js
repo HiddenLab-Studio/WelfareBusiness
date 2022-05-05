@@ -46,20 +46,6 @@ if(app.get("env") === "production"){
 global.flash = flash;
 global.pool = pool;
 
-// Flash message pour afficher si une erreur est détecté pour le login ou le register
-/*app.use(function(req, res, next) {
-    res.locals.registerError = req.flash("registerError", false);
-    res.locals.registerUsernameError = req.flash("registerUsernameError", undefined);
-    res.locals.registerPasswordError= req.flash("registerPasswordError", undefined);
-    res.locals.registerConfirmError = req.flash("registerConfirmError", undefined);
-    res.locals.registerUsernameAlreadyUsed = req.flash("registerUsernameAlreadyUsed", undefined);
-
-    //res.locals.loginError = req.flash("loginError", false);
-    res.locals.loginUsernameError = req.flash("loginUsernameError", undefined);
-    res.locals.loginPasswordError = req.flash("loginPasswordError", undefined);
-    next();
-});*/
-
 // Home page
 app.get('/', (req, res) => {
     // Si l'utilisateur n'est pas connecté
@@ -74,14 +60,10 @@ app.get('/', (req, res) => {
         if(req.session.login === undefined) req.session.login = false;
         // Rendu de la page avec le bouton pour se connecter
         res.render(path.join(__dirname, "..", "views", "index"), {
+            //session: false,
             session: false,
-            /* TODO
-             *  - change login and register options
-             */
             loginFlash: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
-            registerFlash: {error: true, display: []}
-            //login: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
-            //register: {error: true, username: true, password: true, confirm: true, user: true},
+            registerFlash: {error: req.flash("registerError"), username: req.flash("registerUsernameError"), usernameAlreadyRegistered: req.flash("registerUsernameAlreadyUsed"), password: req.flash("registerPasswordError"), confirm: req.flash("registerConfirmError")}
         });
     }
 })
@@ -94,11 +76,11 @@ app.use("/", game);
 
 // Page 404
 app.use((req, res) => {
-    /* TODO
-     *  - change login and register options
-     */
     res.status(404).render(path.join(__dirname, "..", "views", "errors", "404"), {
-        session: undefined,
+        username: req.session.username,
+        session: req.session.login,
+        loginFlash: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
+        registerFlash: {error: req.flash("registerError"), username: req.flash("registerUsernameError"), usernameAlreadyRegistered: req.flash("registerUsernameAlreadyUsed"), password: req.flash("registerPasswordError"), confirm: req.flash("registerConfirmError")}
     });
 })
 

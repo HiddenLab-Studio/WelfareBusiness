@@ -3,14 +3,11 @@ const router = express.Router();
 const path = require("path");
 
 router.get("/play", (req, res) => {
-    console.log(req.flash("loginError"))
     res.render(path.join(__dirname, "..", "..", "views", "play"), {
         session: req.session.login,
-        /* TODO
-         *  - change login and register options
-         */
-        login: {error: req.flash("loginError"), username: true, password: true},
-        register: {error: true, username: true, password: true, confirm: true, user: true}
+        username: req.session.username,
+        loginFlash: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
+        registerFlash: {error: req.flash("registerError"), username: req.flash("registerUsernameError"), usernameAlreadyRegistered: req.flash("registerUsernameAlreadyUsed"), password: req.flash("registerPasswordError"), confirm: req.flash("registerConfirmError")}
     });
 })
 

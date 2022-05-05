@@ -12,7 +12,8 @@
             <% if(!session) { %>
                 <img id="connect" class="hvr-grow" src="../../public/assets/img/header/connectBtn.png" alt="Sign in">
             <% } else { %>
-                <a href="/profile"><i class='bx bxs-user-account hvr-grow'></i></a>
+                <a id="myAccountBtn" href="/profile">My account<i class='bx bxs-down-arrow'></i></a>
+                <%- include("./accountModal") %>
             <% } %>
         </div>
     </nav>

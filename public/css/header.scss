@@ -61,10 +61,20 @@ header {
         cursor: pointer;
         height: 50px;
       }
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: var(--fs-l);
+        letter-spacing: 4px;
+        font-weight: 800;
+        &:visited {
+          color: white;
+        }
+      }
       i {
         cursor: pointer;
         color: white;
-        font-size: var(--fs-xl);
+        font-size: var(--fs-sm);
       }
     }
   }

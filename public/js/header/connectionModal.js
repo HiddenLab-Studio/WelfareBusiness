@@ -6,10 +6,10 @@ let registerContainer = document.getElementById("registerContainer");
 // FadeIn and FadeOut in JQuery (connectBtn)
 $(document).ready(function () {
     $("#connect").click(function () {
-        $("#accountModal").fadeIn(500);
+        $("#connectModal").fadeIn(500);
     });
     $("#close").click(function () {
-        $("#accountModal").fadeOut(500);
+        $("#connectModal").fadeOut(500);
     });
 });
 

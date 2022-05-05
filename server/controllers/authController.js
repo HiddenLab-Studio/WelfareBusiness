@@ -179,7 +179,7 @@ router.post("/api/login", (req, res) => {
                     // L'utilisateur existe + le mot de passe est valide on peut donc le connecter à son profil
                     req.session.login = true;
                     req.session.username = username;
-                    res.redirect("/profile");
+                    res.redirect("/");
                 } else {
                     // On modifie notre flash message
                     // On update notre message flash qui sera affiché à l'utilisateur pour lui rendre compte de l'erreur

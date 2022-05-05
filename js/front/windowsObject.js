@@ -11,20 +11,10 @@ class windowObject {
     createBackWindow() {
         let window = this;
         this.opened = true;
-<<<<<<< Updated upstream
-        this.menu = this.game.add.image(this.config.width * 0.5, 300, 'windowBack').setScale(0.6, 0.8)
-        this.volume = this.game.add.image(this.config.width * 0.5 - 125, 200, 'volume').setScale(0.15).setInteractive();
-        this.closewindowbtn = this.game.add.image(640, 97, 'closeWindowBtn').setScale(2);
-
-        console.log(this.closewindowbtn);
-        this.closewindowbtn.on('pointerdown', function(){
-            console.log("clickwindow");
-=======
         this.menu = this.game.add.image(this.config.width * 0.5, 300, 'windowBack').setScale(0.6, 0.8);
         this.closewindowbtn = this.game.add.image(640, 97, 'closeWindowBtn').setScale().setInteractive();
 
         this.closewindowbtn.on('pointerdown', function () {
->>>>>>> Stashed changes
             window.closeWindow();
         });
 

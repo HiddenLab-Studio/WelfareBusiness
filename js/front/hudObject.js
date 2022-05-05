@@ -29,6 +29,7 @@ class hudObject {
             //Création de l'hud du jeu
             hud.createHud();
             hud.createListeners();
+            hud.window.closeWindow()
 
 
         });
@@ -36,6 +37,15 @@ class hudObject {
         //Bouton de settings
         this.settingsbtn = this.game.add.sprite(config.width - this.arbitraryUnit - 30, config.height - this.arbitraryUnit - 30, 'button_settings').setOrigin(0, 0).setInteractive().setScale(0.5);
 
+        this.settingsbtn.on('pointerdown', function () {
+            if (hud.window.isOpened()) {
+                hud.window.closeWindow()
+            }
+            else {
+                hud.window.createBackWindow();
+                hud.window.beSettingsWindow();
+            }
+        });
     }
 
     createHud() {
@@ -56,19 +66,19 @@ class hudObject {
         this.happinessText = this.game.add.text(2 * (this.arbitraryUnit + 20) + 35, 30, this.happinessString, { font: "14px Arial", fill: "#FFFFFF" });
 
         //Barre de la date
-        this.dateInfoBar = this.game.add.image(4 * this.arbitraryUnit + 3 * 20, 20, 'infobar').setOrigin(0, 0);
-        this.dateString = "4 septembre 2002";
-        this.dateText = this.game.add.text(4 * this.arbitraryUnit + 3 * 20 + 15, 30, this.dateString, { font: "14px Arial", fill: "#000000" });
+        this.dateInfoBar = this.game.add.image(4 * this.arbitraryUnit + 3 * 20, 0, 'date_hud').setOrigin(0, 0).setScale(0.5);
+        this.dateString = "04/09/02";
+        this.dateText = this.game.add.text(4 * this.arbitraryUnit + 3 * 20 + 60, 30, this.dateString, { font: "14px Arial", fill: "#ffffff" });
 
         //Icones gestion du temps
         this.pausebtn = this.game.add.image(500, 20, 'pause').setOrigin(0, 0).setScale(0.25).setInteractive();
 
         // A MODIFIER
-        this.pausebtn.on("pointerdown",function(){
-            if(hud.window.isOpened()){
+        this.pausebtn.on("pointerdown", function () {
+            if (hud.window.isOpened()) {
                 hud.window.closeWindow()
             }
-            else{
+            else {
                 hud.window.createBackWindow();
                 hud.window.beEmployeeWindow();
             }
@@ -77,11 +87,11 @@ class hudObject {
 
         this.playbtn = this.game.add.image(540, 20, 'play').setOrigin(0, 0).setScale(0.25).setInteractive();
 
-        this.playbtn.on("pointerdown",function(){
-            if(hud.window.isOpened()){
+        this.playbtn.on("pointerdown", function () {
+            if (hud.window.isOpened()) {
                 hud.window.closeWindow()
             }
-            else{
+            else {
                 hud.window.createBackWindow();
                 hud.window.beProjectChoiceWindow();
             }
@@ -104,7 +114,7 @@ class hudObject {
 
     }
 
-    
+
     //Création des listeners des boutons
     createListeners() {
         let hud = this;

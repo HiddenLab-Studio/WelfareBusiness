@@ -28,6 +28,7 @@ function preload() {
     this.load.image('button_shop', './img/HUD/logo_shop.png');
     this.load.image('argent_hud', './img/HUD/argent_hud.png');
     this.load.image('bonheur_hud', './img/HUD/humeur_hud.png');
+    this.load.image('date_hud', './img/HUD/date_hud.png');
     this.load.image('pause', './img/HUD/bouton_pause.png');
     this.load.image('play', './img/HUD/bouton_play.png');
     this.load.image('avance_rapide', './img/HUD/bouton_acc.png');

@@ -117,7 +117,7 @@ class windowObject {
         //Textes de conseil pour le joueur
         this.employeeTips = new Array(3);
 
-        for(let i =0;i<3;i++){
+        for (let i = 0; i < 3; i++) {
             this.employeeTips[i] = this.game.add.text(350, 405 + i * 40, "• Texte de conseil", { font: "14px Arial", fill: "#000000" });
 
         }
@@ -140,7 +140,7 @@ class windowObject {
             this.employeeWelfareGauge[i].bar.destroy();
         }
 
-        for(let i = 0; i < 3; i++){
+        for (let i = 0; i < 3; i++) {
             this.employeeTips[i].destroy();
         }
     }

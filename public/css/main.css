@@ -27,6 +27,7 @@
     --fs-s: 0.85rem;
   }
 }
+
 @font-face {
   font-family: "Minecraft";
   src: url("../../public/assets/fonts/Minecraft.ttf") format("truetype");

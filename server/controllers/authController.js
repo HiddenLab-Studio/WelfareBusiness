@@ -63,15 +63,16 @@ function isUsernameValid(username) {
 // Dashboard de l'utilisateur
 router.get("/profile", (req, res) => {
     // Si l'utilisateur est connecté
-    if(req.session.login){
+    if(!req.session.login){
         // On fait le rendu de notre page en passant en paramètre les différentes informations du joueur
         res.render(path.join(__dirname, "..", "..", "views", "profile"), {
             session: req.session.login,
-            username: req.session.username
+            username: req.session.username,
+            avatar: req.session.avatar
         });
     } else {
         // On le redirige sur la page home
-        res.redirect("/")
+        res.redirect("/");
     }
 })
 
@@ -115,7 +116,7 @@ router.post("/api/register", async (req, res) => {
                 if(error) throw error;
                 // Si notre requête SQL aboutie alors elle admet forcément un résultat
                 // On check donc si un utilisateur n'est pas déjà enregistré avec ce pseudo
-                console.log(result)
+                //console.log(result)
                 // L'utilisateur existe déjà, on refresh la page pour afficher l'erreur
                 if(result.length > 0){
                     // On coupe la connection à notre base de donnée
@@ -139,6 +140,7 @@ router.post("/api/register", async (req, res) => {
                             // On met à jour la session de l'utilisateur
                             req.session.login = true;
                             req.session.username = username;
+                            req.session.avatar = 1;
                             // On redirige notre utilisateur connecté vers son dashboard
                             res.redirect("/profile");
                         });
@@ -162,7 +164,7 @@ router.post("/api/login", (req, res) => {
         // On affiche l'erreur si le serveur n'arrive à se connecter à notre bdd
         if(error) throw error;
         // Requête SQL pour savoir si le pseudo et le mdp entré par l'utilisateur existe dans la bdd
-        pool.query("SELECT Username as username, Password as password FROM users WHERE username = ?", [username], async (error, result) => {
+        pool.query("SELECT Username as username, Password as password, AvatarIcon as avatar FROM users WHERE username = ?", [username], async (error, result) => {
             // On affiche l'erreur
             if (error) throw error;
             // On coupe la connexion à notre bdd
@@ -179,6 +181,7 @@ router.post("/api/login", (req, res) => {
                     // L'utilisateur existe + le mot de passe est valide on peut donc le connecter à son profil
                     req.session.login = true;
                     req.session.username = username;
+                    req.session.avatar = result[0].avatar;
                     res.redirect("/");
                 } else {
                     // On modifie notre flash message
@@ -196,6 +199,12 @@ router.post("/api/login", (req, res) => {
             }
         })
     })
+})
+
+router.post('/api/changeavatar', function (req, res) {
+    res.redirect("/");
+    let avatarIndex = req.body.value;
+    console.log("Result of XHR request: " + avatarIndex);
 })
 
 // Page pour se déconnecter (cette page n'existe pas réellement)

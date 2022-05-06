@@ -32,6 +32,7 @@ const pool = mysql.createPool({
 app.use(express.static(path.join(__dirname, "..")));
 app.use(compression());
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
 app.use(session)
 app.use(flash());
 app.set("title", process.env.SERVER_NAME)
@@ -60,7 +61,6 @@ app.get('/', (req, res) => {
         if(req.session.login === undefined) req.session.login = false;
         // Rendu de la page avec le bouton pour se connecter
         res.render(path.join(__dirname, "..", "views", "index"), {
-            //session: false,
             session: false,
             loginFlash: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
             registerFlash: {error: req.flash("registerError"), username: req.flash("registerUsernameError"), usernameAlreadyRegistered: req.flash("registerUsernameAlreadyUsed"), password: req.flash("registerPasswordError"), confirm: req.flash("registerConfirmError")}
@@ -91,4 +91,10 @@ server.listen(app.get("port"), () => {
     console.log("[INFO] Server " + app.get("title") + " started on port: " + app.get("port"));
     console.log("[INFO] Server environnement: " + app.get("env"));
     console.log("[INFO] Server view engine: " + app.get("view engine"));
+    console.log("[INFO] Hooking into MySQL...");
+    pool.getConnection((error, connection) => {
+        if(error) throw error;
+        connection.release();
+        console.log("[INFO] Server is now connected to database");
+    })
 })

@@ -7,12 +7,14 @@ var config = {
         preload: preload,
         create: create,
         update: update
-    }
+    },
+    fps: {
+        target: 30,
+        forceSetTimeOut: true
+    },
 };
 
 var gamePhaser = new Phaser.Game(config);
-var chaise, menu, music;
-var open = false;
 
 function preload() {
     this.load.image('button_play', './img/bouton_play.png');
@@ -35,18 +37,24 @@ function preload() {
     this.load.image('closeWindowBtn', './img/HUD/croix.png');
 }
 
-let hud;
+let hud, welfareBusinessGame;
 function create() {
     let game = this;
     hud = new hudObject(game, config)
+    welfareBusinessGame = new welfareBusiness();
 }
 
-
-var start = 0
-function update(time, delta) {
+let limitRefreshRateCounter = 0;
+function update() {
     let game = this;
-    
+    console.log("test");
+    //Limiter l'update du projet à 2 fois par seconde :
+    limitRefreshRateCounter++
+    if (limitRefreshRateCounter == 15) {
+        limitRefreshRateCounter = 0;
+        welfareBusinessGame.updateProject();
 
+    }
 }
 
 

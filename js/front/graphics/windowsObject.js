@@ -26,22 +26,24 @@ class windowObject {
 
     //Ferme la fenêtre
     closeWindow() {
-        this.opened = false;
-        switch (this.windowType) {
-            case "option":
-                this.volume.destroy();
-                break;
+        if (this.opened) {
+            switch (this.windowType) {
+                case "option":
+                    this.volume.destroy();
+                    break;
 
-            case "projectChoice":
-                this.closeProjectChoiceWindow();
-                break;
+                case "projectChoice":
+                    this.closeProjectChoiceWindow();
+                    break;
 
-            case "employee":
-                this.closeEmployeeWindow();
-                break;
+                case "employee":
+                    this.closeEmployeeWindow();
+                    break;
+            }
+            this.menu.destroy();
+            this.closewindowbtn.destroy();
         }
-        this.menu.destroy();
-        this.closewindowbtn.destroy();
+        this.opened = false;
     }
 
     //Est ce qu'une fenêtre est ouverte ?
@@ -146,4 +148,3 @@ class windowObject {
     }
 
 }
-    

@@ -63,7 +63,7 @@ function isUsernameValid(username) {
 // Dashboard de l'utilisateur
 router.get("/profile", (req, res) => {
     // Si l'utilisateur est connecté
-    if(!req.session.login){
+    if(req.session.login){
         // On fait le rendu de notre page en passant en paramètre les différentes informations du joueur
         res.render(path.join(__dirname, "..", "..", "views", "profile"), {
             session: req.session.login,
@@ -201,14 +201,29 @@ router.post("/api/login", (req, res) => {
     })
 })
 
-router.post('/api/changeavatar', function (req, res) {
-    res.redirect("/");
-    let avatarIndex = req.body.value;
+router.post("/api/changeavatar", (req, res) => {
+    let avatarIndex = parseInt(req.body.value);
+    req.session.avatar = avatarIndex;
+    console.log(req.session.avatar)
     console.log("Result of XHR request: " + avatarIndex);
+    pool.getConnection((error, connection) => {
+        if (error) throw error;
+        pool.query("UPDATE users SET AvatarIcon = ? WHERE username = ?", [avatarIndex, req.session.username], (error, result) => {
+            if (error) throw error;
+            connection.release();
+        })
+    })
+    res.end();
+})
+
+router.post("/api/changeusername", (req, res) => {
+    // On récupère les données de notre formulaire
+    const newUsername = req.body.newUsername;
+    console.log(newUsername)
 })
 
 // Page pour se déconnecter (cette page n'existe pas réellement)
-router.get('/logout', function (req, res, next) {
+router.get('/logout', (req, res, next) => {
     if (req.session) {
         req.session.destroy((err) => {
             if (err) return next(err);

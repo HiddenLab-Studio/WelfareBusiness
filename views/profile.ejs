@@ -102,7 +102,7 @@
         <div class="profile__container">
             <div class="title">
                 <h1>Welcome back</h1>
-                <span>CHANGE</span>
+                <span><%= username %></span>
             </div>
             <div class="informations__container">
                 <h2>Informations</h2>
@@ -111,7 +111,7 @@
                         <tbody>
                         <tr>
                             <td>Username</td>
-                            <td class="profile__editor"><span>CHANGE</span><i id="changeUsernameBtn" class='bx bx-edit'></i></td>
+                            <td class="profile__editor"><span><%= username %></span><i id="changeUsernameBtn" class='bx bx-edit'></i></td>
                         </tr>
                         <tr>
                             <td>Password</td>
@@ -121,7 +121,7 @@
                             <td>Avatar</td>
                             <td class="profile__editor">
                                 <div class="avatar__image__container">
-                                    <img src="../public/assets/img/avatar/Avatar_1.png" alt="">
+                                    <img src="../public/assets/img/avatar/Avatar_<%= avatar %>.png" alt="">
                                 </div>
                                 <i id="changeAvatarBtn" class='bx bx-edit'></i>
                             </td>

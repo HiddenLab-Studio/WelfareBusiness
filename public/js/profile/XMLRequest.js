@@ -7,19 +7,20 @@ function sendData(data) {
     XHR.addEventListener("error", XHRRequestFailed, false);
     XHR.addEventListener("load", XHRRequestComplete, false);
     let avatarIndex = {value: data.toString()};
-    XHR.open("POST", "/api/changeavatar", true)
-    XHR.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+    XHR.open("POST", "/api/changeavatar", true);
+    XHR.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     // On envoie les données au serveur celui va les traiter
     // Une fois que nos données ont été traitées le listener "load" va exécuter la fonction XHRRequestComplete()
-    XHR.send(JSON.stringify(avatarIndex))
+    XHR.send(JSON.stringify(avatarIndex));
 }
 
 function XHRRequestComplete(){
-    console.info("XHR request complete!")
-    //window.location.href = "/profile";
+    console.info("XHR request complete!");
+    setTimeout(() => {
+        window.location.href = "/profile";
+    }, 100)
 }
 
 function XHRRequestFailed(){
-    console.error("XHR request error!")
-    //window.location.href = "/profile";
+    console.error("XHR request error!");
 }

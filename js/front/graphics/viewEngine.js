@@ -39,23 +39,25 @@ function preload() {
 
 let hud, welfareBusinessGame;
 function create() {
-    let game = this;
-    hud = new hudObject(game, config)
+    let phaser = this;
     welfareBusinessGame = new welfareBusiness();
+    hud = new hudObject(phaser, config, welfareBusinessGame);
 }
 
 let limitRefreshRateCounter = 0;
 function update() {
-    let game = this;
+    let phaser = this;
     console.log("test");
-    //Limiter l'update du projet à 2 fois par seconde :
-    limitRefreshRateCounter++
-    if (limitRefreshRateCounter == 15) {
-        limitRefreshRateCounter = 0;
-        welfareBusinessGame.updateProject();
-        console.log(welfareBusinessGame.getCurrentProjectPercentage());
-
+    if (welfareBusinessGame.isGameStarted()) {
+        //Limiter l'update du projet à 2 fois par seconde :
+        limitRefreshRateCounter++
+        if (limitRefreshRateCounter == 15) {
+            limitRefreshRateCounter = 0;
+            welfareBusinessGame.updateProject();
+            hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
+        }
     }
+
 }
 
 

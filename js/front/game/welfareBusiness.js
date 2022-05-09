@@ -2,10 +2,26 @@
 
 class welfareBusiness {
     constructor() {
-        this.currentProject = new project(1000, 100)
+        this.currentProject = new project(100, 100)
         this.employeesList = new Array();
         this.employeesList[0] = new employee();
-        this.updateRate = 2 //update du jeu 2 fois par sec
+        this.updateRate = 2;//update du jeu 2 fois par sec
+        this.started = false;
+    }
+
+    isProjectFinished() {
+        if (this.currentProject.getAmountToProduce() <= 0) {
+            return true;
+        }
+        else { return false }
+    }
+
+    startGame(){
+        this.started = true;
+    }
+
+    isGameStarted(){
+        return this.started;
     }
 
     getTotalProduction() {
@@ -17,27 +33,31 @@ class welfareBusiness {
         return production;
     }
 
-    getTotalEmployeesCost(){
+    getTotalEmployeesCost() {
         let cost = 0;
-        for(let i = 0; i < this.employeesList.length; i++){
+        for (let i = 0; i < this.employeesList.length; i++) {
             cost = this.employeesList[i].getSalary();
         }
     }
 
-    convertToSec(seconds){
+    convertToSec(seconds) {
         return seconds * this.updateProject;
     }
 
-    
-
-
 
     updateProject() {
-        for (let i = 0; i < this.employeesList.length; i++) {
-            this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
+        if(this.isProjectFinished()){
+            console.log("Project finished");
+            
         }
-        console.log("Amount left to produce :");
-        console.log(this.currentProject.getAmountToProduce());
+        else{
+            for (let i = 0; i < this.employeesList.length; i++) {
+                this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
+            }
+            console.log("Amount left to produce :");
+            console.log(this.currentProject.getAmountToProduce());
+        }
+        
     }
 
     getCurrentProjectPercentage() {
@@ -57,17 +77,19 @@ class welfareBusiness {
     }
 
     generateSafeProject() {
-        let proposal = new project(this.getTotalProduction()*this.convertToSec(720), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/);
+        let proposal = new project(this.getTotalProduction() * this.convertToSec(720), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/);
         return proposal;
     }
 
     generateNullProject() {
-        let proposal = new project(this.getTotalProduction()*this.convertToSec(720), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * this.convertToSec(720), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
         return proposal;
     }
 
     generateAmbitiousProject() {
-        let proposal = new project(this.getTotalProduction()*this.convertToSec(900), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * this.convertToSec(900), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
         return proposal;
     }
+
+
 }

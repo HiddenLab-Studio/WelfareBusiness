@@ -13,6 +13,10 @@ class welfareBusiness {
         console.log(this.currentProject.getAmountToProduce());
     }
 
+    getCurrentProjectPercentage(){
+        return this.currentProject.getProjectPercentage();
+    }
+
     addEmployee() {
         let newEmployee = new employee();
         employeesList.push(newEmployee);

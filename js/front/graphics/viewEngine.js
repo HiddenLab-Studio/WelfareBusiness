@@ -53,6 +53,7 @@ function update() {
     if (limitRefreshRateCounter == 15) {
         limitRefreshRateCounter = 0;
         welfareBusinessGame.updateProject();
+        console.log(welfareBusinessGame.getCurrentProjectPercentage());
 
     }
 }

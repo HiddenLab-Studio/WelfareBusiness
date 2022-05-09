@@ -59,8 +59,10 @@ function update(time, delta) {
         if (limitRefreshRateCounter == 15) {
             limitRefreshRateCounter = 0;
             welfareBusinessGame.updateProject();
-            hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
+            if(welfareBusinessGame.isRealProject()){
             hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
+            }
+            hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
         }
     }
 

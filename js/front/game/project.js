@@ -18,5 +18,8 @@ class project {
         return percentage;
     }
 
+    getRevenue(){
+        return this.revenue;
+    }
 
 }

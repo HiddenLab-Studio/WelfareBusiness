@@ -2,12 +2,13 @@
 
 class welfareBusiness {
     constructor() {
-        this.currentProject = new project(100, 100)
+        this.currentProject = new project(10, 100)
         this.employeesList = new Array();
         this.employeesList[0] = new employee();
         this.updateRate = 2;//update du jeu 2 fois par sec
         this.started = false;
         this.money = 1000;
+        this.realProject = true;
     }
 
     isProjectFinished() {
@@ -15,6 +16,10 @@ class welfareBusiness {
             return true;
         }
         else { return false }
+    }
+
+    isRealProject(){
+        return this.realProject;
     }
 
     startGame(){
@@ -52,8 +57,10 @@ class welfareBusiness {
 
     updateProject() {
         if(this.isProjectFinished()){
-            console.log("Project finished");
-
+            console.log("Project finished, waiting for next project");
+            this.realProject = false;
+            this.money += this.currentProject.getRevenue();
+            this.currentProject = new project(999999999,0);//Projet temporaire inutile en attendant un nouveau choix
         }
         else{
             for (let i = 0; i < this.employeesList.length; i++) {

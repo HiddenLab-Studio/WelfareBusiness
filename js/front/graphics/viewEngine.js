@@ -7,7 +7,11 @@ const config = {
         preload: preload,
         create: create,
         update: update
-    }
+    },
+    fps: {
+        target: 30,
+        forceSetTimeOut: true
+    },
 };
 
 let gamePhaser = new Phaser.Game(config);

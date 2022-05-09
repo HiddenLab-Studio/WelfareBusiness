@@ -151,7 +151,7 @@ class hudObject {
 
 //Fonction d'affichage de la barre de progression en fonction du poucentage de progression du projet
 function displayProgressBar(game, percent, gameWidth) {
-    let progressbar = game.add.image(0, 0, 'progressbar').setOrigin(0, 0);
+    let progressbar = game.add.image(0, 0, 'progressbar').setOrigin(0, 0).setScrollFactor(0);
     progressbar.setDisplaySize(percent / 100 * gameWidth, 10);
 
     return progressbar;

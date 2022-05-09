@@ -71,8 +71,8 @@ class windowObject {
 
         for (let i = 0; i < 3; i++) {
             this.projectChoice[i] = {
-                background: this.game.add.image(350, 150 + i * 100, 'infobar').setOrigin(0, 0).setScale(2, 2.4),
-                title: this.game.add.text(360, 160 + i * 100, "project title", { font: "14px Arial", fill: "#ff4000" }),
+                background: this.game.add.image(350, 150 + i * 100, 'infobar').setOrigin(0, 0).setScale(2, 2.4).setScrollFactor(0),
+                title: this.game.add.text(360, 160 + i * 100, "project title", { font: "14px Arial", fill: "#ff4000" }).setScrollFactor(0),
             }
         }
     }
@@ -93,15 +93,15 @@ class windowObject {
 
         this.employeeParameterGauge = new Array(2);
         //Titre de la fenêtre
-        this.employeeName = this.game.add.text(400, 95, "Employee name", { font: "14px Arial", fill: "#000000" });
+        this.employeeName = this.game.add.text(400, 95, "Employee name", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
 
         //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
         for (let i = 0; i < 2; i++) {
             this.employeeParameterGauge[i] = {
-                bar: this.game.add.image(350, 135 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1),
-                percentage: this.game.add.text(620, 130 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }),
-                upgradeBtn: this.game.add.image(360, 185, 'infobar').setOrigin(0, 0).setScale(1, 1.5),
-                upgradeBtnText: this.game.add.text(395, 203, "Level MAX", { font: "14px Arial", fill: "#000000" }).setOrigin(0, 0),
+                bar: this.game.add.image(350, 135 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
+                percentage: this.game.add.text(620, 130 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+                upgradeBtn: this.game.add.image(360, 185, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0),
+                upgradeBtnText: this.game.add.text(395, 203, "Level MAX", { font: "14px Arial", fill: "#000000" }).setOrigin(0, 0).setScrollFactor(0),
             }
 
         }
@@ -111,8 +111,8 @@ class windowObject {
 
         for (let i = 0; i < 3; i++) {
             this.employeeWelfareGauge[i] = {
-                icon: this.game.add.image(350, 255 + i * 50, 'infobar').setOrigin(0, 0).setScale(0.25, 1),
-                bar: this.game.add.image(400, 272 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1),
+                icon: this.game.add.image(350, 255 + i * 50, 'infobar').setOrigin(0, 0).setScale(0.25, 1).setScrollFactor(0),
+                bar: this.game.add.image(400, 272 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
             }
         }
 
@@ -120,7 +120,7 @@ class windowObject {
         this.employeeTips = new Array(3);
 
         for (let i = 0; i < 3; i++) {
-            this.employeeTips[i] = this.game.add.text(350, 405 + i * 40, "• Texte de conseil", { font: "14px Arial", fill: "#000000" });
+            this.employeeTips[i] = this.game.add.text(350, 405 + i * 40, "• Texte de conseil", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
 
         }
 

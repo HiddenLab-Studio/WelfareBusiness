@@ -12,8 +12,8 @@ class windowObject {
     createBackWindow() {
         let window = this;
         this.opened = true;
-        this.menu = this.game.add.image(this.config.width * 0.5, 300, 'windowBack').setScale(0.6, 0.8);
-        this.closewindowbtn = this.game.add.image(640, 97, 'closeWindowBtn').setScale().setInteractive();
+        this.menu = this.game.add.image(this.config.width * 0.5, 300, 'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
+        this.closewindowbtn = this.game.add.image(640, 97, 'closeWindowBtn').setScale().setInteractive().setScrollFactor(0);
 
         this.closewindowbtn.on('pointerdown', function () {
             window.closeWindow();
@@ -55,7 +55,7 @@ class windowObject {
     beSettingsWindow() {
         this.windowType = "option";
 
-        this.volume = this.game.add.image(this.config.width * 0.5 - 125, 200, 'volumeHigh').setScale(0.35).setInteractive();
+        this.volume = this.game.add.image(this.config.width * 0.5 - 125, 200, 'volumeHigh').setScale(0.35).setInteractive().setScrollFactor(0);
     }
 
     //Supprime les éléments de la fenêtre des settings

@@ -91,13 +91,7 @@ class hudObject {
         this.playbtn = this.phaser.add.image(540, 20, 'play').setOrigin(0, 0).setScale(0.25).setInteractive().setScrollFactor(0);
 
         this.playbtn.on("pointerdown", function () {
-            if (hud.window.isOpened()) {
-                hud.window.closeWindow()
-            }
-            else {
-                hud.window.createBackWindow();
-                hud.window.beProjectChoiceWindow();
-            }
+            console.log("Click play button");
 
         });
 
@@ -118,7 +112,7 @@ class hudObject {
 
     }
 
-    getmap(){
+    getmap() {
         return this.maps
     }
 
@@ -143,12 +137,27 @@ class hudObject {
         });
     }
 
-    updateProgressBar(percent){
+    updateProgressBar(percent) {
         this.progressbar.destroy();
         this.progressbar = displayProgressBar(this.phaser, percent, this.config.width);
+        if (percent >= 100) {//Si le projet est fini, on ouvre la fenêtre de choix de nouveau projet
+            this.projectChoicebtn = this.phaser.add.image(850, 20, 'infobar').setOrigin(0, 0).setScale(1,1).setInteractive().setScrollFactor(0);
+            this.projectChoiceText = this.phaser.add.text(853, 29, 'Choose a new project',{ font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
+
+            this.projectChoicebtn.on("pointerdown", function () {
+                if (hud.window.isOpened()) {
+                    hud.window.closeWindow()
+                }
+                else {
+                    hud.window.createBackWindow();
+                    hud.window.beProjectChoiceWindow();
+                }
+    
+            });
+        }
     }
 
-    updateMoneyCounter(money){
+    updateMoneyCounter(money) {
         this.moneyString = money.toString() + "$";
         this.moneyText.destroy();
         this.moneyText = this.phaser.add.text(60, 30, this.moneyString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);

@@ -62,6 +62,9 @@ function update(time, delta) {
             if(welfareBusinessGame.isRealProject()){
             hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
             }
+            else{
+                
+            }
             hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
         }
     }

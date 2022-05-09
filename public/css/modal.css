@@ -1,0 +1,349 @@
+/*=====================================================
+ *                      M O D A L S
+ *
+ *  All modal css rules
+ *
+ *=====================================================*/
+.close {
+  width: inherit;
+  display: flex;
+  justify-content: end;
+  position: absolute;
+}
+.close i {
+  cursor: pointer;
+  color: white;
+  font-size: 2.5rem;
+  padding: 15px;
+}
+.close i:hover {
+  opacity: 0.75;
+}
+
+.form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+  font-family: "Minecraft", sans-serif;
+}
+.form .element {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form .element span {
+  color: white;
+  font-size: var(--fs-s);
+  letter-spacing: 1px;
+}
+.form .element label {
+  display: flex;
+}
+.form .element label input {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 2px solid #cd6f66;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: white;
+}
+.form .element label input:focus {
+  outline-style: none !important;
+}
+.form .element label input ::placeholder {
+  color: white;
+}
+.form .element .loginPasswordInput, .form .element .registerConfirmPasswordInput, .form .element .registerPasswordInput {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.form .element .loginPasswordInput input, .form .element .registerConfirmPasswordInput input, .form .element .registerPasswordInput input {
+  padding-right: 30px;
+}
+.form .element .loginPasswordInput i, .form .element .registerConfirmPasswordInput i, .form .element .registerPasswordInput i {
+  cursor: pointer;
+  position: absolute;
+  font-size: var(--fs-s);
+  padding-right: 10px;
+  color: white;
+}
+.form .element .loginPasswordInput i:hover, .form .element .registerConfirmPasswordInput i:hover, .form .element .registerPasswordInput i:hover {
+  opacity: 0.75;
+}
+.form .connection__btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.form .connection__btn button {
+  cursor: pointer;
+  width: 90%;
+  height: 50px;
+  border: solid #8B352D 2px;
+  border-radius: 5px;
+  background-color: #cd6f66;
+  color: white;
+  font-size: var(--fs-m);
+  letter-spacing: 2px;
+  font-family: "Minecraft", sans-serif;
+}
+
+.submit__btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.submit__btn button {
+  cursor: pointer;
+  width: 90%;
+  height: 50px;
+  border: solid #8B352D 2px;
+  border-radius: 5px;
+  background-color: #cd6f66;
+  color: white;
+  font-size: var(--fs-m);
+  letter-spacing: 2px;
+  font-family: "Minecraft", sans-serif;
+}
+
+.error {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: #c0392b solid 1px;
+  border-radius: 5px;
+  background-color: #c0392b;
+  font-family: "Minecraft", sans-serif;
+}
+.error i {
+  color: white;
+  font-size: var(--fs-l);
+}
+.error ul {
+  padding-left: 25px;
+  margin: 0;
+  color: white;
+}
+.error ul li {
+  letter-spacing: 1px;
+  font-size: var(--fs-s);
+}
+
+.connect__modal__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+.connect__modal__container .connection__container {
+  display: flex;
+  flex-direction: row;
+  width: 45vh;
+  border-radius: 10px;
+  background-color: #121D27;
+  box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+}
+@media (max-width: 40em) {
+  .connect__modal__container .connection__container {
+    width: max(20%, 37vh);
+  }
+}
+.connect__modal__container .connection__container .connection__content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 10px 50px 10px;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+}
+.connect__modal__container .connection__container .connection__content .text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Minecraft", sans-serif;
+}
+.connect__modal__container .connection__container .connection__content .text h1 {
+  color: white;
+  margin: 0;
+  font-size: var(--fs-sm);
+  letter-spacing: 2px;
+}
+.connect__modal__container .connection__container .connection__content .text span {
+  color: white;
+  font-size: var(--fs-s);
+  letter-spacing: 1px;
+}
+.connect__modal__container .connection__container .connection__content .register {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: "Minecraft", sans-serif;
+  color: white;
+  font-size: var(--fs-s);
+}
+.connect__modal__container .connection__container .connection__content .register p {
+  margin: 0;
+  letter-spacing: 1px;
+}
+.connect__modal__container .connection__container .connection__content .register p span {
+  cursor: pointer;
+}
+.connect__modal__container .connection__container .connection__content .register p span:hover {
+  opacity: 0.5;
+}
+
+.account__modal__container {
+  position: absolute;
+  width: inherit;
+  transform: translateY(50px);
+  z-index: 500;
+}
+.account__modal__container .background {
+  width: 60%;
+  height: inherit;
+  margin: auto;
+  background-color: #121D27;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+}
+.account__modal__container .background h1 {
+  margin: 0;
+  text-align: center;
+  color: white;
+  font-size: var(--fs-sm);
+  letter-spacing: 2px;
+}
+.account__modal__container .background .avatar__container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  gap: 10px;
+}
+.account__modal__container .background .avatar__container .avatar {
+  border: solid white 2px;
+}
+.account__modal__container .background .avatar__container .progress__bar__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 5px;
+}
+.account__modal__container .background .avatar__container .progress__bar__container .bar {
+  width: 100%;
+  height: 10%;
+  background-color: white;
+}
+.account__modal__container .background .avatar__container .progress__bar__container .level span {
+  font-size: var(--fs-s);
+  color: white;
+}
+.account__modal__container .background .btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.account__modal__container .background .btn a {
+  text-decoration: none;
+  color: white;
+  font-size: var(--fs-s);
+}
+.account__modal__container .background .btn a:hover {
+  opacity: 0.5;
+}
+.account__modal__container .background .btn a:visited {
+  color: white;
+}
+
+.edit__modal__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+.edit__modal__container .edit__container {
+  display: flex;
+  flex-direction: row;
+  width: 60vh;
+  border-radius: 10px;
+  background-color: #121D27;
+  box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+}
+@media (max-width: 40em) {
+  .edit__modal__container .edit__container {
+    width: max(20%, 37vh);
+  }
+}
+.edit__modal__container .edit__container .password, .edit__modal__container .edit__container .avatar, .edit__modal__container .edit__container .username {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 10px 50px 10px;
+  width: 100%;
+  justify-content: center;
+  gap: 25px;
+  font-family: "Minecraft", sans-serif;
+}
+.edit__modal__container .edit__container .text {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Minecraft", sans-serif;
+  gap: 15px;
+}
+.edit__modal__container .edit__container .text h1 {
+  color: white;
+  margin: 0;
+  font-size: var(--fs-sm);
+  letter-spacing: 2px;
+}
+.edit__modal__container .edit__container .text span {
+  text-align: justify;
+  color: white;
+  font-size: var(--fs-s);
+  letter-spacing: 1px;
+}
+.edit__modal__container .edit__container .select__avatar {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+.edit__modal__container .edit__container .select__avatar img {
+  cursor: pointer;
+  height: 75px;
+}
+
+.avatarSelected {
+  transition: all ease-in-out 500ms;
+  border: solid #27ae60 1px;
+  border-radius: 5px;
+}
+
+/*# sourceMappingURL=modal.css.map */

@@ -1,0 +1,140 @@
+/*=====================================================
+ *                      F O O T E R
+ *
+ *  All footer css rules
+ *
+ *=====================================================*/
+.absolute {
+  position: absolute;
+}
+
+footer {
+  padding: 0;
+  margin: 0;
+}
+footer .footer__wave {
+  transform: translateY(10px);
+}
+footer .footer__element__container {
+  padding-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "VAGRbLAC", sans-serif;
+  background-color: #192E3D;
+}
+footer .footer__element__container h1 {
+  font-family: "Minecraft", sans-serif;
+  padding: 0;
+  margin: 0;
+  font-size: var(--fs-xxl);
+  color: white;
+  letter-spacing: 5px;
+}
+@media (max-width: 31.25em) {
+  footer .footer__element__container h1 {
+    font-size: var(--fs-l);
+  }
+}
+@media (max-width: 25em) {
+  footer .footer__element__container h1 {
+    font-size: var(--fs-sl);
+  }
+}
+footer .footer__element__container .footer__text {
+  width: 65%;
+}
+footer .footer__element__container .footer__text p {
+  color: white;
+  font-size: var(--fs-m);
+  text-align: justify;
+  letter-spacing: 1px;
+}
+@media (max-width: 25em) {
+  footer .footer__element__container .footer__text p {
+    font-size: var(--fs-sm);
+  }
+}
+footer .footer__element__container .footer__contributors {
+  display: flex;
+  gap: 25px;
+  width: 65%;
+  margin: 75px 0 100px 0;
+}
+@media (max-width: 60em) {
+  footer .footer__element__container .footer__contributors {
+    align-items: center;
+  }
+}
+footer .footer__element__container .footer__contributors img {
+  cursor: pointer;
+  width: 200px;
+  height: auto;
+}
+@media (max-width: 60em) {
+  footer .footer__element__container .footer__contributors img {
+    width: 50%;
+  }
+}
+footer .footer__element__container .footer__contributors h2 {
+  padding: 0;
+  margin: 0;
+  font-size: var(--fs-l);
+  color: white;
+  letter-spacing: 5px;
+  font-family: "Minecraft", sans-serif;
+}
+footer .footer__element__container .footer__contributors .footer__contributors__name__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 2;
+  gap: 5px;
+}
+footer .footer__element__container .footer__contributors .footer__contributors__name__container a {
+  color: white;
+  text-decoration: none;
+  font-size: var(--fs-s);
+  letter-spacing: 1px;
+}
+footer .footer__element__container .footer__contributors .footer__contributors__name__container a:hover {
+  opacity: 0.5;
+}
+footer .footer__element__container .footer__contributors .footer__contributors__sources {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+footer .footer__element__container .footer__contributors .footer__contributors__sources a {
+  color: white;
+  text-decoration: none;
+  font-size: var(--fs-s);
+  letter-spacing: 1px;
+}
+footer .footer__element__container .footer__contributors .footer__contributors__sources a:hover {
+  opacity: 0.5;
+}
+@media (max-width: 60em) {
+  footer .footer__element__container .footer__contributors {
+    flex-direction: column;
+  }
+}
+footer .footer__element__container .footer__copyright {
+  width: 100%;
+  font-family: "Minecraft", sans-serif;
+  background-color: #121d27;
+}
+footer .footer__element__container .footer__copyright p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: white;
+  font-size: var(--fs-s);
+  letter-spacing: 1px;
+}
+
+/*# sourceMappingURL=footer.css.map */

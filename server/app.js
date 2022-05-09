@@ -55,6 +55,7 @@ app.get('/', (req, res) => {
         res.render(path.join(__dirname, "..", "views", "index"), {
             session: true,
             username: req.session.username,
+            avatar: req.session.avatar
         });
     } else {
         // Si la session du joueur n'est pas défini on le met offline
@@ -79,6 +80,7 @@ app.use((req, res) => {
     res.status(404).render(path.join(__dirname, "..", "views", "errors", "404"), {
         username: req.session.username,
         session: req.session.login,
+        avatar: req.session.avatar,
         loginFlash: {error: req.flash("loginError"), username: req.flash("loginUsernameError"), password: req.flash("loginPasswordError")},
         registerFlash: {error: req.flash("registerError"), username: req.flash("registerUsernameError"), usernameAlreadyRegistered: req.flash("registerUsernameAlreadyUsed"), password: req.flash("registerPasswordError"), confirm: req.flash("registerConfirmError")}
     });

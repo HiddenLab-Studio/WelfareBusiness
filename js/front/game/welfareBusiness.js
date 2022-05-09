@@ -7,6 +7,7 @@ class welfareBusiness {
         this.employeesList[0] = new employee();
         this.updateRate = 2;//update du jeu 2 fois par sec
         this.started = false;
+        this.money = 1000;
     }
 
     isProjectFinished() {
@@ -40,6 +41,10 @@ class welfareBusiness {
         }
     }
 
+    getPlayerMoney(){
+        return this.money;
+    }
+
     convertToSec(seconds) {
         return seconds * this.updateProject;
     }
@@ -48,7 +53,7 @@ class welfareBusiness {
     updateProject() {
         if(this.isProjectFinished()){
             console.log("Project finished");
-            
+
         }
         else{
             for (let i = 0; i < this.employeesList.length; i++) {

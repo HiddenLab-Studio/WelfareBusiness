@@ -147,6 +147,12 @@ class hudObject {
         this.progressbar.destroy();
         this.progressbar = displayProgressBar(this.phaser, percent, this.config.width);
     }
+
+    updateMoneyCounter(money){
+        this.moneyString = money.toString() + "$";
+        this.moneyText.destroy();
+        this.moneyText = this.phaser.add.text(60, 30, this.moneyString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
+    }
 }
 
 //Fonction d'affichage de la barre de progression en fonction du poucentage de progression du projet

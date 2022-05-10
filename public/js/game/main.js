@@ -23,6 +23,7 @@ function create(){
     const tileSet = map.addTilesetImage("tileset_1", "tiles");
     let sol = map.createLayer("sol1", tileSet);
     let desk = map.createLayer("bureau_lvl1_1", tileSet);
+    let deskLvl2 = map.createLayer("bureau_lvl2_1", tileSet);
 
     deskManager.init(desk, phaser, config);
     deskManager.registerEvent(desk, this);

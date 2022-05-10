@@ -5,6 +5,8 @@ const router = express.Router();
 // Module utiles
 const bcrypt = require("bcrypt"); // hash password
 const path = require("path");
+const defaultDataSchema = require("../data/defaultDataSchem");
+const {stringify} = require("nodemon/lib/utils");
 
 /**
  * Permet de "crypter" notre mot de passe
@@ -132,7 +134,7 @@ router.post("/api/register", async (req, res) => {
                     // Si on a survécu à nos différents tests ouffff...
                     if (isInputValid === true) {
                         // On va donc faire une dernière et ultime requête SQL afin de tout simplement ajouter notre utilisateur à notre base de donnée
-                        pool.query("INSERT INTO users (username, password) VALUES(?, ?)", [username, passwordHashed], (error) => {
+                        pool.query("INSERT INTO users (username, password, data) VALUES(?, ?, ?)", [username, passwordHashed, JSON.stringify(defaultDataSchema)], (error) => {
                             // On coupe la connection à notre base de donnée car on ne fais plus aucune requête
                             connection.release();
                             // On affiche si une erreur est détectée

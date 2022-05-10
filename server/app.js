@@ -72,6 +72,7 @@ app.get('/', (req, res) => {
 // Controllers
 const auth = require("./controllers/authController");
 const game = require("./controllers/gameController");
+const test = require("./data/defaultDataSchem");
 app.use("/", auth);
 app.use("/", game);
 
@@ -93,6 +94,7 @@ server.listen(app.get("port"), () => {
     console.log("[INFO] Server " + app.get("title") + " started on port: " + app.get("port"));
     console.log("[INFO] Server environnement: " + app.get("env"));
     console.log("[INFO] Server view engine: " + app.get("view engine"));
+    console.log("[INFO] Loading defaultDataSchema... done!");
     console.log("[INFO] Hooking into MySQL...");
     pool.getConnection((error, connection) => {
         if(error) throw error;

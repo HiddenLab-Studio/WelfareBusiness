@@ -7,7 +7,7 @@ class hudObject {
         this.phaser = phaser;
         this.config = config;
 
-        this.window = new windowObject(phaser, config);
+        this.window = new windowObject(phaser, config, welfareGame, this);
 
         //Initialisation de l'interface utilisateur
         this.initializeUI();
@@ -138,9 +138,13 @@ class hudObject {
     }
 
     updateProgressBar(percent) {
+        let welfareGame = this.welfareGame;
+
         this.progressbar.destroy();
         this.progressbar = displayProgressBar(this.phaser, percent, this.config.width);
-        if (percent >= 100) {//Si le projet est fini, on ouvre la fenêtre de choix de nouveau projet
+        if (percent >= 100) {//Si le projet est fini, on affiche un bouton pour choisir un nouveau projet
+
+
             this.projectChoicebtn = this.phaser.add.image(850, 20, 'infobar').setOrigin(0, 0).setScale(1,1).setInteractive().setScrollFactor(0);
             this.projectChoiceText = this.phaser.add.text(853, 29, 'Choose a new project',{ font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
 
@@ -150,11 +154,16 @@ class hudObject {
                 }
                 else {
                     hud.window.createBackWindow();
-                    hud.window.beProjectChoiceWindow();
+                    hud.window.beProjectChoiceWindow(welfareGame.getProjectChoices());
                 }
     
             });
         }
+    }
+
+    deleteProjectChoiceBtn(){
+        this.projectChoiceText.destroy();
+        this.projectChoicebtn.destroy();
     }
 
     updateMoneyCounter(money) {

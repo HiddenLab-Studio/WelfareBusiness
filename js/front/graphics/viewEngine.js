@@ -52,7 +52,6 @@ let limitRefreshRateCounter = 0;
 function update(time, delta) {
     //Jeu
     let phaser = this;
-    console.log("test");
     if (welfareBusinessGame.isGameStarted()) {
         //Limiter l'update du projet à 2 fois par seconde :
         limitRefreshRateCounter++

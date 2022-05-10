@@ -51,13 +51,14 @@ class welfareBusiness {
     }
 
     convertToSec(seconds) {
-        return seconds * this.updateProject;
+        return seconds * this.updateRate;
     }
 
 
     updateProject() {
         if(this.isProjectFinished()){
             console.log("Project finished, waiting for next project");
+            this.generate3ProjectChoices()
             this.realProject = false;
             this.money += this.currentProject.getRevenue();
             this.currentProject = new project(999999999,0);//Projet temporaire inutile en attendant un nouveau choix
@@ -66,11 +67,9 @@ class welfareBusiness {
             for (let i = 0; i < this.employeesList.length; i++) {
                 this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
             }
-            console.log("Amount left to produce :");
-            console.log(this.currentProject.getAmountToProduce());
         }
-        
     }
+
 
     getCurrentProjectPercentage() {
         return this.currentProject.getProjectPercentage();
@@ -82,14 +81,18 @@ class welfareBusiness {
     }
 
     generate3ProjectChoices() {
-        proposals = new Array(3);
-        proposal[0] = this.generateSafeProject();
-        proposal[1] = this.generateNullProject();
-        proposal[2] = this.generateAmbitiousProject();
+        this.proposals = new Array(3);
+        this.proposals[0] = this.generateSafeProject();
+        this.proposals[1] = this.generateNullProject();
+        this.proposals[2] = this.generateAmbitiousProject();
+    }
+
+    getProjectChoices(){
+        return this.proposals;
     }
 
     generateSafeProject() {
-        let proposal = new project(this.getTotalProduction() * this.convertToSec(720), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/);
+        let proposal = new project(10,100/*this.getTotalProduction() * this.convertToSec(720), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
         return proposal;
     }
 
@@ -103,5 +106,10 @@ class welfareBusiness {
         return proposal;
     }
 
+
+    chooseNewProject(project){
+        this.realProject = true;
+        this.currentProject = project;
+    }
 
 }

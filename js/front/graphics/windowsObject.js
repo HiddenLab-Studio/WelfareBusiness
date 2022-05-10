@@ -1,8 +1,10 @@
 class windowObject {
-    constructor(game, config) {
+    constructor(game, config, welfareGame, hud) {
 
         this.game = game;
         this.config = config;
+        this.welfareGame = welfareGame;
+        this.hud = hud;
         //this.createBackWindow();
         this.windowType = undefined;//Garde en mémoire quel type de fenêtre est ouvert
 
@@ -64,16 +66,27 @@ class windowObject {
     }
 
     //Fenêtre de choix de projet
-    beProjectChoiceWindow(choice1, choice2, choice3) {
+    beProjectChoiceWindow(proposals) {
         this.windowType = "projectChoice";
+        let welfareGame = this.welfareGame;
+        let window = this;
+        let hud = this.hud
+
 
         this.projectChoice = new Array(3);
 
         for (let i = 0; i < 3; i++) {
+            let projectTitleString = "Project " + (i+1) + "\nAmount to produce :" + (proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
             this.projectChoice[i] = {
-                background: this.game.add.image(350, 150 + i * 100, 'infobar').setOrigin(0, 0).setScale(2, 2.4).setScrollFactor(0),
-                title: this.game.add.text(360, 160 + i * 100, "project title", { font: "14px Arial", fill: "#ff4000" }).setScrollFactor(0),
+                background: this.game.add.image(350, 150 + i * 100, 'infobar').setOrigin(0, 0).setScale(2, 2.4).setScrollFactor(0).setInteractive(),
+                title: this.game.add.text(360, 160 + i * 100, projectTitleString, { font: "14px Arial", fill: "#ff4000" }).setScrollFactor(0),
             }
+
+            this.projectChoice[i].background.on('pointerdown', function () {
+                welfareGame.chooseNewProject(proposals[i]);
+                window.closeWindow();
+                hud.deleteProjectChoiceBtn();
+            });
         }
     }
 

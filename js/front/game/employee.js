@@ -10,11 +10,11 @@ class employee {
         return this.production;
     }
 
-    getSalary(){
+    getSalary() {
         return this.salary;
     }
 
-    getHappiness(){
+    getHappiness() {
         return this.happiness;
     }
 }

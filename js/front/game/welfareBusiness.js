@@ -9,6 +9,13 @@ class welfareBusiness {
         this.started = false;
         this.money = 1000;
         this.realProject = true;
+
+        this.time = 0;//+1 toutes les secondes
+        this.date = {
+            day: 1,
+            month: 1,
+            year: 2022,
+        }
     }
 
     isProjectFinished() {
@@ -18,15 +25,15 @@ class welfareBusiness {
         else { return false }
     }
 
-    isRealProject(){
+    isRealProject() {
         return this.realProject;
     }
 
-    startGame(){
+    startGame() {
         this.started = true;
     }
 
-    isGameStarted(){
+    isGameStarted() {
         return this.started;
     }
 
@@ -44,18 +51,20 @@ class welfareBusiness {
         for (let i = 0; i < this.employeesList.length; i++) {
             cost = this.employeesList[i].getSalary();
         }
+
+        return cost;
     }
 
-    getGlobalHappiness(){
+    getGlobalHappiness() {
         let happiness = 0;
-        for(let i = 0; i < this.employeesList.length; i++){
+        for (let i = 0; i < this.employeesList.length; i++) {
             happiness += this.employeesList[i].getHappiness();
         }
-        happiness = happiness/this.employeesList.length;
+        happiness = happiness / this.employeesList.length;
         return happiness;
     }
 
-    getPlayerMoney(){
+    getPlayerMoney() {
         return this.money;
     }
 
@@ -64,19 +73,71 @@ class welfareBusiness {
     }
 
 
+    payWage() {
+        this.money -= this.getTotalEmployeesCost();
+    }
+
     updateProject() {
-        if(this.isProjectFinished()){
+        if (this.isProjectFinished()) {
             console.log("Project finished, waiting for next project");
             this.generate3ProjectChoices()
             this.realProject = false;
             this.money += this.currentProject.getRevenue();
-            this.currentProject = new project(999999999,0);//Projet temporaire inutile en attendant un nouveau choix
+            this.currentProject = new project(999999999, 0);//Projet temporaire inutile en attendant un nouveau choix
         }
-        else{
+        else {
             for (let i = 0; i < this.employeesList.length; i++) {
                 this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
             }
         }
+        this.updateDate();
+    }
+
+    updateDate() {
+        this.time += 1 // this.updateRate;
+
+        //Changement de jour
+        if (this.time == 1) {
+            this.date.day++
+            this.time = 0;
+        }
+
+
+        //Changement de mois
+        if (this.date.day == 29) {
+            if (this.date.month == 2) {
+                this.date.month++;
+                this.date.day -= 28;
+                this.payWage();
+            }
+        }
+        if (this.date.day == 31) {
+            if (this.date.month == 4 || this.date.month == 6 || this.date.month == 9 || this.date.month == 11) {
+                this.date.month++;
+                this.date.day -= 30;
+                this.payWage();
+            }
+        }
+        if (this.date.day == 32) {
+            if (this.date.month == 1 || this.date.month == 3 || this.date.month == 5 || this.date.month == 7 || this.date.month == 8 || this.date.month == 10 || this.date.month == 12) {
+                this.date.month++;
+                this.date.day -= 31;
+                this.payWage();
+            }
+        }
+
+        //Changement d'année
+        if (this.date.month == 13) {
+            this.date.day = 1;
+            this.date.month = 1;
+            this.date.year++;
+        }
+
+
+    }
+
+    getDate() {
+        return this.date;
     }
 
 
@@ -96,12 +157,12 @@ class welfareBusiness {
         this.proposals[2] = this.generateAmbitiousProject();
     }
 
-    getProjectChoices(){
+    getProjectChoices() {
         return this.proposals;
     }
 
     generateSafeProject() {
-        let proposal = new project(10,100/*this.getTotalProduction() * this.convertToSec(720), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
+        let proposal = new project(10, 100/*this.getTotalProduction() * this.convertToSec(720), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
         return proposal;
     }
 
@@ -116,7 +177,7 @@ class welfareBusiness {
     }
 
 
-    chooseNewProject(project){
+    chooseNewProject(project) {
         this.realProject = true;
         this.currentProject = project;
     }

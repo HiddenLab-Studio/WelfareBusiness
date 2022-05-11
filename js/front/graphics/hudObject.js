@@ -60,18 +60,19 @@ class hudObject {
 
         //Barre d'argent
         this.moneyInfoBar = this.phaser.add.image(0, 0, 'argent_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
-        this.moneyString = "44 444 $";
+        this.moneyString = "0 $";
         this.moneyText = this.phaser.add.text(60, 30, this.moneyString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
 
         //Barre de bonheur
-        this.happinessInfoBar = this.phaser.add.image(175, 0, 'bonheur_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
-        this.happinessString = "100";
+        this.happinessInfoBar = this.phaser.add.image(175, 0, 'barre_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
+        this.happinessIcon = this.phaser.add.image(180, 20, 'emote_neutre').setOrigin(0, 0).setScale(0.75).setScrollFactor(0);
+        this.happinessString = "100 %";
         this.happinessText = this.phaser.add.text(2 * (this.arbitraryUnit + 20) + 55, 30, this.happinessString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
 
         //Barre de la date
         this.dateInfoBar = this.phaser.add.image(4 * this.arbitraryUnit + 3 * 20, 0, 'date_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
         this.dateString = "04/09/02";
-        this.dateText = this.phaser.add.text(4 * this.arbitraryUnit + 3 * 20 + 60, 30, this.dateString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0);
+        this.dateText = this.phaser.add.text(4 * this.arbitraryUnit + 3 * 20 + 50, 30, this.dateString, { font: "18px Arial", fill: "#ffffff" }).setScrollFactor(0);
 
         //Icones gestion du temps
         this.pausebtn = this.phaser.add.image(500, 20, 'pause').setOrigin(0, 0).setScale(0.25).setInteractive().setScrollFactor(0);
@@ -145,8 +146,8 @@ class hudObject {
         if (percent >= 100) {//Si le projet est fini, on affiche un bouton pour choisir un nouveau projet
 
 
-            this.projectChoicebtn = this.phaser.add.image(850, 20, 'infobar').setOrigin(0, 0).setScale(1,1).setInteractive().setScrollFactor(0);
-            this.projectChoiceText = this.phaser.add.text(853, 29, 'Choose a new project',{ font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
+            this.projectChoicebtn = this.phaser.add.image(850, 20, 'infobar').setOrigin(0, 0).setScale(1, 1).setInteractive().setScrollFactor(0);
+            this.projectChoiceText = this.phaser.add.text(853, 29, 'Choose a new project', { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
 
             this.projectChoicebtn.on("pointerdown", function () {
                 if (hud.window.isOpened()) {
@@ -156,12 +157,12 @@ class hudObject {
                     hud.window.createBackWindow();
                     hud.window.beProjectChoiceWindow(welfareGame.getProjectChoices());
                 }
-    
+
             });
         }
     }
 
-    deleteProjectChoiceBtn(){
+    deleteProjectChoiceBtn() {
         this.projectChoiceText.destroy();
         this.projectChoicebtn.destroy();
     }
@@ -172,10 +173,33 @@ class hudObject {
         this.moneyText = this.phaser.add.text(60, 30, this.moneyString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
     }
 
-    updateHappinessCounter(happiness){
+    updateHappinessCounter(happiness) {
         this.happinessString = happiness.toString() + "%";
         this.happinessText.destroy();
         this.happinessText = this.phaser.add.text(2 * (this.arbitraryUnit + 20) + 55, 30, this.happinessString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
+
+        if (happiness >= 75) {
+            this.happinessIcon.destroy();
+            this.happinessIcon = this.phaser.add.image(180, 20, 'emote_heureux').setOrigin(0, 0).setScale(0.75).setScrollFactor(0);
+
+        }
+        else {
+            if (happiness < 75 && happiness >= 25) {
+                this.happinessIcon = this.phaser.add.image(180, 20, 'emote_neutre').setOrigin(0, 0).setScale(0.75).setScrollFactor(0);
+
+            }
+            else {
+                this.happinessIcon = this.phaser.add.image(180, 20, 'emote_colere').setOrigin(0, 0).setScale(0.75).setScrollFactor(0);
+
+            }
+        }
+    }
+
+
+    updateDate(date) {
+        this.dateString = date.day.toString() + "/" + date.month.toString() + "/" + date.year.toString();
+        this.dateText.destroy();
+        this.dateText = this.phaser.add.text(4 * this.arbitraryUnit + 3 * 20 + 50, 30, this.dateString, { font: "18px Arial", fill: "#ffffff" }).setScrollFactor(0);
     }
 }
 

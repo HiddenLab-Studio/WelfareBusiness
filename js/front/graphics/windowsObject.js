@@ -70,13 +70,13 @@ class windowObject {
         this.windowType = "projectChoice";
         let welfareGame = this.welfareGame;
         let window = this;
-        let hud = this.hud
+        let hud = this.hud;
 
 
         this.projectChoice = new Array(3);
 
         for (let i = 0; i < 3; i++) {
-            let projectTitleString = "Project " + (i+1) + "\nAmount to produce :" + (proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
+            let projectTitleString = "Project " + (i + 1) + "\nAmount to produce :" + (proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
             this.projectChoice[i] = {
                 background: this.game.add.image(350, 150 + i * 100, 'infobar').setOrigin(0, 0).setScale(2, 2.4).setScrollFactor(0).setInteractive(),
                 title: this.game.add.text(360, 160 + i * 100, projectTitleString, { font: "14px Arial", fill: "#ff4000" }).setScrollFactor(0),

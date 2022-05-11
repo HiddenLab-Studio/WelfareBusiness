@@ -31,12 +31,15 @@ function preload() {
     this.load.image('button_settings', './img/HUD/settings.png');
     this.load.image('button_shop', './img/HUD/logo_shop.png');
     this.load.image('argent_hud', './img/HUD/argent_hud.png');
-    this.load.image('bonheur_hud', './img/HUD/humeur_hud.png');
+    this.load.image('barre_hud', './img/HUD/barre_hud.png');
     this.load.image('date_hud', './img/HUD/date_hud.png');
     this.load.image('pause', './img/HUD/bouton_pause.png');
     this.load.image('play', './img/HUD/bouton_play.png');
     this.load.image('avance_rapide', './img/HUD/bouton_acc.png');
     this.load.image('closeWindowBtn', './img/HUD/croix.png');
+    this.load.image('emote_neutre', './img/HUD/neutre.png')
+    this.load.image('emote_colere', './img/HUD/colere.png')
+    this.load.image('emote_heureux', './img/HUD/bonheur.png')
 }
 
 let hud;
@@ -58,14 +61,15 @@ function update(time, delta) {
         if (limitRefreshRateCounter == 15) {
             limitRefreshRateCounter = 0;
             welfareBusinessGame.updateProject();
-            if(welfareBusinessGame.isRealProject()){
-            hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
+            if (welfareBusinessGame.isRealProject()) {
+                hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
             }
-            else{
-                
+            else {
+
             }
             hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
             hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
+            hud.updateDate(welfareBusinessGame.getDate());
         }
     }
 

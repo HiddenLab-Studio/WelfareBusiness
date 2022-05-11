@@ -5,20 +5,20 @@ class project {
         this.revenue = revenue;
     }
 
-    getAmountToProduce(){
+    getAmountToProduce() {
         return this.amountToProduce;
     }
 
-    updateAmountToProduce(amountWorked){
+    updateAmountToProduce(amountWorked) {
         this.amountToProduce = this.amountToProduce - amountWorked;
     }
 
-    getProjectPercentage(){
+    getProjectPercentage() {
         let percentage = (1 - this.amountToProduce / this.initialAmount) * 100;
         return percentage;
     }
 
-    getRevenue(){
+    getRevenue() {
         return this.revenue;
     }
 

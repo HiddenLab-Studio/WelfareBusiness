@@ -65,6 +65,7 @@ function update(time, delta) {
                 
             }
             hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
+            hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
         }
     }
 

@@ -46,6 +46,15 @@ class welfareBusiness {
         }
     }
 
+    getGlobalHappiness(){
+        let happiness = 0;
+        for(let i = 0; i < this.employeesList.length; i++){
+            happiness += this.employeesList[i].getHappiness();
+        }
+        happiness = happiness/this.employeesList.length;
+        return happiness;
+    }
+
     getPlayerMoney(){
         return this.money;
     }

@@ -65,8 +65,8 @@ class hudObject {
 
         //Barre de bonheur
         this.happinessInfoBar = this.phaser.add.image(175, 0, 'bonheur_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
-        this.happinessString = "Valeur bonheur";
-        this.happinessText = this.phaser.add.text(2 * (this.arbitraryUnit + 20) + 35, 30, this.happinessString, { font: "14px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
+        this.happinessString = "100";
+        this.happinessText = this.phaser.add.text(2 * (this.arbitraryUnit + 20) + 55, 30, this.happinessString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
 
         //Barre de la date
         this.dateInfoBar = this.phaser.add.image(4 * this.arbitraryUnit + 3 * 20, 0, 'date_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
@@ -170,6 +170,12 @@ class hudObject {
         this.moneyString = money.toString() + "$";
         this.moneyText.destroy();
         this.moneyText = this.phaser.add.text(60, 30, this.moneyString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
+    }
+
+    updateHappinessCounter(happiness){
+        this.happinessString = happiness.toString() + "%";
+        this.happinessText.destroy();
+        this.happinessText = this.phaser.add.text(2 * (this.arbitraryUnit + 20) + 55, 30, this.happinessString, { font: "18px Arial", fill: "#FFFFFF" }).setScrollFactor(0);
     }
 }
 

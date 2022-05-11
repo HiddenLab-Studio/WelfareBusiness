@@ -25,7 +25,8 @@ function create(){
     let desk = map.createLayer("bureau_lvl1_1", tileSet);
     let deskLvl2 = map.createLayer("bureau_lvl2_1", tileSet);
 
-    deskManager.init(desk, phaser, config);
+    dataManager.init(map);
+    deskManager.init(phaser, config);
     deskManager.registerEvent(desk, this);
 
 }

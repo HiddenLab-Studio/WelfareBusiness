@@ -6,7 +6,7 @@ module.exports = {
     "desk": [
         {
             "id": 0,
-            "pos": [[7,5],[8,5],[9,5],[7,6],[8,6],[9,6]],
+            "pos": [[5,4],[6,4],[7,4],[5,5],[6,5],[7,5]],
             /// 1 = horizontal bas / 2 = horizontal haut / 3 = vertical gauche / 4 vertical droite
             "orientation": 1,
             "active": true,
@@ -19,8 +19,8 @@ module.exports = {
         },
         {
             "id": 1,
-            "pos": [[14,5],[15,5],[16,5],[14,6],[15,6],[16,6]],
-            "orientation": 1,
+            "pos": [[3,6],[4,6],[3,7],[4,7],[3,8],[4,8],[3,9],[4,9]],
+            "orientation": 3,
             "active": true,
             "level": 1,
             "employee": {

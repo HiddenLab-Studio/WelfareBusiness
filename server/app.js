@@ -31,8 +31,8 @@ const pool = mysql.createPool({
 // Configuration du serveur
 app.use(express.static(path.join(__dirname, "..")));
 app.use(compression());
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(session)
 app.use(flash());
 app.set("title", process.env.SERVER_NAME)

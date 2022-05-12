@@ -22,11 +22,13 @@ function create(){
     const map = this.make.tilemap({key: "map"});
     const tileSet = map.addTilesetImage("tileset_1", "tiles");
     let sol = map.createLayer("sol1", tileSet);
+    let mur = map.createLayer("mur1", tileSet);
     let desk = map.createLayer("bureau_lvl1_1", tileSet);
     let deskLvl2 = map.createLayer("bureau_lvl2_1", tileSet);
 
     dataManager.init(map);
     deskManager.init(phaser, config);
+    deskManager.getCoordinate(desk);
     deskManager.registerEvent(desk, this);
 
 }

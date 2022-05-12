@@ -20,12 +20,12 @@ router.get("/api/userdata", (req, res) => {
         // Je viens créer une connexion à ma bdd pour récupérer les données du joueur
         pool.getConnection((error, connection) => {
             if(error) throw error;
-            pool.query("SELECT data FROM users WHERE username = ?", [req.session.username], (error, result) => {
+            pool.query("SELECT userData FROM users WHERE username = ?", [req.session.username], (error, result) => {
                 if(error) throw error;
                 connection.release();
-                console.log(result[0])
+                //console.log(result[0])
                 if(result.length > 0){
-                    res.send(result[0].data)
+                    res.send(result[0].userData)
                 }
             })
         })
@@ -33,6 +33,28 @@ router.get("/api/userdata", (req, res) => {
         console.log("[INFO] Request complete for user (guess)")
         res.send(defaultDataSchema)
     }
+})
+
+router.post("/api/savedata", (req, res) => {
+    let data = req.body
+    //console.log(data)
+    if(req.session.login){
+        console.log("[INFO] Request complete for user " + req.session.username)
+        // Je viens créer une connexion à ma bdd pour récupérer les données du joueur
+        pool.getConnection((error, connection) => {
+            if(error) throw error;
+            pool.query("UPDATE users SET userData = ? WHERE username = ?", [JSON.stringify(data), req.session.username], (error, result) => {
+                if(error) throw error;
+                connection.release();
+                if(result.length > 0){
+                    console.info("Data successfully saved!")
+                    res.send({text: "Data successfully saved!"});
+                }
+            })
+        })
+    }
+    console.log(data);
+    res.send({text: "Please create an account to save your data!"})
 })
 
 

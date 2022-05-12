@@ -31,13 +31,22 @@ let dataManager = (function() {
                     //console.log(json);
                     data = json;
                 })
+            console.log(data)
             return data;
         }
     }
 
-    function saveData(access){
+    function saveData(access, data){
         if(access === token){
-            console.info("Data successfully saved!")
+            fetch("/api/savedata", {
+                method: "POST",
+                headers: new Headers({"Content-Type": "application/json"}),
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then((obj) => {
+                    console.info(obj.text);
+                })
         }
     }
 
@@ -57,7 +66,7 @@ let dataManager = (function() {
             return result;
         },
 
-        save: () => saveData(),
+        save: (access, data) => saveData(access, data),
         autoSave: () => autoSaveData(),
         showMap: () => console.log(map),
     }

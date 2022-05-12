@@ -33,6 +33,20 @@ let deskManager = (function () {
                 [30, 33],
                 [31, 34]
             ]
+        },
+        {
+            orientation: 3,
+            index: [
+                // A CHANGER
+                [57, 60],
+                [58, 61],
+                [85, 88],
+                [86, 89],
+                [113, 116],
+                [114, 117],
+                [141, 144],
+                [142, 145]
+            ]
         }
     ]
 
@@ -59,56 +73,36 @@ let deskManager = (function () {
         // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
         if (deskData.level < maxDeskLevel && deskData.active) {
             // On récupère l'objet qui contient l'index de chaque texture avec la texture qui correspond à son amélioration
-            let textureArray = textureIndex.filter(element => {
-                if(element.orientation === deskData.orientation){
-                    return element;
-                }
-            })
+            let upgradeTextureArray = textureIndex.filter((element) => {
+                if(deskData.orientation === element.orientation) return element;
+            });
 
-            // On parcourt chaque case qui contient les frames de notre bureau
-            deskData.pos.forEach((coordinate) => {
-                // Pour chaque case, on vient récupérer le tileIndex qui correspond à un chiffre celui-ci est interpréter
-                // pa
-                // r phaser pour correspondre à une texture donnée
+            for (const coordinate of deskData.pos) {
                 let tileIndex = layer.getTileAt(coordinate[0], coordinate[1]).index;
-                // Pour chacune des textures améliorantes
-                textureArray[0].index.forEach((element) => {
-                    if(element.includes(tileIndex)){
-                        console.log("(" + element + ") include " + tileIndex)
+                for (const array of upgradeTextureArray[0].index) {
+                    if(array.includes(tileIndex)){
+                        //console.log("(" + array + ") include " + tileIndex)
                         // On récupère l'index du chiffre puis le prochain index de la texture
-                        let indexOfElement = element.indexOf(tileIndex);
-                        console.log("next texture index is: " + element[indexOfElement + 1]);
-                        layer.getTileAt(coordinate[0], coordinate[1]).index = element[indexOfElement + 1];
+                        let indexOfElement = array.indexOf(tileIndex);
+                        //console.log("next texture index is: " + array[indexOfElement + 1]);
+                        layer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
                     }
-                })
-            })
-
-            // Quand on a update toutes les textures de notre bureau
+                }
+            }
             deskData.level += 1;
-            deskData.employee.happiness += 10;
-
-            dataManager.save();
+            dataManager.save(token, data);
         }
     }
 
-    /**
-     * Permet de load avec une méthode fetch les données de l'utilisateur si celui-ci est connecté pour pouvoir rétablir ça partie
-     */
-    /*function loadData() {
-        fetch("/api/userdata", {
-            method: "get",
-            mode: "cors",
-            headers: new Headers({"Content-Type": "application/json"})
-        })
-            .then(response => response.json())
-            .then((json) => {
-                console.info("Fetch userdata completed!");
-                console.log(json);
-                data = json;
-            })
-    }*/
-
     return {
+        getCoordinate(layer){
+            layer.forEachTile((tile) => {
+                if(tile.index !== -1){
+                    console.log(tile.x, tile.y)
+                }
+            })
+        },
+
         // Initialisation des variables
         async init(phaser, cfg) {
             if(!init){
@@ -128,22 +122,25 @@ let deskManager = (function () {
                 try {
                     let target = layer.getTileAtWorldXY(pos.x, pos.y);
                     // DEBUG
-                    //console.log("Click detected position: x:" + target.x + " y:" + target.y);
+                    // console.log("Click detected position: x:" + target.x + " y:" + target.y);
                     // console.log("Index of the clicked case is " + target.index)
 
+                    let result = undefined;
                     let id = undefined;
                     let level = undefined;
                     let active = undefined;
-                    let result = data.desk.filter((element) => {
-                        element.pos.forEach((pos) => {
-                            if (pos.includes(target.x) && pos.includes(target.y)) {
+                    for (const element of data.desk) {
+                        element.pos.forEach((coordinate) => {
+                            if(coordinate[0] === target.x && coordinate[1] === target.y){
+                                console.log(coordinate[0] === target.x && coordinate[1] === target.y)
+                                console.log(element.id)
                                 id = element.id;
                                 level = element.level;
                                 active = element.active;
-                                return true;
+                                result = true;
                             }
-                        });
-                    })
+                        })
+                    }
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
                     if (result && !isDeskWindowOpened && active){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
@@ -159,6 +156,7 @@ let deskManager = (function () {
             // Boolean qui permet de savoir si une fenêtre est ouverte
             isDeskWindowOpened = true;
             let deskData = getDeskById(id)[0];
+
 
             // Ajout des éléments à notre fenêtre
             let deskGroup = instance.add.group();

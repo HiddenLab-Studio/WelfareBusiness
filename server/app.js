@@ -12,7 +12,7 @@ const bodyParser = require("body-parser");
 const flash = require("express-flash");
 
 // Configuration de notre session
-const session = require('express-session')({
+const session = require("express-session")({
     secret: process.env.SESSION_KEY,
     name: process.env.SESSION_NAME,
     resave: true,
@@ -72,7 +72,6 @@ app.get('/', (req, res) => {
 // Controllers
 const auth = require("./controllers/authController");
 const game = require("./controllers/gameController");
-const test = require("./data/defaultDataSchem");
 app.use("/", auth);
 app.use("/", game);
 

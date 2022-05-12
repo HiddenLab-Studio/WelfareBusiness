@@ -47,13 +47,15 @@ router.post("/api/savedata", (req, res) => {
                 if(error) throw error;
                 connection.release();
                 if(result.length > 0){
-                    console.info("Data successfully saved!")
+                    //console.info("Data successfully saved!")
                     res.send({text: "Data successfully saved!"});
                 }
             })
         })
     }
-    console.log(data);
+    //console.log(data);
+    req.session.guessData = data;
+    console.log(req.session.guessData)
     res.send({text: "Please create an account to save your data!"})
 })
 

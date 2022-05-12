@@ -132,8 +132,8 @@ let deskManager = (function () {
                     for (const element of data.desk) {
                         element.pos.forEach((coordinate) => {
                             if(coordinate[0] === target.x && coordinate[1] === target.y){
-                                console.log(coordinate[0] === target.x && coordinate[1] === target.y)
-                                console.log(element.id)
+                                //console.log(coordinate[0] === target.x && coordinate[1] === target.y)
+                                //console.log(element.id)
                                 id = element.id;
                                 level = element.level;
                                 active = element.active;
@@ -156,7 +156,6 @@ let deskManager = (function () {
             // Boolean qui permet de savoir si une fenêtre est ouverte
             isDeskWindowOpened = true;
             let deskData = getDeskById(id)[0];
-
 
             // Ajout des éléments à notre fenêtre
             let deskGroup = instance.add.group();

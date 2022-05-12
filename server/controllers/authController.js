@@ -134,7 +134,9 @@ router.post("/api/register", async (req, res) => {
                     // Si on a survécu à nos différents tests ouffff...
                     if (isInputValid === true) {
                         // On va donc faire une dernière et ultime requête SQL afin de tout simplement ajouter notre utilisateur à notre base de donnée
-                        pool.query("INSERT INTO users (username, password, userData) VALUES(?, ?, ?)", [username, passwordHashed, JSON.stringify(defaultDataSchema)], (error) => {
+                        let tmp = req.session.guessData;
+                        if(tmp === undefined) tmp = defaultDataSchema;
+                        pool.query("INSERT INTO users (username, password, userData) VALUES(?, ?, ?)", [username, passwordHashed, JSON.stringify(tmp)], (error) => {
                             // On coupe la connection à notre base de donnée car on ne fais plus aucune requête
                             connection.release();
                             // On affiche si une erreur est détectée

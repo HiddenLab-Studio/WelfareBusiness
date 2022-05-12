@@ -40,6 +40,10 @@ function preload() {
     this.load.image('emote_neutre', './img/HUD/neutre.png')
     this.load.image('emote_colere', './img/HUD/colere.png')
     this.load.image('emote_heureux', './img/HUD/bonheur.png')
+    this.load.image('projet_hud', './img/HUD/projet_hud.png');
+    this.load.image('menu_hud', './img/HUD/menu_hud.png');
+    this.load.image('bouton_projet', './img/HUD/bouton_projet.png');
+    this.load.image('progress_bar', './img/hud/progress_bar.png')
 }
 
 let hud;
@@ -93,19 +97,8 @@ function update(time, delta) {
 
     controls.update(delta);
     if (getmap.isStarted()) {
-        const worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
-
-        const pointerTileXY = getmap.groundLayer.worldToTileXY(worldPoint.x, worldPoint.y);
-        const snappedWorldPoint = getmap.groundLayer.tileToWorldXY(pointerTileXY.x, pointerTileXY.y);
-        getmap.marker.setPosition(snappedWorldPoint.x, snappedWorldPoint.y);
         camera.setBounds(0, 0, getmap.returnmap().widthInPixels, getmap.returnmap().heightInPixels); //fixe les bords à FIXE MARCHE PAS
 
-        if (this.input.manager.activePointer.isDown) {
-
-            //console.log('coord: x', worldPoint.x) //Bordel de fou furieux dans la console mais fonctionne
-            //console.log('coord: y', worldPoint.y)
-
-        }
     }
 
 }

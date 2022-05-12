@@ -78,8 +78,8 @@ class windowObject {
         for (let i = 0; i < 3; i++) {
             let projectTitleString = "Project " + (i + 1) + "\nAmount to produce :" + (proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
             this.projectChoice[i] = {
-                background: this.game.add.image(350, 150 + i * 100, 'infobar').setOrigin(0, 0).setScale(2, 2.4).setScrollFactor(0).setInteractive(),
-                title: this.game.add.text(360, 160 + i * 100, projectTitleString, { font: "14px Arial", fill: "#ff4000" }).setScrollFactor(0),
+                background: this.game.add.image(350, 120 + i * 130, 'projet_hud').setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive(),
+                title: this.game.add.text(370, 160 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
             }
 
             this.projectChoice[i].background.on('pointerdown', function () {

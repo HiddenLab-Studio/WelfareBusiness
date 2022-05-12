@@ -9,6 +9,7 @@ class welfareBusiness {
         this.started = false;
         this.money = 1000;
         this.realProject = true;
+        this.isNewMonthBool = false;
 
         this.time = 0;//+1 toutes les secondes
         this.date = {
@@ -100,6 +101,7 @@ class welfareBusiness {
         if (this.time == 1) {
             this.date.day++
             this.time = 0;
+            this.isNewMonthBool = false;
         }
 
 
@@ -108,6 +110,7 @@ class welfareBusiness {
             if (this.date.month == 2) {
                 this.date.month++;
                 this.date.day -= 28;
+                this.isNewMonthBool = true;
                 this.payWage();
             }
         }
@@ -115,6 +118,7 @@ class welfareBusiness {
             if (this.date.month == 4 || this.date.month == 6 || this.date.month == 9 || this.date.month == 11) {
                 this.date.month++;
                 this.date.day -= 30;
+                this.isNewMonthBool = true;
                 this.payWage();
             }
         }
@@ -122,6 +126,7 @@ class welfareBusiness {
             if (this.date.month == 1 || this.date.month == 3 || this.date.month == 5 || this.date.month == 7 || this.date.month == 8 || this.date.month == 10 || this.date.month == 12) {
                 this.date.month++;
                 this.date.day -= 31;
+                this.isNewMonthBool = true;
                 this.payWage();
             }
         }
@@ -138,6 +143,10 @@ class welfareBusiness {
 
     getDate() {
         return this.date;
+    }
+
+    isNewMonth(){
+        return this.isNewMonthBool;
     }
 
 

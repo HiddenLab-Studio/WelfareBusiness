@@ -70,6 +70,7 @@ function update(time, delta) {
             hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
             hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
             hud.updateDate(welfareBusinessGame.getDate());
+            hud.temporaryMessageWageLoop();
         }
     }
 

@@ -9,6 +9,8 @@ class hudObject {
 
         this.window = new windowObject(phaser, config, welfareGame, this);
 
+        this.tmpMsgCounter = -1;
+
         //Initialisation de l'interface utilisateur
         this.initializeUI();
 
@@ -200,6 +202,22 @@ class hudObject {
         this.dateString = date.day.toString() + "/" + date.month.toString() + "/" + date.year.toString();
         this.dateText.destroy();
         this.dateText = this.phaser.add.text(4 * this.arbitraryUnit + 3 * 20 + 50, 30, this.dateString, { font: "18px Arial", fill: "#ffffff" }).setScrollFactor(0);
+    }
+
+
+    temporaryMessageWageLoop() {
+        this.tmpMsgCounter--;
+        if (this.tmpMsgCounter == 0) {
+            //this.tmpMsgBackground.destroy();
+            this.tmpMsgText.destroy();
+        }
+        if (this.welfareGame.isNewMonth()) {
+            this.tmpMsgCounter = 4;
+            if (this.tmpMsgCounter == 4) {
+                //this.tmpMsgBackground = this.phaser.add.image(50, 50, 'infobar').setOrigin(0, 0).setScale(0.9, 1).setInteractive().setScrollFactor(0);
+                this.tmpMsgText = this.phaser.add.text(55, 55, "-" + this.welfareGame.getTotalEmployeesCost() + "$", { font: "18px Arial", fill: "#FF0000" }).setScrollFactor(0);
+            }
+        }
     }
 }
 

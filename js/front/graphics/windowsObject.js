@@ -15,7 +15,7 @@ class windowObject {
         let window = this;
         this.opened = true;
         this.menu = this.game.add.image(this.config.width * 0.5, 300, 'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
-        this.closewindowbtn = this.game.add.image(640, 97, 'closeWindowBtn').setScale().setInteractive().setScrollFactor(0);
+        this.closewindowbtn = this.game.add.image(670, 70, 'closeWindowBtn').setScale(0.5).setInteractive().setScrollFactor(0);
 
         this.closewindowbtn.on('pointerdown', function () {
             window.closeWindow();

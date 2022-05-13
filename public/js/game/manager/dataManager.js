@@ -4,6 +4,7 @@ let dataManager = (function() {
     let token = "1";
     let map = undefined;
     let data = undefined;
+    let username = undefined;
 
     let config = {
         autoSave: false,
@@ -30,6 +31,7 @@ let dataManager = (function() {
                     console.info("Fetch userdata completed!");
                     //console.log(json);
                     data = json;
+                    username = data.user.name;
                 })
             console.log(data)
             return data;
@@ -66,6 +68,7 @@ let dataManager = (function() {
             return result;
         },
 
+        getUsername: () => username,
         save: (access, data) => saveData(access, data),
         autoSave: () => autoSaveData(),
         showMap: () => console.log(map),

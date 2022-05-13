@@ -46,17 +46,14 @@ router.post("/api/savedata", (req, res) => {
             pool.query("UPDATE users SET userData = ? WHERE username = ?", [JSON.stringify(data), req.session.username], (error, result) => {
                 if(error) throw error;
                 connection.release();
-                if(result.length > 0){
-                    //console.info("Data successfully saved!")
-                    res.send({text: "Data successfully saved!"});
-                }
+                res.send({text: "Data successfully saved!"});
             })
         })
+    } else {
+        //console.log(data);
+        req.session.guessData = data;
+        res.send({text: "Please create an account to save your data!"})
     }
-    //console.log(data);
-    req.session.guessData = data;
-    console.log(req.session.guessData)
-    res.send({text: "Please create an account to save your data!"})
 })
 
 

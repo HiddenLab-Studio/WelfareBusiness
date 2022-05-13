@@ -104,10 +104,9 @@ let deskManager = (function () {
         },
 
         // Initialisation des variables
-        async init(phaser, cfg) {
+        async init(cfg) {
             if(!init){
                 init = true;
-                game = phaser;
                 config = cfg;
                 await dataManager.load(token).then(r => data = r);
                 //console.log(data)
@@ -159,17 +158,17 @@ let deskManager = (function () {
 
             // Ajout des éléments à notre fenêtre
             let deskGroup = instance.add.group();
-            let deskWindow = instance.add.image(0, 0, "background").setScale(0.6, 0.8).setScrollFactor(0);
-            let closeBtn = instance.add.image(0, 0, "closeBtn").setScale(0.6, 0.8).setScrollFactor(0);
-            let textId = instance.add.text(0, 0, "Desk n°" + id + " (Lv. " + deskData.level + ")", {color: "white", fontFamily: "Minecraft"});
-            let upgradeDeskBtn = instance.add.text(0, 0, "UPGRADE", {cursor: "pointer", color: "white", fontFamily: "Minecraft"});
+            let deskWindow = instance.add.image(config.width * 0.5, 300, "windowBack").setScale(0.6, 0.8).setScrollFactor(0);
+            let closeBtn = instance.add.image(0, 0, "closeWindowBtn").setScale(0.5).setScrollFactor(0);
+            let textId = instance.add.text(0, 0, "Desk n°" + id + " (Lv. " + deskData.level + ")", {color: "black", fontFamily: "Minecraft"});
+            let upgradeDeskBtn = instance.add.text(0, 0, "UPGRADE", {cursor: "pointer", color: "black", fontFamily: "Minecraft"});
 
             // Alignement des éléments
-            Phaser.Display.Align.In.Center(deskWindow, instance.add.zone(400, 300, 800, 600));
+            Phaser.Display.Align.In.Center(deskWindow, instance.add.zone(500, 280, 1000, 563));
             Phaser.Display.Align.In.TopRight(closeBtn, deskWindow);
             Phaser.Display.Align.In.TopCenter(textId, deskWindow);
             Phaser.Display.Align.In.Center(upgradeDeskBtn, deskWindow);
-            closeBtn.setPosition(closeBtn.x - 165, closeBtn.y + 95);
+            closeBtn.setPosition(closeBtn.x - 100, closeBtn.y + 40);
             textId.setPosition(textId.x, textId.y + 95);
 
             deskGroup.add(deskWindow).add(closeBtn).add(textId).add(upgradeDeskBtn);

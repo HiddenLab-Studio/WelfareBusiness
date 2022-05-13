@@ -1,5 +1,6 @@
 module.exports = {
     "user": {
+        "name": "guess",
         "money": 100,
     },
 

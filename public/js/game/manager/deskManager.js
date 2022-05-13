@@ -110,7 +110,7 @@ let deskManager = (function () {
                 game = phaser;
                 config = cfg;
                 await dataManager.load(token).then(r => data = r);
-                console.log(data)
+                //console.log(data)
             }
         },
 

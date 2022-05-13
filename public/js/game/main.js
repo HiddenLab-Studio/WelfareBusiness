@@ -28,7 +28,6 @@ function create(){
 
     dataManager.init(map);
     deskManager.init(phaser, config);
-    deskManager.getCoordinate(desk);
     deskManager.registerEvent(desk, this);
 
 }

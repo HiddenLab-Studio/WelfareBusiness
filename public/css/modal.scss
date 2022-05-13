@@ -1,0 +1,361 @@
+/*=====================================================
+ *                      M O D A L S
+ *
+ *  All modal css rules
+ *
+ *=====================================================*/
+
+.close {
+  width: inherit;
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  i {
+    cursor: pointer;
+    color: white;
+    font-size: 2.5rem;
+    padding: 15px;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+.form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+  font-family: "Minecraft", sans-serif;
+
+  .element {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    span {
+      color: white;
+      font-size: var(--fs-s);
+      letter-spacing: 1px;
+    }
+    label {
+      display: flex;
+      input {
+        width: 100%;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 2px solid #cd6f66;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background-color: transparent;
+        color: white;
+        &:focus {
+          outline-style: none !important;
+        }
+        ::placeholder {
+          color: white;
+        }
+      }
+    }
+
+    .loginPasswordInput, .registerConfirmPasswordInput, .registerPasswordInput {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      input {
+        padding-right: 30px;
+      }
+      i {
+        cursor: pointer;
+        position: absolute;
+        font-size: var(--fs-s);
+        padding-right: 10px;
+        color: white;
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+
+  .connection__btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    button {
+      cursor: pointer;
+      width: 90%;
+      height: 50px;
+      border: solid #8B352D 2px;
+      border-radius: 5px;
+      background-color: #cd6f66;
+      color: white;
+      font-size: var(--fs-m);
+      letter-spacing: 2px;
+      font-family: "Minecraft", sans-serif;
+    }
+  }
+}
+.submit__btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  button {
+    cursor: pointer;
+    width: 90%;
+    height: 50px;
+    border: solid #8B352D 2px;
+    border-radius: 5px;
+    background-color: #cd6f66;
+    color: white;
+    font-size: var(--fs-m);
+    letter-spacing: 2px;
+    font-family: "Minecraft", sans-serif;
+  }
+}
+.error {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: #c0392b solid 1px;
+  border-radius: 5px;
+  background-color: #c0392b;
+  font-family: "Minecraft", sans-serif;
+  i {
+    color: white;
+    font-size: var(--fs-l);
+  }
+  ul {
+    padding-left: 25px;
+    margin: 0;
+    color: white;
+    li {
+      letter-spacing: 1px;
+      font-size: var(--fs-s);
+    }
+  }
+}
+
+.connect__modal__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+
+  .connection__container {
+    display: flex;
+    flex-direction: row;
+    //height: 65vh;
+    width: 45vh;
+    border-radius: 10px;
+    background-color: #121D27;
+    box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+    @media (max-width: 40em){
+      width: max(20%, 37vh);
+    }
+
+    .connection__content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 50px 10px 50px 10px;
+      width: 100%;
+      justify-content: center;
+      gap: 10px;
+
+      .text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Minecraft", sans-serif;
+        h1 {
+          color: white;
+          margin: 0;
+          font-size: var(--fs-sm);
+          letter-spacing: 2px;
+        }
+        span {
+          color: white;
+          font-size: var(--fs-s);
+          letter-spacing: 1px;
+        }
+      }
+
+      .register {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-family: "Minecraft", sans-serif;
+        color: white;
+        font-size: var(--fs-s);
+        p {
+          margin: 0;
+          letter-spacing: 1px;
+          span {
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.account__modal__container {
+  position: absolute;
+  width: inherit;
+  transform: translateY(50px);
+  z-index: 500;
+  .background {
+    width: 60%;
+    height: inherit;
+    margin: auto;
+    background-color: #121D27;
+    border-radius: 10px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+    h1 {
+      margin: 0;
+      text-align: center;
+      color: white;
+      font-size: var(--fs-sm);
+      letter-spacing: 2px;
+    }
+    .avatar__container {
+      width: 80%;
+      margin: auto;
+      display: flex;
+      gap: 10px;
+      .avatar {
+        border: solid white 2px;
+      }
+      .progress__bar__container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 5px;
+        .bar {
+          width: 100%;
+          height: 10%;
+          background-color: white;
+        }
+        .level {
+          span {
+            font-size: var(--fs-s);
+            color: white;
+          }
+        }
+      }
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: var(--fs-s);
+        &:hover {
+          opacity: .5;
+        }
+        &:visited {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.edit__modal__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+
+  .edit__container {
+    display: flex;
+    flex-direction: row;
+    //height: 65vh;
+    width: 60vh;
+    border-radius: 10px;
+    background-color: #121D27;
+    box-shadow: 12px 12px 2px 1px rgba(205, 111, 102, 0.5);
+    @media (max-width: 40em){
+      width: max(20%, 37vh);
+    }
+
+    .password, .avatar, .username {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 50px 10px 50px 10px;
+      width: 100%;
+      justify-content: center;
+      gap: 25px;
+      font-family: "Minecraft", sans-serif;
+    }
+
+    .text {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: "Minecraft", sans-serif;
+      gap: 15px;
+      h1 {
+        color: white;
+        margin: 0;
+        font-size: var(--fs-sm);
+        letter-spacing: 2px;
+      }
+      span {
+        text-align: justify;
+        color: white;
+        font-size: var(--fs-s);
+        letter-spacing: 1px;
+      }
+    }
+
+    .select__avatar {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
+      img {
+        cursor: pointer;
+        height: 75px;
+      }
+    }
+
+  }
+
+}
+
+.avatarSelected {
+  transition: all ease-in-out 500ms;
+  border: solid #27ae60 1px;
+  border-radius: 5px;
+}

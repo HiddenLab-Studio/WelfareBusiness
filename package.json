@@ -1,6 +1,20 @@
 {
   "dependencies": {
-    "express": "^4.18.1",
-    "nodemon": "^2.0.16"
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.7",
+    "express": "^4.17.3",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
+    "helmet": "^5.0.2",
+    "jquery": "^3.6.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.16",
+    "phaser": "^3.55.2",
+    "rellax": "^1.12.1",
+    "socket.io": "^4.5.0"
   }
 }

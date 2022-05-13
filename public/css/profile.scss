@@ -1,0 +1,162 @@
+/*=====================================================
+ *                     P R O F I L E
+ *
+ *  All profile css rules
+ *
+ *=====================================================*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121d27;
+  background-image: url("../assets/img/filter.png");
+  background-position: center;
+  //background: url("../../public/assets/img/header/mainBackground.png") no-repeat;
+}
+
+main {
+  width: 85%;
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  font-family: "VAGRbLAC", sans-serif;
+
+  .profile__container {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px ;
+    margin: 50px;
+
+    .title {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Minecraft", sans-serif;
+      gap: 10px;
+      margin: 50px 0 50px 0;
+
+      @media (max-width: 37.5em){
+        h1 {
+          font-size: var(--fs-sl) !important;
+        }
+        span {
+          font-size: var(--fs-sm) !important;
+        }
+      }
+
+      h1 {
+        margin: 0;
+        text-align: center;
+        font-size: var(--fs-xxl);
+        color: white;
+        letter-spacing: 7px;
+      }
+
+      span {
+        color: white;
+        font-size: var(--fs-m);
+        letter-spacing: 1px;
+      }
+    }
+
+    .informations__container {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      font-family: "Minecraft", sans-serif;
+
+      h2 {
+        text-align: left;
+        color: white;
+        font-size: var(--fs-l);
+        letter-spacing: 1px;
+        margin: 0;
+
+        @media (max-width: 37.5em){
+          font-size: var(--fs-m) !important;
+        }
+      }
+
+      .profile__informations__table {
+        display: flex;
+        justify-content: center;
+
+        table {
+          width: 90%;
+          border-collapse: collapse;
+
+          tbody {
+            tr {
+              border-bottom: solid white 1px;
+
+              td {
+                padding: 15px;
+                color: white;
+                font-size: var(--fs-s);
+              }
+            }
+
+            .profile__editor {
+              display: flex;
+              align-items: center;
+              .avatar__image__container, span {
+                flex-grow: 2;
+              }
+              i {
+                cursor: pointer;
+                display: flex;
+                justify-content: end;
+                &:hover {
+                  opacity: .5;
+                }
+              }
+              img {
+                height: 50px;
+                border: solid white 1px;
+              }
+            }
+
+          }
+        }
+
+      }
+    }
+
+    .choose__avatar__container {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: "Minecraft", sans-serif;
+      margin: 50px 0 50px 0;
+
+      h2 {
+        text-align: left;
+        color: white;
+        font-size: var(--fs-l);
+        letter-spacing: 1px;
+        margin: 0;
+        @media (max-width: 37.5em){
+          font-size: var(--fs-m) !important;
+        }
+      }
+    }
+
+    p {
+      text-align: justify;
+      font-size: var(--fs-sm);
+      color: white;
+    }
+
+  }
+}

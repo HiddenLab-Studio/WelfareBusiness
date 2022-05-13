@@ -1,0 +1,40 @@
+/*=====================================================
+ *                      M A I N
+ *
+ *  root settings and responsive design
+ *
+ *=====================================================*/
+:root {
+  --fs-error: 7rem;
+  --fs-xxl: 3rem;
+  --fs-xl: 2.5rem;
+  --fs-l: 2rem;
+  --fs-sl: 1.75rem;
+  --fs-m: 1.5rem;
+  --fs-sm: 1.25rem;
+  --fs-s: 1rem;
+}
+
+@media (max-width: 40em) {
+  :root {
+    --fs-error: 5rem;
+    --fs-xxl: 2.5rem;
+    --fs-xl: 2rem;
+    --fs-l: 1.75rem;
+    --fs-sl: 1.5rem;
+    --fs-m: 1.25rem;
+    --fs-sm: 1rem;
+    --fs-s: 0.85rem;
+  }
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("../../public/assets/fonts/Minecraft.ttf") format("truetype");
+}
+@font-face {
+  font-family: "VAGRBlack";
+  src: url("../../public/assets/fonts/VAG_Rounded_Black.ttf") format("truetype");
+}
+
+/*# sourceMappingURL=main.css.map */

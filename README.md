@@ -6,8 +6,8 @@
 2. **Créer** une base de données
    
    ```
-    Table:
-    Columns:
+    Table: users
+    Columns: 5
    ```
 
 4. **Créer** un fichier **.env** à la racine du projet
@@ -20,7 +20,7 @@
     SESSION_NAME = session.sid
     SESSION_KEY = STRING
 
-    DATABASE_NAME = WelfareBusiness
+    DATABASE_NAME = welfare_business
     DATABASE_HOST = localhost
     DATABASE_USER = root
     DATABASE_PASSWORD =

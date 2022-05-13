@@ -7,7 +7,13 @@
    
    ```
     Table: users
-    Columns: 5
+    Columns:
+      id          (Auto-increment)
+      Username    (VARCHAR, 255)
+      Password    (VARCHAR, 255)
+      AvatarIcon  (INT, 11, valeur par défaut = 0)
+      userData    (JSON)
+    
    ```
 
 4. **Créer** un fichier **.env** à la racine du projet

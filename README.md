@@ -6,6 +6,7 @@
 2. **Créer** une base de données
    
    ```
+    Name: welfare_business
     Table: users
     Columns:
       id          (Auto-increment)

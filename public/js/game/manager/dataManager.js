@@ -60,6 +60,12 @@ let dataManager = (function() {
             }
         },
 
+        // Getters
+        getUsername: () => username,
+        getData: () => data,
+
+        // Setters
+        save: (access, data) => saveData(access, data),
         async load(access) {
             let result;
             await loadData(access).then(response => {
@@ -68,8 +74,7 @@ let dataManager = (function() {
             return result;
         },
 
-        getUsername: () => username,
-        save: (access, data) => saveData(access, data),
+        // Methods
         autoSave: () => autoSaveData(),
         showMap: () => console.log(map),
     }

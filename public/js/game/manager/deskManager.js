@@ -1,6 +1,6 @@
 let deskManager = (function () {
     // Variables ultra méga giga importantes
-    let game = undefined;
+    let instance = undefined;
     let config = undefined;
     let init = false;
     let token = "1";
@@ -10,6 +10,8 @@ let deskManager = (function () {
     let data = undefined;
 
     // Contient pour chaque orientation une array qui contient la texture de base et ses améliorations successives
+    // Layer qui contient tous nos bureaux
+    let deskLayer = undefined;
     let textureIndex = [
         {
             orientation: 1,
@@ -51,7 +53,7 @@ let deskManager = (function () {
     ]
 
     // Variables utilitaires
-    const maxDeskLevel = 2;
+    const maxDeskLevel = 10;
     let isDeskWindowOpened = undefined;
 
     // Getter private
@@ -69,7 +71,31 @@ let deskManager = (function () {
     }
 
     // Setter private
-    function upgradeDesk(layer, deskData) {
+    /**
+     * Lorsque les données du joueurs sont chargées on vient update la tileMap (chaque texture) en fonction de sa sauvegarde
+     */
+    function loadDeskTexture(){
+        data.desk.forEach((element) => {
+            if(element.level !== 1){
+                console.log(element)
+                let upgradeArray = textureIndex.filter((array) => {
+                    if(element.orientation === array.orientation) return array;
+                });
+
+                for (const coordinate of element.pos) {
+                    let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
+                    for (const array of upgradeArray[0].index) {
+                        if(array.includes(tileIndex)){
+                            let indexOfElement = array.indexOf(tileIndex);
+                            deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    function upgradeDesk(deskData) {
         // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
         if (deskData.level < maxDeskLevel && deskData.active) {
             // On récupère l'objet qui contient l'index de chaque texture avec la texture qui correspond à son amélioration
@@ -78,14 +104,14 @@ let deskManager = (function () {
             });
 
             for (const coordinate of deskData.pos) {
-                let tileIndex = layer.getTileAt(coordinate[0], coordinate[1]).index;
+                let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
                 for (const array of upgradeTextureArray[0].index) {
                     if(array.includes(tileIndex)){
                         //console.log("(" + array + ") include " + tileIndex)
                         // On récupère l'index du chiffre puis le prochain index de la texture
                         let indexOfElement = array.indexOf(tileIndex);
                         //console.log("next texture index is: " + array[indexOfElement + 1]);
-                        layer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                        deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
                     }
                 }
             }
@@ -95,8 +121,8 @@ let deskManager = (function () {
     }
 
     return {
-        getCoordinate(layer){
-            layer.forEachTile((tile) => {
+        getCoordinate(){
+            deskLayer.forEachTile((tile) => {
                 if(tile.index !== -1){
                     console.log(tile.x, tile.y)
                 }
@@ -104,22 +130,27 @@ let deskManager = (function () {
         },
 
         // Initialisation des variables
-        async init(cfg) {
+        async init(layer, phaser, cfg) {
             if(!init){
                 init = true;
+                instance = phaser;
+                deskLayer = layer;
                 config = cfg;
-                await dataManager.load(token).then(r => data = r);
-                //console.log(data)
+
+                data = dataManager.getData();
+                //await dataManager.load(token).then((response) => data = response);
+                loadDeskTexture(layer, instance);
+                deskManager.registerEvent()
             }
         },
 
         //Création des listeners des bureaux
-        registerEvent(layer, instance) {
+        registerEvent() {
             // Listener quand on clique sur une case
             instance.input.on("pointerdown", (pos) => {
                 // try catch car la target peut être null (NullPointerException)
                 try {
-                    let target = layer.getTileAtWorldXY(pos.x, pos.y);
+                    let target = deskLayer.getTileAtWorldXY(pos.x, pos.y);
                     // DEBUG
                     // console.log("Click detected position: x:" + target.x + " y:" + target.y);
                     // console.log("Index of the clicked case is " + target.index)
@@ -143,7 +174,7 @@ let deskManager = (function () {
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
                     if (result && !isDeskWindowOpened && active){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
-                        deskManager.openDesk(layer, id, instance);
+                        deskManager.openDesk(id);
                     }
                 } catch (NullPointerException) {/*ignored*/}
             })
@@ -151,7 +182,7 @@ let deskManager = (function () {
 
         // SHOULD BE CLEANER
         // Affiche le menu du bureau sur lequel on a cliqué
-        openDesk(layer, id, instance){
+        openDesk(id){
             // Boolean qui permet de savoir si une fenêtre est ouverte
             isDeskWindowOpened = true;
             let deskData = getDeskById(id)[0];
@@ -180,7 +211,7 @@ let deskManager = (function () {
             })
 
             upgradeDeskBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
-                upgradeDesk(layer, deskData);
+                upgradeDesk(deskData);
                 deskGroup.clear(true);
                 isDeskWindowOpened = false;
             })

@@ -77,17 +77,18 @@ let deskManager = (function () {
     function loadDeskTexture(){
         data.desk.forEach((element) => {
             if(element.level !== 1){
-                console.log(element)
-                let upgradeArray = textureIndex.filter((array) => {
-                    if(element.orientation === array.orientation) return array;
-                });
+                for (let i = 1; i < element.level ; i++) {
+                    let upgradeArray = textureIndex.filter((array) => {
+                        if(element.orientation === array.orientation) return array;
+                    });
 
-                for (const coordinate of element.pos) {
-                    let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
-                    for (const array of upgradeArray[0].index) {
-                        if(array.includes(tileIndex)){
-                            let indexOfElement = array.indexOf(tileIndex);
-                            deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                    for (const coordinate of element.pos) {
+                        let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
+                        for (const array of upgradeArray[0].index) {
+                            if(array.includes(tileIndex)){
+                                let indexOfElement = array.indexOf(tileIndex);
+                                deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                            }
                         }
                     }
                 }

@@ -15,6 +15,11 @@ class project {
 
     getProjectPercentage() {
         let percentage = (1 - this.amountToProduce / this.initialAmount) * 100;
+
+        if(percentage > 100){
+            percentage = 100;
+        }
+
         return percentage;
     }
 

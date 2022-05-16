@@ -30,7 +30,7 @@ router.get("/api/userdata", (req, res) => {
             })
         })
     } else {
-        console.log("[INFO] Request complete for user (guess)")
+        console.log("[INFO] Request complete for user (guest)")
         res.send(defaultDataSchema)
     }
 })
@@ -51,7 +51,7 @@ router.post("/api/savedata", (req, res) => {
         })
     } else {
         //console.log(data);
-        req.session.guessData = data;
+        req.session.guestData = data;
         res.send({text: "Please create an account to save your data!"})
     }
 })

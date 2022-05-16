@@ -3,11 +3,12 @@ class employee {
         this.name = 'TBD';
         this.production = 1;
         this.salary = 10;
-        this.happiness = 100;
+        this.happiness = Math.floor(Math.random() * (60 - 40) + 40);//Pourcentage de bonheur de base aléatoire entre 60 % et 40 %
     }
 
     getProduction() {
-        return this.production;
+        console.log(this.calculateBonusProduction())// + this.calculateBonusProduction())
+        return this.production + this.calculateBonusProduction();
     }
 
     getSalary() {
@@ -16,5 +17,19 @@ class employee {
 
     getHappiness() {
         return this.happiness;
+    }
+
+    //Valeur arbitraire : 10% de bonheur de plus que 50% = 4% de prod en plus (et inversement)
+    calculateBonusProduction() {
+        if (this.happiness > 50) {
+            let tmpProd = this.production;
+            tmpProd = tmpProd * (this.happiness - 50) * 0.004;
+            return tmpProd;
+        }
+        else {
+            let tmpProd = this.production;
+            tmpProd = tmpProd * (this.happiness - 50) * 0.004;
+            return tmpProd;
+        }
     }
 }

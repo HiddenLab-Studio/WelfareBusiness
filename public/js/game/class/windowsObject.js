@@ -74,7 +74,7 @@ class windowObject {
         this.projectChoice = new Array(3);
 
         for (let i = 0; i < 3; i++) {
-            let projectTitleString = "Project " + (i + 1) + "\nAmount to produce :" + (proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
+            let projectTitleString = "Project " + (i + 1) + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
             this.projectChoice[i] = {
                 background: this.game.add.image(350, 120 + i * 130, 'projet_hud').setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive(),
                 title: this.game.add.text(370, 160 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),

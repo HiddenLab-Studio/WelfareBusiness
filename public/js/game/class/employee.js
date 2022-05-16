@@ -7,7 +7,7 @@ class employee {
     }
 
     getProduction() {
-        console.log(this.calculateBonusProduction())// + this.calculateBonusProduction())
+        this.updateHappiness();
         return this.production + this.calculateBonusProduction();
     }
 
@@ -31,5 +31,27 @@ class employee {
             tmpProd = tmpProd * (this.happiness - 50) * 0.004;
             return tmpProd;
         }
+    }
+
+    updateHappiness() {
+        /*switch (deskLevel) {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+        }
+
+        if(salleDeSport){
+
+        }
+
+        if(salleDeSieste){
+
+        }*/
+
     }
 }

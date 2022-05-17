@@ -47,8 +47,8 @@ function preload(){
     this.load.image('bouton_projet', './public/assets/img/game/HUD/bouton_projet.png');
     this.load.image('progress_bar', './public/assets/img/game/hud/progress_bar.png')
 
-    this.load.image("tiles", "./public/js/game/map/tileset_1.png");
-    this.load.tilemapTiledJSON("map", "./public/js/game/map/map_pres.json");
+    this.load.image("tiles", "./public/js/game/map/tileset_wb.png");
+    this.load.tilemapTiledJSON("map", "./public/js/game/map/wb_map.json");
 }
 
 function create(){

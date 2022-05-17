@@ -37,13 +37,14 @@ let mapManager = (function(){
             if(!isMapCreated){
                 isMapCreated = true;
                 map = instance.make.tilemap({key: "map"});
-                const tileSet = map.addTilesetImage("tileset_1", "tiles");
+                const tileSet = map.addTilesetImage("tileset_wb", "tiles");
                 map.createLayer("sol1", tileSet);
                 map.createLayer("mur1", tileSet);
                 map.createLayer("jardin", tileSet);
                 map.createLayer("arbre", tileSet);
                 let desk = map.createLayer("bureau_lvl1", tileSet);
                 map.createLayer("plante", tileSet);
+                map.createLayer("sport", tileSet);
 
                 // On initialise le module qui gère les données
                 dataManager.init(map);

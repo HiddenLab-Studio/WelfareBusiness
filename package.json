@@ -1,13 +1,4 @@
 {
-  "name": "welfarebusiness",
-  "version": "1.0.0",
-  "description": "Cirious game",
-  "main": "server/app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "HiddenLab",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",

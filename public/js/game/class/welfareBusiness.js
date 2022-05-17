@@ -4,6 +4,7 @@ class welfareBusiness {
     constructor() {
         this.currentProject = new project(10, 100)
         this.employeesList = new Array(12);
+        this.employeesNb = 0;
         this.updateRate = 2;//update du jeu 2 fois par sec
         this.started = false;
         this.money = 1000;
@@ -70,7 +71,7 @@ class welfareBusiness {
                 happiness += this.employeesList[i].getHappiness();
             }
         }
-        happiness = happiness / this.employeesList.length;
+        happiness = happiness / this.employeesNb;
         return happiness;
     }
 
@@ -172,6 +173,7 @@ class welfareBusiness {
         this.employeesList[deskData.id] = newEmployee;
         let data = dataManager.getData();
         data.desk[deskData.id].employee = newEmployee;
+        this.employeesNb++;
         dataManager.save("1", data);
     }
 

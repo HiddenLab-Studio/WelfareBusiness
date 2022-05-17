@@ -3,7 +3,7 @@
 class welfareBusiness {
     constructor() {
         this.currentProject = new project(10, 100)
-        this.employeesList = new Array();
+        this.employeesList = new Array(12);
         this.updateRate = 2;//update du jeu 2 fois par sec
         this.started = false;
         this.money = 1000;
@@ -43,7 +43,9 @@ class welfareBusiness {
     getTotalProduction() {
         let production = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            production += this.employeesList[i].getProduction();
+            if(this.employeesList[i] !== undefined){
+                production += this.employeesList[i].getProduction();
+            }
         }
 
         return production;
@@ -52,7 +54,10 @@ class welfareBusiness {
     getTotalEmployeesCost() {
         let cost = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            cost = this.employeesList[i].getSalary();
+            if(this.employeesList[i] !== undefined){
+                cost = this.employeesList[i].getSalary();
+                //!//
+            }
         }
 
         return cost;
@@ -61,7 +66,9 @@ class welfareBusiness {
     getGlobalHappiness() {
         let happiness = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            happiness += this.employeesList[i].getHappiness();
+            if(this.employeesList[i] !== undefined){
+                happiness += this.employeesList[i].getHappiness();
+            }
         }
         happiness = happiness / this.employeesList.length;
         return happiness;
@@ -91,7 +98,9 @@ class welfareBusiness {
         }
         else {
             for (let i = 0; i < this.employeesList.length; i++) {
-                this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
+                if(this.employeesList[i] !== undefined){
+                    this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
+                }
             }
         }
         this.updateDate();
@@ -159,7 +168,8 @@ class welfareBusiness {
 
     addEmployee(deskData) {
         let newEmployee = new employee(deskData.id);
-        this.employeesList.push(newEmployee);
+        console.log(newEmployee)
+        this.employeesList[deskData.id] = newEmployee;
         let data = dataManager.getData();
         data.desk[deskData.id].employee = newEmployee;
         dataManager.save("1", data);

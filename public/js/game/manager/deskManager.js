@@ -217,6 +217,7 @@ let deskManager = (function () {
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
                     if (result && !mapManager.getHud().getWindow().isOpened()){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
+                        console.log(id);
                         deskManager.openDesk(id);
                     }
                 } catch (NullPointerException) {/*ignored*/}
@@ -231,32 +232,14 @@ let deskManager = (function () {
 
             mapManager.getHud().getWindow().createBackWindow();
             mapManager.getHud().getWindow().beEmployeeWindow(mapManager.getWelfareBusinessGame().getEmployeeById(id), getDeskById(id)[0]);
-            //let textId = instance.add.text(0, 0, "Desk n°" + id + " (Lv. " + deskData.level + ")", {color: "black", fontFamily: "Minecraft"});
+            console.log(mapManager.getWelfareBusinessGame().getEmployeeById(id))
             console.log(deskData.active);
 
-            if(deskData.active){//Si le bureau appartient à un employé 
-                
-            } 
-            else {//Si le bureau n'est pas encore acheté (pas d'employé)
-                // Ajout des éléments à notre fenêtre
+            //Si le bureau n'est pas encore acheté (pas d'employé)
+            if(!deskData.active) {
                 console.log(mapManager.getHud.getWindow())
                 mapManager.getHud.getWindow().beEmployeeWindow(undefined, getDeskById(id)[0])
-
             }
-
-            //deskGroup.add(deskWindow).add(closeBtn).add(textId);
-
-            // Alignement des éléments
-            //Phaser.Display.Align.In.Center(deskWindow, instance.add.zone(500, 280, 1000, 563));
-            //Phaser.Display.Align.In.TopRight(closeBtn, deskWindow);
-            //Phaser.Display.Align.In.TopCenter(textId, deskWindow);
-            //closeBtn.setPosition(closeBtn.x - 100, closeBtn.y + 40);
-            //textId.setPosition(textId.x, textId.y + 95);
-
-            // Listener pour le close btn et l'upgrade btn
-            /*closeBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
-                deskGroup.clear(true);
-            })*/
         }
     }
 })();

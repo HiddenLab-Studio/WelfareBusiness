@@ -4,7 +4,7 @@ class welfareBusiness {
     constructor() {
         this.currentProject = new project(10, 100)
         this.employeesList = new Array();
-        this.employeesList[0] = new employee();
+        //this.employeesList[0] = new employee();
         this.updateRate = 2;//update du jeu 2 fois par sec
         this.started = false;
         this.money = 1000;
@@ -73,6 +73,9 @@ class welfareBusiness {
         return seconds * this.updateRate;
     }
 
+    getEmployeeById(id){
+        return this.employeesList[id];
+    }
 
     payWage() {
         this.money -= this.getTotalEmployeesCost();
@@ -154,9 +157,12 @@ class welfareBusiness {
         return this.currentProject.getProjectPercentage();
     }
 
-    addEmployee() {
-        let newEmployee = new employee();
-        employeesList.push(newEmployee);
+    addEmployee(desk) {
+        let newEmployee = new employee(desk);
+        this.employeesList.push(newEmployee);
+        console.log(this.employeesList);
+        console.log("desk");
+        console.log(this.employeesList[0].getDesk().level)
     }
 
     generate3ProjectChoices() {

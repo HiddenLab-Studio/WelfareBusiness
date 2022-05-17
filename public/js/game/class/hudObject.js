@@ -215,6 +215,10 @@ class hudObject {
             }
         }
     }
+
+    getWindow(){
+        return this.window;
+    }
 }
 
 //Fonction d'affichage de la barre de progression en fonction du pourcentage de progression du projet

@@ -4,7 +4,6 @@ class welfareBusiness {
     constructor() {
         this.currentProject = new project(10, 100)
         this.employeesList = new Array();
-        //this.employeesList[0] = new employee();
         this.updateRate = 2;//update du jeu 2 fois par sec
         this.started = false;
         this.money = 1000;
@@ -159,12 +158,11 @@ class welfareBusiness {
     }
 
     addEmployee(deskData) {
-        let newEmployee = new employee();
+        let newEmployee = new employee(deskData.id);
         this.employeesList.push(newEmployee);
         let data = dataManager.getData();
         data.desk[deskData.id].employee = newEmployee;
         dataManager.save("1", data);
-        console.log("employee added")
     }
 
     generate3ProjectChoices() {

@@ -106,6 +106,7 @@ class windowObject {
 
         //Si le bureau appartient à un employé
         if (employee !== undefined) {
+            employee.getDesk();
 
             this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, /*"Employee name"*/employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
 
@@ -170,7 +171,6 @@ class windowObject {
             this.upgradeBtn.on("pointerdown", () => {
                 //desk.level += 1;
                 //desk.active = true;
-                console.log(desk)
                 deskManager.buyDesk(desk);
                 mapManager.getWelfareBusinessGame().addEmployee(desk);
                 window.closeWindow();
@@ -202,8 +202,7 @@ class windowObject {
 
         }
 
-        console.log('this.employeeTips0')
-
+        
         for (let i = 0; i < 3; i++) {
             if (this.employeeTips != undefined && this.employeeTips[0] != undefined) {
                 this.employeeTips[i].destroy();

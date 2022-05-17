@@ -1,9 +1,10 @@
 class employee {
-    constructor() {
+    constructor(deskId) {
         this.name = getRandomName(nameArray);
         this.production = 0;
         this.salary = 100;
         this.happiness = Math.floor(Math.random() * (60 - 40) + 40);//Pourcentage de bonheur de base aléatoire entre 60 % et 40 %
+        this.deskId = deskId
     }
 
     getProduction() {
@@ -21,6 +22,10 @@ class employee {
 
     getName(){
         return this.name;
+    }
+
+    getDesk(){
+        return dataManager.getData().desk[this.deskId];
     }
 
     //Valeur arbitraire : 10% de bonheur de plus que 50% = 4% de prod en plus (et inversement)

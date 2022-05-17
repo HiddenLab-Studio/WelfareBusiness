@@ -10,7 +10,7 @@ const config = {
         update: update
     },
     fps: {
-        target: 30,
+        target: 144,
         forceSetTimeOut: true
     },
 };
@@ -65,7 +65,7 @@ function update(time, delta) {
     if (welfareBusinessGame.isGameStarted()) {
         //Limiter l'update du projet à 2 fois par seconde :
         limitRefreshRateCounter++
-        if (limitRefreshRateCounter === 15) {
+        if (limitRefreshRateCounter === 72) {
             limitRefreshRateCounter = 0;
             welfareBusinessGame.updateProject();
             if (welfareBusinessGame.isRealProject()) {

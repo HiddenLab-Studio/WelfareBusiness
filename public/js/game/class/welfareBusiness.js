@@ -158,11 +158,11 @@ class welfareBusiness {
     }
 
     addEmployee(desk) {
+        console.log(this.employeesList);
         let newEmployee = new employee(desk);
         this.employeesList.push(newEmployee);
-        console.log(this.employeesList);
         console.log("desk");
-        console.log(this.employeesList[0].getDesk().level)
+        console.log(this.employeesList[0].getDesk())
     }
 
     generate3ProjectChoices() {

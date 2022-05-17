@@ -21,7 +21,7 @@ class employee {
     }
 
     getDesk(){
-        return this.desk[0];
+        return this.desk;
     }
 
     //Valeur arbitraire : 10% de bonheur de plus que 50% = 4% de prod en plus (et inversement)

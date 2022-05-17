@@ -54,7 +54,6 @@ let deskManager = (function () {
 
     // Variables utilitaires
     const maxDeskLevel = 10;
-    let isDeskWindowOpened = undefined;
 
     // Getter private
     function getDeskById(id) {
@@ -96,32 +95,48 @@ let deskManager = (function () {
         })
     }
 
-    function upgradeDesk(deskData) {
-        // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
-        if (deskData.level < maxDeskLevel && deskData.active) {
-            // On récupère l'objet qui contient l'index de chaque texture avec la texture qui correspond à son amélioration
-            let upgradeTextureArray = textureIndex.filter((element) => {
-                if(deskData.orientation === element.orientation) return element;
-            });
-
-            for (const coordinate of deskData.pos) {
-                let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
-                for (const array of upgradeTextureArray[0].index) {
-                    if(array.includes(tileIndex)){
-                        //console.log("(" + array + ") include " + tileIndex)
-                        // On récupère l'index du chiffre puis le prochain index de la texture
-                        let indexOfElement = array.indexOf(tileIndex);
-                        //console.log("next texture index is: " + array[indexOfElement + 1]);
-                        deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
-                    }
-                }
-            }
-            deskData.level += 1;
-            dataManager.save(token, data);
-        }
-    }
 
     return {
+
+        //getter public (code pas propre)
+        getDeskById(id){
+            return getDeskById(id);
+        },
+
+        buyDesk(desk){
+            desk.level += 1
+            desk.active = true;
+        },
+
+        upgradeDesk(deskData) {
+            console.log("upgrade desk avant if");
+            console.log(deskData);
+            // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
+            if (deskData.level < maxDeskLevel && deskData.active) {
+                console.log("upgrade desk apres if");
+
+                // On récupère l'objet qui contient l'index de chaque texture avec la texture qui correspond à son amélioration
+                let upgradeTextureArray = textureIndex.filter((element) => {
+                    if(deskData.orientation === element.orientation) return element;
+                });
+    
+                for (const coordinate of deskData.pos) {
+                    let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
+                    for (const array of upgradeTextureArray[0].index) {
+                        if(array.includes(tileIndex)){
+                            //console.log("(" + array + ") include " + tileIndex)
+                            // On récupère l'index du chiffre puis le prochain index de la texture
+                            let indexOfElement = array.indexOf(tileIndex);
+                            //console.log("next texture index is: " + array[indexOfElement + 1]);
+                            deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                        }
+                    }
+                }
+                deskData.level += 1;
+                dataManager.save(token, data);
+            }
+        },
+
         getCoordinate(){
             deskLayer.forEachTile((tile) => {
                 if(tile.index !== -1){
@@ -173,7 +188,7 @@ let deskManager = (function () {
                         })
                     }
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
-                    if (result && !isDeskWindowOpened){
+                    if (result && !mapManager.getHud().getWindow().isOpened()){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
                         deskManager.openDesk(id);
                     }
@@ -185,38 +200,20 @@ let deskManager = (function () {
         // Affiche le menu du bureau sur lequel on a cliqué
         openDesk(id){
             // Boolean qui permet de savoir si une fenêtre est ouverte
-            //isDeskWindowOpened = false;
             let deskData = getDeskById(id)[0];
-            console.log(mapManager.getWelfareBusinessGame().getEmployeeById(id)/*.getDesk()*/);
+
             mapManager.getHud().getWindow().createBackWindow();
+            mapManager.getHud().getWindow().beEmployeeWindow(mapManager.getWelfareBusinessGame().getEmployeeById(id), getDeskById(id)[0]);
             //let textId = instance.add.text(0, 0, "Desk n°" + id + " (Lv. " + deskData.level + ")", {color: "black", fontFamily: "Minecraft"});
+            console.log(deskData.active);
 
-            if(deskData.active){//Si le bureau appartient à un employé
+            if(deskData.active){//Si le bureau appartient à un employé 
+                
+            } 
+            else {//Si le bureau n'est pas encore acheté (pas d'employé)
                 // Ajout des éléments à notre fenêtre
-                //let upgradeDeskBtn = instance.add.text(0, 0, "UPGRADE", {cursor: "pointer", color: "black", fontFamily: "Minecraft"});
-                //Phaser.Display.Align.In.Center(upgradeDeskBtn, deskWindow);
-                //deskGroup.add(upgradeDeskBtn);
-                /*upgradeDeskBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
-                    upgradeDesk(deskData);
-                    deskGroup.clear(true);
-                    isDeskWindowOpened = false;
-                })*/
-
-            } else {//Si le bureau n'est pas encore acheté (pas d'employé)
-                // Ajout des éléments à notre fenêtre
-                /*let buyDeskBtn = instance.add.text(0, 0, "HIRE EMPLOYEE", {cursor: "pointer", color: "black", fontFamily: "Minecraft"});
-                Phaser.Display.Align.In.Center(buyDeskBtn, deskWindow);
-                deskGroup.add(buyDeskBtn);
-                buyDeskBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
-                    deskData.level += 1;
-                    deskData.active = true;
-                    console.log(data)
-
-                    mapManager.getWelfareBusinessGame().addEmployee(getDeskById(id));
-
-                    deskGroup.clear(true);
-                    isDeskWindowOpened = false;
-                })*/
+                console.log(mapManager.getHud.getWindow())
+                mapManager.getHud.getWindow().beEmployeeWindow(undefined, getDeskById(id)[0])
 
             }
 
@@ -232,7 +229,6 @@ let deskManager = (function () {
             // Listener pour le close btn et l'upgrade btn
             /*closeBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
                 deskGroup.clear(true);
-                isDeskWindowOpened = false;
             })*/
         }
     }

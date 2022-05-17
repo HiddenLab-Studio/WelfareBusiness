@@ -99,7 +99,10 @@ class windowObject {
 
     //A MODIFIER QUAND ON AURA LE SYSTEME D EMPLOYES SUR LE JEU
     //Fenêtre d'un employé
-    beEmployeeWindow(employee) {
+    beEmployeeWindow(employee, desk) {
+        let window = this;
+
+
         this.windowType = "employee";
 
         this.employeeParameterGauge = new Array(2);
@@ -111,11 +114,41 @@ class windowObject {
             this.employeeParameterGauge[i] = {
                 bar: this.game.add.image(350, 105 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
                 percentage: this.game.add.text(620, 100 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
-                upgradeBtn: this.game.add.image(360, 155, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0),
-                upgradeBtnText: this.game.add.text(395, 173, "Level MAX", { font: "14px Arial", fill: "#000000" }).setOrigin(0, 0).setScrollFactor(0),
             }
 
         }
+
+
+        this.upgradeBtn = this.game.add.image(360, 155, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
+
+
+        if (employee != undefined) {
+            this.upgradeBtnText = this.game.add.text(395, 173, "Level " + desk.level, { cursor: "pointer", color: "black", fontFamily: "Arial" }).setOrigin(0, 0).setScrollFactor(0);
+
+            this.upgradeBtn.on("pointerdown", () => {
+                deskManager.upgradeDesk(desk);
+                this.closeWindow();
+            })
+        }
+        else {
+            this.upgradeBtnText = this.game.add.text(365, 173, "HIRE EMPLOYEE", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setOrigin(0, 0).setScrollFactor(0);
+
+
+            this.upgradeBtn.on("pointerdown", () => {
+                //desk.level += 1;  
+                //desk.active = true;
+                console.log(desk)
+
+                deskManager.buyDesk(desk);
+                mapManager.getWelfareBusinessGame().addEmployee(desk);
+                window.closeWindow();
+
+            })
+
+        }
+
+
+
 
         //Jauge d'information du bien être de l'employé
         this.employeeWelfareGauge = new Array(3);
@@ -144,9 +177,11 @@ class windowObject {
         for (let i = 0; i < 2; i++) {
             this.employeeParameterGauge[i].bar.destroy();
             this.employeeParameterGauge[i].percentage.destroy();
-            this.employeeParameterGauge[i].upgradeBtn.destroy();
-            this.employeeParameterGauge[i].upgradeBtnText.destroy();
+
         }
+
+        this.upgradeBtn.destroy();
+        this.upgradeBtnText.destroy();
 
         for (let i = 0; i < 3; i++) {
             this.employeeWelfareGauge[i].icon.destroy();

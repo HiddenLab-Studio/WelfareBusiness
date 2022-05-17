@@ -76,7 +76,7 @@ class windowObject {
         for (let i = 0; i < 3; i++) {
             let projectTitleString = "Project " + (i + 1) + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
             this.projectChoice[i] = {
-                background: this.game.add.image(350, 90 + i * 130, 'projet_hud').setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive(),
+                background: this.game.add.image(350, 90 + i * 130, getRandomProjectChoiceBackground()).setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive(),
                 title: this.game.add.text(370, 130 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
             }
 
@@ -193,4 +193,13 @@ class windowObject {
         }
     }
 
+}
+
+function random(min, max){
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function getRandomProjectChoiceBackground(){
+    let tmpRandom = random(0,6);
+    return 'projet_hud' + tmpRandom.toString();
 }

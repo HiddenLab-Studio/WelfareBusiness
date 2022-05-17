@@ -37,6 +37,12 @@ function preload(){
     this.load.image('emote_colere', './public/assets/img/game/HUD/colere.png')
     this.load.image('emote_heureux', './public/assets/img/game/HUD/bonheur.png')
     this.load.image('projet_hud', './public/assets/img/game/HUD/projet_hud.png');
+    this.load.image('projet_hud0', './public/assets/img/game/HUD/projet_hud0.png');
+    this.load.image('projet_hud1', './public/assets/img/game/HUD/projet_hud1.png');
+    this.load.image('projet_hud2', './public/assets/img/game/HUD/projet_hud2.png');
+    this.load.image('projet_hud3', './public/assets/img/game/HUD/projet_hud3.png');
+    this.load.image('projet_hud4', './public/assets/img/game/HUD/projet_hud4.png');
+    this.load.image('projet_hud5', './public/assets/img/game/HUD/projet_hud5.png');
     this.load.image('menu_hud', './public/assets/img/game/HUD/menu_hud.png');
     this.load.image('bouton_projet', './public/assets/img/game/HUD/bouton_projet.png');
     this.load.image('progress_bar', './public/assets/img/game/hud/progress_bar.png')

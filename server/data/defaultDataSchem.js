@@ -7,28 +7,20 @@ module.exports = {
     "desk": [
         {
             "id": 0,
-            "pos": [[5,4],[6,4],[7,4],[5,5],[6,5],[7,5]],
+            "pos": [[4,11],[5,11],[6,11],[5,12],[5,12],[5,13]],
             /// 1 = horizontal bas / 2 = horizontal haut / 3 = vertical gauche / 4 vertical droite
             "orientation": 1,
             "active": false,
             "level": 0,
-            "employee": {
-                "name": "Aurélien Rogé",
-                "happiness": 100,
-                "wage": 1000
-            }
+            "employee": {}
         },
         {
             "id": 1,
-            "pos": [[3,6],[4,6],[3,7],[4,7],[3,8],[4,8],[3,9],[4,9]],
+            "pos": [],
             "orientation": 3,
             "active": false,
             "level": 0,
-            "employee": {
-                "name": "Guillaume Leroy",
-                "happiness": 1,
-                "wage": 1
-            }
+            "employee": {}
         }
     ],
 

@@ -30,6 +30,7 @@ let mapManager = (function(){
         getWelfareBusinessGame: () => welfareBusinessGame,
         getHud: () => hud,
         getMap: () => map,
+        isMapCreated: () => isMapCreated,
 
         // Methods
         async createMap(instance){
@@ -39,8 +40,10 @@ let mapManager = (function(){
                 const tileSet = map.addTilesetImage("tileset_1", "tiles");
                 map.createLayer("sol1", tileSet);
                 map.createLayer("mur1", tileSet);
-                let desk = map.createLayer("bureau_lvl1_1", tileSet);
-                map.createLayer("bureau_lvl2_1", tileSet);
+                map.createLayer("jardin", tileSet);
+                map.createLayer("arbre", tileSet);
+                map.createLayer("plante", tileSet);
+                let desk = map.createLayer("bureau_lvl5", tileSet);
 
                 // On initialise le module qui gère les données
                 dataManager.init(map);

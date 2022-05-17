@@ -108,11 +108,8 @@ let deskManager = (function () {
         },
 
         upgradeDesk(deskData) {
-            console.log("upgrade desk avant if");
-            console.log(deskData);
             // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
             if (deskData.level < maxDeskLevel && deskData.active) {
-                console.log("upgrade desk apres if");
 
                 // On récupère l'objet qui contient l'index de chaque texture avec la texture qui correspond à son amélioration
                 let upgradeTextureArray = textureIndex.filter((element) => {
@@ -123,10 +120,8 @@ let deskManager = (function () {
                     let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
                     for (const array of upgradeTextureArray[0].index) {
                         if(array.includes(tileIndex)){
-                            //console.log("(" + array + ") include " + tileIndex)
                             // On récupère l'index du chiffre puis le prochain index de la texture
                             let indexOfElement = array.indexOf(tileIndex);
-                            //console.log("next texture index is: " + array[indexOfElement + 1]);
                             deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
                         }
                     }

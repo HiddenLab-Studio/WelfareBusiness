@@ -12,8 +12,8 @@ class windowObject {
     createBackWindow() {
         let window = this;
         this.opened = true;
-        this.menu = this.game.add.image(this.config.width * 0.5, 300, 'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
-        this.closewindowbtn = this.game.add.image(670, 70, 'closeWindowBtn').setScale(0.5).setInteractive().setScrollFactor(0);
+        this.menu = this.game.add.image(this.config.width * 0.5, 270, 'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
+        this.closewindowbtn = this.game.add.image(670, 40, 'closeWindowBtn').setScale(0.5).setInteractive().setScrollFactor(0);
 
         this.closewindowbtn.on('pointerdown', function () {
             window.closeWindow();
@@ -76,8 +76,8 @@ class windowObject {
         for (let i = 0; i < 3; i++) {
             let projectTitleString = "Project " + (i + 1) + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
             this.projectChoice[i] = {
-                background: this.game.add.image(350, 120 + i * 130, 'projet_hud').setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive(),
-                title: this.game.add.text(370, 160 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
+                background: this.game.add.image(350, 90 + i * 130, 'projet_hud').setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive(),
+                title: this.game.add.text(370, 130 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
             }
 
             this.projectChoice[i].background.on('pointerdown', function () {
@@ -104,15 +104,15 @@ class windowObject {
 
         this.employeeParameterGauge = new Array(2);
         //Titre de la fenêtre
-        this.employeeName = this.game.add.text(400, 95, "Employee name", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
+        this.employeeName = this.game.add.text(400, 65, "Employee name", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
 
         //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
         for (let i = 0; i < 2; i++) {
             this.employeeParameterGauge[i] = {
-                bar: this.game.add.image(350, 135 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
-                percentage: this.game.add.text(620, 130 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
-                upgradeBtn: this.game.add.image(360, 185, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0),
-                upgradeBtnText: this.game.add.text(395, 203, "Level MAX", { font: "14px Arial", fill: "#000000" }).setOrigin(0, 0).setScrollFactor(0),
+                bar: this.game.add.image(350, 105 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
+                percentage: this.game.add.text(620, 100 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+                upgradeBtn: this.game.add.image(360, 155, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0),
+                upgradeBtnText: this.game.add.text(395, 173, "Level MAX", { font: "14px Arial", fill: "#000000" }).setOrigin(0, 0).setScrollFactor(0),
             }
 
         }
@@ -122,8 +122,8 @@ class windowObject {
 
         for (let i = 0; i < 3; i++) {
             this.employeeWelfareGauge[i] = {
-                icon: this.game.add.image(350, 255 + i * 50, 'infobar').setOrigin(0, 0).setScale(0.25, 1).setScrollFactor(0),
-                bar: this.game.add.image(400, 272 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
+                icon: this.game.add.image(350, 225 + i * 50, 'infobar').setOrigin(0, 0).setScale(0.25, 1).setScrollFactor(0),
+                bar: this.game.add.image(400, 242 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
             }
         }
 
@@ -131,7 +131,7 @@ class windowObject {
         this.employeeTips = new Array(3);
 
         for (let i = 0; i < 3; i++) {
-            this.employeeTips[i] = this.game.add.text(350, 405 + i * 40, "• Texte de conseil", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
+            this.employeeTips[i] = this.game.add.text(350, 375 + i * 40, "• Texte de conseil", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
 
         }
 

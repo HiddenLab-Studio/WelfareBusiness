@@ -1,6 +1,7 @@
 class employee {
     constructor() {
         this.name = 'TBD';
+        this.desk = undefined;
         this.production = 1;
         this.salary = 10;
         this.happiness = Math.floor(Math.random() * (60 - 40) + 40);//Pourcentage de bonheur de base aléatoire entre 60 % et 40 %

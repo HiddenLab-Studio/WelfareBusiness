@@ -50,7 +50,6 @@ router.post("/api/savedata", (req, res) => {
             })
         })
     } else {
-        //console.log(data);
         req.session.guestData = data;
         res.send({text: "Please create an account to save your data!"})
     }

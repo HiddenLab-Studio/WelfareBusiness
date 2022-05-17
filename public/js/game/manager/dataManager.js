@@ -15,6 +15,7 @@ let dataManager = (function() {
         if(config.autoSave){
             setInterval(function(){
                 console.info("Auto save enabled!")
+                saveData(token, data);
             }, config.interval)
         }
     }

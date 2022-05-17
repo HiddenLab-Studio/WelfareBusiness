@@ -42,8 +42,8 @@ let mapManager = (function(){
                 map.createLayer("mur1", tileSet);
                 map.createLayer("jardin", tileSet);
                 map.createLayer("arbre", tileSet);
+                let desk = map.createLayer("bureau_lvl1", tileSet);
                 map.createLayer("plante", tileSet);
-                let desk = map.createLayer("bureau_lvl5", tileSet);
 
                 // On initialise le module qui gère les données
                 dataManager.init(map);

@@ -12,16 +12,20 @@ let deskManager = (function () {
     // Contient pour chaque orientation une array qui contient la texture de base et ses améliorations successives
     // Layer qui contient tous nos bureaux
     let deskLayer = undefined;
+    const maxDeskLevel = 5;
     let textureIndex = [
         {
             orientation: 1,
             index: [
-                [1, 4],
-                [2, 5],
-                [3, 6],
-                [29, 32],
-                [30, 33],
-                [31, 34]
+                [4, 13, 7, 16, 10],
+                [5, 14, 8, 17, 11],
+                [6, 15, 9, 18, 12],
+                [32, 41, 35, 44, 38],
+                [33, 42, 36, 45, 39],
+                [34, 43, 37, 46, 40],
+                [63, 72, 66],
+                [64, 73, 67],
+                [65, 74, 68]
             ]
         },
         {
@@ -51,9 +55,6 @@ let deskManager = (function () {
             ]
         }
     ]
-
-    // Variables utilitaires
-    const maxDeskLevel = 10;
 
     // Getter private
     function getDeskById(id) {
@@ -115,14 +116,25 @@ let deskManager = (function () {
                 let upgradeTextureArray = textureIndex.filter((element) => {
                     if(deskData.orientation === element.orientation) return element;
                 });
-    
+
+                let c = 6;
                 for (const coordinate of deskData.pos) {
-                    let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
-                    for (const array of upgradeTextureArray[0].index) {
-                        if(array.includes(tileIndex)){
-                            // On récupère l'index du chiffre puis le prochain index de la texture
-                            let indexOfElement = array.indexOf(tileIndex);
-                            deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                    try {
+                        let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
+                        for (const array of upgradeTextureArray[0].index) {
+                            if(array.includes(tileIndex)){
+                                // On récupère l'index du chiffre puis le prochain index de la texture
+                                let indexOfElement = array.indexOf(tileIndex);
+                                deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                            }
+                        }
+                    } catch (NullPointerException){
+                        if(deskData.level === 2){
+                            console.log("Agrandissement du bureau!!")
+                            console.log("No tile at ", coordinate[0], coordinate[1])
+                            console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));
+                            deskLayer.putTileAt(upgradeTextureArray[0].index[c][0], coordinate[0], coordinate[1])
+                            c += 1;
                         }
                     }
                 }
@@ -184,7 +196,7 @@ let deskManager = (function () {
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
                     if (result && !mapManager.getHud().getWindow().isOpened()){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
-                        //deskManager.openDesk(id);
+                        deskManager.openDesk(id);
                     }
                 } catch (NullPointerException) {/*ignored*/}
             })

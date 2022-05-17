@@ -102,36 +102,72 @@ class windowObject {
     beEmployeeWindow(employee, desk) {
         let window = this;
 
-
         this.windowType = "employee";
 
-        this.employeeParameterGauge = new Array(2);
+        //Si le bureau appartient à un employé
+        if (employee != undefined) {
 
-        //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
-        for (let i = 0; i < 2; i++) {
-            this.employeeParameterGauge[i] = {
-                bar: this.game.add.image(350, 105 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
-                percentage: this.game.add.text(620, 100 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+            this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, /*"Employee name"*/employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
+
+
+            //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
+
+            this.employeeParameterGauge = new Array(2);
+
+            for (let i = 0; i < 2; i++) {
+                this.employeeParameterGauge[i] = {
+                    bar: this.game.add.image(350, 105 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
+                    percentage: this.game.add.text(620, 100 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+                }
+
             }
 
-        }
+            this.upgradeBtn = this.game.add.image(360, 155, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
 
 
-        this.upgradeBtn = this.game.add.image(360, 155, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
+            let stringLvlTmp;
+            if (desk.level < 5) {
+                stringLvlTmp = "Level " + desk.level;
+            }
+            else {
+                stringLvlTmp = "Level MAX";
+            }
 
-
-        if (employee != undefined) {
-            this.employeeName = this.game.add.text(this.config.width/2 -150, 55, /*"Employee name"*/employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0,0);
-            this.upgradeBtnText = this.game.add.text(395, 173, "Level " + desk.level, { cursor: "pointer", color: "black", fontFamily: "Arial" }).setOrigin(0, 0).setScrollFactor(0);
+            this.upgradeBtnText = this.game.add.text(405, 173, stringLvlTmp, { cursor: "pointer", color: "black", fontFamily: "Arial" }).setScrollFactor(0);
 
             this.upgradeBtn.on("pointerdown", () => {
                 deskManager.upgradeDesk(desk);
                 this.closeWindow();
             })
+
+
+
+            //Jauge d'information du bien être de l'employé
+            this.employeeWelfareGauge = new Array(3);
+
+            for (let i = 0; i < 3; i++) {
+                this.employeeWelfareGauge[i] = {
+                    icon: this.game.add.image(350, 225 + i * 50, 'infobar').setOrigin(0, 0).setScale(0.25, 1).setScrollFactor(0),
+                    bar: this.game.add.image(400, 242 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
+                }
+            }
+
+
+
+            //Textes de conseil pour le joueur
+            this.employeeTips = new Array(3);
+
+            for (let i = 0; i < 3; i++) {
+                this.employeeTips[i] = this.game.add.text(350, 375 + i * 40, "• " + determineTextAdvice(employee)[0], { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
+            }
         }
+
+        //Si aucun employé ne possède ce bureau
         else {
+            this.upgradeBtn = this.game.add.image(this.config.width / 2, 255, 'infobar').setScale(1.2, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
+
             this.employeeName = this.game.add.text(400, 55, "Hire someone to unlock", { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
-            this.upgradeBtnText = this.game.add.text(365, 173, "HIRE EMPLOYEE", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setOrigin(0, 0).setScrollFactor(0);
+            this.upgradeBtnText = this.game.add.text(this.config.width / 2 - 66, 245, "HIRE EMPLOYEE", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setScrollFactor(0);
 
 
             this.upgradeBtn.on("pointerdown", () => {
@@ -147,36 +183,17 @@ class windowObject {
 
         }
 
-
-
-
-        //Jauge d'information du bien être de l'employé
-        this.employeeWelfareGauge = new Array(3);
-
-        for (let i = 0; i < 3; i++) {
-            this.employeeWelfareGauge[i] = {
-                icon: this.game.add.image(350, 225 + i * 50, 'infobar').setOrigin(0, 0).setScale(0.25, 1).setScrollFactor(0),
-                bar: this.game.add.image(400, 242 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
-            }
-        }
-
-        //Textes de conseil pour le joueur
-        this.employeeTips = new Array(3);
-
-        for (let i = 0; i < 3; i++) {
-            this.employeeTips[i] = this.game.add.text(350, 375 + i * 40, "• Texte de conseil", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
-
-        }
-
-
     }
+
 
     //Supprime les éléments de la fenêtre d'un employé
     closeEmployeeWindow() {
         this.employeeName.destroy();
         for (let i = 0; i < 2; i++) {
-            this.employeeParameterGauge[i].bar.destroy();
-            this.employeeParameterGauge[i].percentage.destroy();
+            if (this.employeeParameterGauge != undefined) {
+                this.employeeParameterGauge[i].bar.destroy();
+                this.employeeParameterGauge[i].percentage.destroy();
+            }
 
         }
 
@@ -184,22 +201,75 @@ class windowObject {
         this.upgradeBtnText.destroy();
 
         for (let i = 0; i < 3; i++) {
-            this.employeeWelfareGauge[i].icon.destroy();
-            this.employeeWelfareGauge[i].bar.destroy();
+            if (this.employeeWelfareGauge != undefined) {
+                this.employeeWelfareGauge[i].icon.destroy();
+                this.employeeWelfareGauge[i].bar.destroy();
+            }
+
         }
 
         for (let i = 0; i < 3; i++) {
-            this.employeeTips[i].destroy();
+            if (this.employeeTips != undefined) {
+                this.employeeTips[i].destroy();
+            }
         }
     }
 
 }
 
-function random(min, max){
+function random(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function getRandomProjectChoiceBackground(){
-    let tmpRandom = random(0,6);
+function getRandomProjectChoiceBackground() {
+    let tmpRandom = random(0, 6);
     return 'projet_hud' + tmpRandom.toString();
 }
+
+function determineTextAdvice(employee) {
+    let adviceArray = new Array();
+
+    let adviceString = ""
+
+    //Partie conseils sur le bureau
+    if (employee.getDesk().level == 1) {
+        adviceString = "I can't work properly with such a desk !"
+    }
+
+    if (employee.getDesk().level > 1 && employee.getDesk().level <= 3) {
+        adviceString = "I would like a better desk !"
+    }
+
+    if (employee.getDesk().level == 4) {
+        adviceString = "I love my desk !"
+    }
+
+    if (employee.getDesk().level == 5) {
+        adviceString = "MY DESK IS PERFECT"
+    }
+
+    adviceArray.push(adviceString);
+
+
+    //Partie conseil équipements de l'entreprise
+    /*if (lePlusGrave) {
+
+    }
+    else {
+        if (UnPeuMoinsGrave) {
+
+        }
+        else {
+            if (etc) {
+
+            }
+        }
+    }
+    */
+
+
+    
+    return adviceArray;
+}
+
+

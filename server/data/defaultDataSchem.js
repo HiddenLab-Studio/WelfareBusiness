@@ -12,7 +12,7 @@ module.exports = {
             "orientation": 1,
             "active": false,
             "level": 0,
-            "employee": {}
+            "employee": undefined
         },
         {
             "id": 1,
@@ -20,7 +20,7 @@ module.exports = {
             "orientation": 3,
             "active": false,
             "level": 0,
-            "employee": {}
+            "employee": undefined
         }
     ],
 

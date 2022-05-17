@@ -105,7 +105,7 @@ class windowObject {
         this.windowType = "employee";
 
         //Si le bureau appartient à un employé
-        if (employee != undefined) {
+        if (employee !== undefined) {
 
             this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, /*"Employee name"*/employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
 
@@ -133,14 +133,13 @@ class windowObject {
                 stringLvlTmp = "Level MAX";
             }
 
-            this.upgradeBtnText = this.game.add.text(405, 173, stringLvlTmp, { cursor: "pointer", color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+            let debugNextUpgrade = desk.level + 1;
+            this.upgradeBtnText = this.game.add.text(405, 173, stringLvlTmp + " (" + debugNextUpgrade + ")", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setScrollFactor(0);
 
             this.upgradeBtn.on("pointerdown", () => {
                 deskManager.upgradeDesk(desk);
                 this.closeWindow();
             })
-
-
 
             //Jauge d'information du bien être de l'employé
             this.employeeWelfareGauge = new Array(3);
@@ -151,8 +150,6 @@ class windowObject {
                     bar: this.game.add.image(400, 242 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
                 }
             }
-
-
 
             //Textes de conseil pour le joueur
             this.employeeTips = new Array(3);
@@ -171,26 +168,23 @@ class windowObject {
 
 
             this.upgradeBtn.on("pointerdown", () => {
-                //desk.level += 1;  
+                //desk.level += 1;
                 //desk.active = true;
                 console.log(desk)
-
                 deskManager.buyDesk(desk);
                 mapManager.getWelfareBusinessGame().addEmployee(desk);
                 window.closeWindow();
-
             })
 
         }
 
     }
 
-
     //Supprime les éléments de la fenêtre d'un employé
     closeEmployeeWindow() {
         this.employeeName.destroy();
         for (let i = 0; i < 2; i++) {
-            if (this.employeeParameterGauge != undefined) {
+            if (this.employeeParameterGauge !== undefined) {
                 this.employeeParameterGauge[i].bar.destroy();
                 this.employeeParameterGauge[i].percentage.destroy();
             }
@@ -201,15 +195,16 @@ class windowObject {
         this.upgradeBtnText.destroy();
 
         for (let i = 0; i < 3; i++) {
-            if (this.employeeWelfareGauge != undefined) {
+            if (this.employeeWelfareGauge !== undefined) {
                 this.employeeWelfareGauge[i].icon.destroy();
                 this.employeeWelfareGauge[i].bar.destroy();
             }
 
         }
 
+        console.log(this.employeeTips)
         for (let i = 0; i < 3; i++) {
-            if (this.employeeTips != undefined) {
+            if (this.employeeTips !== undefined) {
                 this.employeeTips[i].destroy();
             }
         }
@@ -232,7 +227,7 @@ function determineTextAdvice(employee) {
     let adviceString = ""
 
     //Partie conseils sur le bureau
-    if (employee.getDesk().level == 1) {
+    if (employee.getDesk().level === 1) {
         adviceString = "I can't work properly with such a desk !"
     }
 
@@ -267,8 +262,6 @@ function determineTextAdvice(employee) {
     }
     */
 
-
-    
     return adviceArray;
 }
 

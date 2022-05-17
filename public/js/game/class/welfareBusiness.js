@@ -11,6 +11,8 @@ class welfareBusiness {
         this.realProject = true;
         this.isNewMonthBool = false;
 
+        this.data = dataManager.getData();
+
         this.time = 0;//+1 toutes les secondes
         this.date = {
             day: 1,
@@ -156,9 +158,13 @@ class welfareBusiness {
         return this.currentProject.getProjectPercentage();
     }
 
-    addEmployee(desk) {
-        let newEmployee = new employee(desk);
+    addEmployee(deskData) {
+        let newEmployee = new employee();
         this.employeesList.push(newEmployee);
+        let data = dataManager.getData();
+        data.desk[deskData.id].employee = newEmployee;
+        dataManager.save("1", data);
+        console.log("employee added")
     }
 
     generate3ProjectChoices() {

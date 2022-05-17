@@ -1,7 +1,6 @@
 class employee {
-    constructor(desk) {
+    constructor() {
         this.name = getRandomName(nameArray);
-        this.desk = desk;
         this.production = 0;
         this.salary = 100;
         this.happiness = Math.floor(Math.random() * (60 - 40) + 40);//Pourcentage de bonheur de base aléatoire entre 60 % et 40 %
@@ -18,10 +17,6 @@ class employee {
 
     getHappiness() {
         return this.happiness;
-    }
-
-    getDesk(){
-        return this.desk;
     }
 
     getName(){
@@ -58,7 +53,8 @@ class employee {
     }
 
     updateStats(){
-        switch (this.desk.level) {
+        let data = dataManager.getData();
+        switch (data.desk.level) {
             case 1:
                 this.production = 1;
                 break;

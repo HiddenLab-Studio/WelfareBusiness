@@ -76,24 +76,44 @@ let deskManager = (function () {
      */
     function loadDeskTexture(){
         data.desk.forEach((element) => {
+            let c = 6;
             if(element.level !== 1){
-                for (let i = 1; i < element.level ; i++) {
-                    let upgradeArray = textureIndex.filter((array) => {
-                        if(element.orientation === array.orientation) return array;
-                    });
+                console.log(element.level)
+                let upgradeArray = textureIndex.filter((array) => {
+                    if(element.orientation === array.orientation) return array;
+                });
 
+                for (let i = 1; i < element.level ; i++) {
                     for (const coordinate of element.pos) {
-                        let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
-                        for (const array of upgradeArray[0].index) {
-                            if(array.includes(tileIndex)){
-                                let indexOfElement = array.indexOf(tileIndex);
-                                deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                        try {
+                            let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
+                            for (const array of upgradeArray[0].index) {
+                                if(array.includes(tileIndex)){
+                                    let indexOfElement = array.indexOf(tileIndex);
+                                    deskLayer.getTileAt(coordinate[0], coordinate[1]).index = array[indexOfElement + 1];
+                                }
+                            }
+                        } catch(NullPointerException){
+                            if(i === 2){
+                                console.log("Agrandissement du bureau!!")
+                                console.log("No tile at ", coordinate[0], coordinate[1])
+                                console.log(deskLayer.hasTileAt(coordinate[0], coordinate[1]));
+                                console.log(upgradeArray[0].index[c][0])
+                                deskLayer.putTileAt(upgradeArray[0].index[c][0], coordinate[0], coordinate[1])
+                                c += 1;
                             }
                         }
                     }
                 }
             }
         })
+    }
+    function loadEmployee(){
+        for (const element of data.desk) {
+            if(element.employee !== undefined){
+                mapManager.getWelfareBusinessGame().addEmployee(element);
+            }
+        }
     }
 
 
@@ -102,16 +122,15 @@ let deskManager = (function () {
         getDeskById(id){
             return getDeskById(id);
         },
-
         buyDesk(desk){
-            desk.level += 1
-            desk.active = true;
+            if(desk.level === 0){
+                desk.level += 1
+                desk.active = true;
+            }
         },
-
         upgradeDesk(deskData) {
             // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
             if (deskData.level < maxDeskLevel && deskData.active) {
-
                 // On récupère l'objet qui contient l'index de chaque texture avec la texture qui correspond à son amélioration
                 let upgradeTextureArray = textureIndex.filter((element) => {
                     if(deskData.orientation === element.orientation) return element;
@@ -129,7 +148,7 @@ let deskManager = (function () {
                             }
                         }
                     } catch (NullPointerException){
-                        if(deskData.level === 2){
+                        if(deskData.level >= 2){
                             console.log("Agrandissement du bureau!!")
                             console.log("No tile at ", coordinate[0], coordinate[1])
                             console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));
@@ -138,6 +157,7 @@ let deskManager = (function () {
                         }
                     }
                 }
+
                 deskData.level += 1;
                 dataManager.save(token, data);
             }
@@ -162,6 +182,7 @@ let deskManager = (function () {
                 data = dataManager.getData();
                 //await dataManager.load(token).then((response) => data = response);
                 loadDeskTexture(layer, instance);
+                loadEmployee();
                 deskManager.registerEvent()
             }
         },

@@ -173,7 +173,7 @@ let deskManager = (function () {
                         })
                     }
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
-                    if (result && !isDeskWindowOpened && active){
+                    if (result && !isDeskWindowOpened){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
                         deskManager.openDesk(id);
                     }
@@ -187,32 +187,48 @@ let deskManager = (function () {
             // Boolean qui permet de savoir si une fenêtre est ouverte
             isDeskWindowOpened = true;
             let deskData = getDeskById(id)[0];
-
-            // Ajout des éléments à notre fenêtre
             let deskGroup = instance.add.group();
             let deskWindow = instance.add.image(config.width * 0.5, 300, "windowBack").setScale(0.6, 0.8).setScrollFactor(0);
             let closeBtn = instance.add.image(0, 0, "closeWindowBtn").setScale(0.5).setScrollFactor(0);
             let textId = instance.add.text(0, 0, "Desk n°" + id + " (Lv. " + deskData.level + ")", {color: "black", fontFamily: "Minecraft"});
-            let upgradeDeskBtn = instance.add.text(0, 0, "UPGRADE", {cursor: "pointer", color: "black", fontFamily: "Minecraft"});
+
+            if(deskData.active){
+                // Ajout des éléments à notre fenêtre
+                let upgradeDeskBtn = instance.add.text(0, 0, "UPGRADE", {cursor: "pointer", color: "black", fontFamily: "Minecraft"});
+                Phaser.Display.Align.In.Center(upgradeDeskBtn, deskWindow);
+                deskGroup.add(upgradeDeskBtn);
+                upgradeDeskBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
+                    upgradeDesk(deskData);
+                    deskGroup.clear(true);
+                    isDeskWindowOpened = false;
+                })
+
+            } else {
+                // Ajout des éléments à notre fenêtre
+                let buyDeskBtn = instance.add.text(0, 0, "BUY", {cursor: "pointer", color: "black", fontFamily: "Minecraft"});
+                Phaser.Display.Align.In.Center(buyDeskBtn, deskWindow);
+                deskGroup.add(buyDeskBtn);
+                buyDeskBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
+                    deskData.level += 1;
+                    deskData.active = true;
+                    console.log(data)
+                    deskGroup.clear(true);
+                    isDeskWindowOpened = false;
+                })
+
+            }
+
+            deskGroup.add(deskWindow).add(closeBtn).add(textId);
 
             // Alignement des éléments
             Phaser.Display.Align.In.Center(deskWindow, instance.add.zone(500, 280, 1000, 563));
             Phaser.Display.Align.In.TopRight(closeBtn, deskWindow);
             Phaser.Display.Align.In.TopCenter(textId, deskWindow);
-            Phaser.Display.Align.In.Center(upgradeDeskBtn, deskWindow);
             closeBtn.setPosition(closeBtn.x - 100, closeBtn.y + 40);
             textId.setPosition(textId.x, textId.y + 95);
 
-            deskGroup.add(deskWindow).add(closeBtn).add(textId).add(upgradeDeskBtn);
-
             // Listener pour le close btn et l'upgrade btn
             closeBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
-                deskGroup.clear(true);
-                isDeskWindowOpened = false;
-            })
-
-            upgradeDeskBtn.setInteractive({cursor: "pointer"}).on("pointerdown", () => {
-                upgradeDesk(deskData);
                 deskGroup.clear(true);
                 isDeskWindowOpened = false;
             })

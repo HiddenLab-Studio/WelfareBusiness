@@ -106,8 +106,6 @@ class windowObject {
         this.windowType = "employee";
 
         this.employeeParameterGauge = new Array(2);
-        //Titre de la fenêtre
-        this.employeeName = this.game.add.text(400, 65, "Employee name", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
 
         //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
         for (let i = 0; i < 2; i++) {
@@ -123,6 +121,7 @@ class windowObject {
 
 
         if (employee != undefined) {
+            this.employeeName = this.game.add.text(this.config.width/2 -150, 55, /*"Employee name"*/employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0,0);
             this.upgradeBtnText = this.game.add.text(395, 173, "Level " + desk.level, { cursor: "pointer", color: "black", fontFamily: "Arial" }).setOrigin(0, 0).setScrollFactor(0);
 
             this.upgradeBtn.on("pointerdown", () => {
@@ -131,10 +130,14 @@ class windowObject {
             })
         }
         else {
+            this.employeeName = this.game.add.text(400, 55, "Hire someone to unlock", { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
             this.upgradeBtnText = this.game.add.text(365, 173, "HIRE EMPLOYEE", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setOrigin(0, 0).setScrollFactor(0);
 
 
             this.upgradeBtn.on("pointerdown", () => {
+                //desk.level += 1;  
+                //desk.active = true;
+                console.log(desk)
 
                 deskManager.buyDesk(desk);
                 mapManager.getWelfareBusinessGame().addEmployee(desk);

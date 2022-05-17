@@ -108,7 +108,7 @@ class welfareBusiness {
     }
 
     updateDate() {
-        this.time += 1 // this.updateRate;
+        this.time += 1 / this.updateRate;
 
         //Changement de jour
         if (this.time == 1) {

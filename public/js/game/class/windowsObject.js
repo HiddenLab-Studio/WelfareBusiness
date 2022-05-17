@@ -202,9 +202,10 @@ class windowObject {
 
         }
 
-        console.log(this.employeeTips)
+        console.log('this.employeeTips0')
+
         for (let i = 0; i < 3; i++) {
-            if (this.employeeTips !== undefined) {
+            if (this.employeeTips != undefined && this.employeeTips[0] != undefined) {
                 this.employeeTips[i].destroy();
             }
         }

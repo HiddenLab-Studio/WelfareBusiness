@@ -31,27 +31,30 @@ let deskManager = (function () {
         {
             orientation: 2,
             index: [
-                // A CHANGER
-                [1, 4],
-                [2, 5],
-                [3, 6],
-                [29, 32],
-                [30, 33],
-                [31, 34]
+
             ]
         },
         {
             orientation: 3,
             index: [
-                // A CHANGER
-                [57, 60],
-                [58, 61],
-                [85, 88],
-                [86, 89],
-                [113, 116],
-                [114, 117],
-                [141, 144],
-                [142, 145]
+
+            ]
+        },
+        {
+            orientation: 4,
+            index: [
+                [287, 296, 290],
+                [172, 181, 288, 297, 291],
+                [173, 182, 289, 298, 292],
+                [315, 324, 318],
+                [200, 209, 316, 325, 319],
+                [201, 210, 317, 326, 320],
+                [343, 352, 346],
+                [228, 237, 344, 353, 347],
+                [229, 238, 345, 354, 348],
+                [371, 380, 374],
+                [256, 265, 372, 381, 375],
+                [257, 266, 373, 382, 376]
             ]
         }
     ]
@@ -76,11 +79,28 @@ let deskManager = (function () {
      */
     function loadDeskTexture(){
         data.desk.forEach((element) => {
-            let c = 6;
+            let c = undefined;
+            let count = 0;
             if(element.level !== 1){
                 console.log(element.level)
                 let upgradeArray = textureIndex.filter((array) => {
-                    if(element.orientation === array.orientation) return array;
+                    if(array.orientation === element.orientation) {
+                        switch (array.orientation){
+                            case 1:
+                                c = [6, 7, 8];
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                c = [0, 3, 6, 9];
+                                break;
+                            default:
+                                break;
+                        }
+                        return element;
+                    }
                 });
 
                 for (let i = 1; i < element.level ; i++) {
@@ -95,12 +115,11 @@ let deskManager = (function () {
                             }
                         } catch(NullPointerException){
                             if(i === 2){
-                                console.log("Agrandissement du bureau!!")
+                                /*console.log("Agrandissement du bureau!!")
                                 console.log("No tile at ", coordinate[0], coordinate[1])
-                                console.log(deskLayer.hasTileAt(coordinate[0], coordinate[1]));
-                                console.log(upgradeArray[0].index[c][0])
-                                deskLayer.putTileAt(upgradeArray[0].index[c][0], coordinate[0], coordinate[1])
-                                c += 1;
+                                console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));*/
+                                deskLayer.putTileAt(upgradeArray[0].index[c[count]][0], coordinate[0], coordinate[1]);
+                                count += 1;
                             }
                         }
                     }
@@ -132,11 +151,30 @@ let deskManager = (function () {
             // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
             if (deskData.level < maxDeskLevel && deskData.active) {
                 // On récupère l'objet qui contient l'index de chaque texture avec la texture qui correspond à son amélioration
+                let c = undefined;
+                let i = 0;
                 let upgradeTextureArray = textureIndex.filter((element) => {
-                    if(deskData.orientation === element.orientation) return element;
+                    if(deskData.orientation === element.orientation) {
+                        switch (deskData.orientation){
+                            case 1:
+                                c = [6, 7, 8];
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                c = [0, 3, 6, 9];
+                                break;
+                            default:
+                                break;
+                        }
+                        return element;
+                    }
                 });
 
-                let c = 6;
+                console.log("value of c is ", c)
+                console.log(upgradeTextureArray)
                 for (const coordinate of deskData.pos) {
                     try {
                         let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
@@ -149,15 +187,14 @@ let deskManager = (function () {
                         }
                     } catch (NullPointerException){
                         if(deskData.level >= 2){
-                            console.log("Agrandissement du bureau!!")
+                            /*console.log("Agrandissement du bureau!!")
                             console.log("No tile at ", coordinate[0], coordinate[1])
-                            console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));
-                            deskLayer.putTileAt(upgradeTextureArray[0].index[c][0], coordinate[0], coordinate[1])
-                            c += 1;
+                            console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));*/
+                            deskLayer.putTileAt(upgradeTextureArray[0].index[c[i]][0], coordinate[0], coordinate[1]);
+                            i += 1;
                         }
                     }
                 }
-
                 deskData.level += 1;
                 dataManager.save(token, data);
             }
@@ -217,7 +254,6 @@ let deskManager = (function () {
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
                     if (result && !mapManager.getHud().getWindow().isOpened()){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
-                        console.log(id);
                         deskManager.openDesk(id);
                     }
                 } catch (NullPointerException) {/*ignored*/}
@@ -229,12 +265,9 @@ let deskManager = (function () {
         openDesk(id){
             // Boolean qui permet de savoir si une fenêtre est ouverte
             let deskData = getDeskById(id)[0];
-
+            console.log(deskData.orientation)
             mapManager.getHud().getWindow().createBackWindow();
             mapManager.getHud().getWindow().beEmployeeWindow(mapManager.getWelfareBusinessGame().getEmployeeById(id), getDeskById(id)[0]);
-            console.log(mapManager.getWelfareBusinessGame().getEmployeeById(id))
-            console.log(deskData.active);
-
             //Si le bureau n'est pas encore acheté (pas d'employé)
             if(!deskData.active) {
                 console.log(mapManager.getHud.getWindow())

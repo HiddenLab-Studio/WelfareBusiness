@@ -135,9 +135,6 @@ class windowObject {
 
 
             this.upgradeBtn.on("pointerdown", () => {
-                //desk.level += 1;  
-                //desk.active = true;
-                console.log(desk)
 
                 deskManager.buyDesk(desk);
                 mapManager.getWelfareBusinessGame().addEmployee(desk);

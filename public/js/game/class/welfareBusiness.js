@@ -17,6 +17,7 @@ class welfareBusiness {
             month: 1,
             year: 2022,
         }
+        this.generate3ProjectChoices()
     }
 
     isProjectFinished() {
@@ -83,8 +84,6 @@ class welfareBusiness {
 
     updateProject() {
         if (this.isProjectFinished()) {
-            console.log("Project finished, waiting for next project");
-            this.generate3ProjectChoices()
             this.realProject = false;
             this.money += this.currentProject.getRevenue();
             this.currentProject = new project(999999999, 0);//Projet temporaire inutile en attendant un nouveau choix
@@ -158,11 +157,8 @@ class welfareBusiness {
     }
 
     addEmployee(desk) {
-        console.log(this.employeesList);
         let newEmployee = new employee(desk);
         this.employeesList.push(newEmployee);
-        console.log("desk");
-        console.log(this.employeesList[0].getDesk())
     }
 
     generate3ProjectChoices() {
@@ -195,6 +191,7 @@ class welfareBusiness {
     chooseNewProject(project) {
         this.realProject = true;
         this.currentProject = project;
+        this.generate3ProjectChoices();
     }
 
 }

@@ -97,7 +97,6 @@ let deskManager = (function () {
 
 
     return {
-
         //getter public (code pas propre)
         getDeskById(id){
             return getDeskById(id);
@@ -161,9 +160,9 @@ let deskManager = (function () {
             instance.input.on("pointerdown", (pos) => {
                 // try catch car la target peut être null (NullPointerException)
                 try {
-                    let target = deskLayer.getTileAtWorldXY(pos.x, pos.y);
+                    let target = deskLayer.getTileAtWorldXY(pos.worldX, pos.worldY);
                     // DEBUG
-                    // console.log("Click detected position: x:" + target.x + " y:" + target.y);
+                    console.log(target.x, target.y);
                     // console.log("Index of the clicked case is " + target.index)
 
                     let result = undefined;
@@ -185,7 +184,7 @@ let deskManager = (function () {
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
                     if (result && !mapManager.getHud().getWindow().isOpened()){
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
-                        deskManager.openDesk(id);
+                        //deskManager.openDesk(id);
                     }
                 } catch (NullPointerException) {/*ignored*/}
             })

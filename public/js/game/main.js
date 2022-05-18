@@ -16,14 +16,13 @@ const config = {
 };
 
 const phaser = new Phaser.Game(config);
-function preload(){
+function preload() {
     this.load.image('button_play', './public/assets/img/game/bouton_play.png');
     this.load.image('chaise', './public/assets/img/game/chaise_bureau.png');
     this.load.image('windowBack', './public/assets/img/game/HUD/fenetre.png');
     this.load.image('volumeMute', './public/assets/img/game/HUD/son_coupe.png');
     this.load.image('volumeLow', './public/assets/img/game/HUD/son_min.png');
     this.load.image('volumeHigh', './public/assets/img/game/HUD/son_max.png');
-    this.load.audio('accueil', ['./audio/getmap.mp3', './audio/getmap.ogg']);
     this.load.image('button_settings', './public/assets/img/game/HUD/settings.png');
     this.load.image('button_shop', './public/assets/img/game/HUD/logo_shop.png');
     this.load.image('argent_hud', './public/assets/img/game/HUD/argent_hud.png');
@@ -39,6 +38,7 @@ function preload(){
     this.load.image('emote_neutre', './public/assets/img/game/HUD/neutre.png')
     this.load.image('emote_colere', './public/assets/img/game/HUD/colere.png')
     this.load.image('emote_heureux', './public/assets/img/game/HUD/bonheur.png')
+    this.load.image('emote_heureux_window', './public/assets/img/game/HUD/bonheur_window.png')
     this.load.image('projet_hud', './public/assets/img/game/HUD/projet_hud.png');
     this.load.image('projet_hud0', './public/assets/img/game/HUD/projet_hud0.png');
     this.load.image('projet_hud1', './public/assets/img/game/HUD/projet_hud1.png');
@@ -59,7 +59,7 @@ function preload(){
 
 
     this.load.image('hud_employed', './public/assets/img/game/hud/hud_employed.png');
-    
+
 
 
 
@@ -68,7 +68,7 @@ function preload(){
     this.load.tilemapTiledJSON("map", "./public/js/game/map/wb_map.json");
 }
 
-function create(){
+function create() {
     mapManager.init(phaser, config, this)
 }
 
@@ -90,11 +90,13 @@ function update(time, delta) {
                 hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
             }
 
-            hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
-            hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
-            hud.updateDate(welfareBusinessGame.getDate());
-            hud.temporaryMessageWageLoop();
+
         }
+        hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
+        hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
+        hud.updateDate(welfareBusinessGame.getDate());
+        hud.updateEmployeeWindow();
+        hud.temporaryMessageWageLoop();
     }
 
     //Caméra

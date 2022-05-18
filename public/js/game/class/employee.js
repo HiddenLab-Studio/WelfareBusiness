@@ -20,8 +20,23 @@ class employee {
         return this.salary;
     }
 
+    getSalaryPercent(){
+        let tmpPercent = this.salary - 1300;
+
+        tmpPercent = tmpPercent / 4000 * 100;
+        if(tmpPercent > 100){
+            tmpPercent = 100
+        }
+
+        return tmpPercent;
+    }
+
     getHappiness() {
-        return this.baseHappiness + this.bonusHappiness;
+        let happiness = this.baseHappiness + this.bonusHappiness
+        if(happiness > 100){
+            return 100;
+        }
+        return happiness;
     }
 
     getName() {
@@ -34,6 +49,14 @@ class employee {
 
     getWorkTime(){
         return this.workTime;
+    }
+
+    getWorkTimePercent(){
+        let tmpPercent = this.workTime - 5;
+
+        tmpPercent = tmpPercent / 7 * 100
+
+        return tmpPercent
     }
 
     //Valeur arbitraire : 10% de bonheur de plus que 50% = 4% de prod en plus (et inversement)
@@ -115,18 +138,15 @@ class employee {
     }
 
     increaseWorkTime(){
-        console.log('work time increased')
         if(this.workTime <= 11){
             this.workTime += 1;
         }
-        console.log(this.workTime);
     }
 
     decreaseWorkTime(){
         if(this.workTime >= 6){
             this.workTime -= 1;
         }
-        console.log(this.workTime);
     }
 
 
@@ -134,7 +154,6 @@ class employee {
 
 //Fonction qui prend en paramètre le salaire de l'employé et retourne le bonheur correspondant. AMODIFIER
 function salaryScaleToWelfare(salary) {
-    console.log("salaryScaleToWelfare");
     let tmpWelfare = 2 * ((2 * salary / 1302) - 3);//2000€ de salaire = 0 de bonheur bonus
 
     if (tmpWelfare < 0) {

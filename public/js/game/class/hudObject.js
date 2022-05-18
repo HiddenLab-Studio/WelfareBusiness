@@ -52,8 +52,11 @@ class hudObject {
         this.menubar = this.phaser.add.sprite(config.width / 2, config.height - 100, 'menu_hud').setScrollFactor(0);
 
         //Style des barres d'info (argent, bonheur, date et vitesse de jeu) A SUPPRIMER
-        this.infobarStyle = this.phaser.make.graphics().fillStyle(0x00ffff).fillRect(0, 0, 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
+        this.infobarStyle = this.phaser.make.graphics().fillStyle(0x1089f2).fillRect(0, 0, 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
         this.infobarStyle.generateTexture('infobar', 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
+
+        this.happinessBarStyle = this.phaser.make.graphics().fillStyle(0x5ed23b).fillRect(0, 0, 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
+        this.happinessBarStyle.generateTexture('happinessbar', 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
 
         //Barre d'argent
         this.moneyInfoBar = this.phaser.add.image(8, -8, 'argent_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
@@ -256,6 +259,12 @@ class hudObject {
         this.dateString = date.day.toString() + "/" + date.month.toString() + "/" + date.year.toString();
         this.dateText.destroy();
         this.dateText = this.phaser.add.text(378, 20, this.dateString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
+    }
+
+    updateEmployeeWindow(){
+        if(this.window.isOpened() && this.window.isEmployeeWindow()){
+            this.window.updateEmployeeWindow();
+        }
     }
 
 

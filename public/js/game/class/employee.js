@@ -77,7 +77,7 @@ class employee {
     
 }
 
-let nameStr = "Lucas Haboussi,Antoine Mignien,Aurélien Rogé,Guillaume Leroy,Théo Vangheluwe,James Rodriguez,Joseph Levine,Christopher Payne,Robert Camacho,Jose Payne,Matthew Torres,Ryan Ryan,Erik Bishop,Martin Larsson,Tyler Joseph,Josh Dun,Bryce Johnson,Zachary Nguyen,Greg Morris,Michael Eaton Jr.,Ethan Poole,Ryan Hill,Thomas Collins,Kamel Kebir,Kylian Mbappe,Thomas Pesquet"
+let nameStr = "Lucas Haboussi,Antoine Mignien,Aurélien Rogé,Guillaume Leroy,Théo Vangheluwe,James Rodriguez,Joseph Levine,Christopher Payne,Robert Camacho,Jose Payne,Matthew Torres,Ryan Ryan,Erik Bishop,Martin Larsson,Tyler Joseph,Josh Dun,Bryce Johnson,Zachary Nguyen,Greg Morris,Michael Eaton Jr.,Ethan Poole,Ryan Hill,Thomas Collins,Kamel Kebir,Kylian Mbappe,Thomas Pesquet,Jean-Luc Leroy,Emmanuel Mignien,Farid Haboussi,Stephane Vangheluwe,Roneda Degui,Farouk Baraka,Kevin Gamero,Karim Benzema,Lee Sang-hyeok"
 let nameArray = nameStr.split(",");
 
 function random(min, max){

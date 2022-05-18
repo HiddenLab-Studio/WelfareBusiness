@@ -2,11 +2,13 @@ class employee {
     constructor(deskId) {
         this.name = getRandomName(nameArray);
         this.production = 1;
-        this.salary = 100;
+        this.salary = 1300;
         this.happiness = Math.floor(Math.random() * (60 - 40) + 40);//Pourcentage de bonheur de base aléatoire entre 60 % et 40 %
         this.deskId = deskId
         this.baseHappiness = this.happiness;
         this.bonusHappiness = 0;
+
+        this.workTime = 7;
     }
 
     getProduction() {
@@ -59,7 +61,7 @@ class employee {
 
         //Ecoproject
         //Temps de travail
-        //Salaire
+        //Salaire FAIT
     }
 
     updateStats() {
@@ -92,16 +94,41 @@ class employee {
                 break;
         }
 
-        
-
-
-
+        tmpHappinessCounter += salaryScaleToWelfare(this.salary);
 
 
         this.bonusHappiness = tmpHappinessCounter;
     }
 
+    increaseWage() {
+        this.salary += 100;
+    }
 
+    decreaseWage() {
+        if (this.salary > 1402) {
+            this.salary -= 100;
+        }
+    }
+
+
+}
+
+//Fonction qui prend en paramètre le salaire de l'employé et retourne le bonheur correspondant. AMODIFIER
+function salaryScaleToWelfare(salary) {
+    console.log("salaryScaleToWelfare");
+    let tmpWelfare = 2 * ((2 * salary / 1302) - 3);//2000€ de salaire = 0 de bonheur bonus
+
+    if (tmpWelfare < 0) {
+        return (tmpWelfare * 3)
+    }
+    if (tmpWelfare < 4) {
+        return (tmpWelfare * 2)
+    }
+    if (tmpWelfare > 4) {
+        return 8 + (tmpWelfare - 4)
+    }
+
+    return tmpWelfare
 }
 
 
@@ -123,3 +150,4 @@ function getRandomName(array) {
     array.splice(randomValue, 1);
     return result
 }
+

@@ -7,7 +7,7 @@ class welfareBusiness {
         this.employeesNb = 0;
         this.updateRate = 1;
         this.started = false;
-        this.money = 1000;
+        this.money = 3000;
         this.realProject = true;
         this.isNewMonthBool = false;
 
@@ -76,7 +76,7 @@ class welfareBusiness {
         let cost = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
             if (this.employeesList[i] !== undefined) {
-                cost = this.employeesList[i].getSalary();
+                cost += this.employeesList[i].getSalary();
                 //!//
             }
         }
@@ -134,11 +134,11 @@ class welfareBusiness {
     }
 
     updateDate() {
-        this.time += this.updateRate / 4;
+        this.time += this.updateRate // 12;
         this.isNewMonthBool = false;
 
         //Changement de jour
-        if (this.time >= 1) {
+        if (this.time >= 12) {
             this.date.day++
             this.time = 0;
         }

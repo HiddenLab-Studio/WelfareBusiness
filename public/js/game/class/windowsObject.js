@@ -124,12 +124,12 @@ class windowObject {
                 minusBtn: this.game.add.image(355, 89, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
             }
 
-            this.employeeParameterGauge[1].plusBtn.on("pointerdown", () => {
-                console.log("augmenter salaire")
+            this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {
+                increaseButton('wage', employee);
             })
 
-            this.employeeParameterGauge[1].minusBtn.on("pointerdown", () => {
-                console.log("diminuer salaire")
+            this.employeeParameterGauge[0].minusBtn.on("pointerdown", () => {
+                decreaseButton('wage', employee);
             })
 
 
@@ -142,11 +142,11 @@ class windowObject {
                 minusBtn: this.game.add.image(355, 120, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
             }
 
-            this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {
+            this.employeeParameterGauge[1].plusBtn.on("pointerdown", () => {
                 console.log("augmenter temps de travail")
             })
 
-            this.employeeParameterGauge[0].minusBtn.on("pointerdown", () => {
+            this.employeeParameterGauge[1].minusBtn.on("pointerdown", () => {
                 console.log("diminuer temps de travail")
             })
 
@@ -241,7 +241,7 @@ class windowObject {
 
         }
 
-        
+
         for (let i = 0; i < 3; i++) {
             if (this.employeeTips != undefined && this.employeeTips[0] != undefined) {
                 this.employeeTips[i].destroy();
@@ -305,3 +305,22 @@ function determineTextAdvice(employee) {
 }
 
 
+function decreaseButton(actionWanted, employee) {
+    switch (actionWanted) {
+        case 'wage':
+            employee.decreaseWage()
+
+            break;
+    }
+}
+
+function increaseButton(actionWanted, employee) {
+
+    switch (actionWanted) {
+        case 'wage':
+            employee.increaseWage()
+
+            break;
+    }
+    
+}

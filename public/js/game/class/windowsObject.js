@@ -12,7 +12,7 @@ class windowObject {
     createBackWindow() {
         let window = this;
         this.opened = true;
-        this.menu = this.game.add.image(this.config.width * 0.5, 270, 'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
+        this.menu = this.game.add.image(this.config.width * 0.5, 270, /*'hud_employed'*/'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
         this.closewindowbtn = this.game.add.image(670, 40, 'closeWindowBtn').setScale(0.5).setInteractive().setScrollFactor(0);
 
         this.closewindowbtn.on('pointerdown', function () {
@@ -117,11 +117,11 @@ class windowObject {
 
             //Salaire
             this.employeeParameterGauge[0] = {
-                bar: this.game.add.image(395, 105, 'infobar').setOrigin(0, 0).setScale(1.3, 0.1).setScrollFactor(0),
-                percentage: this.game.add.text(620, 100, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
-                icon: this.game.add.image(335, 89, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0),
-                plusBtn: this.game.add.image(580, 89, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
-                minusBtn: this.game.add.image(355, 89, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
+                bar: this.game.add.image(418, 125, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0),
+                //percentage: this.game.add.text(620, 130, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+                icon: this.game.add.image(335, 119, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0),
+                plusBtn: this.game.add.image(620, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
+                minusBtn: this.game.add.image(380, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
             }
 
             this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {
@@ -135,50 +135,53 @@ class windowObject {
 
             //Temps de travail
             this.employeeParameterGauge[1] = {
-                bar: this.game.add.image(395, 135, 'infobar').setOrigin(0, 0).setScale(1.3, 0.1).setScrollFactor(0),
-                percentage: this.game.add.text(620, 130, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
-                icon: this.game.add.image(340, 120, 'logo_time').setOrigin(0, 0).setScale(0.05).setScrollFactor(0),
-                plusBtn: this.game.add.image(580, 120, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
-                minusBtn: this.game.add.image(355, 120, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
+                bar: this.game.add.image(418, 185, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0),
+                //percentage: this.game.add.text(620, 150, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+                icon: this.game.add.image(340, 179, 'logo_time').setOrigin(0, 0).setScale(0.05).setScrollFactor(0),
+                plusBtn: this.game.add.image(620, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
+                minusBtn: this.game.add.image(380, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
             }
 
             this.employeeParameterGauge[1].plusBtn.on("pointerdown", () => {
-                console.log("augmenter temps de travail")
+                increaseButton('workTime', employee);
             })
 
             this.employeeParameterGauge[1].minusBtn.on("pointerdown", () => {
-                console.log("diminuer temps de travail")
+                decreaseButton('workTime', employee);
             })
 
 
-            /*for (let i = 0; i < 2; i++) {
-                this.employeeParameterGauge[i] = {
-                    bar: this.game.add.image(350, 105 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
-                    percentage: this.game.add.text(620, 100 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
-                }
-
-            }*/
-
-            this.upgradeBtn = this.game.add.image(360, 155, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
+            this.upgradeBtn = this.game.add.image(480, 230, 'upgrade').setOrigin(0, 0).setScale(0.9, 1.1).setScrollFactor(0).setInteractive({ cursor: "pointer" });
+            this.deskImg = this.game.add.image(340, 238, 'bureau').setOrigin(0, 0).setScale(1).setScrollFactor(0);
 
 
-            let stringLvlTmp;
-            if (desk.level < 5) {
-                stringLvlTmp = "Level " + desk.level;
+            let stringLvlTmp = "Level " + desk.level;;
+            /*if (desk.level < 5) {
+                stringLvlTmp
             }
             else {
                 stringLvlTmp = "Level MAX";
-            }
+            }*/
 
             let debugNextUpgrade = desk.level + 1;
-            this.upgradeBtnText = this.game.add.text(405, 173, stringLvlTmp + " (" + debugNextUpgrade + ")", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+            this.deskLevelText = this.game.add.text(415, 240, stringLvlTmp, { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
 
             this.upgradeBtn.on("pointerdown", () => {
+                console.log("click upgrade")
                 deskManager.upgradeDesk(desk);
                 this.closeWindow();
             })
 
-            //Jauge d'information du bien être de l'employé
+            let stringUpgradePrice = '500€'
+            this.upgradeBtnText = this.game.add.text(554, 240, stringUpgradePrice, { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+            /*if (desk.level < 5) {
+                stringLvlTmp
+            }
+            else {
+                stringLvlTmp = "Level MAX";
+            }*/
+
+            /*//Jauge d'information du bien être de l'employé
             this.employeeWelfareGauge = new Array(3);
 
             for (let i = 0; i < 3; i++) {
@@ -187,7 +190,7 @@ class windowObject {
                     bar: this.game.add.image(400, 242 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
                 }
             }
-
+*/
             //Textes de conseil pour le joueur
             this.employeeTips = new Array(3);
 
@@ -222,7 +225,7 @@ class windowObject {
         for (let i = 0; i < 2; i++) {
             if (this.employeeParameterGauge !== undefined) {
                 this.employeeParameterGauge[i].bar.destroy();
-                this.employeeParameterGauge[i].percentage.destroy();
+                //this.employeeParameterGauge[i].percentage.destroy();
                 this.employeeParameterGauge[i].icon.destroy();
                 this.employeeParameterGauge[i].plusBtn.destroy();
                 this.employeeParameterGauge[i].minusBtn.destroy();
@@ -233,13 +236,13 @@ class windowObject {
         this.upgradeBtn.destroy();
         this.upgradeBtnText.destroy();
 
-        for (let i = 0; i < 3; i++) {
+        /*for (let i = 0; i < 3; i++) {
             if (this.employeeWelfareGauge !== undefined) {
                 this.employeeWelfareGauge[i].icon.destroy();
                 this.employeeWelfareGauge[i].bar.destroy();
             }
 
-        }
+        }*/
 
 
         for (let i = 0; i < 3; i++) {
@@ -308,7 +311,12 @@ function determineTextAdvice(employee) {
 function decreaseButton(actionWanted, employee) {
     switch (actionWanted) {
         case 'wage':
-            employee.decreaseWage()
+            employee.decreaseWage();
+
+            break;
+
+        case 'workTime':
+            employee.decreaseWorkTime();
 
             break;
     }
@@ -321,6 +329,11 @@ function increaseButton(actionWanted, employee) {
             employee.increaseWage()
 
             break;
+
+        case 'workTime':
+            employee.increaseWorkTime();
+
+            break;
     }
-    
+
 }

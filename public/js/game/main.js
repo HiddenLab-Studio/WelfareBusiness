@@ -51,6 +51,16 @@ function preload(){
     this.load.image('progress_bar', './public/assets/img/game/hud/progress_bar.png');
     this.load.image('logo_money', './public/assets/img/game/hud/logo_money.png');
     this.load.image('logo_time', './public/assets/img/game/hud/time_logo.png');
+    this.load.image('plus', './public/assets/img/game/hud/plus.png');
+    this.load.image('minus', './public/assets/img/game/hud/moins.png');
+    this.load.image('barre', './public/assets/img/game/hud/barre.png');
+    this.load.image('upgrade', './public/assets/img/game/hud/upgrade.png');
+    this.load.image('bureau', './public/assets/img/game/hud/bureau.png');
+
+
+    this.load.image('hud_employed', './public/assets/img/game/hud/hud_employed.png');
+    
+
 
 
 

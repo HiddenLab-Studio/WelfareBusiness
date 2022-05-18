@@ -57,7 +57,7 @@ class hudObject {
 
         //Barre d'argent
         this.moneyInfoBar = this.phaser.add.image(8, -8, 'argent_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
-        this.moneyString = "0 $";
+        this.moneyString = "0 €";
         this.moneyText = this.phaser.add.text(68, 20, this.moneyString, {
             font: "18px Arial",
             fill: "#000000"
@@ -225,7 +225,7 @@ class hudObject {
     }
 
     updateMoneyCounter(money) {
-        this.moneyString = money.toString() + "$";
+        this.moneyString = money.toString() + "€";
         this.moneyText.destroy();
         this.moneyText = this.phaser.add.text(68, 20, this.moneyString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
     }
@@ -267,7 +267,7 @@ class hudObject {
         if (this.welfareGame.isNewMonth()) {
             this.tmpMsgCounter = 7;
 
-            this.tmpMsgText = this.phaser.add.text(55, 55, "-" + this.welfareGame.getTotalEmployeesCost() + "$", { font: "18px Arial", fill: "#FF0000" }).setScrollFactor(0);
+            this.tmpMsgText = this.phaser.add.text(55, 55, "-" + this.welfareGame.getTotalEmployeesCost() + "€", { font: "18px Arial", fill: "#FF0000" }).setScrollFactor(0);
 
         }
     }

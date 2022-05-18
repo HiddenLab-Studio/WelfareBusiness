@@ -32,6 +32,10 @@ class employee {
         return dataManager.getData().desk[this.deskId];
     }
 
+    getWorkTime(){
+        return this.workTime;
+    }
+
     //Valeur arbitraire : 10% de bonheur de plus que 50% = 4% de prod en plus (et inversement)
     calculateBonusProduction() {
         if (this.happiness > 50) {
@@ -108,6 +112,21 @@ class employee {
         if (this.salary > 1402) {
             this.salary -= 100;
         }
+    }
+
+    increaseWorkTime(){
+        console.log('work time increased')
+        if(this.workTime <= 11){
+            this.workTime += 1;
+        }
+        console.log(this.workTime);
+    }
+
+    decreaseWorkTime(){
+        if(this.workTime >= 6){
+            this.workTime -= 1;
+        }
+        console.log(this.workTime);
     }
 
 

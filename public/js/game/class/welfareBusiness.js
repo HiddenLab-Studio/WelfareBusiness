@@ -126,7 +126,9 @@ class welfareBusiness {
         else {
             for (let i = 0; i < this.employeesList.length; i++) {
                 if (this.employeesList[i] !== undefined) {
-                    this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
+                    if(isEmployeeWorking(this.employeesList[i].getWorkTime(), this.getTime())){
+                        this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
+                    }
                 }
             }
         }
@@ -185,6 +187,10 @@ class welfareBusiness {
         return this.date;
     }
 
+    getTime(){
+        return this.time;
+    }
+
     isNewMonth() {
         return this.isNewMonthBool;
     }
@@ -240,4 +246,11 @@ class welfareBusiness {
 
 function convertToSec(seconds, updateRate) {
     return seconds * updateRate;
+}
+
+function isEmployeeWorking(employeeWorkTime, time){
+    if(employeeWorkTime - time > 0){
+        return true;
+    }
+    return false;
 }

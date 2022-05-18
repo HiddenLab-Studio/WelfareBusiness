@@ -102,7 +102,8 @@ class hudObject {
 
         this.pseudoText = this.phaser.add.text(this.config.width / 2 - 25, this.config.height - 87, dataManager.getUsername(), {
             font: "14px Arial",
-            fill: "#000000"
+            fill: "#000000",
+            fontStyle: 'bold',
         }).setScrollFactor(0);
     }
 
@@ -230,7 +231,7 @@ class hudObject {
     }
 
     updateHappinessCounter(happiness) {
-        this.happinessString = happiness.toString() + "%";
+        this.happinessString = roundToTwo(happiness).toString() + "%";
         this.happinessText.destroy();
         this.happinessText = this.phaser.add.text(237, 20, this.happinessString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
         this.happinessIcon.destroy();
@@ -283,6 +284,12 @@ function displayProgressBar(game, percent, config) {
 
     return progressbar;
 }
+
+
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+console.log(roundToTwo(2.005));
 
 
 

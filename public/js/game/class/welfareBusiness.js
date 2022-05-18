@@ -196,7 +196,6 @@ class welfareBusiness {
 
     addEmployee(deskData) {
         let newEmployee = new employee(deskData.id);
-        console.log(newEmployee)
         this.employeesList[deskData.id] = newEmployee;
         let data = dataManager.getData();
         data.desk[deskData.id].employee = newEmployee;

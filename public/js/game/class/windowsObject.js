@@ -108,20 +108,56 @@ class windowObject {
         if (employee !== undefined) {
             employee.getDesk();
 
-            this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, /*"Employee name"*/employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
+            this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
 
 
             //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
 
             this.employeeParameterGauge = new Array(2);
 
-            for (let i = 0; i < 2; i++) {
+            //Salaire
+            this.employeeParameterGauge[0] = {
+                bar: this.game.add.image(395, 105, 'infobar').setOrigin(0, 0).setScale(1.3, 0.1).setScrollFactor(0),
+                percentage: this.game.add.text(620, 100, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+                icon: this.game.add.image(335, 89, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0),
+                plusBtn: this.game.add.image(580, 89, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
+                minusBtn: this.game.add.image(355, 89, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
+            }
+
+            this.employeeParameterGauge[1].plusBtn.on("pointerdown", () => {
+                console.log("augmenter salaire")
+            })
+
+            this.employeeParameterGauge[1].minusBtn.on("pointerdown", () => {
+                console.log("diminuer salaire")
+            })
+
+
+            //Temps de travail
+            this.employeeParameterGauge[1] = {
+                bar: this.game.add.image(395, 135, 'infobar').setOrigin(0, 0).setScale(1.3, 0.1).setScrollFactor(0),
+                percentage: this.game.add.text(620, 130, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
+                icon: this.game.add.image(340, 120, 'logo_time').setOrigin(0, 0).setScale(0.05).setScrollFactor(0),
+                plusBtn: this.game.add.image(580, 120, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
+                minusBtn: this.game.add.image(355, 120, 'logo_money').setOrigin(0, 0).setScale(0.30).setScrollFactor(0).setInteractive(),
+            }
+
+            this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {
+                console.log("augmenter temps de travail")
+            })
+
+            this.employeeParameterGauge[0].minusBtn.on("pointerdown", () => {
+                console.log("diminuer temps de travail")
+            })
+
+
+            /*for (let i = 0; i < 2; i++) {
                 this.employeeParameterGauge[i] = {
                     bar: this.game.add.image(350, 105 + i * 30, 'infobar').setOrigin(0, 0).setScale(1.8, 0.1).setScrollFactor(0),
                     percentage: this.game.add.text(620, 100 + i * 30, "100%", { font: "14px Arial", fill: "#000000" }).setScrollFactor(0),
                 }
 
-            }
+            }*/
 
             this.upgradeBtn = this.game.add.image(360, 155, 'infobar').setOrigin(0, 0).setScale(1, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
 
@@ -187,6 +223,9 @@ class windowObject {
             if (this.employeeParameterGauge !== undefined) {
                 this.employeeParameterGauge[i].bar.destroy();
                 this.employeeParameterGauge[i].percentage.destroy();
+                this.employeeParameterGauge[i].icon.destroy();
+                this.employeeParameterGauge[i].plusBtn.destroy();
+                this.employeeParameterGauge[i].minusBtn.destroy();
             }
 
         }

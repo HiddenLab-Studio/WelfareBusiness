@@ -259,7 +259,7 @@ let deskManager = (function () {
                 try {
                     let target = deskLayer.getTileAtWorldXY(pos.worldX, pos.worldY);
                     // DEBUG
-                    console.log(target.x, target.y);
+                    //console.log(target.x, target.y);
                     // console.log("Index of the clicked case is " + target.index)
 
                     let result = undefined;
@@ -292,7 +292,7 @@ let deskManager = (function () {
         openDesk(id) {
             // Boolean qui permet de savoir si une fenêtre est ouverte
             let deskData = getDeskById(id)[0];
-            console.log(deskData.orientation)
+            //console.log(deskData.orientation)
             mapManager.getHud().getWindow().createBackWindow();
             mapManager.getHud().getWindow().beEmployeeWindow(mapManager.getWelfareBusinessGame().getEmployeeById(id), getDeskById(id)[0]);
             //Si le bureau n'est pas encore acheté (pas d'employé)

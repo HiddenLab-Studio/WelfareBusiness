@@ -7,18 +7,21 @@ class hudObject {
         this.config = config;
         this.window = new windowObject(phaser, config, welfareGame, this);
         this.tmpMsgCounter = -1;
+        this.isNewProjectButtonGenerated = false;
+
 
         //Initialisation de l'interface utilisateur
         this.initializeUI();
+        
     }
 
     //Initialisation de l'interface utilisateur
     initializeUI() {
         let hud = this;
         //Bouton play
-        this.playbtn = this.phaser.add.sprite(this.config.width * 0.5, 300, "button_play").setInteractive().setScrollFactor(0);
-        this.playbtn.on("pointerdown", async function () {
-            this.destroy(); // Suppression du bouton play
+        this.startbtn = this.phaser.add.sprite(this.config.width * 0.5, 300, "button_play").setInteractive().setScrollFactor(0);
+        this.startbtn.on("pointerdown", async function () {
+            this.destroy(); // Suppression du bouton start
             // Création de la map
             await mapManager.createMap(hud.phaser).then(() => {
                 // Création du HUD du jeu
@@ -26,6 +29,7 @@ class hudObject {
                 hud.createListeners();
                 hud.window.closeWindow()
                 hud.welfareGame.startGame();
+                hud.changeActiveSpeed(1)
             });
         });
 
@@ -43,7 +47,6 @@ class hudObject {
     }
 
     createHud() {
-        let hud = this;
 
         //Barre de menu du bas
         this.menubar = this.phaser.add.sprite(config.width / 2, config.height - 100, 'menu_hud').setScrollFactor(0);
@@ -78,38 +81,24 @@ class hudObject {
         }).setScrollFactor(0);
 
         //Icones gestion du temps
-        this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive().setScrollFactor(0);
+        this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
 
-        // A MODIFIER
-        this.pausebtn.on("pointerdown", function () {
-            if (hud.window.isOpened()) {
-                hud.window.closeWindow()
-            } else {
-                hud.window.createBackWindow();
-                hud.window.beEmployeeWindow();
-            }
-        });
+        this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+
+        this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
 
 
-        this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive().setScrollFactor(0);
-
-        this.playbtn.on("pointerdown", function () {
-            console.log("Click play button");
-
-        });
-
-        this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setScrollFactor(0);
-
+        this.generateTimeSpeedListeners();
 
         //Bouton du shop
         //this.shopStyle = this.phaser.make.graphics().fillStyle(0xffff00).fillRect(0, 0, this.arbitraryUnit, this.arbitraryUnit);
-        this.shopbtn = this.phaser.add.sprite(298, config.height - 110, 'button_shop').setOrigin(0, 0).setInteractive().setScale(0.55).setScrollFactor(0);
+        this.shopbtn = this.phaser.add.sprite(298, config.height - 110, 'button_shop').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
 
         //Barre de progression du projet en cours
         this.progressbar = displayProgressBar(this.phaser, 100, this.config).setScrollFactor(0);
 
         //Boutton settings 
-        this.settingsbtn = this.phaser.add.sprite(config.width - 397, config.height - 110, 'button_settings').setOrigin(0, 0).setInteractive().setScale(0.55).setScrollFactor(0);
+        this.settingsbtn = this.phaser.add.sprite(config.width - 397, config.height - 110, 'button_settings').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
 
         this.pseudoText = this.phaser.add.text(this.config.width / 2 - 25, this.config.height - 87, dataManager.getUsername(), {
             font: "14px Arial",
@@ -120,6 +109,68 @@ class hudObject {
     getmap() {
         return mapManager.getMap();
     }
+
+    //0 = pause, 1 = play, 2 = rapide
+    changeActiveSpeed(speedActivated) {
+        switch (speedActivated) {
+            case 0:
+                this.pausebtn.destroy();
+                this.playbtn.destroy();
+                this.avancerapidebtn.destroy();
+                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.generateTimeSpeedListeners()
+                break;
+
+            case 1:
+                this.pausebtn.destroy();
+                this.playbtn.destroy();
+                this.avancerapidebtn.destroy();
+                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.generateTimeSpeedListeners()
+                break;
+
+            case 2:
+                this.pausebtn.destroy();
+                this.playbtn.destroy();
+                this.avancerapidebtn.destroy();
+                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.generateTimeSpeedListeners()
+                break;
+
+        }
+    }
+
+
+
+    //Listeners de la vitesse du jeu
+    generateTimeSpeedListeners() {
+        let hud = this;
+        let welfareGame = this.welfareGame;
+
+        this.pausebtn.on("pointerdown", function () {
+            welfareGame.setPause();
+            hud.changeActiveSpeed(0);
+        });
+
+        this.playbtn.on("pointerdown", function () {
+            console.log("Click play button");
+            welfareGame.setNormalSpeed();
+            hud.changeActiveSpeed(1);
+        });
+
+        this.avancerapidebtn.on("pointerdown", function () {
+            console.log("Click play button");
+            welfareGame.setFastSpeed();
+            hud.changeActiveSpeed(2);
+        });
+    }
+
 
     //Création des listeners des boutons
     createListeners() {
@@ -148,8 +199,11 @@ class hudObject {
         this.progressbar = displayProgressBar(this.phaser, percent, this.config);
         if (percent >= 100) {//Si le projet est fini, on affiche un bouton pour choisir un nouveau projet
 
+            if (this.isNewProjectButtonGenerated == false) {
+                this.projectChoicebtn = this.phaser.add.image(this.config.width / 2 + 5, this.config.height - 50, 'bouton_projet').setInteractive().setScrollFactor(0);
+                this.isNewProjectButtonGenerated = true;
+            }
 
-            this.projectChoicebtn = this.phaser.add.image(this.config.width / 2 + 5, this.config.height - 50, 'bouton_projet').setInteractive().setScrollFactor(0);
 
             this.projectChoicebtn.on("pointerdown", function () {
                 if (hud.window.isOpened()) {
@@ -166,6 +220,7 @@ class hudObject {
 
     deleteProjectChoiceBtn() {
         this.projectChoicebtn.destroy();
+        this.isNewProjectButtonGenerated = false;
     }
 
     updateMoneyCounter(money) {
@@ -199,7 +254,7 @@ class hudObject {
     updateDate(date) {
         this.dateString = date.day.toString() + "/" + date.month.toString() + "/" + date.year.toString();
         this.dateText.destroy();
-        this.dateText = this.phaser.add.text(378,20, this.dateString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
+        this.dateText = this.phaser.add.text(378, 20, this.dateString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
     }
 
 
@@ -209,14 +264,14 @@ class hudObject {
             this.tmpMsgText.destroy();
         }
         if (this.welfareGame.isNewMonth()) {
-            this.tmpMsgCounter = 4;
-            if (this.tmpMsgCounter == 4) {
-                this.tmpMsgText = this.phaser.add.text(55, 55, "-" + this.welfareGame.getTotalEmployeesCost() + "$", { font: "18px Arial", fill: "#FF0000" }).setScrollFactor(0);
-            }
+            this.tmpMsgCounter = 7;
+
+            this.tmpMsgText = this.phaser.add.text(55, 55, "-" + this.welfareGame.getTotalEmployeesCost() + "$", { font: "18px Arial", fill: "#FF0000" }).setScrollFactor(0);
+
         }
     }
 
-    getWindow(){
+    getWindow() {
         return this.window;
     }
 }
@@ -224,7 +279,7 @@ class hudObject {
 //Fonction d'affichage de la barre de progression en fonction du pourcentage de progression du projet
 function displayProgressBar(game, percent, config) {
     let progressbar = game.add.image(config.width / 2 - 87, config.height - 61, 'progress_bar').setOrigin(0, 0).setScrollFactor(0);
-    progressbar.setDisplaySize(percent * 184/ 100,  18);
+    progressbar.setDisplaySize(percent * 184 / 100, 18);
 
     return progressbar;
 }

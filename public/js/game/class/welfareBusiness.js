@@ -5,7 +5,7 @@ class welfareBusiness {
         this.currentProject = new project(10, 100)
         this.employeesList = new Array(12);
         this.employeesNb = 0;
-        this.updateRate = 2;//update du jeu 2 fois par sec
+        this.updateRate = 1;
         this.started = false;
         this.money = 1000;
         this.realProject = true;
@@ -44,7 +44,7 @@ class welfareBusiness {
     getTotalProduction() {
         let production = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            if(this.employeesList[i] !== undefined){
+            if (this.employeesList[i] !== undefined) {
                 production += this.employeesList[i].getProduction();
             }
         }
@@ -52,10 +52,30 @@ class welfareBusiness {
         return production;
     }
 
+    getGameSpeed() {
+        return this.updateRate;
+    }
+
+    setPause(){
+        console.log("pause activated");
+        this.updateRate = 0;
+    }
+
+    setNormalSpeed(){
+        console.log("normal speed activated");
+        this.updateRate = 1;
+    }
+
+    setFastSpeed(){
+        this.updateRate = 2;
+        console.log("fast speed activated");
+    }
+
+
     getTotalEmployeesCost() {
         let cost = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            if(this.employeesList[i] !== undefined){
+            if (this.employeesList[i] !== undefined) {
                 cost = this.employeesList[i].getSalary();
                 //!//
             }
@@ -67,7 +87,7 @@ class welfareBusiness {
     getGlobalHappiness() {
         let happiness = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            if(this.employeesList[i] !== undefined){
+            if (this.employeesList[i] !== undefined) {
                 happiness += this.employeesList[i].getHappiness();
             }
         }
@@ -79,16 +99,22 @@ class welfareBusiness {
         return this.money;
     }
 
-    convertToSec(seconds) {
-        return seconds * this.updateRate;
-    }
-
-    getEmployeeById(id){
+    
+    getEmployeeById(id) {
         return this.employeesList[id];
     }
 
     payWage() {
         this.money -= this.getTotalEmployeesCost();
+    }
+
+    updateGame(){
+        if(this.updateRate > 0){
+            this.updateProject();
+        }
+        else{
+            this.updateDate();
+        }
     }
 
     updateProject() {
@@ -99,7 +125,7 @@ class welfareBusiness {
         }
         else {
             for (let i = 0; i < this.employeesList.length; i++) {
-                if(this.employeesList[i] !== undefined){
+                if (this.employeesList[i] !== undefined) {
                     this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
                 }
             }
@@ -108,49 +134,50 @@ class welfareBusiness {
     }
 
     updateDate() {
-        this.time += 1 / this.updateRate;
+        this.time += this.updateRate / 4;
+        this.isNewMonthBool = false;
 
         //Changement de jour
-        if (this.time == 1) {
+        if (this.time >= 1) {
             this.date.day++
             this.time = 0;
-            this.isNewMonthBool = false;
         }
 
-
-        //Changement de mois
-        if (this.date.day == 29) {
-            if (this.date.month == 2) {
-                this.date.month++;
-                this.date.day -= 28;
-                this.isNewMonthBool = true;
-                this.payWage();
+        if (this.time === 0) {
+            //Changement de mois
+            if (this.date.day == 29) {
+                if (this.date.month == 2) {
+                    this.date.month++;
+                    this.date.day -= 28;
+                    this.isNewMonthBool = true;
+                    this.payWage();
+                }
             }
-        }
-        if (this.date.day == 31) {
-            if (this.date.month == 4 || this.date.month == 6 || this.date.month == 9 || this.date.month == 11) {
-                this.date.month++;
-                this.date.day -= 30;
-                this.isNewMonthBool = true;
-                this.payWage();
+            if (this.date.day == 31) {
+                if (this.date.month == 4 || this.date.month == 6 || this.date.month == 9 || this.date.month == 11) {
+                    this.date.month++;
+                    this.date.day -= 30;
+                    this.isNewMonthBool = true;
+                    this.payWage();
+                }
             }
-        }
-        if (this.date.day == 32) {
-            if (this.date.month == 1 || this.date.month == 3 || this.date.month == 5 || this.date.month == 7 || this.date.month == 8 || this.date.month == 10 || this.date.month == 12) {
-                this.date.month++;
-                this.date.day -= 31;
-                this.isNewMonthBool = true;
-                this.payWage();
+            if (this.date.day == 32) {
+                if (this.date.month == 1 || this.date.month == 3 || this.date.month == 5 || this.date.month == 7 || this.date.month == 8 || this.date.month == 10 || this.date.month == 12) {
+                    this.date.month++;
+                    this.date.day -= 31;
+                    this.isNewMonthBool = true;
+                    this.payWage();
+                }
             }
-        }
 
-        //Changement d'année
-        if (this.date.month == 13) {
-            this.date.day = 1;
-            this.date.month = 1;
-            this.date.year++;
-        }
+            //Changement d'année
+            if (this.date.month == 13) {
+                this.date.day = 1;
+                this.date.month = 1;
+                this.date.year++;
+            }
 
+        }
 
     }
 
@@ -158,7 +185,7 @@ class welfareBusiness {
         return this.date;
     }
 
-    isNewMonth(){
+    isNewMonth() {
         return this.isNewMonthBool;
     }
 
@@ -189,17 +216,17 @@ class welfareBusiness {
     }
 
     generateSafeProject() {
-        let proposal = new project(10, 100/*this.getTotalProduction() * this.convertToSec(720), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
+        let proposal = new project(10, 100/*this.getTotalProduction() * convertToSec(720, this.updateRate), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
         return proposal;
     }
 
     generateNullProject() {
-        let proposal = new project(this.getTotalProduction() * this.convertToSec(720), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * convertToSec(720, this.updateRate), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
         return proposal;
     }
 
     generateAmbitiousProject() {
-        let proposal = new project(this.getTotalProduction() * this.convertToSec(900), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * convertToSec(900, this.updateRate), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
         return proposal;
     }
 
@@ -210,4 +237,8 @@ class welfareBusiness {
         this.generate3ProjectChoices();
     }
 
+}
+
+function convertToSec(seconds, updateRate) {
+    return seconds * updateRate;
 }

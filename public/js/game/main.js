@@ -10,7 +10,7 @@ const config = {
         update: update
     },
     fps: {
-        target: 144,
+        target: 100,
         forceSetTimeOut: true
     },
 };
@@ -30,7 +30,10 @@ function preload(){
     this.load.image('barre_hud', './public/assets/img/game/HUD/barre_hud.png');
     this.load.image('date_hud', './public/assets/img/game/HUD/date_hud.png');
     this.load.image('pause', './public/assets/img/game/HUD/bouton_pause.png');
+    this.load.image('pause_actif', './public/assets/img/game/HUD/bouton_pause_actif.png');
+    this.load.image('play_actif', './public/assets/img/game/HUD/bouton_play_actif.png');
     this.load.image('play', './public/assets/img/game/HUD/bouton_play.png');
+    this.load.image('avance_rapide_actif', './public/assets/img/game/HUD/bouton_acc_actif.png');
     this.load.image('avance_rapide', './public/assets/img/game/HUD/bouton_acc.png');
     this.load.image('closeWindowBtn', './public/assets/img/game/HUD/croix.png');
     this.load.image('emote_neutre', './public/assets/img/game/HUD/neutre.png')
@@ -65,15 +68,14 @@ function update(time, delta) {
     if (welfareBusinessGame.isGameStarted()) {
         //Limiter l'update du projet à 2 fois par seconde :
         limitRefreshRateCounter++
-        if (limitRefreshRateCounter === 72) {
+
+        if (limitRefreshRateCounter === 20) {
             limitRefreshRateCounter = 0;
-            welfareBusinessGame.updateProject();
+            welfareBusinessGame.updateGame();
             if (welfareBusinessGame.isRealProject()) {
                 hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
             }
-            else {
 
-            }
             hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
             hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
             hud.updateDate(welfareBusinessGame.getDate());

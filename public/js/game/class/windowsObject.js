@@ -238,7 +238,6 @@ class windowObject {
             this.deskLevelText = this.game.add.text(415, 240, "Level " + desk.level, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
 
             this.upgradeBtn.on("pointerdown", () => {
-                console.log("click upgrade")
                 if(this.welfareGame.getPlayerMoney() >= getNextDeskPrice(employee.getDesk().level)){
                     this.welfareGame.payAmount(getNextDeskPrice(employee.getDesk().level))
                     deskManager.upgradeDesk(desk);
@@ -459,7 +458,6 @@ function displayWindowHappinessProgressBar(game, x, y, percentSize) {
 }
 
 function displayWindowProductionProgressBar(game, x, y, percentSize) {
-    console.log(percentSize);
     let progressbar = game.add.image(x, y, 'productionbar').setOrigin(0, 0).setScale(1.73 * (percentSize > 200 ? 200 : percentSize) / 200, 0.22).setScrollFactor(0)
 
     return progressbar;

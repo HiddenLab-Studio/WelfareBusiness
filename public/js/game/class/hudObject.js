@@ -188,13 +188,11 @@ class hudObject {
         });
 
         this.playbtn.on("pointerdown", function () {
-            console.log("Click play button");
             welfareGame.setNormalSpeed();
             hud.changeActiveSpeed(1);
         });
 
         this.avancerapidebtn.on("pointerdown", function () {
-            console.log("Click play button");
             welfareGame.setFastSpeed();
             hud.changeActiveSpeed(2);
         });
@@ -324,7 +322,6 @@ function displayProgressBar(game, percent, config) {
 function roundToTwo(num) {
     return +(Math.round(num + "e+2")  + "e-2");
 }
-console.log(roundToTwo(2.005));
 
 function getNextDeskPrice(level){
     switch(level){

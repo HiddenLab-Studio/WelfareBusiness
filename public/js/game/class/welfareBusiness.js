@@ -60,18 +60,15 @@ class welfareBusiness {
     }
 
     setPause() {
-        console.log("pause activated");
         this.updateRate = 0;
     }
 
     setNormalSpeed() {
-        console.log("normal speed activated");
         this.updateRate = 1;
     }
 
     setFastSpeed() {
         this.updateRate = 2;
-        console.log("fast speed activated");
     }
 
 
@@ -243,23 +240,19 @@ class welfareBusiness {
 
             switch (tmpRand) {
                 case 0: case 1: case 2:
-                    console.log('safe')
                     this.proposals[i] = this.generateSafeProject();
                     break;
 
                 case 3: case 4: case 5:
-                    console.log('null')
                     this.proposals[i] = this.generateNullProject();
                     break;
 
                 case 6: case 7:
-                    console.log('ambitious')
 
                     this.proposals[i] = this.generateAmbitiousProject();
                     break;
 
                 case 8:
-                    console.log('eco')
 
                     this.proposals[i] = this.generateEcoProject();
             }

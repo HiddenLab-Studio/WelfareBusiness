@@ -8,13 +8,13 @@ let dataManager = (function() {
 
     let config = {
         autoSave: true,
-        interval: 5000,
+        interval: 10000,
     }
 
     function autoSaveData(){
         if(config.autoSave){
             setInterval(function(){
-                console.info("Auto save enabled!")
+                //console.info("Auto save enabled!")
                 saveData(token, data);
             }, config.interval)
         }
@@ -57,6 +57,7 @@ let dataManager = (function() {
         init(tileMap){
             if(!init){
                 map = tileMap;
+                if(config.autoSave) console.info("Auto save enabled!");
                 autoSaveData();
             }
         },

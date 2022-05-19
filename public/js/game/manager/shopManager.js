@@ -113,7 +113,7 @@ let shopManager = (function () {
                     elementPos = data.shop.plant.pos;
                     upgradeTexture = upgradePlantTexture;
                     if (welfareGame.getPlayerMoney() < 300 || level > maxLevel) {
-                        return console.log('Not enough money !');
+                        return null;
                     }
                     welfareGame.payAmount(300);
 
@@ -125,7 +125,7 @@ let shopManager = (function () {
                     elementPos = data.shop.water.pos;
                     upgradeTexture = upgradeWaterTexture;
                     if (welfareGame.getPlayerMoney() < 150 || level > maxLevel) {
-                        return console.log('Not enough money !');
+                        return null;
                     }
                     welfareGame.payAmount(150);
 
@@ -137,7 +137,7 @@ let shopManager = (function () {
                     elementPos = data.shop.coffee.pos;
                     upgradeTexture = upgradeCoffeeTexture;
                     if (welfareGame.getPlayerMoney() < 400 || level >= maxLevel) {
-                        return console.log('Not enough money !');
+                        return null;
                     }
                     welfareGame.payAmount(400);
 
@@ -169,9 +169,7 @@ let shopManager = (function () {
                         break;
                 }
                 dataManager.save(token, data);
-            } else {
-                console.log("MAX LEVEL")
-            }
+            } 
 
         },
 
@@ -183,13 +181,10 @@ let shopManager = (function () {
                     welfareGame.payAmount(1000);
                     data.shop.sport.active = true;
                     sportLayer.visible = true;
-                    console.log("Sport purchased")
                     dataManager.save(token, data);
                 }
 
-            } else {
-                console.log("Upgrade already bought !")
-            }
+            } 
         },
 
         buyKitchen() {
@@ -200,13 +195,10 @@ let shopManager = (function () {
                     data.shop.kitchen.active = true;
                     kitchenLayer[0].visible = true;
                     kitchenLayer[1].visible = true;
-                    console.log("Kitchen purchased")
                     dataManager.save(token, data);
                 }
 
-            } else {
-                console.log("Upgrade already bought !")
-            }
+            } 
         },
 
         buySleep() {
@@ -217,12 +209,9 @@ let shopManager = (function () {
                     data.shop.sleep.active = true;
                     sleepLayer[0].visible = true;
                     sleepLayer[1].visible = true;
-                    console.log("Sleep purchased")
                     dataManager.save(token, data);
                 }
-            } else {
-                console.log("Upgrade already bought !")
-            }
+            } 
         },
 
         buyPing() {
@@ -231,13 +220,10 @@ let shopManager = (function () {
                 if (welfareGame.getPlayerMoney() > 500) {
                     data.shop.ping.active = true;
                     pingLayer.visible = true;
-                    console.log("Ping purchased")
                     dataManager.save(token, data);
                 }
 
-            } else {
-                console.log("Upgrade already bought !")
-            }
+            } 
         }
 
     }

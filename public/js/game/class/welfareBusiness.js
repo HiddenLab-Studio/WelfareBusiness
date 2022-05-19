@@ -221,7 +221,7 @@ class welfareBusiness {
     }
 
     generateSafeProject() {
-        let proposal = new project(10, 100/*this.getTotalProduction() * convertToSec(720, this.updateRate), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
+        let proposal = new project(20, 100/*this.getTotalProduction() * convertToSec(720, this.updateRate), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
         return proposal;
     }
 

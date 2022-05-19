@@ -80,18 +80,21 @@ function update(time, delta) {
     let hud = mapManager.getHud();
 
     if (welfareBusinessGame.isGameStarted()) {
-        //Limiter l'update du projet à 2 fois par seconde :
-        limitRefreshRateCounter++
+        if (welfareBusinessGame.getGameSpeed() > 0) {
+            //Limiter l'update du projet à 2 fois par seconde :
+            limitRefreshRateCounter++
 
-        if (limitRefreshRateCounter === 20) {
-            limitRefreshRateCounter = 0;
-            welfareBusinessGame.updateGame();
-            if (welfareBusinessGame.isRealProject()) {
-                hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
+            if (limitRefreshRateCounter >= (20 / welfareBusinessGame.getGameSpeed())) {
+                limitRefreshRateCounter = 0;
+                welfareBusinessGame.updateGame();
+                if (welfareBusinessGame.isRealProject()) {
+                    hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
+                }
+
+
             }
-
-
         }
+
         hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
         hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
         hud.updateDate(welfareBusinessGame.getDate());

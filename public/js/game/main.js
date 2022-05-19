@@ -155,8 +155,6 @@ function update(time, delta) {
                 hud.playerF[i].anims.play("front_of_me", true);
             }
         }
-
-
     }
 
     //Caméra

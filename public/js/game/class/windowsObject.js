@@ -351,7 +351,7 @@ class windowObject {
                 this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
 
                 this.productionProgressBar.destroy();
-                this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction())
+                this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3)
                 this.productionBarText.destroy();
                 this.productionBarText = this.game.add.text(490, 340, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3/*3 tick par secondes*/) + ' /s', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
             }
@@ -459,7 +459,8 @@ function displayWindowHappinessProgressBar(game, x, y, percentSize) {
 }
 
 function displayWindowProductionProgressBar(game, x, y, percentSize) {
-    let progressbar = game.add.image(x, y, 'productionbar').setOrigin(0, 0).setScale(1.73 * percentSize / 100, 0.22).setScrollFactor(0)
+    console.log(percentSize);
+    let progressbar = game.add.image(x, y, 'productionbar').setOrigin(0, 0).setScale(1.73 * (percentSize > 200 ? 200 : percentSize) / 200, 0.22).setScrollFactor(0)
 
     return progressbar;
 }

@@ -2,7 +2,7 @@
 
 class welfareBusiness {
     constructor() {
-        this.currentProject = new project(100, 100)
+        this.currentProject = new project(100, 100, 0)
         this.employeesList = new Array(12);
         this.employeesNb = 0;
         this.updateRate = 1;
@@ -130,11 +130,12 @@ class welfareBusiness {
             this.realProject = false;
             this.money += this.currentProject.getRevenue();
             this.generate3ProjectChoices()
-            this.currentProject = new project(999999999, 0);//Projet temporaire inutile en attendant un nouveau choix
+            this.currentProject = new project(99999999999, 0, -1);//Projet temporaire inutile en attendant un nouveau choix
         }
         else {
             for (let i = 0; i < this.employeesList.length; i++) {
                 if (this.employeesList[i] !== undefined) {
+                    this.employeesList[i].setCurrentProjectHappiness(this.currentProject.getHappinessImpact())
                     if(isEmployeeWorking(this.employeesList[i].getWorkTime(), this.getTime())){
                         this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
                     }
@@ -245,22 +246,22 @@ class welfareBusiness {
     }
 
     generateSafeProject() {
-        let proposal = new project(200, 100/*this.getTotalProduction() * convertToSec(720, this.updateRate), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
+        let proposal = new project(200, 100, 5);
         return proposal;
     }
 
     generateNullProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(30, this.updateRate), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * convertToSec(30, this.updateRate), 1000, 0)
         return proposal;
     }
 
     generateAmbitiousProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * 2 * convertToSec(20, this.updateRate, -15), this.getTotalEmployeesCost() / 2, -15)
         return proposal;
     }
 
     generateEcoProject(){
-        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate), this.getTotalEmployeesCost() / 4/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate, 20), this.getTotalEmployeesCost() / 4, 20, 'Ecoproject')
         return proposal;
     }
 

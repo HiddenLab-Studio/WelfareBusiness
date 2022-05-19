@@ -38,7 +38,7 @@ class hudObject {
     initializeUI() {
         let hud = this;
         //Bouton play
-        this.startbtn = this.phaser.add.sprite(this.config.width * 0.5, 300, "button_play").setInteractive().setScrollFactor(0);
+        this.startbtn = this.phaser.add.sprite(this.config.width * 0.5, 300, "button_play").setInteractive({ cursor: "pointer" }).setScrollFactor(0);
         this.startbtn.on("pointerdown", async function () {
             this.destroy(); // Suppression du bouton start
             // Création de la map
@@ -53,7 +53,7 @@ class hudObject {
         });
 
         //Bouton de settings
-        this.settingsbtn = this.phaser.add.sprite(config.width - 397, config.height - 110, 'button_settings').setOrigin(0, 0).setInteractive().setScale(0.55).setScrollFactor(0);
+        this.settingsbtn = this.phaser.add.sprite(config.width - 397, config.height - 110, 'button_settings').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
         this.settingsbtn.on('pointerdown', function () {
             if (hud.window.isOpened()) {
                 hud.window.closeWindow()
@@ -237,7 +237,7 @@ class hudObject {
         this.progressbar = displayProgressBar(this.phaser, percent, this.config);
         if (percent >= 100) {//Si le projet est fini, on affiche un bouton pour choisir un nouveau projet
             if (this.isNewProjectButtonGenerated === false) {
-                this.projectChoicebtn = this.phaser.add.image(this.config.width / 2 + 5, this.config.height - 50, 'bouton_projet').setInteractive().setScrollFactor(0);
+                this.projectChoicebtn = this.phaser.add.image(this.config.width / 2 + 5, this.config.height - 50, 'bouton_projet').setInteractive({ cursor: "pointer" }).setScrollFactor(0);
                 this.isNewProjectButtonGenerated = true;
             }
 

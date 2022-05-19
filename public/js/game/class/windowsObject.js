@@ -14,7 +14,7 @@ class windowObject {
         let window = this;
         this.opened = true;
         this.menu = this.game.add.image(this.config.width * 0.5, 270, /*'hud_employed'*/'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
-        this.closewindowbtn = this.game.add.image(670, 40, 'closeWindowBtn').setScale(0.5).setInteractive().setScrollFactor(0);
+        this.closewindowbtn = this.game.add.image(670, 40, 'closeWindowBtn').setScale(0.5).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
 
         this.closewindowbtn.on('pointerdown', function () {
             window.closeWindow();
@@ -64,7 +64,7 @@ class windowObject {
     //Fenêtre des settings
     beSettingsWindow() {
         this.windowType = "option";
-        this.volume = this.game.add.image(this.config.width * 0.5 - 125, 200, 'volumeHigh').setScale(0.35).setInteractive().setScrollFactor(0);
+        this.volume = this.game.add.image(this.config.width * 0.5 - 125, 200, 'volumeHigh').setScale(0.35).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
     }
 
     beShopWindow() {
@@ -151,10 +151,10 @@ class windowObject {
         this.projectChoice = new Array(3);
 
         for (let i = 0; i < 3; i++) {
-            let projectTitleString = "Project " + (i + 1) + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue());
+            let projectTitleString = proposals[i].getTitle() + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue()) + "\nHappiness impact :" + (proposals[i].getHappinessImpact());
             this.projectChoice[i] = {
-                background: this.game.add.image(350, 90 + i * 130, getRandomProjectChoiceBackground()).setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive(),
-                title: this.game.add.text(370, 130 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
+                background: this.game.add.image(350, 90 + i * 130, getRandomProjectChoiceBackground()).setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
+                title: this.game.add.text(370, 115 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
             }
 
             this.projectChoice[i].background.on('pointerdown', function () {
@@ -197,8 +197,8 @@ class windowObject {
                 bar: this.game.add.image(423, 125, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0),
                 textBar: this.game.add.text(500, 105, this.currentEmployeeWindow.getSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0),
                 icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0),
-                plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
-                minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
+                plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
+                minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
                 progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
             }
 
@@ -215,8 +215,8 @@ class windowObject {
                 bar: this.game.add.image(423, 185, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0),
                 textBar: this.game.add.text(510, 165, this.currentEmployeeWindow.getWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0),
                 icon: this.game.add.image(340, 164, 'logo_time').setOrigin(0, 0).setScale(0.08).setScrollFactor(0),
-                plusBtn: this.game.add.image(625, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
-                minusBtn: this.game.add.image(389, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
+                plusBtn: this.game.add.image(625, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
+                minusBtn: this.game.add.image(389, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
                 progressbar: displayWindowProgressBar(this.game, 429, 185, employee.getWorkTimePercent()),
             }
 

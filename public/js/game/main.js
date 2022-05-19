@@ -64,12 +64,43 @@ function preload() {
 
     this.load.image('hud_employed', './public/assets/img/game/hud/hud_employed.png');
 
+    this.load.spritesheet('characterL', './public/assets/img/game/hud/perso_test.png', { frameWidth: 61, frameHeight: 50 });
+    this.load.spritesheet('characterB', './public/assets/img/game/hud/perso_test.png', { frameWidth: 63, frameHeight: 50 });
+    this.load.spritesheet('characterR', './public/assets/img/game/hud/perso_test.png', { frameWidth: 63.5, frameHeight: 50 });
+    this.load.spritesheet('characterF', './public/assets/img/game/hud/perso_test.png', { frameWidth: 63, frameHeight: 50 });
+
+
     this.load.image("tiles", "./public/js/game/map/tileset_wb.png");
     this.load.tilemapTiledJSON("map", "./public/js/game/map/wb_map.json");
 }
 
 function create() {
     mapManager.init(phaser, config, this)
+
+    this.anims.create({
+        key: 'back_to_me',
+        frames: this.game.anims.generateFrameNumbers('characterB', {start: 0, end: 2}),
+        frameRate: 5,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'left',
+        frames: this.game.anims.generateFrameNumbers('characterL', {start: 3, end: 5}),
+        frameRate: 5,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'right',
+        frames: this.game.anims.generateFrameNumbers('characterR', {start: 6, end: 8}),
+        frameRate: 5,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'front_of_me',
+        frames: this.game.anims.generateFrameNumbers('characterF', {start: 9, end: 11}),
+        frameRate: 5,
+        repeat: -1
+    });
 }
 
 let limitRefreshRateCounter = 0;
@@ -80,25 +111,48 @@ function update(time, delta) {
     let hud = mapManager.getHud();
 
     if (welfareBusinessGame.isGameStarted()) {
-        if (welfareBusinessGame.getGameSpeed() > 0) {
-            //Limiter l'update du projet à 2 fois par seconde :
-            limitRefreshRateCounter++
+        //Limiter l'update du projet à 2 fois par seconde :
+        limitRefreshRateCounter++
 
-            if (limitRefreshRateCounter >= (20 / welfareBusinessGame.getGameSpeed())) {
-                limitRefreshRateCounter = 0;
-                welfareBusinessGame.updateGame();
-                if (welfareBusinessGame.isRealProject()) {
-                    hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
-                }
-                hud.temporaryMessageWageLoop();
-
+        if (limitRefreshRateCounter === 20) {
+            limitRefreshRateCounter = 0;
+            welfareBusinessGame.updateGame();
+            if (welfareBusinessGame.isRealProject()) {
+                hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
             }
-        }
 
+        }
         hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
         hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
         hud.updateDate(welfareBusinessGame.getDate());
         hud.updateEmployeeWindow();
+        hud.temporaryMessageWageLoop();
+
+        if(hud.playerB.length > 0){
+            for (let i = 0; i < hud.playerB.length; i++) {
+                hud.playerB[i].anims.play("back_to_me", true);
+            }
+        }
+
+        if(hud.playerL.length > 0){
+            for (let i = 0; i < hud.playerL.length; i++) {
+                hud.playerL[i].anims.play("left", true);
+            }
+        }
+
+        if(hud.playerR.length > 0) {
+            for (let i = 0; i < hud.playerR.length; i++) {
+                hud.playerR[i].anims.play("right", true);
+            }
+        }
+
+        if(hud.playerF.length > 0) {
+            for (let i = 0; i < hud.playerF.length; i++) {
+                hud.playerF[i].anims.play("front_of_me", true);
+            }
+        }
+
+
     }
 
     //Caméra

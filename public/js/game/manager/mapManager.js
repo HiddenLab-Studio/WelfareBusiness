@@ -23,6 +23,7 @@ let mapManager = (function(){
                 config = cfg;
                 welfareBusinessGame = new welfareBusiness();
                 hud = new hudObject(instance, config, welfareBusinessGame)
+
             }
         },
 

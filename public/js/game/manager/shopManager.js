@@ -52,6 +52,5 @@ let shopManager = (function() {
                 console.log("MAX LEVEL")
             }
         }
-
     }
 })();

@@ -8,7 +8,7 @@ let dataManager = (function() {
 
     let config = {
         autoSave: true,
-        interval: 300000,
+        interval: 5000,
     }
 
     function autoSaveData(){

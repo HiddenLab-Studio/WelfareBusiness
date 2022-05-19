@@ -9,10 +9,29 @@ class hudObject {
         this.tmpMsgCounter = -1;
         this.isNewProjectButtonGenerated = false;
 
+        this.playerB = []
+        this.playerL = []
+        this.playerR = []
+        this.playerF = []
 
         //Initialisation de l'interface utilisateur
         this.initializeUI();
-        
+    }
+
+    getSprite() {
+        return [this.playerB, this.playerF, this.playerL, this.playerR];
+    }
+
+    /**
+     * Permet d'ajouter un sprite
+     * @param couple (x,y)
+     * @param str orientation
+     * @param variable hud.player(B/L/...)
+     */
+    addSprite(couple, str, variable){
+        let hud = this;
+        variable.push(hud.phaser.add.sprite(couple[0], couple[1], str).setScale(1));
+        console.log(variable, couple);
     }
 
     //Initialisation de l'interface utilisateur
@@ -44,10 +63,12 @@ class hudObject {
                 hud.window.beSettingsWindow();
             }
         });
+
+
+
     }
 
     createHud() {
-
         //Barre de menu du bas
         this.menubar = this.phaser.add.sprite(config.width / 2, config.height - 100, 'menu_hud').setScrollFactor(0);
 
@@ -63,29 +84,29 @@ class hudObject {
 
 
         //Barre d'argent
-        this.moneyInfoBar = this.phaser.add.image(8, -8, 'argent_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
+        this.moneyInfoBar = this.phaser.add.image(8, -8, 'argent_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0).setDepth(10);
         this.moneyString = "0 €";
         this.moneyText = this.phaser.add.text(68, 20, this.moneyString, {
             font: "18px Arial",
             fill: "#000000"
-        }).setScrollFactor(0);
+        }).setScrollFactor(0).setDepth(11);
 
         //Barre de bonheur
-        this.happinessInfoBar = this.phaser.add.image(169, -8, 'barre_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
-        this.happinessIcon = this.phaser.add.image(170, 10, 'emote_neutre').setOrigin(0, 0).setScale(0.64).setScrollFactor(0);
+        this.happinessInfoBar = this.phaser.add.image(169, -8, 'barre_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0).setDepth(10);
+        this.happinessIcon = this.phaser.add.image(170, 10, 'emote_neutre').setOrigin(0, 0).setScale(0.64).setScrollFactor(0).setDepth(11);
         this.happinessString = "100 %";
         this.happinessText = this.phaser.add.text(237, 20, this.happinessString, {
             font: "18px Arial",
             fill: "#000000"
-        }).setScrollFactor(0);
+        }).setScrollFactor(0).setDepth(11);
 
         //Barre de la date
-        this.dateInfoBar = this.phaser.add.image(330, -10, 'date_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
+        this.dateInfoBar = this.phaser.add.image(330, -10, 'date_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0).setDepth(10);
         this.dateString = "04/09/02";
         this.dateText = this.phaser.add.text(378, 20, this.dateString, {
             font: "18px Arial",
             fill: "#000000"
-        }).setScrollFactor(0);
+        }).setScrollFactor(0).setDepth(11);
 
         //Icones gestion du temps
         this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
@@ -248,21 +269,21 @@ class hudObject {
     updateMoneyCounter(money) {
         this.moneyString = money.toString() + "€";
         this.moneyText.destroy();
-        this.moneyText = this.phaser.add.text(68, 20, this.moneyString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
+        this.moneyText = this.phaser.add.text(68, 20, this.moneyString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(11);
     }
 
     updateHappinessCounter(happiness) {
         this.happinessString = roundToTwo(happiness).toString() + "%";
         this.happinessText.destroy();
-        this.happinessText = this.phaser.add.text(237, 20, this.happinessString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
+        this.happinessText = this.phaser.add.text(237, 20, this.happinessString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(11);
         this.happinessIcon.destroy();
         if (happiness >= 75) {
-            this.happinessIcon = this.phaser.add.image(170, 10, 'emote_heureux').setOrigin(0, 0).setScale(0.64).setScrollFactor(0);
+            this.happinessIcon = this.phaser.add.image(170, 10, 'emote_heureux').setOrigin(0, 0).setScale(0.64).setScrollFactor(0).setDepth(11);
         } else {
             if (happiness < 75 && happiness >= 25) {
-                this.happinessIcon = this.phaser.add.image(170, 10, 'emote_neutre').setOrigin(0, 0).setScale(0.64).setScrollFactor(0);
+                this.happinessIcon = this.phaser.add.image(170, 10, 'emote_neutre').setOrigin(0, 0).setScale(0.64).setScrollFactor(0).setDepth(11);
             } else {
-                this.happinessIcon = this.phaser.add.image(170, 10, 'emote_colere').setOrigin(0, 0).setScale(0.64).setScrollFactor(0);
+                this.happinessIcon = this.phaser.add.image(170, 10, 'emote_colere').setOrigin(0, 0).setScale(0.64).setScrollFactor(0).setDepth(11);
             }
         }
     }
@@ -271,7 +292,7 @@ class hudObject {
     updateDate(date) {
         this.dateString = date.day.toString() + "/" + date.month.toString() + "/" + date.year.toString();
         this.dateText.destroy();
-        this.dateText = this.phaser.add.text(378, 20, this.dateString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
+        this.dateText = this.phaser.add.text(378, 20, this.dateString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(11);
     }
 
     updateEmployeeWindow(){

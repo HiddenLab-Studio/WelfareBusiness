@@ -20,7 +20,10 @@ module.exports = {
             "orientation": 1,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[176,376]],
+            }
         },
 
         //Bureau vertical droite 
@@ -30,7 +33,10 @@ module.exports = {
             "orientation": 4,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[826,521]],
+            }
         },
         {
             "id": 2,
@@ -38,7 +44,10 @@ module.exports = {
             "orientation": 4,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[826,361]],
+            }
         },
         {
             "id": 3,
@@ -46,7 +55,10 @@ module.exports = {
             "orientation": 4,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[826,201]],
+            }
         },
 
         //Bureau vertical gauche
@@ -56,7 +68,10 @@ module.exports = {
             "orientation": 3,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[487,521]],
+            }
         },
         {
             "id": 5,
@@ -64,7 +79,10 @@ module.exports = {
             "orientation": 3,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[487,361]],
+            }
         },
         {
             "id": 6,
@@ -72,7 +90,10 @@ module.exports = {
             "orientation": 3,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[487,201]],
+            }
         },
 
         //Bureau top grande salle
@@ -82,7 +103,10 @@ module.exports = {
             "orientation": 1,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[656,185]],
+            }
         },
 
         //Bureau top petite salle
@@ -92,7 +116,10 @@ module.exports = {
             "orientation": 1,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[80,664]],
+            }
         },
         {
             "id": 9,
@@ -100,7 +127,10 @@ module.exports = {
             "orientation": 1,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[305,664]],
+            }
         },
 
         //Bureau bot petite salle
@@ -110,7 +140,10 @@ module.exports = {
             "orientation": 2,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[85,810]],
+            }
         },
         {
             "id": 11,
@@ -118,7 +151,10 @@ module.exports = {
             "orientation": 2,
             "active": false,
             "level": 0,
-            "employee": undefined
+            "employee": undefined,
+            "pnj": {
+                "pos": [[309,810]],
+            }
         },
     ],
 

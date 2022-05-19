@@ -7,7 +7,7 @@ class welfareBusiness {
         this.employeesNb = 0;
         this.updateRate = 1;
         this.started = false;
-        this.money = 3000;
+        this.money = 300000;
         this.realProject = true;
         this.isNewMonthBool = false;
 
@@ -103,6 +103,9 @@ class welfareBusiness {
         this.money -= amount;
     }
 
+    test(){
+        return this.employeesList;
+    }
     
     getEmployeeById(id) {
         return this.employeesList[id];
@@ -207,8 +210,23 @@ class welfareBusiness {
     addEmployee(deskData) {
         let newEmployee = new employee(deskData.id);
         this.employeesList[deskData.id] = newEmployee;
+
         let data = dataManager.getData();
+        // On set les données de l'employé (pour le load)
+        if(data.desk[deskData.id].employee !== undefined){
+            newEmployee.name = data.desk[deskData.id].employee.name;
+            newEmployee.salary = data.desk[deskData.id].employee.salary;
+            newEmployee.workTime = data.desk[deskData.id].employee.workTime;
+            newEmployee.happiness = data.desk[deskData.id].employee.happiness;
+            newEmployee.baseHappiness = data.desk[deskData.id].employee.baseHappiness;
+            newEmployee.bonusHappiness = data.desk[deskData.id].employee.bonusHappiness;
+            newEmployee.production = data.desk[deskData.id].employee.production;
+            newEmployee.deskId = data.desk[deskData.id].employee.deskId;
+        }
+
+        // On update l'employé dans le json
         data.desk[deskData.id].employee = newEmployee;
+
         this.employeesNb++;
         dataManager.save("1", data);
     }

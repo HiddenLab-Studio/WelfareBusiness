@@ -221,12 +221,6 @@ class windowObject {
             })
 
             this.upgradeBtnText = this.game.add.text(554, 240, employee.getDesk().level < 5 ? getNextDeskPrice(employee.getDesk().level) + '€' : 'MAX', { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
-            /*if (desk.level < 5) {
-                stringLvlTmp
-            }
-            else {
-                stringLvlTmp = "Level MAX";
-            }*/
 
 
             this.happinessIcon = this.game.add.image(340, 300, 'emote_heureux_window').setOrigin(0, 0).setScale(1).setScrollFactor(0);

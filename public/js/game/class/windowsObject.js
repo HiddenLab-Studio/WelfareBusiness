@@ -163,7 +163,6 @@ class windowObject {
 
 
             //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
-
             this.employeeParameterGauge = new Array(2);
 
             //Salaire
@@ -229,7 +228,7 @@ class windowObject {
             this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
 
 
-            this.productionIcon = this.game.add.image(340, 350, 'emote_heureux_window').setOrigin(0, 0).setScale(1).setScrollFactor(0);
+            this.productionIcon = this.game.add.image(348, 350, 'production').setOrigin(0, 0).setScale(1).setScrollFactor(0);
             this.productionBar = this.game.add.image(385, 360, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0);
             this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction())
             this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction()), { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
@@ -246,10 +245,10 @@ class windowObject {
         //Si aucun employé ne possède ce bureau
         else {
             this.currentEmployeeWindow = undefined;
-            this.upgradeBtn = this.game.add.image(this.config.width / 2, 255, 'infobar').setScale(1.2, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
+            this.upgradeBtn = this.game.add.image(this.config.width / 2, 255, 'hirebtn').setScale(0.75).setScrollFactor(0).setInteractive({ cursor: "pointer" });
 
             this.employeeName = this.game.add.text(400, 55, "Hire someone to unlock", { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
-            this.upgradeBtnText = this.game.add.text(this.config.width / 2 - 66, 245, "HIRE EMPLOYEE", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+            //this.upgradeBtnText = this.game.add.text(this.config.width / 2 - 66, 245, "HIRE EMPLOYEE", { cursor: "pointer", color: "black", fontFamily: "Arial" }).setScrollFactor(0);
 
 
             this.upgradeBtn.on("pointerdown", () => {
@@ -278,10 +277,11 @@ class windowObject {
         }
 
         this.upgradeBtn.destroy();
-        this.upgradeBtnText.destroy();
         if (this.happinessBar != undefined) {
             this.deskLevelText.destroy();
             this.deskImg.destroy();
+            this.upgradeBtnText.destroy();
+
 
             this.happinessIcon.destroy();
             this.happinessBar.destroy();

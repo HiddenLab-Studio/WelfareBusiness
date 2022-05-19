@@ -61,6 +61,9 @@ function preload() {
     this.load.image('bouton_cafe', './public/assets/img/game/hud/bouton_cafe.png');
     this.load.image('bouton_eau', './public/assets/img/game/hud/bouton_eau.png');
     this.load.image('shop_hud', './public/assets/img/game/hud/boutique_hud.png');
+    this.load.image('hirebtn', './public/assets/img/game/hud/hireButton.png');
+    this.load.image('production', './public/assets/img/game/hud/production.png');
+
 
     this.load.image('hud_employed', './public/assets/img/game/hud/hud_employed.png');
 
@@ -120,13 +123,14 @@ function update(time, delta) {
             if (welfareBusinessGame.isRealProject()) {
                 hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
             }
+        hud.temporaryMessageWageLoop();
+
 
         }
         hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
         hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
         hud.updateDate(welfareBusinessGame.getDate());
         hud.updateEmployeeWindow();
-        hud.temporaryMessageWageLoop();
 
         if(hud.playerB.length > 0){
             for (let i = 0; i < hud.playerB.length; i++) {

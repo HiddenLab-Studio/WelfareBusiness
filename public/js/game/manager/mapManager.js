@@ -46,6 +46,7 @@ let mapManager = (function(){
                 let plant = map.createLayer("plante", tileSet);
                 let sport = map.createLayer("sport", tileSet);
                 let sleep = map.createLayer("detente", tileSet);
+                let plante2 = map.createLayer("plante2", tileSet);
                 let kitchen = map.createLayer("cuisine", tileSet);
                 let kitchenObj = map.createLayer("cuisine2", tileSet);
                 let water = map.createLayer("eau", tileSet);
@@ -65,7 +66,10 @@ let mapManager = (function(){
                 await dataManager.load(token).then((response) => {data = response}).then(() => {
                     // Amélioration
                     if(!data.shop.sport.active) sport.visible = false;
-                    if(!data.shop.sleep.active) sleep.visible = false;
+                    if(!data.shop.sleep.active) {
+                        sleep.visible = false
+                        plante2.visible = false;
+                    }
                     if(!data.shop.ping.active) ping.visible = false;
                     if(!data.shop.kitchen.active) {
                         kitchen.visible = false;
@@ -75,7 +79,7 @@ let mapManager = (function(){
                     // On initialise les bureaux
                     deskManager.init(desk, instance, config);
                     // On initialise le shop
-                    shopManager.init([plant, sport, kitchen, kitchenObj, sleep, water, coffee, ping], instance, config);
+                    shopManager.init([plant, sport, kitchen, kitchenObj, sleep, plante2, water, coffee, ping], instance, config);
                 })
             }
         }

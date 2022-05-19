@@ -29,15 +29,33 @@ let shopManager = (function() {
     let sleepLayer = undefined;
     let pingLayer = undefined;
 
-    function loadObj(){
-        let plantLevel = data.shop.plant.level;
-        let waterLevel = data.shop.water.level;
-        let coffeeLevel = data.shop.water.level;
-        let level = [plantLevel, waterLevel, coffeeLevel];
+    function loadObj(str, variable){
+        let level = variable.level;
+        let pos = variable.pos;
+        let layer = undefined;
+        let upgradeTexture = undefined;
+        switch (str){
+            case "plant":
+                layer = plantLayer;
+                upgradeTexture = upgradePlantTexture;
+                break;
+            case "water":
+                layer = waterLayer;
+                upgradeTexture = upgradeWaterTexture;
+                break;
+            case "coffee":
+                layer = coffeeLayer;
+                upgradeTexture = upgradeCoffeeTexture;
+                break;
+            default:
+                return;
+        }
 
-        for (let i = 0; i < level.length; i++) {
-            for (let j = 0; j < level[i]; j++) {
-                console.log(j);
+        for (const po of pos) {
+            for (let j = 0; j < po.length - 1; j++) {
+                if (po[po.length - 1] <= level) {
+                    layer.putTileAt(upgradeTexture[j], po[j][0], po[j][1]);
+                }
             }
         }
 
@@ -52,13 +70,11 @@ let shopManager = (function() {
                 plantLayer = layer[0];
                 sportLayer = layer[1]
                 kitchenLayer = [layer[2], layer[3]];
-                sleepLayer = layer[4];
-                waterLayer = layer[5];
-                coffeeLayer = layer[6];
-                pingLayer = layer[7];
+                sleepLayer = [layer[4], layer[5]];
+                waterLayer = layer[6];
+                coffeeLayer = layer[7];
+                pingLayer = layer[8];
                 data = dataManager.getData();
-
-                //loadObj();
 
                 plantLayer.forEachTile((tile) => {
                     tile.index = 0;
@@ -71,6 +87,10 @@ let shopManager = (function() {
                 coffeeLayer.forEachTile((tile) => {
                     tile.index = 0;
                 })
+
+                if(data.shop.plant.level !== 0) loadObj("plant", data.shop.plant);
+                if(data.shop.water.level !== 0) loadObj("water", data.shop.water);
+                if(data.shop.coffee.level !== 0) loadObj("coffee", data.shop.coffee);
 
             }
         },
@@ -164,7 +184,8 @@ let shopManager = (function() {
             let isActive = data.shop.sleep.active;
             if(!isActive){
                 data.shop.sleep.active = true;
-                sleepLayer.visible = true;
+                sleepLayer[0].visible = true;
+                sleepLayer[1].visible = true;
                 console.log("Sleep purchased")
                 dataManager.save(token, data);
             } else {

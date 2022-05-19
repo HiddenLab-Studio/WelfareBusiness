@@ -23,7 +23,6 @@ let mapManager = (function(){
                 config = cfg;
                 welfareBusinessGame = new welfareBusiness();
                 hud = new hudObject(instance, config, welfareBusinessGame)
-
             }
         },
 
@@ -49,9 +48,13 @@ let mapManager = (function(){
                 let sleep = map.createLayer("detente", tileSet);
                 let kitchen = map.createLayer("cuisine", tileSet);
                 let kitchenObj = map.createLayer("cuisine2", tileSet);
+                let water = map.createLayer("eau", tileSet);
+                let coffee = map.createLayer("cafe", tileSet);
+                map.createLayer("toilettes", tileSet);
+                let ping = map.createLayer("ping", tileSet);
 
                 /*instance.input.on("pointerdown", (pos) => {
-                    let tile = plant.getTileAtWorldXY(pos.worldX, pos.worldY);
+                    let tile = coffee.getTileAtWorldXY(pos.worldX, pos.worldY);
                     if(tile !== null){
                         console.log(tile.x, tile.y);
                     }
@@ -60,10 +63,19 @@ let mapManager = (function(){
                 // On initialise le module qui gère les données
                 dataManager.init(map);
                 await dataManager.load(token).then((response) => {data = response}).then(() => {
+                    // Amélioration
+                    if(!data.shop.sport.active) sport.visible = false;
+                    if(!data.shop.sleep.active) sleep.visible = false;
+                    if(!data.shop.ping.active) ping.visible = false;
+                    if(!data.shop.kitchen.active) {
+                        kitchen.visible = false;
+                        kitchenObj.visible = false;
+                    }
+
                     // On initialise les bureaux
                     deskManager.init(desk, instance, config);
                     // On initialise le shop
-                    shopManager.init(plant,instance, config);
+                    shopManager.init([plant, sport, kitchen, kitchenObj, sleep, water, coffee, ping], instance, config);
                 })
             }
         }

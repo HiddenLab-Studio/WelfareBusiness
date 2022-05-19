@@ -64,6 +64,10 @@ function preload() {
     this.load.image('hirebtn', './public/assets/img/game/hud/hireButton.png');
     this.load.image('production', './public/assets/img/game/hud/production.png');
 
+    this.load.image('sleep', './public/assets/img/game/hud/bouton_detente.png');
+    this.load.image('cuisine', './public/assets/img/game/hud/bouton_cuisine.png');
+    this.load.image('ping', './public/assets/img/game/hud/bouton_PING.png');
+    this.load.image('sport', './public/assets/img/game/hud/bouton_sport.png');
 
     this.load.image('hud_employed', './public/assets/img/game/hud/hud_employed.png');
 

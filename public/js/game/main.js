@@ -90,7 +90,7 @@ function update(time, delta) {
                 if (welfareBusinessGame.isRealProject()) {
                     hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
                 }
-
+                hud.temporaryMessageWageLoop();
 
             }
         }
@@ -99,7 +99,6 @@ function update(time, delta) {
         hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
         hud.updateDate(welfareBusinessGame.getDate());
         hud.updateEmployeeWindow();
-        hud.temporaryMessageWageLoop();
     }
 
     //Caméra

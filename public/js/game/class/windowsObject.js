@@ -150,12 +150,13 @@ class windowObject {
     //Fenêtre d'un employé
     beEmployeeWindow(employee, desk) {
         let window = this;
-        this.currentEmployeeWindow = employee;
+        
 
         this.windowType = "employee";
 
         //Si le bureau appartient à un employé
         if (employee !== undefined) {
+            this.currentEmployeeWindow = employee;
             employee.getDesk();
 
             this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
@@ -251,6 +252,7 @@ class windowObject {
 
         //Si aucun employé ne possède ce bureau
         else {
+            this.currentEmployeeWindow = undefined;
             this.upgradeBtn = this.game.add.image(this.config.width / 2, 255, 'infobar').setScale(1.2, 1.5).setScrollFactor(0).setInteractive({ cursor: "pointer" });
 
             this.employeeName = this.game.add.text(400, 55, "Hire someone to unlock", { font: "18px Arial", fill: "#000000" }).setScrollFactor(0);
@@ -308,7 +310,7 @@ class windowObject {
 
     updateEmployeeWindow(employee) {
         if (this.windowType == "employee") {
-            if (this.employeeParameterGauge != undefined) {
+            if (this.employeeParameterGauge != undefined && this.currentEmployeeWindow != undefined) {
                 this.employeeParameterGauge[0].textBar.destroy();
                 this.employeeParameterGauge[0].textBar = this.game.add.text(500, 105, this.currentEmployeeWindow.getSalary().toString() + '€', { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
                 this.employeeParameterGauge[1].textBar.destroy();

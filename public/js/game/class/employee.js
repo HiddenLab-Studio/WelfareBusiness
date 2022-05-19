@@ -241,20 +241,12 @@ function waterFountainToWelfare() {
         case 3:
             return 4;
 
-        case 4:
-            return 8;
-
-        case 5:
-            return 12;
-
-        case 6:
-            return 16;
     }*/
 }
 
 function vendingMachineToWelfare() {
     let data = dataManager.getData();
-    /*console.log(data.shop.plant.level);
+    console.log(data.shop.plant.level);
     switch (data.shop.plant.level) {
         case 0:
             return -8;
@@ -264,19 +256,23 @@ function vendingMachineToWelfare() {
 
         case 2:
             return 0;
+    }
+}
 
-        case 3:
-            return 4;
+function pingToWelfare(){
+    
+}
 
-        case 4:
-            return 8;
+function relaxationRoomToWelfare(){
 
-        case 5:
-            return 12;
+}
 
-        case 6:
-            return 16;
-    }*/
+function sportsHallToWelfare(){
+
+}
+
+function kitchenToWelfare(){
+
 }
 
 let nameStr = "Lucas Haboussi,Antoine Mignien,Aurélien Rogé,Guillaume Leroy,Théo Vangheluwe,James Rodriguez,Joseph Levine,Christopher Payne,Robert Camacho,Jose Payne,Matthew Torres,Ryan Ryan,Erik Bishop,Martin Larsson,Tyler Joseph,Josh Dun,Bryce Johnson,Zachary Nguyen,Greg Morris,Michael Eaton Jr.,Ethan Poole,Ryan Hill,Thomas Collins,Kamel Kebir,Kylian Mbappe,Thomas Pesquet,Jean-Luc Leroy,Emmanuel Mignien,Farid Haboussi,Stephane Vangheluwe,Didier Rogé,Roneda Degui,Farouk Baraka,Kevin Gamero,Karim Benzema,Lee Sang-hyeok"

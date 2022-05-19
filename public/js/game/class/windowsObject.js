@@ -69,41 +69,66 @@ class windowObject {
 
     beShopWindow() {
         let window = this
+        let hud = mapManager.getHud();
+
         this.shopopened = true;
         this.windowType = "shop_hud";
-        this.shop_hud = this.game.add.image(1000 / 2, 433, 'shop_hud').setScale(1, 1.2).setScrollFactor(0).setInteractive().setDepth(10);
-        this.water_fountain_button = this.game.add.image(1000 / 2 - 150, 520, 'bouton_eau').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.plant_button = this.game.add.image(1000 / 2, 520, 'bouton_plante').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.distributer_button = this.game.add.image(1000 / 2 + 150, 520, 'bouton_cafe').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.shop_hud = this.game.add.image(1000 / 2, 510, "shop_hud").setScrollFactor(0).setInteractive().setDepth(10);
 
-        this.plant_button.on("pointerdown", () => {
-            shopManager.upgradePlant();
+        // Left
+        this.plant_button = this.game.add.image(1000 / 2 - 100, 515, "bouton_plante").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.water_fountain_button = this.game.add.image(1000 / 2 - 200, 515, "bouton_eau").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.distributer_button = this.game.add.image(1000 / 2 - 300, 515, "bouton_cafe").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+
+        // Center
+        this.carpet = this.game.add.image(1000 / 2, 515, "tapis").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+
+        // Right
+        this.sleep = this.game.add.image(1000 / 2 + 100, 515, "sleep").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.sport = this.game.add.image(1000 / 2 + 200, 515, "sport").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.kitchen = this.game.add.image(1000 / 2 + 300, 515, "cuisine").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+
+        // Listeners
+        this.plant_button.on("pointerdown", () => shopManager.upgradePlant());
+        this.sleep.on("pointerdown", () => console.log("sleep"))
+        this.kitchen.on("pointerdown", () => console.log("kitchen"))
+        this.sport.on("pointerdown", () => console.log("sport"))
+        this.carpet.on("pointerdown", () => console.log("carpet"))
+
+        hud.closeshopdowbtn = hud.phaser.add.image(885, 470, "closeWindowBtn").setScale(0.5).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(11);
+        hud.closeshopdowbtn.on("pointerdown", function () {
+            hud.window.closeShopWindow()
+            hud.closeshopdowbtn.destroy()
+            hud.shopbtn.setInteractive()
+            hud.pausebtn.setInteractive()
+            hud.playbtn.setInteractive()
+            hud.avancerapidebtn.setInteractive()
         })
 
     }
 
-    shopdestroy() {
-        let hud = this
+    shopDestroy() {
         this.shop_hud.destroy();
         this.water_fountain_button.destroy();
         this.plant_button.destroy();
         this.distributer_button.destroy();
+        this.sleep.destroy();
+        this.sport.destroy();
+        this.carpet.destroy()
+        this.kitchen.destroy();
     }
 
-    isShopOpened() {
-        return this.shopopened
-    }
+    isShopOpened() { return this.shopopened; }
 
     closeShopWindow() {
         if (this.shopopened) {
             switch (this.windowType) {
                 case "shop_hud":
-                    this.shopdestroy();
+                    this.shopDestroy();
                     break;
             }
             this.shop_hud.destroy();
         }
-
         this.shopopened = false;
     }
 

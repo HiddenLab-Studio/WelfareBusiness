@@ -125,8 +125,9 @@ function update(time, delta) {
                 if (welfareBusinessGame.isRealProject()) {
                     hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
                 }
-            }
             hud.temporaryMessageWageLoop();
+
+            }
 
 
         }

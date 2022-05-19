@@ -237,7 +237,7 @@ class welfareBusiness {
         this.proposals = new Array(3);
         this.proposals[0] = this.generateSafeProject();
         this.proposals[1] = this.generateNullProject();
-        this.proposals[2] = this.generateAmbitiousProject();
+        this.proposals[2] = this.generateEcoProject();
     }
 
     getProjectChoices() {
@@ -260,7 +260,8 @@ class welfareBusiness {
     }
 
     generateEcoProject(){
-        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate), this.getTotalEmployeesCost() / 4/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        return proposal;
     }
 
 

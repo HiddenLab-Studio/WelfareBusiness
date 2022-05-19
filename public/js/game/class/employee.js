@@ -8,6 +8,8 @@ class employee {
         this.baseHappiness = this.happiness;
         this.bonusHappiness = 0;
 
+
+        this.currentProjectHappiness = 0;
         this.workTime = 7;
     }
 
@@ -119,7 +121,8 @@ class employee {
         tmpHappinessCounter += workTimeToWelfare(this.workTime);
         tmpHappinessCounter += plantLvlToWelfare();
 
-        this.bonusHappiness = tmpHappinessCounter;
+
+        this.bonusHappiness = tmpHappinessCounter + this.currentProjectHappiness;
     }
 
     increaseWage() {
@@ -144,6 +147,10 @@ class employee {
         }
     }
 
+
+    setCurrentProjectHappiness(happiness){
+        this.currentProjectHappiness = happiness;
+    }
 
 }
 

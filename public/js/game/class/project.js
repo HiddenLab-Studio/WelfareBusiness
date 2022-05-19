@@ -1,8 +1,10 @@
 class project {
-    constructor(amountToProduce, revenue) {
+    constructor(amountToProduce, revenue, happinessImpact, title) {
         this.amountToProduce = amountToProduce;
         this.initialAmount = amountToProduce;
         this.revenue = revenue;
+        this.happinessImpact = happinessImpact;
+        this.title = title
     }
 
     getAmountToProduce() {
@@ -27,4 +29,17 @@ class project {
         return this.revenue;
     }
 
+    getHappinessImpact(){
+        console.log(this.happinessImpact)
+        return this.happinessImpact;
+    }
+
+    getTitle(){
+        if(this.title == undefined){
+            return 'Project unnamed'
+        }
+        else{
+            return this.title;
+        }
+    }
 }

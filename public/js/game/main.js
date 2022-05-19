@@ -139,6 +139,7 @@ function update(time, delta) {
         hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
         hud.updateDate(welfareBusinessGame.getDate());
         hud.updateEmployeeWindow();
+        hud.updateShopWindow();
 
         if (hud.playerB.length > 0) {
             for (let i = 0; i < hud.playerB.length; i++) {

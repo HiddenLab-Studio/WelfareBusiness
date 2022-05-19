@@ -290,6 +290,12 @@ class hudObject {
         }
     }
 
+    updateShopWindow(){
+        if(this.window.isShopOpened()){
+            this.window.updateShopWindow();
+        }
+    }
+
 
     temporaryMessageWageLoop() {
         this.tmpMsgCounter--;

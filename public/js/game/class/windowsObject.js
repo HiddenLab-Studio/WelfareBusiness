@@ -71,30 +71,41 @@ class windowObject {
         let window = this
         let hud = mapManager.getHud();
 
-        this.shopopened = true;
+        this.shopOpened = true;
         this.windowType = "shop_hud";
         this.shop_hud = this.game.add.image(1000 / 2, 510, "shop_hud").setScrollFactor(0).setInteractive().setDepth(10);
 
         // Left
-        this.plant_button = this.game.add.image(1000 / 2 - 100, 515, "bouton_plante").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.water_fountain_button = this.game.add.image(1000 / 2 - 200, 515, "bouton_eau").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.distributer_button = this.game.add.image(1000 / 2 - 300, 515, "bouton_cafe").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.plant_button = this.game.add.image(1000 / 2 - 100, 515, "bouton_plante").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.plant_priceTag = this.game.add.text(1000 / 2 - 115, 530, getShopPriceString().plant, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+
+        this.water_fountain_button = this.game.add.image(1000 / 2 - 200, 515, "bouton_eau").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.water_priceTag = this.game.add.text(1000 / 2 - 215, 530, getShopPriceString().water, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+
+        this.distributeur_button = this.game.add.image(1000 / 2 - 300, 515, "bouton_cafe").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.distributeur_priceTag = this.game.add.text(1000 / 2 - 315, 530, getShopPriceString().coffee, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
         // Center
-        this.carpet = this.game.add.image(1000 / 2, 515, "ping").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.ping_button = this.game.add.image(1000 / 2, 515, "ping").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.ping_priceTag = this.game.add.text(1000 / 2 - 15, 530, getShopPriceString().ping, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
         // Right
-        this.sleep = this.game.add.image(1000 / 2 + 100, 515, "sleep").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.sport = this.game.add.image(1000 / 2 + 200, 515, "sport").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.kitchen = this.game.add.image(1000 / 2 + 300, 515, "cuisine").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.sleep = this.game.add.image(1000 / 2 + 100, 515, "sleep").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.sleep_priceTag = this.game.add.text(1000 / 2 + 80, 530, getShopPriceString().sleep, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+
+        this.sport = this.game.add.image(1000 / 2 + 200, 515, "sport").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.sport_priceTag = this.game.add.text(1000 / 2 + 183, 530, getShopPriceString().sport, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+
+        this.kitchen = this.game.add.image(1000 / 2 + 300, 515, "cuisine").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.kitchen_priceTag = this.game.add.text(1000 / 2 + 280, 530, getShopPriceString().kitchen, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
         // Listeners
         this.plant_button.on("pointerdown", () => shopManager.upgradeObject("plant"));
         this.sleep.on("pointerdown", () => shopManager.buySleep())
         this.kitchen.on("pointerdown", () => shopManager.buyKitchen())
         this.sport.on("pointerdown", () => shopManager.buySport())
-        this.carpet.on("pointerdown", () => shopManager.buyPing())
-        this.distributer_button.on("pointerdown", () => shopManager.upgradeObject("coffee"))
+        this.ping_button.on("pointerdown", () => shopManager.buyPing())
+        this.distributeur_button.on("pointerdown", () => shopManager.upgradeObject("coffee"))
         this.water_fountain_button.on("pointerdown", () => shopManager.upgradeObject("water"))
 
         hud.closeshopdowbtn = hud.phaser.add.image(885, 470, "closeWindowBtn").setScale(0.5).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(11);
@@ -113,17 +124,45 @@ class windowObject {
         this.shop_hud.destroy();
         this.water_fountain_button.destroy();
         this.plant_button.destroy();
-        this.distributer_button.destroy();
+        this.distributeur_button.destroy();
         this.sleep.destroy();
         this.sport.destroy();
-        this.carpet.destroy()
+        this.ping_button.destroy()
         this.kitchen.destroy();
+        this.plant_priceTag.destroy()
+        this.water_priceTag.destroy()
+        this.kitchen_priceTag.destroy()
+        this.sport_priceTag.destroy()
+        this.sleep_priceTag.destroy()
+        this.ping_priceTag.destroy()
+        this.distributeur_priceTag.destroy()
+
+
+
     }
 
-    isShopOpened() { return this.shopopened; }
+    updateShopWindow(){
+        this.plant_priceTag.destroy()
+        this.plant_priceTag = this.game.add.text(1000 / 2 - 115, 530, getShopPriceString().plant, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+        this.water_priceTag.destroy()
+        this.water_priceTag = this.game.add.text(1000 / 2 - 215, 530, getShopPriceString().water, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+        this.kitchen_priceTag.destroy()
+        this.kitchen_priceTag = this.game.add.text(1000 / 2 + 280, 530, getShopPriceString().kitchen, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+        this.sport_priceTag.destroy()
+        this.sport_priceTag = this.game.add.text(1000 / 2 + 183, 530, getShopPriceString().sport, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+        this.sleep_priceTag.destroy()
+        this.sleep_priceTag = this.game.add.text(1000 / 2 + 80, 530, getShopPriceString().sleep, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+        this.ping_priceTag.destroy()
+        this.ping_priceTag = this.game.add.text(1000 / 2 - 15, 530, getShopPriceString().ping, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+        this.distributeur_priceTag.destroy()
+        this.distributeur_priceTag = this.game.add.text(1000 / 2 - 315, 530, getShopPriceString().coffee, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
+
+    }
+
+    isShopOpened() { return this.shopOpened; }
 
     closeShopWindow() {
-        if (this.shopopened) {
+        if (this.shopOpened) {
             switch (this.windowType) {
                 case "shop_hud":
                     this.shopDestroy();
@@ -131,7 +170,7 @@ class windowObject {
             }
             this.shop_hud.destroy();
         }
-        this.shopopened = false;
+        this.shopOpened = false;
     }
 
 
@@ -442,6 +481,7 @@ function increaseButton(actionWanted, employee) {
             break;
     }
 
+
 }
 
 
@@ -476,5 +516,76 @@ function getNextDeskPrice(level){
 
         case 4:
             return 1500;
+    }
+}
+
+function getShopPriceString(){
+    let data = dataManager.getData();
+
+    let coffee = 0;
+    let water = 0;
+    let plant = 0;
+    let ping = 0;
+    let sleep = 0;
+    let sport = 0;
+    let kitchen = 0;
+
+    if(data.shop.coffee.level < 1){
+        coffee = '400€'
+    }
+    else{
+        coffee = 'MAX'
+    }
+
+    if(data.shop.water.level < 3){
+        water = '150€'
+    }
+    else{
+        water = 'MAX'
+    }
+
+    if(data.shop.plant.level < 6){
+        plant = '300€'
+    }
+    else{
+        plant = 'MAX'
+    }
+
+    if(!data.shop.ping.active){
+        ping = '500€'
+    }
+    else{
+        ping = 'MAX'
+    }
+
+    if(!data.shop.sleep.active){
+        sleep = '2500€'
+    }
+    else{
+        sleep = ' MAX'
+    }
+
+    if(!data.shop.sport.active){
+        sport = '2000€'
+    }
+    else{
+        sport = 'MAX'
+    }
+
+    if(!data.shop.kitchen.active){
+        kitchen = '3500€'
+    }
+    else{
+        kitchen = ' MAX'
+    }
+
+    return{
+        coffee,
+        water,
+        plant,
+        ping,
+        sleep,
+        sport,
+        kitchen
     }
 }

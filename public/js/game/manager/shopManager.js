@@ -195,8 +195,8 @@ let shopManager = (function () {
         buyKitchen() {
             let isActive = data.shop.kitchen.active;
             if (!isActive) {
-                if (welfareGame.getPlayerMoney() > 2000) {
-                    welfareGame.payAmount(2000);
+                if (welfareGame.getPlayerMoney() > 3500) {
+                    welfareGame.payAmount(3500);
                     data.shop.kitchen.active = true;
                     kitchenLayer[0].visible = true;
                     kitchenLayer[1].visible = true;

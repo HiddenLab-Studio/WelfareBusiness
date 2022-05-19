@@ -19,7 +19,6 @@ class welfareBusiness {
             month: 1,
             year: 2022,
         }
-        this.generate3ProjectChoices()
     }
 
     isProjectFinished() {
@@ -51,6 +50,8 @@ class welfareBusiness {
 
         return production;
     }
+
+
 
     getGameSpeed() {
         return this.updateRate;
@@ -128,6 +129,7 @@ class welfareBusiness {
         if (this.isProjectFinished()) {
             this.realProject = false;
             this.money += this.currentProject.getRevenue();
+            this.generate3ProjectChoices()
             this.currentProject = new project(999999999, 0);//Projet temporaire inutile en attendant un nouveau choix
         }
         else {
@@ -255,6 +257,10 @@ class welfareBusiness {
     generateAmbitiousProject() {
         let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
         return proposal;
+    }
+
+    generateEcoProject(){
+        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
     }
 
 

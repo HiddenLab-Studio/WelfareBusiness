@@ -82,25 +82,25 @@ function create() {
 
     this.anims.create({
         key: 'back_to_me',
-        frames: this.game.anims.generateFrameNumbers('characterB', {start: 0, end: 2}),
+        frames: this.game.anims.generateFrameNumbers('characterB', { start: 0, end: 2 }),
         frameRate: 5,
         repeat: -1
     });
     this.anims.create({
         key: 'left',
-        frames: this.game.anims.generateFrameNumbers('characterL', {start: 3, end: 5}),
+        frames: this.game.anims.generateFrameNumbers('characterL', { start: 3, end: 5 }),
         frameRate: 5,
         repeat: -1
     });
     this.anims.create({
         key: 'right',
-        frames: this.game.anims.generateFrameNumbers('characterR', {start: 6, end: 8}),
+        frames: this.game.anims.generateFrameNumbers('characterR', { start: 6, end: 8 }),
         frameRate: 5,
         repeat: -1
     });
     this.anims.create({
         key: 'front_of_me',
-        frames: this.game.anims.generateFrameNumbers('characterF', {start: 9, end: 11}),
+        frames: this.game.anims.generateFrameNumbers('characterF', { start: 9, end: 11 }),
         frameRate: 5,
         repeat: -1
     });
@@ -115,15 +115,18 @@ function update(time, delta) {
 
     if (welfareBusinessGame.isGameStarted()) {
         //Limiter l'update du projet à 2 fois par seconde :
-        limitRefreshRateCounter++
+        if (welfareBusinessGame.getGameSpeed() > 0) {
+            //Limiter l'update du projet à 2 fois par seconde :
+            limitRefreshRateCounter++
 
-        if (limitRefreshRateCounter === 20) {
-            limitRefreshRateCounter = 0;
-            welfareBusinessGame.updateGame();
-            if (welfareBusinessGame.isRealProject()) {
-                hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
+            if (limitRefreshRateCounter >= (20 / welfareBusinessGame.getGameSpeed())) {
+                limitRefreshRateCounter = 0;
+                welfareBusinessGame.updateGame();
+                if (welfareBusinessGame.isRealProject()) {
+                    hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
+                }
             }
-        hud.temporaryMessageWageLoop();
+            hud.temporaryMessageWageLoop();
 
 
         }
@@ -132,25 +135,25 @@ function update(time, delta) {
         hud.updateDate(welfareBusinessGame.getDate());
         hud.updateEmployeeWindow();
 
-        if(hud.playerB.length > 0){
+        if (hud.playerB.length > 0) {
             for (let i = 0; i < hud.playerB.length; i++) {
                 hud.playerB[i].anims.play("back_to_me", true);
             }
         }
 
-        if(hud.playerL.length > 0){
+        if (hud.playerL.length > 0) {
             for (let i = 0; i < hud.playerL.length; i++) {
                 hud.playerL[i].anims.play("left", true);
             }
         }
 
-        if(hud.playerR.length > 0) {
+        if (hud.playerR.length > 0) {
             for (let i = 0; i < hud.playerR.length; i++) {
                 hud.playerR[i].anims.play("right", true);
             }
         }
 
-        if(hud.playerF.length > 0) {
+        if (hud.playerF.length > 0) {
             for (let i = 0; i < hud.playerF.length; i++) {
                 hud.playerF[i].anims.play("front_of_me", true);
             }

@@ -1,4 +1,4 @@
-let shopManager = (function() {
+let shopManager = (function () {
 
     // Variables ultra méga giga importantes
     let instance = undefined;
@@ -29,12 +29,14 @@ let shopManager = (function() {
     let sleepLayer = undefined;
     let pingLayer = undefined;
 
-    function loadObj(str, variable){
+    let welfareGame = undefined;
+
+    function loadObj(str, variable) {
         let level = variable.level;
         let pos = variable.pos;
         let layer = undefined;
         let upgradeTexture = undefined;
-        switch (str){
+        switch (str) {
             case "plant":
                 layer = plantLayer;
                 upgradeTexture = upgradePlantTexture;
@@ -62,8 +64,8 @@ let shopManager = (function() {
     }
 
     return {
-        init(layer, phaser, cfg){
-            if(!init){
+        init(layer, phaser, cfg) {
+            if (!init) {
                 init = true;
                 instance = phaser;
                 config = cfg;
@@ -88,53 +90,72 @@ let shopManager = (function() {
                     tile.index = 0;
                 })
 
-                if(data.shop.plant.level !== 0) loadObj("plant", data.shop.plant);
-                if(data.shop.water.level !== 0) loadObj("water", data.shop.water);
-                if(data.shop.coffee.level !== 0) loadObj("coffee", data.shop.coffee);
+                if (data.shop.plant.level !== 0) loadObj("plant", data.shop.plant);
+                if (data.shop.water.level !== 0) loadObj("water", data.shop.water);
+                if (data.shop.coffee.level !== 0) loadObj("coffee", data.shop.coffee);
+
+
+                welfareGame = mapManager.getWelfareBusinessGame();
 
             }
         },
 
-        upgradeObject(str){
+        upgradeObject(str) {
             let level = undefined;
             let maxLevel = undefined;
             let elementPos = undefined;
             let upgradeTexture = undefined;
-            switch (str){
+            switch (str) {
                 case "plant":
+
                     level = data.shop.plant.level;
                     maxLevel = maxPlantLevel;
                     elementPos = data.shop.plant.pos;
                     upgradeTexture = upgradePlantTexture;
+                    if (welfareGame.getPlayerMoney() < 300 || level > maxLevel) {
+                        return console.log('Not enough money !');
+                    }
+                    welfareGame.payAmount(300);
+
                     break;
                 case "water":
+
                     level = data.shop.water.level;
                     maxLevel = maxWaterLevel;
                     elementPos = data.shop.water.pos;
                     upgradeTexture = upgradeWaterTexture;
+                    if (welfareGame.getPlayerMoney() < 150 || level > maxLevel) {
+                        return console.log('Not enough money !');
+                    }
+                    welfareGame.payAmount(150);
+
                     break;
                 case "coffee":
+
                     level = data.shop.coffee.level;
                     maxLevel = maxCoffeeLevel;
                     elementPos = data.shop.coffee.pos;
                     upgradeTexture = upgradeCoffeeTexture;
+                    if (welfareGame.getPlayerMoney() < 400 || level >= maxLevel) {
+                        return console.log('Not enough money !');
+                    }
+                    welfareGame.payAmount(400);
+
                     break;
                 default:
                     break;
             }
 
-            if(level <= maxLevel){
+            if (level <= maxLevel) {
                 for (const elementPo of elementPos) {
-                    console.log(elementPo[elementPo.length - 1])
                     if (level === elementPo[elementPo.length - 1]) {
                         for (let i = 0; i < elementPo.length - 1; i++) {
-                            console.log(elementPo[i])
-                            console.log("here")
+
                             plantLayer.putTileAt(upgradeTexture[i], elementPo[i][0], elementPo[i][1]);
                         }
                     }
                 }
-                switch (str){
+                switch (str) {
                     case "plant":
                         data.shop.plant.level += 1;
                         break;
@@ -155,53 +176,67 @@ let shopManager = (function() {
         },
 
 
-        buySport(){
+        buySport() {
             let isActive = data.shop.sport.active;
-            if(!isActive){
-                data.shop.sport.active = true;
-                sportLayer.visible = true;
-                console.log("Sport purchased")
-                dataManager.save(token, data);
+            if (!isActive) {
+                if (welfareGame.getPlayerMoney() > 1000) {
+                    welfareGame.payAmount(1000);
+                    data.shop.sport.active = true;
+                    sportLayer.visible = true;
+                    console.log("Sport purchased")
+                    dataManager.save(token, data);
+                }
+
             } else {
-                console.log("MAX LEVEL")
+                console.log("Upgrade already bought !")
             }
         },
 
-        buyKitchen(){
+        buyKitchen() {
             let isActive = data.shop.kitchen.active;
-            if(!isActive){
-                data.shop.kitchen.active = true;
-                kitchenLayer[0].visible = true;
-                kitchenLayer[1].visible = true;
-                console.log("Kitchen purchased")
-                dataManager.save(token, data);
+            if (!isActive) {
+                if (welfareGame.getPlayerMoney() > 2000) {
+                    welfareGame.payAmount(2000);
+                    data.shop.kitchen.active = true;
+                    kitchenLayer[0].visible = true;
+                    kitchenLayer[1].visible = true;
+                    console.log("Kitchen purchased")
+                    dataManager.save(token, data);
+                }
+
             } else {
-                console.log("MAX LEVEL")
+                console.log("Upgrade already bought !")
             }
         },
 
-        buySleep(){
+        buySleep() {
             let isActive = data.shop.sleep.active;
-            if(!isActive){
-                data.shop.sleep.active = true;
-                sleepLayer[0].visible = true;
-                sleepLayer[1].visible = true;
-                console.log("Sleep purchased")
-                dataManager.save(token, data);
+            if (!isActive) {
+                if (welfareGame.getPlayerMoney() > 2500) {
+                    welfareGame.payAmount(2500);
+                    data.shop.sleep.active = true;
+                    sleepLayer[0].visible = true;
+                    sleepLayer[1].visible = true;
+                    console.log("Sleep purchased")
+                    dataManager.save(token, data);
+                }
             } else {
-                console.log("MAX LEVEL")
+                console.log("Upgrade already bought !")
             }
         },
 
-        buyPing(){
+        buyPing() {
             let isActive = data.shop.ping.active;
-            if(!isActive){
-                data.shop.ping.active = true;
-                pingLayer.visible = true;
-                console.log("Ping purchased")
-                dataManager.save(token, data);
+            if (!isActive) {
+                if (welfareGame.getPlayerMoney() > 500) {
+                    data.shop.ping.active = true;
+                    pingLayer.visible = true;
+                    console.log("Ping purchased")
+                    dataManager.save(token, data);
+                }
+
             } else {
-                console.log("MAX LEVEL")
+                console.log("Upgrade already bought !")
             }
         }
 

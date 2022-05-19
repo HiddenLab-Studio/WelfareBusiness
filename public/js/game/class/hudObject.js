@@ -296,13 +296,10 @@ class hudObject {
     temporaryMessageWageLoop() {
         this.tmpMsgCounter--;
         if (this.tmpMsgCounter <= 0 && this.tmpMsgText != undefined) {
-            console.log('destruction message')
-            console.log(this.tmpMsgText)
             this.tmpMsgText.destroy();
             this.tmpMsgText = undefined;
         }
         if (this.welfareGame.isNewMonth()) {
-            console.log("création message")
             this.tmpMsgCounter = 7;
 
             this.tmpMsgText = this.phaser.add.text(55, 55, "-" + this.welfareGame.getTotalEmployeesCost() + "€", { font: "18px Arial", fill: "#FF0000" }).setScrollFactor(0);

@@ -46,6 +46,9 @@ let mapManager = (function(){
                 let desk = map.createLayer("bureau_lvl1", tileSet);
                 let plant = map.createLayer("plante", tileSet);
                 let sport = map.createLayer("sport", tileSet);
+                let sleep = map.createLayer("detente", tileSet);
+                let kitchen = map.createLayer("cuisine", tileSet);
+                let kitchenObj = map.createLayer("cuisine2", tileSet);
 
                 /*instance.input.on("pointerdown", (pos) => {
                     let tile = plant.getTileAtWorldXY(pos.worldX, pos.worldY);

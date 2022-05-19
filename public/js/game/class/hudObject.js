@@ -225,7 +225,7 @@ class hudObject {
 
                 // On créé la fenêtre
                 hud.window.beShopWindow()
-                hud.closeshopdowbtn = hud.phaser.add.image(720, 470, 'closeWindowBtn').setScale(0.5).setInteractive().setScrollFactor(0).setDepth(11);
+                hud.closeshopdowbtn = hud.phaser.add.image(720, 470, 'closeWindowBtn').setScale(0.5).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(11);
                 hud.closeshopdowbtn.on("pointerdown", function () {
                     hud.window.closeShopWindow()
                     hud.closeshopdowbtn.destroy()

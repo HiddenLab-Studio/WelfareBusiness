@@ -69,16 +69,17 @@ class windowObject {
 
     beShopWindow() {
         let window = this
-
         this.shopopened = true;
         this.windowType = "shop_hud";
-        this.shop_hud = this.game.add.image(1000 / 2, 433, "shop_hud").setScale(1, 1.2).setScrollFactor(0).setInteractive().setDepth(10);
-        this.water_fountain_button = this.game.add.image(1000 / 2 - 150, 520, "bouton_eau").setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.sleep = this.game.add.image(1000 / 2 - 150, 520, "sleep").setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.plant_button = this.game.add.image(1000 / 2, 520, "bouton_plante").setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
-        this.distributer_button = this.game.add.image(1000 / 2 + 150, 520, "bouton_cafe").setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.shop_hud = this.game.add.image(1000 / 2, 433, 'shop_hud').setScale(1, 1.2).setScrollFactor(0).setInteractive().setDepth(10);
+        this.water_fountain_button = this.game.add.image(1000 / 2 - 150, 520, 'bouton_eau').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.plant_button = this.game.add.image(1000 / 2, 520, 'bouton_plante').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.distributer_button = this.game.add.image(1000 / 2 + 150, 520, 'bouton_cafe').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
 
-        this.plant_button.on("pointerdown", () => shopManager.upgradePlant())
+        this.plant_button.on("pointerdown", () => {
+            shopManager.upgradePlant();
+        })
+
     }
 
     shopdestroy() {

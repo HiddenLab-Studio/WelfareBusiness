@@ -28,6 +28,7 @@ class windowObject {
     //Ferme la fenêtre
     closeWindow() {
         if (this.opened) {
+            mapManager.getHud().shopbtn.setInteractive()
             switch (this.windowType) {
                 case "option":
                     this.volume.destroy();
@@ -150,9 +151,8 @@ class windowObject {
     //Fenêtre d'un employé
     beEmployeeWindow(employee, desk) {
         let window = this;
-
-
         this.windowType = "employee";
+        mapManager.getHud().shopbtn.disableInteractive()
 
         //Si le bureau appartient à un employé
         if (employee !== undefined) {
@@ -161,9 +161,7 @@ class windowObject {
 
             this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, employee.getName(), { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
 
-
             //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
-
             this.employeeParameterGauge = new Array(2);
 
             //Salaire
@@ -183,8 +181,6 @@ class windowObject {
             this.employeeParameterGauge[0].minusBtn.on("pointerdown", () => {
                 decreaseButton('wage', employee);
             })
-
-
 
             //Temps de travail
             this.employeeParameterGauge[1] = {
@@ -216,6 +212,7 @@ class windowObject {
                 if(this.welfareGame.getPlayerMoney() >= getNextDeskPrice(employee.getDesk().level)){
                     this.welfareGame.payAmount(getNextDeskPrice(employee.getDesk().level))
                     deskManager.upgradeDesk(desk);
+                    mapManager.getHud().shopbtn.setInteractive()
                     this.closeWindow();
                 }
             })
@@ -255,6 +252,7 @@ class windowObject {
             this.upgradeBtn.on("pointerdown", () => {
                 deskManager.buyDesk(desk);
                 mapManager.getWelfareBusinessGame().addEmployee(desk);
+                mapManager.getHud().shopbtn.setInteractive()
                 window.closeWindow();
             })
 

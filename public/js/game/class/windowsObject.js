@@ -151,7 +151,7 @@ class windowObject {
         this.projectChoice = new Array(3);
 
         for (let i = 0; i < 3; i++) {
-            let projectTitleString = proposals[i].getTitle() + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue()) + "\nHappiness impact :" + (proposals[i].getHappinessImpact());
+            let projectTitleString = proposals[i].getTitle() + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue()) + "\nHappiness impact :" + (proposals[i].getHappinessImpact() > 0 ? '+' + proposals[i].getHappinessImpact() : proposals[i].getHappinessImpact())  + '%';
             this.projectChoice[i] = {
                 background: this.game.add.image(350, 90 + i * 130, getRandomProjectChoiceBackground()).setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
                 title: this.game.add.text(370, 115 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
@@ -351,7 +351,7 @@ class windowObject {
                 this.productionProgressBar.destroy();
                 this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction())
                 this.productionBarText.destroy();
-                this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction()), { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+                this.productionBarText = this.game.add.text(490, 340, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3/*3 tick par secondes*/) + ' /s', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
             }
 
         }

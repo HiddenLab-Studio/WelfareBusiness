@@ -64,10 +64,10 @@ class employee {
         return tmpPercent
     }
 
-    //Valeur arbitraire : 10% de bonheur de plus que 50% = 12% de prod en plus (et inversement)
+    //Valeur arbitraire : 10% de bonheur de plus que 50% = 20% de prod en plus (et inversement)
     calculateBonusProduction() {
         let tmpProd = this.production;
-        tmpProd = tmpProd * (this.getHappiness() - 50) * 0.012;
+        tmpProd = tmpProd * (this.getHappiness() - 50) * 0.020;
         return tmpProd;
     }
 
@@ -130,7 +130,7 @@ class employee {
     }
 
     decreaseWage() {
-        if (this.salary > 1402) {
+        if (this.salary >= 1400) {
             this.salary -= 100;
         }
     }
@@ -174,28 +174,28 @@ function salaryScaleToWelfare(salary) {
 function workTimeToWelfare(workTime) {
     switch (workTime) {
         case 5:
-            return 10;
+            return 15;
 
         case 6:
-            return 5;
+            return 7;
 
         case 7:
             return 0;
 
         case 8:
-            return -5;
+            return -7;
 
         case 9:
-            return -10;
+            return -14;
 
         case 10:
-            return -15;
+            return -21;
 
         case 11:
-            return -20;
+            return -28;
 
         case 12:
-            return -25;
+            return -35;
     }
 }
 
@@ -283,6 +283,7 @@ let nameStr = "Lucas Haboussi,Antoine Mignien,Aurélien Rogé,Guillaume Leroy,Th
 let nameArray = nameStr.split(",");
 
 function random(min, max){ return Math.floor(Math.random() * (max - min)) + min; }
+
 function getRandomName(array) {
     let randomValue = random(0, array.length);
     let result = array[randomValue];

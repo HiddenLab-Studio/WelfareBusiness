@@ -19,6 +19,8 @@ class welfareBusiness {
             month: 1,
             year: 2022,
         }
+        this.generate3ProjectChoices()
+
     }
 
     isProjectFinished() {
@@ -57,17 +59,17 @@ class welfareBusiness {
         return this.updateRate;
     }
 
-    setPause(){
+    setPause() {
         console.log("pause activated");
         this.updateRate = 0;
     }
 
-    setNormalSpeed(){
+    setNormalSpeed() {
         console.log("normal speed activated");
         this.updateRate = 1;
     }
 
-    setFastSpeed(){
+    setFastSpeed() {
         this.updateRate = 2;
         console.log("fast speed activated");
     }
@@ -100,14 +102,14 @@ class welfareBusiness {
         return this.money;
     }
 
-    payAmount(amount){
+    payAmount(amount) {
         this.money -= amount;
     }
 
-    test(){
+    test() {
         return this.employeesList;
     }
-    
+
     getEmployeeById(id) {
         return this.employeesList[id];
     }
@@ -116,11 +118,11 @@ class welfareBusiness {
         this.money -= this.getTotalEmployeesCost();
     }
 
-    updateGame(){
-        if(this.updateRate > 0){
+    updateGame() {
+        if (this.updateRate > 0) {
             this.updateProject();
         }
-        else{
+        else {
             this.updateDate();
         }
     }
@@ -136,7 +138,7 @@ class welfareBusiness {
             for (let i = 0; i < this.employeesList.length; i++) {
                 if (this.employeesList[i] !== undefined) {
                     this.employeesList[i].setCurrentProjectHappiness(this.currentProject.getHappinessImpact())
-                    if(isEmployeeWorking(this.employeesList[i].getWorkTime(), this.getTime())){
+                    if (isEmployeeWorking(this.employeesList[i].getWorkTime(), this.getTime())) {
                         this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
                     }
                 }
@@ -197,7 +199,7 @@ class welfareBusiness {
         return this.date;
     }
 
-    getTime(){
+    getTime() {
         return this.time;
     }
 
@@ -216,7 +218,7 @@ class welfareBusiness {
 
         let data = dataManager.getData();
         // On set les données de l'employé (pour le load)
-        if(data.desk[deskData.id].employee !== undefined){
+        if (data.desk[deskData.id].employee !== undefined) {
             newEmployee.name = data.desk[deskData.id].employee.name;
             newEmployee.salary = data.desk[deskData.id].employee.salary;
             newEmployee.workTime = data.desk[deskData.id].employee.workTime;
@@ -236,9 +238,32 @@ class welfareBusiness {
 
     generate3ProjectChoices() {
         this.proposals = new Array(3);
-        this.proposals[0] = this.generateSafeProject();
-        this.proposals[1] = this.generateNullProject();
-        this.proposals[2] = this.generateEcoProject();
+        for (let i = 0; i < 3; i++) {
+            let tmpRand = random(0, 8);
+
+            switch (tmpRand) {
+                case 0: case 1: case 2:
+                    console.log('safe')
+                    this.proposals[i] = this.generateSafeProject();
+                    break;
+
+                case 3: case 4: case 5:
+                    console.log('null')
+                    this.proposals[i] = this.generateNullProject();
+                    break;
+
+                case 6: case 7:
+                    console.log('ambitious')
+
+                    this.proposals[i] = this.generateAmbitiousProject();
+                    break;
+
+                case 8:
+                    console.log('eco')
+
+                    this.proposals[i] = this.generateEcoProject();
+            }
+        }
     }
 
     getProjectChoices() {
@@ -246,22 +271,22 @@ class welfareBusiness {
     }
 
     generateSafeProject() {
-        let proposal = new project(200, 100, 5);
+        let proposal = new project(this.getTotalProduction() * convertToSec(15, 3), this.getTotalProduction() * 6, 5, 'Short project');
         return proposal;
     }
 
     generateNullProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(30, this.updateRate), 1000, 0)
+        let proposal = new project(this.getTotalProduction() * convertToSec(25, 3), this.getTotalProduction() * 6, 0, 'SQL Project')
         return proposal;
     }
 
     generateAmbitiousProject() {
-        let proposal = new project(this.getTotalProduction() * 2 * convertToSec(20, this.updateRate, -15), this.getTotalEmployeesCost() / 2, -15)
+        let proposal = new project(this.getTotalProduction() * 2 * convertToSec(50, 3), this.getTotalProduction() * 18, -15, 'Time consuming project')
         return proposal;
     }
 
-    generateEcoProject(){
-        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate, 20), this.getTotalEmployeesCost() / 4, 20, 'Ecoproject')
+    generateEcoProject() {
+        let proposal = new project(this.getTotalProduction() * convertToSec(30, 3), this.getTotalProduction() * 5, 20, 'Ecoproject')
         return proposal;
     }
 
@@ -279,9 +304,10 @@ function convertToSec(seconds, updateRate) {
     return seconds * updateRate;
 }
 
-function isEmployeeWorking(employeeWorkTime, time){
-    if(employeeWorkTime - time > 0){
+function isEmployeeWorking(employeeWorkTime, time) {
+    if (employeeWorkTime - time > 0) {
         return true;
     }
     return false;
 }
+

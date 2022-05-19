@@ -58,6 +58,10 @@ class hudObject {
         this.happinessBarStyle = this.phaser.make.graphics().fillStyle(0x5ed23b).fillRect(0, 0, 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
         this.happinessBarStyle.generateTexture('happinessbar', 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
 
+        this.productionBarStyle = this.phaser.make.graphics().fillStyle(0x051018).fillRect(0, 0, 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
+        this.productionBarStyle.generateTexture('productionbar', 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
+
+
         //Barre d'argent
         this.moneyInfoBar = this.phaser.add.image(8, -8, 'argent_hud').setOrigin(0, 0).setScale(0.5).setScrollFactor(0);
         this.moneyString = "0 €";
@@ -313,6 +317,20 @@ function roundToTwo(num) {
 }
 console.log(roundToTwo(2.005));
 
+function getNextDeskPrice(level){
+    switch(level){
+        case 1:
+            return 100;
 
+        case 2:
+            return 700;
+
+        case 3:
+            return 500;
+
+        case 4:
+            return 1500;
+    }
+}
 
 

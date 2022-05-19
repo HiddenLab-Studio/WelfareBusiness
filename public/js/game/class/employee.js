@@ -1,7 +1,7 @@
 class employee {
     constructor(deskId) {
         this.name = getRandomName(nameArray);
-        this.production = 1;
+        this.production = 10;
         this.salary = 1300;
         this.happiness = Math.floor(Math.random() * (60 - 40) + 40);//Pourcentage de bonheur de base aléatoire entre 60 % et 40 %
         this.deskId = deskId
@@ -20,11 +20,11 @@ class employee {
         return this.salary;
     }
 
-    getSalaryPercent(){
+    getSalaryPercent() {
         let tmpPercent = this.salary - 1300;
 
         tmpPercent = tmpPercent / 4000 * 100;
-        if(tmpPercent > 100){
+        if (tmpPercent > 100) {
             tmpPercent = 100
         }
 
@@ -33,8 +33,11 @@ class employee {
 
     getHappiness() {
         let happiness = this.baseHappiness + this.bonusHappiness
-        if(happiness > 100){
+        if (happiness > 100) {
             return 100;
+        }
+        if (happiness < 0) {
+            return 0;
         }
         return happiness;
     }
@@ -47,11 +50,11 @@ class employee {
         return dataManager.getData().desk[this.deskId];
     }
 
-    getWorkTime(){
+    getWorkTime() {
         return this.workTime;
     }
 
-    getWorkTimePercent(){
+    getWorkTimePercent() {
         let tmpPercent = this.workTime - 5;
 
         tmpPercent = tmpPercent / 7 * 100
@@ -59,20 +62,11 @@ class employee {
         return tmpPercent
     }
 
-    //Valeur arbitraire : 10% de bonheur de plus que 50% = 4% de prod en plus (et inversement)
+    //Valeur arbitraire : 10% de bonheur de plus que 50% = 12% de prod en plus (et inversement)
     calculateBonusProduction() {
-        if (this.happiness > 50) {
-            let tmpProd = this.production;
-            tmpProd = tmpProd * (this.happiness - 50) * 0.004;
-            return tmpProd;
-        }
-        else {
-            let tmpProd = this.production;
-            tmpProd = tmpProd * (this.happiness - 50) * 0.004;
-            return tmpProd;
-        }
-
-
+        let tmpProd = this.production;
+        tmpProd = tmpProd * (this.getHappiness() - 50) * 0.012;
+        return tmpProd;
     }
 
     updateHappiness() {
@@ -87,7 +81,7 @@ class employee {
         }*/
 
         //Ecoproject
-        //Temps de travail
+        //Temps de travail FAIT
         //Salaire FAIT
     }
 
@@ -96,32 +90,34 @@ class employee {
         let tmpHappinessCounter = 0;
         switch (this.getDesk().level) {
             case 1:
-                this.production = 1;
+                this.production = 10;
                 tmpHappinessCounter = -10;
                 break;
 
             case 2:
-                this.production = 2;
+                this.production = 20;
                 tmpHappinessCounter = -6;
                 break;
 
             case 3:
-                this.production = 3;
+                this.production = 30;
                 tmpHappinessCounter = 0;
                 break;
 
             case 4:
-                this.production = 4;
+                this.production = 40;
                 tmpHappinessCounter = 4;
                 break;
 
             case 5:
-                this.production = 5;
+                this.production = 50;
                 tmpHappinessCounter = 10;
                 break;
         }
 
         tmpHappinessCounter += salaryScaleToWelfare(this.salary);
+        tmpHappinessCounter += workTimeToWelfare(this.workTime);
+        tmpHappinessCounter += plantLvlToWelfare();
 
 
         this.bonusHappiness = tmpHappinessCounter;
@@ -137,14 +133,14 @@ class employee {
         }
     }
 
-    increaseWorkTime(){
-        if(this.workTime <= 11){
+    increaseWorkTime() {
+        if (this.workTime <= 11) {
             this.workTime += 1;
         }
     }
 
-    decreaseWorkTime(){
-        if(this.workTime >= 6){
+    decreaseWorkTime() {
+        if (this.workTime >= 6) {
             this.workTime -= 1;
         }
     }
@@ -168,6 +164,115 @@ function salaryScaleToWelfare(salary) {
 
     return tmpWelfare
 }
+
+function workTimeToWelfare(workTime) {
+    switch (workTime) {
+        case 5:
+            return 10;
+
+        case 6:
+            return 5;
+
+        case 7:
+            return 0;
+
+        case 8:
+            return -5;
+
+        case 9:
+            return -10;
+
+        case 10:
+            return -15;
+
+        case 11:
+            return -20;
+
+        case 12:
+            return -25;
+    }
+}
+
+function plantLvlToWelfare() {
+    let data = dataManager.getData();
+    switch (data.shop.plant.level) {
+        case 0:
+            return -8;
+
+        case 1:
+            return -4;
+
+        case 2:
+            return 0;
+
+        case 3:
+            return 4;
+
+        case 4:
+            return 8;
+
+        case 5:
+            return 12;
+
+        case 6:
+            return 16;
+    }
+}
+
+function waterFountainToWelfare() {
+    let data = dataManager.getData();
+    /*console.log(data.shop.plant.level);
+    switch (data.shop.plant.level) {
+        case 0:
+            return -8;
+
+        case 1:
+            return -4;
+
+        case 2:
+            return 0;
+
+        case 3:
+            return 4;
+
+        case 4:
+            return 8;
+
+        case 5:
+            return 12;
+
+        case 6:
+            return 16;
+    }*/
+}
+
+function vendingMachineToWelfare() {
+    let data = dataManager.getData();
+    /*console.log(data.shop.plant.level);
+    switch (data.shop.plant.level) {
+        case 0:
+            return -8;
+
+        case 1:
+            return -4;
+
+        case 2:
+            return 0;
+
+        case 3:
+            return 4;
+
+        case 4:
+            return 8;
+
+        case 5:
+            return 12;
+
+        case 6:
+            return 16;
+    }*/
+}
+
 
 
 

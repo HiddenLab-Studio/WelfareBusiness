@@ -70,7 +70,7 @@ class windowObject {
         let window = this
         this.shopopened = true;
         this.windowType = "shop_hud";
-        this.shop_hud = this.game.add.image(1000 / 2, 433, 'shop_hud').setScale(1,1.2).setScrollFactor(0).setInteractive().setDepth(10);
+        this.shop_hud = this.game.add.image(1000 / 2, 433, 'shop_hud').setScale(1, 1.2).setScrollFactor(0).setInteractive().setDepth(10);
         this.water_fountain_button = this.game.add.image(1000 / 2 - 150, 520, 'bouton_eau').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
         this.plant_button = this.game.add.image(1000 / 2, 520, 'bouton_plante').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
         this.distributer_button = this.game.add.image(1000 / 2 + 150, 520, 'bouton_cafe').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
@@ -89,7 +89,7 @@ class windowObject {
         this.distributer_button.destroy();
     }
 
-    isShopOpened(){
+    isShopOpened() {
         return this.shopopened
     }
 
@@ -150,7 +150,7 @@ class windowObject {
     //Fenêtre d'un employé
     beEmployeeWindow(employee, desk) {
         let window = this;
-        
+
 
         this.windowType = "employee";
 
@@ -173,7 +173,7 @@ class windowObject {
                 icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0),
                 plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
                 minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
-                progressbar : displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
+                progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
             }
 
             this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {
@@ -193,7 +193,7 @@ class windowObject {
                 icon: this.game.add.image(340, 164, 'logo_time').setOrigin(0, 0).setScale(0.08).setScrollFactor(0),
                 plusBtn: this.game.add.image(625, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
                 minusBtn: this.game.add.image(389, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive(),
-                progressbar : displayWindowProgressBar(this.game, 429, 185, employee.getWorkTimePercent()),
+                progressbar: displayWindowProgressBar(this.game, 429, 185, employee.getWorkTimePercent()),
             }
 
             this.employeeParameterGauge[1].plusBtn.on("pointerdown", () => {
@@ -213,12 +213,14 @@ class windowObject {
 
             this.upgradeBtn.on("pointerdown", () => {
                 console.log("click upgrade")
-                deskManager.upgradeDesk(desk);
-                this.closeWindow();
+                if(this.welfareGame.getPlayerMoney() >= getNextDeskPrice(employee.getDesk().level)){
+                    this.welfareGame.payAmount(getNextDeskPrice(employee.getDesk().level))
+                    deskManager.upgradeDesk(desk);
+                    this.closeWindow();
+                }
             })
 
-            let stringUpgradePrice = '500€'
-            this.upgradeBtnText = this.game.add.text(554, 240, stringUpgradePrice, { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+            this.upgradeBtnText = this.game.add.text(554, 240, employee.getDesk().level < 5 ? getNextDeskPrice(employee.getDesk().level) + '€' : 'MAX', { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
             /*if (desk.level < 5) {
                 stringLvlTmp
             }
@@ -229,24 +231,21 @@ class windowObject {
 
             this.happinessIcon = this.game.add.image(340, 300, 'emote_heureux_window').setOrigin(0, 0).setScale(1).setScrollFactor(0);
             this.happinessBar = this.game.add.image(385, 310, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0);
-            this.happinessProgressBar = displayWindowHappinessProgressBar(this.game, 393,310, this.currentEmployeeWindow.getHappiness())
-            this.happinessBarText = this.game.add.text(595, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+            this.happinessProgressBar = displayWindowHappinessProgressBar(this.game, 393, 310, this.currentEmployeeWindow.getHappiness())
+            this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
 
-            /*//Jauge d'information du bien être de l'employé
-            this.employeeWelfareGauge = new Array(3);
 
-            for (let i = 0; i < 3; i++) {
-                this.employeeWelfareGauge[i] = {
-                    icon: this.game.add.image(350, 225 + i * 50, 'infobar').setOrigin(0, 0).setScale(0.25, 1).setScrollFactor(0),
-                    bar: this.game.add.image(400, 242 + i * 50, 'infobar').setOrigin(0, 0).setScale(1.4, 0.1).setScrollFactor(0),
-                }
-            }
-*/
+            this.productionIcon = this.game.add.image(340, 350, 'emote_heureux_window').setOrigin(0, 0).setScale(1).setScrollFactor(0);
+            this.productionBar = this.game.add.image(385, 360, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0);
+            this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction())
+            this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction()), { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+
+
             //Textes de conseil pour le joueur
             this.employeeTips = new Array(3);
 
             for (let i = 0; i < 3; i++) {
-                this.employeeTips[i] = this.game.add.text(350, 375 + i * 40, "• " + determineTextAdvice(employee)[0], { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
+                this.employeeTips[i] = this.game.add.text(350, 390 + i * 40, "• " + determineTextAdvice(employee)[0], { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
             }
         }
 
@@ -260,8 +259,6 @@ class windowObject {
 
 
             this.upgradeBtn.on("pointerdown", () => {
-                //desk.level += 1;
-                //desk.active = true;
                 deskManager.buyDesk(desk);
                 mapManager.getWelfareBusinessGame().addEmployee(desk);
                 window.closeWindow();
@@ -296,6 +293,11 @@ class windowObject {
             this.happinessBar.destroy();
             this.happinessProgressBar.destroy()
             this.happinessBarText.destroy();
+
+            this.productionIcon.destroy()
+            this.productionBar.destroy()
+            this.productionProgressBar.destroy()
+            this.productionBarText.destroy()
         }
 
 
@@ -322,9 +324,14 @@ class windowObject {
 
 
                 this.happinessProgressBar.destroy();
-                this.happinessProgressBar = displayWindowHappinessProgressBar(this.game, 393,310, this.currentEmployeeWindow.getHappiness())
+                this.happinessProgressBar = displayWindowHappinessProgressBar(this.game, 393, 310, this.currentEmployeeWindow.getHappiness())
                 this.happinessBarText.destroy();
                 this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
+
+                this.productionProgressBar.destroy();
+                this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction())
+                this.productionBarText.destroy();
+                this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction()), { color: "black", fontFamily: "Arial" }).setScrollFactor(0);
             }
 
         }
@@ -417,14 +424,36 @@ function increaseButton(actionWanted, employee) {
 }
 
 
-function displayWindowProgressBar(game,x, y, percentSize) {
-    let progressbar = game.add.image(x, y, 'infobar').setOrigin(0, 0).setScale(1.35 * percentSize / 100,0.22).setScrollFactor(0)
+function displayWindowProgressBar(game, x, y, percentSize) {
+    let progressbar = game.add.image(x, y, 'infobar').setOrigin(0, 0).setScale(1.35 * percentSize / 100, 0.22).setScrollFactor(0)
 
     return progressbar;
 }
 
-function displayWindowHappinessProgressBar(game,x, y, percentSize) {
-    let progressbar = game.add.image(x, y, 'happinessbar').setOrigin(0, 0).setScale(1.73 * percentSize / 100,0.22).setScrollFactor(0)
+function displayWindowHappinessProgressBar(game, x, y, percentSize) {
+    let progressbar = game.add.image(x, y, 'happinessbar').setOrigin(0, 0).setScale(1.73 * percentSize / 100, 0.22).setScrollFactor(0)
 
     return progressbar;
+}
+
+function displayWindowProductionProgressBar(game, x, y, percentSize) {
+    let progressbar = game.add.image(x, y, 'productionbar').setOrigin(0, 0).setScale(1.73 * percentSize / 100, 0.22).setScrollFactor(0)
+
+    return progressbar;
+}
+
+function getNextDeskPrice(level){
+    switch(level){
+        case 1:
+            return 100;
+
+        case 2:
+            return 700;
+
+        case 3:
+            return 500;
+
+        case 4:
+            return 1500;
+    }
 }

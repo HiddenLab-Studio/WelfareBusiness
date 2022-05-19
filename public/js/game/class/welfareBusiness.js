@@ -2,7 +2,7 @@
 
 class welfareBusiness {
     constructor() {
-        this.currentProject = new project(10, 100)
+        this.currentProject = new project(100, 100)
         this.employeesList = new Array(12);
         this.employeesNb = 0;
         this.updateRate = 1;
@@ -97,6 +97,10 @@ class welfareBusiness {
 
     getPlayerMoney() {
         return this.money;
+    }
+
+    payAmount(amount){
+        this.money -= amount;
     }
 
     
@@ -221,17 +225,17 @@ class welfareBusiness {
     }
 
     generateSafeProject() {
-        let proposal = new project(20, 100/*this.getTotalProduction() * convertToSec(720, this.updateRate), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
+        let proposal = new project(200, 100/*this.getTotalProduction() * convertToSec(720, this.updateRate), 1000 AMODIFIER QUAND EQUILIBRAGE*/);
         return proposal;
     }
 
     generateNullProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(720, this.updateRate), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * convertToSec(30, this.updateRate), 1000/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
         return proposal;
     }
 
     generateAmbitiousProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(900, this.updateRate), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
+        let proposal = new project(this.getTotalProduction() * convertToSec(15, this.updateRate), 1500/*AMODIFIER QUAND ON A LE SYSTEME DE TEMPS)*/)
         return proposal;
     }
 
@@ -241,6 +245,7 @@ class welfareBusiness {
         this.currentProject = project;
         this.generate3ProjectChoices();
     }
+
 
 }
 

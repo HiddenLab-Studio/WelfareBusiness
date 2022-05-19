@@ -120,6 +120,12 @@ class employee {
         tmpHappinessCounter += salaryScaleToWelfare(this.salary);
         tmpHappinessCounter += workTimeToWelfare(this.workTime);
         tmpHappinessCounter += plantLvlToWelfare();
+        tmpHappinessCounter += waterFountainToWelfare();
+        tmpHappinessCounter += vendingMachineToWelfare();
+        tmpHappinessCounter += pingToWelfare();
+        tmpHappinessCounter += relaxationRoomToWelfare();
+        tmpHappinessCounter += sportsHallToWelfare();
+        tmpHappinessCounter += kitchenToWelfare();
 
 
         this.bonusHappiness = tmpHappinessCounter + this.currentProjectHappiness;
@@ -203,76 +209,90 @@ function plantLvlToWelfare() {
     let data = dataManager.getData();
     switch (data.shop.plant.level) {
         case 0:
-            return -8;
+            return -5;
 
         case 1:
-            return -4;
+            return -2;
 
         case 2:
             return 0;
 
         case 3:
-            return 4;
+            return 1;
 
         case 4:
-            return 8;
+            return 2;
 
         case 5:
-            return 12;
+            return 3;
 
         case 6:
-            return 16;
+            return 4;
     }
 }
 
 function waterFountainToWelfare() {
     let data = dataManager.getData();
-    /*console.log(data.shop.plant.level);
-    switch (data.shop.plant.level) {
+    switch (data.shop.water.level) {
         case 0:
-            return -8;
+            return -2;
 
         case 1:
-            return -4;
+            return -0;
 
         case 2:
-            return 0;
+            return 2;
 
         case 3:
-            return 4;
+            return 5;
 
-    }*/
+    }
 }
 
 function vendingMachineToWelfare() {
     let data = dataManager.getData();
-    console.log(data.shop.plant.level);
-    switch (data.shop.plant.level) {
+    switch (data.shop.coffee.level) {
         case 0:
-            return -8;
-
-        case 1:
             return -4;
 
-        case 2:
+        case 1:
             return 0;
+
+        case 2:
+            return 4;
     }
 }
 
 function pingToWelfare(){
-    
+    let data = dataManager.getData();
+    if(data.shop.ping.active){
+        return 3;
+    }
+    else {return 0}
 }
 
 function relaxationRoomToWelfare(){
-
+    let data = dataManager.getData();
+    if(data.shop.sleep.active){
+        return 4;
+    }
+    else {return 0}
 }
 
 function sportsHallToWelfare(){
-
+    let data = dataManager.getData();
+    if(data.shop.sport.active){
+        return 4;
+    }
+    else {return 0}
 }
 
 function kitchenToWelfare(){
-
+    let data = dataManager.getData();
+    if(data.shop.kitchen.active){
+        return 4;
+    }
+    else {return 0}
 }
 
 let nameStr = "Lucas Haboussi,Antoine Mignien,Aurélien Rogé,Guillaume Leroy,Théo Vangheluwe,James Rodriguez,Joseph Levine,Christopher Payne,Robert Camacho,Jose Payne,Matthew Torres,Ryan Ryan,Erik Bishop,Martin Larsson,Tyler Joseph,Josh Dun,Bryce Johnson,Zachary Nguyen,Greg Morris,Michael Eaton Jr.,Ethan Poole,Ryan Hill,Thomas Collins,Kamel Kebir,Kylian Mbappe,Thomas Pesquet,Jean-Luc Leroy,Emmanuel Mignien,Farid Haboussi,Stephane Vangheluwe,Didier Rogé,Roneda Degui,Farouk Baraka,Kevin Gamero,Karim Benzema,Lee Sang-hyeok"

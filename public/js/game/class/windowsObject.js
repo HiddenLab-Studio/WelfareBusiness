@@ -6,7 +6,6 @@ class windowObject {
         this.hud = hud;
         //this.createBackWindow();
         this.windowType = undefined;//Garde en mémoire quel type de fenêtre est ouvert
-
         this.currentEmployeeWindow = undefined;
     }
 
@@ -55,7 +54,7 @@ class windowObject {
     }
 
     isEmployeeWindow() {
-        if (this.windowType == "employee") {
+        if (this.windowType === "employee") {
             return true;
         }
         return false;
@@ -64,9 +63,49 @@ class windowObject {
     //Fenêtre des settings
     beSettingsWindow() {
         this.windowType = "option";
-
         this.volume = this.game.add.image(this.config.width * 0.5 - 125, 200, 'volumeHigh').setScale(0.35).setInteractive().setScrollFactor(0);
     }
+
+    beShopWindow() {
+        let window = this
+        this.shopopened = true;
+        this.windowType = "shop_hud";
+        this.shop_hud = this.game.add.image(1000 / 2, 433, 'shop_hud').setScale(1,1.2).setScrollFactor(0).setInteractive().setDepth(10);
+        this.water_fountain_button = this.game.add.image(1000 / 2 - 150, 520, 'bouton_eau').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.plant_button = this.game.add.image(1000 / 2, 520, 'bouton_plante').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.distributer_button = this.game.add.image(1000 / 2 + 150, 520, 'bouton_cafe').setInteractive().setScrollFactor(0).setScale(1.2).setDepth(11);
+
+        this.plant_button.on("pointerdown", () => {
+            shopManager.upgradePlant();
+        })
+
+    }
+
+    shopdestroy() {
+        let hud = this
+        this.shop_hud.destroy();
+        this.water_fountain_button.destroy();
+        this.plant_button.destroy();
+        this.distributer_button.destroy();
+    }
+
+    isShopOpened(){
+        return this.shopopened
+    }
+
+    closeShopWindow() {
+        if (this.shopopened) {
+            switch (this.windowType) {
+                case "shop_hud":
+                    this.shopdestroy();
+                    break;
+            }
+            this.shop_hud.destroy();
+        }
+
+        this.shopopened = false;
+    }
+
 
     //Supprime les éléments de la fenêtre des settings
     closeSettingsWindow() {

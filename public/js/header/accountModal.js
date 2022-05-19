@@ -6,7 +6,7 @@ let transition = false;
 // FadeIn and FadeOut in JQuery hover (accountBtn)
 $(document).ready(function () {
     $(myAccountBtn).hover(function() {
-        console.log("btn inside")
+        //console.log("btn inside")
         if(!insideAccountModal && !transition){
             transition = true;
             $(accountModal).fadeIn(500);
@@ -24,12 +24,12 @@ $(document).ready(function () {
                 }, 500)
             }
         }, 1000)
-        console.log("btn outside")
+        //console.log("btn outside")
     })
 
     $(accountModal).hover(function() {
         insideAccountModal = true;
-        console.log("inside account modal")
+        //console.log("inside account modal")
     }, function(){
         insideAccountModal = false;
         if(!transition){
@@ -39,7 +39,7 @@ $(document).ready(function () {
                 transition = false;
             }, 500)
         }
-        console.log("outside account modal")
+        //console.log("outside account modal")
     })
 
 });

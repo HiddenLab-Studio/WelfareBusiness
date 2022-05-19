@@ -175,23 +175,41 @@ class hudObject {
         });
     }
 
-
     //Création des listeners des boutons
     createListeners() {
         let hud = this;
         this.settingsbtn.on('pointerdown', function () {
             if (hud.window.isOpened()) {
                 hud.window.closeWindow()
-            }
-            else {
+            } else {
                 hud.window.createBackWindow();
                 hud.window.beSettingsWindow();
             }
         });
 
+        this.shopbtn = this.phaser.add.sprite(298, config.height - 110, 'button_shop').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
+        this.shopbtn.on("pointerdown", function () {
+            if (!hud.window.isShopOpened()) {
+                // Désactive les boutons du HUD
+                hud.shopbtn.disableInteractive()
+                hud.pausebtn.disableInteractive()
+                hud.playbtn.disableInteractive()
+                hud.avancerapidebtn.disableInteractive()
+                hud.settingsbtn.disableInteractive()
+                hud.progressbar.destroy();
 
-        this.shopbtn.on('pointerdown', function () {
-            console.log("click shop")
+                // On créé la fenêtre
+                hud.window.beShopWindow()
+                hud.closeshopdowbtn = hud.phaser.add.image(720, 470, 'closeWindowBtn').setScale(0.5).setInteractive().setScrollFactor(0).setDepth(11);
+                hud.closeshopdowbtn.on("pointerdown", function () {
+                    hud.window.closeShopWindow()
+                    hud.closeshopdowbtn.destroy()
+                    hud.shopbtn.setInteractive()
+                    hud.pausebtn.setInteractive()
+                    hud.playbtn.setInteractive()
+                    hud.avancerapidebtn.setInteractive()
+                })
+            }
         });
     }
 
@@ -202,22 +220,18 @@ class hudObject {
         this.progressbar.destroy();
         this.progressbar = displayProgressBar(this.phaser, percent, this.config);
         if (percent >= 100) {//Si le projet est fini, on affiche un bouton pour choisir un nouveau projet
-
-            if (this.isNewProjectButtonGenerated == false) {
+            if (this.isNewProjectButtonGenerated === false) {
                 this.projectChoicebtn = this.phaser.add.image(this.config.width / 2 + 5, this.config.height - 50, 'bouton_projet').setInteractive().setScrollFactor(0);
                 this.isNewProjectButtonGenerated = true;
             }
 
-
             this.projectChoicebtn.on("pointerdown", function () {
                 if (hud.window.isOpened()) {
                     hud.window.closeWindow()
-                }
-                else {
+                } else {
                     hud.window.createBackWindow();
                     hud.window.beProjectChoiceWindow(welfareGame.getProjectChoices());
                 }
-
             });
         }
     }
@@ -240,16 +254,11 @@ class hudObject {
         this.happinessIcon.destroy();
         if (happiness >= 75) {
             this.happinessIcon = this.phaser.add.image(170, 10, 'emote_heureux').setOrigin(0, 0).setScale(0.64).setScrollFactor(0);
-
-        }
-        else {
+        } else {
             if (happiness < 75 && happiness >= 25) {
                 this.happinessIcon = this.phaser.add.image(170, 10, 'emote_neutre').setOrigin(0, 0).setScale(0.64).setScrollFactor(0);
-
-            }
-            else {
+            } else {
                 this.happinessIcon = this.phaser.add.image(170, 10, 'emote_colere').setOrigin(0, 0).setScale(0.64).setScrollFactor(0);
-
             }
         }
     }

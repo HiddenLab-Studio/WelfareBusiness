@@ -98,7 +98,6 @@ let deskManager = (function () {
         }
     }
 
-    // Setter private
     /**
      * Lorsque les données du joueurs sont chargées on vient update la tileMap (chaque texture) en fonction de sa sauvegarde
      */
@@ -113,8 +112,6 @@ let deskManager = (function () {
                         switch (array.orientation) {
                             case 1:
                                 c = [6, 7, 8];
-                                break;
-                            case 2:
                                 break;
                             case 3:
                                 c = [2, 5, 8, 11];
@@ -141,9 +138,7 @@ let deskManager = (function () {
                             }
                         } catch (NullPointerException) {
                             if (i === 2) {
-                                /*console.log("Agrandissement du bureau!!")
-                                console.log("No tile at ", coordinate[0], coordinate[1])
-                                console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));*/
+                                //console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));*/
                                 deskLayer.putTileAt(upgradeArray[0].index[c[count]][0], coordinate[0], coordinate[1]);
                                 count += 1;
                             }
@@ -185,8 +180,6 @@ let deskManager = (function () {
                             case 1:
                                 c = [6, 7, 8];
                                 break;
-                            case 2:
-                                break;
                             case 3:
                                 c = [2, 5, 8, 11];
                                 break;
@@ -200,8 +193,8 @@ let deskManager = (function () {
                     }
                 });
 
-                console.log("value of c is ", c)
-                console.log(upgradeTextureArray)
+                //console.log("value of c is ", c)
+                //console.log(upgradeTextureArray)
                 for (const coordinate of deskData.pos) {
                     try {
                         let tileIndex = deskLayer.getTileAt(coordinate[0], coordinate[1]).index;
@@ -214,9 +207,7 @@ let deskManager = (function () {
                         }
                     } catch (NullPointerException) {
                         if (deskData.level >= 2) {
-                            /*console.log("Agrandissement du bureau!!")
-                            console.log("No tile at ", coordinate[0], coordinate[1])
-                            console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));*/
+                            //console.log(deskLayer.hasTileAt(coordinate[0],coordinate[1]));
                             deskLayer.putTileAt(upgradeTextureArray[0].index[c[i]][0], coordinate[0], coordinate[1]);
                             i += 1;
                         }
@@ -236,7 +227,7 @@ let deskManager = (function () {
         },
 
         // Initialisation des variables
-        async init(layer, phaser, cfg) {
+        init(layer, phaser, cfg) {
             if (!init) {
                 init = true;
                 instance = phaser;
@@ -259,7 +250,7 @@ let deskManager = (function () {
                 try {
                     let target = deskLayer.getTileAtWorldXY(pos.worldX, pos.worldY);
                     // DEBUG
-                    //console.log(target.x, target.y);
+                    console.log(target.x, target.y);
                     // console.log("Index of the clicked case is " + target.index)
 
                     let result = undefined;
@@ -279,20 +270,19 @@ let deskManager = (function () {
                         })
                     }
                     // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
-                    if (result && !mapManager.getHud().getWindow().isOpened()) {
+                    if (result && (!mapManager.getHud().getWindow().isOpened() && !mapManager.getHud().getWindow().isShopOpened())) {
                         // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
                         deskManager.openDesk(id);
                     }
-                } catch (NullPointerException) {/*ignored*/ }
+                } catch (NullPointerException) {}
             })
         },
 
-        // SHOULD BE CLEANER
         // Affiche le menu du bureau sur lequel on a cliqué
         openDesk(id) {
             // Boolean qui permet de savoir si une fenêtre est ouverte
             let deskData = getDeskById(id)[0];
-            //console.log(deskData.orientation)
+            console.log(deskData.orientation)
             mapManager.getHud().getWindow().createBackWindow();
             mapManager.getHud().getWindow().beEmployeeWindow(mapManager.getWelfareBusinessGame().getEmployeeById(id), getDeskById(id)[0]);
             //Si le bureau n'est pas encore acheté (pas d'employé)

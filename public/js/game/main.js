@@ -56,13 +56,13 @@ function preload() {
     this.load.image('barre', './public/assets/img/game/hud/barre.png');
     this.load.image('upgrade', './public/assets/img/game/hud/upgrade.png');
     this.load.image('bureau', './public/assets/img/game/hud/bureau.png');
-
+    this.load.image('boutique_hud', './public/assets/img/game/hud/boutique_hud.png');
+    this.load.image('bouton_plante', './public/assets/img/game/hud/bouton_plante.png');
+    this.load.image('bouton_cafe', './public/assets/img/game/hud/bouton_cafe.png');
+    this.load.image('bouton_eau', './public/assets/img/game/hud/bouton_eau.png');
+    this.load.image('shop_hud', './public/assets/img/game/hud/boutique_hud.png');
 
     this.load.image('hud_employed', './public/assets/img/game/hud/hud_employed.png');
-
-
-
-
 
     this.load.image("tiles", "./public/js/game/map/tileset_wb.png");
     this.load.tilemapTiledJSON("map", "./public/js/game/map/wb_map.json");

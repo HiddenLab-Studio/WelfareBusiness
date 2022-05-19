@@ -43,14 +43,23 @@ let mapManager = (function(){
                 map.createLayer("jardin", tileSet);
                 map.createLayer("arbre", tileSet);
                 let desk = map.createLayer("bureau_lvl1", tileSet);
-                map.createLayer("plante", tileSet);
-                map.createLayer("sport", tileSet);
+                let plant = map.createLayer("plante", tileSet);
+                let sport = map.createLayer("sport", tileSet);
+
+                /*instance.input.on("pointerdown", (pos) => {
+                    let tile = plant.getTileAtWorldXY(pos.worldX, pos.worldY);
+                    if(tile !== null){
+                        console.log(tile.x, tile.y);
+                    }
+                })*/
 
                 // On initialise le module qui gère les données
                 dataManager.init(map);
-                await dataManager.load(token).then((response) => {data = response}).then(async () => {
+                await dataManager.load(token).then((response) => {data = response}).then(() => {
                     // On initialise les bureaux
-                    await deskManager.init(desk, instance, config);
+                    deskManager.init(desk, instance, config);
+                    // On initialise le shop
+                    shopManager.init(plant,instance, config);
                 })
             }
         }

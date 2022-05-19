@@ -81,7 +81,7 @@ class windowObject {
         this.distributer_button = this.game.add.image(1000 / 2 - 300, 515, "bouton_cafe").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
 
         // Center
-        this.carpet = this.game.add.image(1000 / 2, 515, "tapis").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
+        this.carpet = this.game.add.image(1000 / 2, 515, "ping").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
 
         // Right
         this.sleep = this.game.add.image(1000 / 2 + 100, 515, "sleep").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
@@ -89,11 +89,13 @@ class windowObject {
         this.kitchen = this.game.add.image(1000 / 2 + 300, 515, "cuisine").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.2).setDepth(11);
 
         // Listeners
-        this.plant_button.on("pointerdown", () => shopManager.upgradePlant());
-        this.sleep.on("pointerdown", () => console.log("sleep"))
-        this.kitchen.on("pointerdown", () => console.log("kitchen"))
-        this.sport.on("pointerdown", () => console.log("sport"))
-        this.carpet.on("pointerdown", () => console.log("carpet"))
+        this.plant_button.on("pointerdown", () => shopManager.upgradeObject("plant"));
+        this.sleep.on("pointerdown", () => shopManager.buySleep())
+        this.kitchen.on("pointerdown", () => shopManager.buyKitchen())
+        this.sport.on("pointerdown", () => shopManager.buySport())
+        this.carpet.on("pointerdown", () => shopManager.buyPing())
+        this.distributer_button.on("pointerdown", () => shopManager.upgradeObject("coffee"))
+        this.water_fountain_button.on("pointerdown", () => shopManager.upgradeObject("water"))
 
         hud.closeshopdowbtn = hud.phaser.add.image(885, 470, "closeWindowBtn").setScale(0.5).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(11);
         hud.closeshopdowbtn.on("pointerdown", function () {

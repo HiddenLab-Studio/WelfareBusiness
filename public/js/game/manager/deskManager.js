@@ -177,7 +177,7 @@ let deskManager = (function () {
     function updateSpritePos(deskData){
         let hud = mapManager.getHud();
         let pnjPos = deskData.pnj.pos;
-        hud.getSprite()[deskData.orientation - 1].filter((element) => {
+        hud.getSprite()[deskData.orientation - 1][0].filter((element) => {
             if(element.x === pnjPos[0][0] && element.y === pnjPos[0][1]){
                 switch(deskData.orientation){
                     case 1:

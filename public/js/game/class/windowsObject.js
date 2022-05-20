@@ -72,14 +72,18 @@ class windowObject {
     beSettingsWindow() {
         this.windowType = "option";
 
+        //Titre
+        this.settingsTitle = this.game.add.text(this.config.width / 2, 55, "General settings", { font: "bold 18px Arial", fill: "#000000" }).setOrigin().setScrollFactor(0).setDepth(21);
+
         //Salaire
         this.generalSalary = {
-            bar: this.game.add.image(423, 125, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
-            textBar: this.game.add.text(500, 105, this.welfareGame.getAverageSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25),
-            icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0).setDepth(21),
-            plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
-            minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
-            progressbar: displayWindowProgressBar(this.game, 429, 125, this.welfareGame.getAverageSalaryPercent()).setDepth(21), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
+            title: this.game.add.text(460, 100, "Average salary", { font: "bold 15px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
+            bar: this.game.add.image(423, 140, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
+            textBar: this.game.add.text(500, 120, (isNaN(this.welfareGame.getAverageSalary()) ? 0 : this.welfareGame.getAverageSalary().toString()) + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25),
+            icon: this.game.add.image(335, 125, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0).setDepth(21),
+            plusBtn: this.game.add.image(625, 134, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            minusBtn: this.game.add.image(389, 134, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            progressbar: displayWindowProgressBar(this.game, 429, 140, this.welfareGame.getAverageSalaryPercent()).setDepth(21), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
         }
 
         this.generalSalary.plusBtn.on("pointerdown", () => {
@@ -89,15 +93,16 @@ class windowObject {
         this.generalSalary.minusBtn.on("pointerdown", () => {
             decreaseButton('generalWage');
         })
-        
+
         //Temps de travail
         this.generalWorkTime = {
-            bar: this.game.add.image(423, 185, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
-            textBar: this.game.add.text(510, 165, this.welfareGame.getAverageWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
-            icon: this.game.add.image(340, 164, 'logo_time').setOrigin(0, 0).setScale(0.08).setScrollFactor(0).setDepth(21),
-            plusBtn: this.game.add.image(625, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
-            minusBtn: this.game.add.image(389, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
-            progressbar: displayWindowProgressBar(this.game, 429, 185, this.welfareGame.getAverageWorkTimePercent()).setDepth(21),
+            title: this.game.add.text(450, 165, "Average work time", { font: "bold 15px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
+            bar: this.game.add.image(423, 205, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
+            textBar: this.game.add.text(510, 185, this.welfareGame.getAverageWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
+            icon: this.game.add.image(340, 184, 'logo_time').setOrigin(0, 0).setScale(0.08).setScrollFactor(0).setDepth(21),
+            plusBtn: this.game.add.image(625, 199, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            minusBtn: this.game.add.image(389, 199, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            progressbar: displayWindowProgressBar(this.game, 429, 205, this.welfareGame.getAverageWorkTimePercent()).setDepth(21),
         }
 
         this.generalWorkTime.plusBtn.on("pointerdown", () => {
@@ -111,14 +116,23 @@ class windowObject {
 
         //Indicateur de production moyenne de la boite
         this.averageProduction = {
-
+            title: this.game.add.text(400, 240, "Average production per second", { font: "bold 15px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
+            icon: this.game.add.image(348, 250, 'production').setOrigin(0, 0).setScale(1).setScrollFactor(0).setDepth(21),
+            bar: this.game.add.image(385, 280, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0).setDepth(21),
+            progressBar: displayWindowProductionProgressBar(this.game, 393, 280, roundToTwo(this.welfareGame.getTotalProduction() * this.welfareGame.getAverageWorkTime() / 4)).setDepth(21),
+            barText: this.game.add.text(500, 260, roundToTwo(this.welfareGame.getTotalProduction() * this.welfareGame.getAverageWorkTime() / 4), { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
         }
-        
+
     }
 
     //Supprime les éléments de la fenêtre des settings
     closeSettingsWindow() {
+
+        //Titre
+        this.settingsTitle.destroy();
+
         //Salaire moyen
+        this.generalSalary.title.destroy()
         this.generalSalary.bar.destroy();
         this.generalSalary.icon.destroy();
         this.generalSalary.minusBtn.destroy();
@@ -127,27 +141,41 @@ class windowObject {
         this.generalSalary.progressbar.destroy();
 
         //Temps de travail moyen
+        this.generalWorkTime.title.destroy()
         this.generalWorkTime.bar.destroy();
         this.generalWorkTime.icon.destroy();
         this.generalWorkTime.minusBtn.destroy();
         this.generalWorkTime.plusBtn.destroy();
         this.generalWorkTime.textBar.destroy();
         this.generalWorkTime.progressbar.destroy();
+
+        //Production moyenne
+        this.averageProduction.title.destroy();
+        this.averageProduction.icon.destroy();
+        this.averageProduction.bar.destroy();
+        this.averageProduction.progressBar.destroy();
+        this.averageProduction.barText.destroy();
     }
 
-    updateSettingsWindow(){
+    updateSettingsWindow() {
         this.generalSalary.textBar.destroy();
-        this.generalSalary.textBar = this.game.add.text(500, 105, this.welfareGame.getAverageSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25);
+        this.generalSalary.textBar = this.game.add.text(500, 120, (isNaN(this.welfareGame.getAverageSalary()) ? 0 : this.welfareGame.getAverageSalary().toString()) + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25);
 
         this.generalSalary.progressbar.destroy();
-        this.generalSalary.progressbar = displayWindowProgressBar(this.game, 429, 125, this.welfareGame.getAverageSalaryPercent()).setDepth(21);
+        this.generalSalary.progressbar = displayWindowProgressBar(this.game, 429, 140, this.welfareGame.getAverageSalaryPercent()).setDepth(21);
 
         this.generalWorkTime.textBar.destroy();
-        this.generalWorkTime.textBar = this.game.add.text(510, 165, this.welfareGame.getAverageWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
+        this.generalWorkTime.textBar = this.game.add.text(510, 185, (isNaN(this.welfareGame.getAverageWorkTime()) ? 0 : this.welfareGame.getAverageWorkTime().toString()) + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
         this.generalWorkTime.progressbar.destroy();
-        this.generalWorkTime.progressbar = displayWindowProgressBar(this.game, 429, 185, this.welfareGame.getAverageWorkTimePercent()).setDepth(21);
+        this.generalWorkTime.progressbar = displayWindowProgressBar(this.game, 429, 205, this.welfareGame.getAverageWorkTimePercent()).setDepth(21);
 
+
+        this.averageProduction.progressBar.destroy();
+        this.averageProduction.progressBar = displayWindowProductionProgressBar(this.game, 393, 280, roundToTwo(this.welfareGame.getTotalProduction() * this.welfareGame.getAverageWorkTime() / 4 / this.welfareGame.getNbOfEmployees())).setDepth(21);
+
+        this.averageProduction.barText.destroy();
+        this.averageProduction.barText = this.game.add.text(500, 260, roundToTwo(this.welfareGame.getTotalProduction() * this.welfareGame.getAverageWorkTime() / 4), { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
     }
 
 
@@ -320,7 +348,7 @@ class windowObject {
                 icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0).setDepth(21),
                 plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
                 minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
-                progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()).setDepth(21), 
+                progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()).setDepth(21),
             }
 
             this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {

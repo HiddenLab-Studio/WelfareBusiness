@@ -54,21 +54,6 @@ class hudObject {
                 hud.changeActiveSpeed(1)
             });
         });
-
-        //Bouton de settings
-        this.settingsbtn = this.phaser.add.sprite(config.width - 397, config.height - 110, 'button_settings').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
-        this.settingsbtn.on('pointerdown', function () {
-            if (hud.window.isOpened()) {
-                hud.window.closeWindow()
-            }
-            else {
-                hud.window.createBackWindow();
-                hud.window.beSettingsWindow();
-            }
-        });
-
-
-
     }
 
     createHud() {
@@ -263,7 +248,8 @@ class hudObject {
     }
 
     updateHappinessCounter(happiness) {
-        this.happinessString = roundToTwo(happiness).toString() + "%";
+        console.log();
+        this.happinessString = roundToTwo(isNaN(happiness) ? 0 : happiness).toString() + "%";
         this.happinessText.destroy();
         this.happinessText = this.phaser.add.text(237, 20, this.happinessString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(11);
         this.happinessIcon.destroy();

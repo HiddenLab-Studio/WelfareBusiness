@@ -130,6 +130,7 @@ function update(time, delta) {
                     hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
                 }
             hud.temporaryMessageWageLoop();
+            hud.temporaryMessageEndOfProjectLoop();
 
             }
 

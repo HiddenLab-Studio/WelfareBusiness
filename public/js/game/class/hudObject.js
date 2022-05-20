@@ -311,6 +311,21 @@ class hudObject {
         }
     }
 
+
+    generateEndOfProjectMessage(amount){
+        this.tmpMsgCounterProject = 9;
+
+        this.tmpMsgTextProject = this.phaser.add.text(55, 55, "+" + amount + "€", { font: "18px Arial", fill: "#2e41f0" }).setScrollFactor(0);
+    }
+
+    temporaryMessageEndOfProjectLoop() {
+        this.tmpMsgCounterProject--;
+        if (this.tmpMsgCounterProject <= 0 && this.tmpMsgTextProject != undefined) {
+            this.tmpMsgTextProject.destroy();
+            this.tmpMsgTextProject = undefined;
+        }
+    }
+
     getWindow() {
         return this.window;
     }

@@ -2,12 +2,12 @@
 
 class welfareBusiness {
     constructor() {
-        this.currentProject = new project(100, 100, 0)
+        this.currentProject = new project(1, 0, 0)
         this.employeesList = new Array(12);
         this.employeesNb = 0;
         this.updateRate = 1;
         this.started = false;
-        this.money = 300000;
+        this.money = 1000;
         this.realProject = true;
         this.isNewMonthBool = false;
 
@@ -128,8 +128,9 @@ class welfareBusiness {
         if (this.isProjectFinished()) {
             this.realProject = false;
             this.money += this.currentProject.getRevenue();
+            mapManager.getHud().generateEndOfProjectMessage(this.currentProject.getRevenue())
             this.generate3ProjectChoices()
-            this.currentProject = new project(99999999999, 0, -1);//Projet temporaire inutile en attendant un nouveau choix
+            this.currentProject = new project(99999999999, 0, -1);//Projet temporaire inutile en attendant un nouveau choix et malus de 1 de bonheur car ils ne font rien
         }
         else {
             for (let i = 0; i < this.employeesList.length; i++) {
@@ -236,8 +237,7 @@ class welfareBusiness {
     generate3ProjectChoices() {
         this.proposals = new Array(3);
         for (let i = 0; i < 3; i++) {
-            let tmpRand = random(0, 8);
-
+            let tmpRand = random(0, 9);
             switch (tmpRand) {
                 case 0: case 1: case 2:
                     this.proposals[i] = this.generateSafeProject();
@@ -252,9 +252,9 @@ class welfareBusiness {
                     this.proposals[i] = this.generateAmbitiousProject();
                     break;
 
-                case 8:
-
+                case 8: case 9:
                     this.proposals[i] = this.generateEcoProject();
+                    break;
             }
         }
     }
@@ -264,22 +264,22 @@ class welfareBusiness {
     }
 
     generateSafeProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(15, 3), this.getTotalProduction() * 6, 5, 'Short project');
+        let proposal = new project(this.getTotalProduction() * convertToSec(6, 3), this.getTotalProduction() * 15, 5, 'Short project');
         return proposal;
     }
 
     generateNullProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(25, 3), this.getTotalProduction() * 6, 0, 'SQL Project')
+        let proposal = new project(this.getTotalProduction() * convertToSec(7, 3), this.getTotalProduction() * 20, 0, 'SQL Project')
         return proposal;
     }
 
     generateAmbitiousProject() {
-        let proposal = new project(this.getTotalProduction() * 2 * convertToSec(50, 3), this.getTotalProduction() * 18, -15, 'Time consuming project')
+        let proposal = new project(this.getTotalProduction() * 2 * convertToSec(9, 3), this.getTotalProduction() * 75, -15, 'Time consuming project')
         return proposal;
     }
 
     generateEcoProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(30, 3), this.getTotalProduction() * 5, 20, 'Ecoproject')
+        let proposal = new project(this.getTotalProduction() * convertToSec(9, 3), this.getTotalProduction() * 20, 20, 'Ecoproject')
         return proposal;
     }
 

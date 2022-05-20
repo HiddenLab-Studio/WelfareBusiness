@@ -294,10 +294,10 @@ class windowObject {
             this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
 
-            this.productionIcon = this.game.add.image(348, 350, 'production').setOrigin(0, 0).setScale(1).setScrollFactor(0).setDepth(21);
-            this.productionBar = this.game.add.image(385, 360, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0).setDepth(21);
-            this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction()).setDepth(21)
-            this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction()), { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
+            this.productionIcon = this.game.add.image(348, 350, 'production').setOrigin(0, 0).setScale(1).setScrollFactor(0);
+            this.productionBar = this.game.add.image(385, 360, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0);
+            this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 4))
+            this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 4), { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
 
             //Textes de conseil pour le joueur
@@ -388,10 +388,12 @@ class windowObject {
                 this.happinessBarText.destroy();
                 this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
+                //Calcul production par seconde : un jour = 12 ticks et journée max = 12 ticks, de plus une journée = 4 secondes
+                //Donc pour avoir la prod par seconde, on regarde sa prod journalière * nombre d'heures de taff / 4
                 this.productionProgressBar.destroy();
-                this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3)
+                this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 4))
                 this.productionBarText.destroy();
-                this.productionBarText = this.game.add.text(490, 340, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3/*3 tick par secondes*/) + ' /s', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
+                this.productionBarText = this.game.add.text(490, 340, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 4) + ' /s', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);;
             }
 
         }

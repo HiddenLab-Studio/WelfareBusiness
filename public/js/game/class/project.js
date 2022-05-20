@@ -3,7 +3,7 @@ class project {
         this.randomCoef = Math.random() * (1.10 - 0.9) + 0.9
         
         this.amountToProduce = Math.round(amountToProduce * this.randomCoef);
-        this.initialAmount = amountToProduce;
+        this.initialAmount = this.amountToProduce;
         this.revenue = Math.round(revenue * this.randomCoef);
         this.happinessImpact = happinessImpact;
         this.title = title

@@ -187,15 +187,15 @@ class windowObject {
         let hud = this.hud;
 
 
-        this.projectChoiceTitle = this.game.add.text(410, 50, "Choose a new project", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0)
+        this.projectChoiceTitle = this.game.add.text(410, 50, "Choose a new project", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21)
 
         this.projectChoice = new Array(3);
 
         for (let i = 0; i < 3; i++) {
             let projectTitleString = proposals[i].getTitle() + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue()) + "\nHappiness impact :" + (proposals[i].getHappinessImpact() > 0 ? '+' + proposals[i].getHappinessImpact() : proposals[i].getHappinessImpact())  + '%';
             this.projectChoice[i] = {
-                background: this.game.add.image(350, 90 + i * 130, getRandomProjectChoiceBackground()).setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
-                title: this.game.add.text(370, 115 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0),
+                background: this.game.add.image(350, 90 + i * 130, getRandomProjectChoiceBackground()).setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+                title: this.game.add.text(370, 115 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0).setDepth(21),
             }
 
             this.projectChoice[i].background.on('pointerdown', function () {

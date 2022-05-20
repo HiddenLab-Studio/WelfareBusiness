@@ -142,6 +142,7 @@ function update(time, delta) {
         hud.updateEmployeeWindow();
         hud.updateShopWindow();
         hud.updateSettingsWindow();
+        welfareBusinessGame.isGameLost();
 
         if (hud.playerB.length > 0) {
             for (let i = 0; i < hud.playerB.length; i++) {

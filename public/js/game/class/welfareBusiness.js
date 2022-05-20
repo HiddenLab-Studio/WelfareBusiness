@@ -7,7 +7,7 @@ class welfareBusiness {
         this.employeesNb = 0;
         this.updateRate = 1;
         this.started = false;
-        this.money = 1000000;
+        this.money = -10000;
         this.realProject = true;
         this.isNewMonthBool = false;
 
@@ -21,6 +21,12 @@ class welfareBusiness {
         }
         this.generate3ProjectChoices()
 
+    }
+
+    isGameLost(){
+        if(this.money < -10000){
+            console.log("Partie perdue");
+        }
     }
 
     getNbOfEmployees(){

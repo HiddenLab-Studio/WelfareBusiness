@@ -7,7 +7,7 @@ class welfareBusiness {
         this.employeesNb = 0;
         this.updateRate = 1;
         this.started = false;
-        this.money = -10000;
+        this.money = 1000000;
         this.realProject = true;
         this.isNewMonthBool = false;
 

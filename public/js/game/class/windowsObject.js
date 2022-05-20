@@ -159,13 +159,13 @@ class windowObject {
 
     updateSettingsWindow() {
         this.generalSalary.textBar.destroy();
-        this.generalSalary.textBar = this.game.add.text(500, 120, (isNaN(this.welfareGame.getAverageSalary()) ? 0 : this.welfareGame.getAverageSalary().toString()) + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25);
+        this.generalSalary.textBar = this.game.add.text(500, 120, (isNaN(this.welfareGame.getAverageSalary()) ? 0 : roundToTwo(this.welfareGame.getAverageSalary()).toString()) + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25);
 
         this.generalSalary.progressbar.destroy();
         this.generalSalary.progressbar = displayWindowProgressBar(this.game, 429, 140, this.welfareGame.getAverageSalaryPercent()).setDepth(21);
 
         this.generalWorkTime.textBar.destroy();
-        this.generalWorkTime.textBar = this.game.add.text(510, 185, (isNaN(this.welfareGame.getAverageWorkTime()) ? 0 : this.welfareGame.getAverageWorkTime().toString()) + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
+        this.generalWorkTime.textBar = this.game.add.text(510, 185, (isNaN(this.welfareGame.getAverageWorkTime()) ? 0 : roundToTwo(this.welfareGame.getAverageWorkTime()).toString()) + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
         this.generalWorkTime.progressbar.destroy();
         this.generalWorkTime.progressbar = displayWindowProgressBar(this.game, 429, 205, this.welfareGame.getAverageWorkTimePercent()).setDepth(21);

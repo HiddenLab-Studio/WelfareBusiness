@@ -29,9 +29,11 @@ class hudObject {
      * @param variable hud.player(B/L/...)
      */
     addSprite(couple, str, variable){
-        let hud = this;
-        variable.push(hud.phaser.add.sprite(couple[0], couple[1], str).setScale(1));
-        console.log(variable, couple);
+        let allowedString = ["characterB", "characterL", "characterR", "characterF"]
+        if(couple.length === 2 && allowedString.includes(str)){
+            variable.push(this.phaser.add.sprite(couple[0], couple[1], str).setScale(1).setDepth(0));
+            //console.log(variable, couple);
+        }
     }
 
     //Initialisation de l'interface utilisateur
@@ -70,7 +72,7 @@ class hudObject {
 
     createHud() {
         //Barre de menu du bas
-        this.menubar = this.phaser.add.sprite(config.width / 2, config.height - 100, 'menu_hud').setScrollFactor(0);
+        this.menubar = this.phaser.add.sprite(config.width / 2, config.height - 100, 'menu_hud').setScrollFactor(0).setDepth(1);
 
         //Style des barres d'info (argent, bonheur, date et vitesse de jeu) A SUPPRIMER
         this.infobarStyle = this.phaser.make.graphics().fillStyle(0x1089f2).fillRect(0, 0, 2 * this.arbitraryUnit, 0.5 * this.arbitraryUnit);
@@ -109,30 +111,28 @@ class hudObject {
         }).setScrollFactor(0).setDepth(11);
 
         //Icones gestion du temps
-        this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-
-        this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-
-        this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+        this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+        this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+        this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
 
 
         this.generateTimeSpeedListeners();
 
         //Bouton du shop
         //this.shopStyle = this.phaser.make.graphics().fillStyle(0xffff00).fillRect(0, 0, this.arbitraryUnit, this.arbitraryUnit);
-        this.shopbtn = this.phaser.add.sprite(298, config.height - 110, 'button_shop').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
+        this.shopbtn = this.phaser.add.sprite(298, config.height - 110, 'button_shop').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0).setDepth(2);
 
         //Barre de progression du projet en cours
-        this.progressbar = displayProgressBar(this.phaser, 100, this.config).setScrollFactor(0);
+        this.progressbar = displayProgressBar(this.phaser, 100, this.config).setScrollFactor(0).setDepth(2);
 
         //Boutton settings 
-        this.settingsbtn = this.phaser.add.sprite(config.width - 397, config.height - 110, 'button_settings').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
+        this.settingsbtn = this.phaser.add.sprite(config.width - 397, config.height - 110, 'button_settings').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0).setDepth(2);
 
         this.pseudoText = this.phaser.add.text(this.config.width / 2 - 25, this.config.height - 87, dataManager.getUsername(), {
             font: "14px Arial",
             fill: "#000000",
             fontStyle: 'bold',
-        }).setScrollFactor(0);
+        }).setScrollFactor(0).setDepth(2);
     }
 
     getmap() {
@@ -146,9 +146,9 @@ class hudObject {
                 this.pausebtn.destroy();
                 this.playbtn.destroy();
                 this.avancerapidebtn.destroy();
-                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
                 this.generateTimeSpeedListeners()
                 break;
 
@@ -156,9 +156,9 @@ class hudObject {
                 this.pausebtn.destroy();
                 this.playbtn.destroy();
                 this.avancerapidebtn.destroy();
-                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
                 this.generateTimeSpeedListeners()
                 break;
 
@@ -166,9 +166,9 @@ class hudObject {
                 this.pausebtn.destroy();
                 this.playbtn.destroy();
                 this.avancerapidebtn.destroy();
-                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
-                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.pausebtn = this.phaser.add.image(this.config.width / 2 - 30, this.config.height - 20, 'pause').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+                this.playbtn = this.phaser.add.image(this.config.width / 2, this.config.height - 20, 'play').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
+                this.avancerapidebtn = this.phaser.add.image(this.config.width / 2 + 30, this.config.height - 20, 'avance_rapide_actif').setScale(1).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(2);
                 this.generateTimeSpeedListeners()
                 break;
 
@@ -210,7 +210,7 @@ class hudObject {
             }
         });
 
-        this.shopbtn = this.phaser.add.sprite(298, config.height - 110, 'button_shop').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0);
+        this.shopbtn = this.phaser.add.sprite(298, config.height - 110, 'button_shop').setOrigin(0, 0).setInteractive({ cursor: "pointer" }).setScale(0.55).setScrollFactor(0).setDepth(2);
         this.shopbtn.on("pointerdown", function () {
             if (!hud.window.isShopOpened()) {
                 // Désactive les boutons du HUD
@@ -235,7 +235,7 @@ class hudObject {
         this.progressbar = displayProgressBar(this.phaser, percent, this.config);
         if (percent >= 100) {//Si le projet est fini, on affiche un bouton pour choisir un nouveau projet
             if (this.isNewProjectButtonGenerated === false) {
-                this.projectChoicebtn = this.phaser.add.image(this.config.width / 2 + 5, this.config.height - 50, 'bouton_projet').setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+                this.projectChoicebtn = this.phaser.add.image(this.config.width / 2 + 5, this.config.height - 50, 'bouton_projet').setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(3);
                 this.isNewProjectButtonGenerated = true;
             }
 
@@ -318,9 +318,8 @@ class hudObject {
 
 //Fonction d'affichage de la barre de progression en fonction du pourcentage de progression du projet
 function displayProgressBar(game, percent, config) {
-    let progressbar = game.add.image(config.width / 2 - 87, config.height - 61, 'progress_bar').setOrigin(0, 0).setScrollFactor(0);
+    let progressbar = game.add.image(config.width / 2 - 87, config.height - 61, 'progress_bar').setOrigin(0, 0).setScrollFactor(0).setDepth(2);
     progressbar.setDisplaySize(percent * 184 / 100, 18);
-
     return progressbar;
 }
 

@@ -13,8 +13,8 @@ class windowObject {
     createBackWindow() {
         let window = this;
         this.opened = true;
-        this.menu = this.game.add.image(this.config.width * 0.5, 270, /*'hud_employed'*/'windowBack').setScale(0.6, 0.8).setScrollFactor(0);
-        this.closewindowbtn = this.game.add.image(670, 40, 'closeWindowBtn').setScale(0.5).setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+        this.menu = this.game.add.image(this.config.width * 0.5, 270, /*'hud_employed'*/'windowBack').setScale(0.6, 0.8).setScrollFactor(0).setDepth(20);
+        this.closewindowbtn = this.game.add.image(670, 40, 'closeWindowBtn').setScale(0.5).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(21);
 
         this.closewindowbtn.on('pointerdown', function () {
             window.closeWindow();
@@ -228,19 +228,19 @@ class windowObject {
             this.currentEmployeeWindow = employee;
             employee.getDesk();
 
-            this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, employee.getName(), { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0);
+            this.employeeName = this.game.add.text(this.config.width / 2 - 150, 55, employee.getName(), { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setOrigin(0, 0).setDepth(21);
 
             //Jauge de salaire et temps de travail ajustable + bouton d'upgrade du bureau
             this.employeeParameterGauge = new Array(2);
 
             //Salaire
             this.employeeParameterGauge[0] = {
-                bar: this.game.add.image(423, 125, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0),
-                textBar: this.game.add.text(500, 105, this.currentEmployeeWindow.getSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0),
-                icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0),
-                plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
-                minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
-                progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
+                bar: this.game.add.image(423, 125, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
+                textBar: this.game.add.text(500, 105, this.currentEmployeeWindow.getSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25),
+                icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0).setDepth(21),
+                plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+                minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+                progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()).setDepth(21), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
             }
 
             this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {
@@ -253,12 +253,12 @@ class windowObject {
 
             //Temps de travail
             this.employeeParameterGauge[1] = {
-                bar: this.game.add.image(423, 185, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0),
-                textBar: this.game.add.text(510, 165, this.currentEmployeeWindow.getWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0),
-                icon: this.game.add.image(340, 164, 'logo_time').setOrigin(0, 0).setScale(0.08).setScrollFactor(0),
-                plusBtn: this.game.add.image(625, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
-                minusBtn: this.game.add.image(389, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }),
-                progressbar: displayWindowProgressBar(this.game, 429, 185, employee.getWorkTimePercent()),
+                bar: this.game.add.image(423, 185, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
+                textBar: this.game.add.text(510, 165, this.currentEmployeeWindow.getWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
+                icon: this.game.add.image(340, 164, 'logo_time').setOrigin(0, 0).setScale(0.08).setScrollFactor(0).setDepth(21),
+                plusBtn: this.game.add.image(625, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+                minusBtn: this.game.add.image(389, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+                progressbar: displayWindowProgressBar(this.game, 429, 185, employee.getWorkTimePercent()).setDepth(21),
             }
 
             this.employeeParameterGauge[1].plusBtn.on("pointerdown", () => {
@@ -270,11 +270,11 @@ class windowObject {
             })
 
 
-            this.upgradeBtn = this.game.add.image(480, 230, 'upgrade').setOrigin(0, 0).setScale(0.9, 1.1).setScrollFactor(0).setInteractive({ cursor: "pointer" });
-            this.deskImg = this.game.add.image(340, 238, 'bureau').setOrigin(0, 0).setScale(1).setScrollFactor(0);
+            this.upgradeBtn = this.game.add.image(480, 230, 'upgrade').setOrigin(0, 0).setScale(0.9, 1.1).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21);
+            this.deskImg = this.game.add.image(340, 238, 'bureau').setOrigin(0, 0).setScale(1).setScrollFactor(0).setDepth(21);
 
 
-            this.deskLevelText = this.game.add.text(415, 240, "Level " + desk.level, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+            this.deskLevelText = this.game.add.text(415, 240, "Level " + desk.level, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
             this.upgradeBtn.on("pointerdown", () => {
                 if(this.welfareGame.getPlayerMoney() >= getNextDeskPrice(employee.getDesk().level)){
@@ -285,35 +285,35 @@ class windowObject {
                 }
             })
 
-            this.upgradeBtnText = this.game.add.text(554, 240, employee.getDesk().level < 5 ? getNextDeskPrice(employee.getDesk().level) + '€' : 'MAX', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+            this.upgradeBtnText = this.game.add.text(554, 240, employee.getDesk().level < 5 ? getNextDeskPrice(employee.getDesk().level) + '€' : 'MAX', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
 
-            this.happinessIcon = this.game.add.image(340, 300, 'emote_heureux_window').setOrigin(0, 0).setScale(1).setScrollFactor(0);
-            this.happinessBar = this.game.add.image(385, 310, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0);
-            this.happinessProgressBar = displayWindowHappinessProgressBar(this.game, 393, 310, this.currentEmployeeWindow.getHappiness())
-            this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+            this.happinessIcon = this.game.add.image(340, 300, 'emote_heureux_window').setOrigin(0, 0).setScale(1).setScrollFactor(0).setDepth(21);
+            this.happinessBar = this.game.add.image(385, 310, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0).setDepth(21);
+            this.happinessProgressBar = displayWindowHappinessProgressBar(this.game, 393, 310, this.currentEmployeeWindow.getHappiness()).setDepth(21)
+            this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
 
-            this.productionIcon = this.game.add.image(348, 350, 'production').setOrigin(0, 0).setScale(1).setScrollFactor(0);
-            this.productionBar = this.game.add.image(385, 360, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0);
-            this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction())
-            this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction()), { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+            this.productionIcon = this.game.add.image(348, 350, 'production').setOrigin(0, 0).setScale(1).setScrollFactor(0).setDepth(21);
+            this.productionBar = this.game.add.image(385, 360, 'barre').setOrigin(0, 0).setScale(0.9, 1).setScrollFactor(0).setDepth(21);
+            this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction()).setDepth(21)
+            this.productionBarText = this.game.add.text(500, 340, roundToTwo(this.currentEmployeeWindow.getProduction()), { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
 
             //Textes de conseil pour le joueur
             this.employeeTips = new Array(3);
 
             for (let i = 0; i < 3; i++) {
-                this.employeeTips[i] = this.game.add.text(350, 390 + i * 40, "• " + determineTextAdvice(employee)[0], { font: "14px Arial", fill: "#000000" }).setScrollFactor(0);
+                this.employeeTips[i] = this.game.add.text(350, 390 + i * 40, "• " + determineTextAdvice(employee)[0], { font: "14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
             }
         }
 
         //Si aucun employé ne possède ce bureau
         else {
             this.currentEmployeeWindow = undefined;
-            this.upgradeBtn = this.game.add.image(this.config.width / 2, 255, 'hirebtn').setScale(0.75).setScrollFactor(0).setInteractive({ cursor: "pointer" });
+            this.upgradeBtn = this.game.add.image(this.config.width / 2, 255, 'hirebtn').setScale(0.75).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21);
 
-            this.employeeName = this.game.add.text(400, 55, "Hire someone to unlock", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0);
+            this.employeeName = this.game.add.text(400, 55, "Hire someone to unlock", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
 
             this.upgradeBtn.on("pointerdown", () => {
@@ -374,9 +374,9 @@ class windowObject {
         if (this.windowType == "employee") {
             if (this.employeeParameterGauge != undefined && this.currentEmployeeWindow != undefined) {
                 this.employeeParameterGauge[0].textBar.destroy();
-                this.employeeParameterGauge[0].textBar = this.game.add.text(500, 105, this.currentEmployeeWindow.getSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+                this.employeeParameterGauge[0].textBar = this.game.add.text(500, 105, this.currentEmployeeWindow.getSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
                 this.employeeParameterGauge[1].textBar.destroy();
-                this.employeeParameterGauge[1].textBar = this.game.add.text(510, 165, this.currentEmployeeWindow.getWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000"  }).setScrollFactor(0);
+                this.employeeParameterGauge[1].textBar = this.game.add.text(510, 165, this.currentEmployeeWindow.getWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000"  }).setScrollFactor(0).setDepth(21);
                 this.employeeParameterGauge[0].progressbar.destroy();
                 this.employeeParameterGauge[0].progressbar = displayWindowProgressBar(this.game, 429, 125, this.currentEmployeeWindow.getSalaryPercent());
                 this.employeeParameterGauge[1].progressbar.destroy();
@@ -386,12 +386,12 @@ class windowObject {
                 this.happinessProgressBar.destroy();
                 this.happinessProgressBar = displayWindowHappinessProgressBar(this.game, 393, 310, this.currentEmployeeWindow.getHappiness())
                 this.happinessBarText.destroy();
-                this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+                this.happinessBarText = this.game.add.text(495, 290, roundToTwo(this.currentEmployeeWindow.getHappiness()) + ' %', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
                 this.productionProgressBar.destroy();
                 this.productionProgressBar = displayWindowProductionProgressBar(this.game, 393, 360, this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3)
                 this.productionBarText.destroy();
-                this.productionBarText = this.game.add.text(490, 340, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3/*3 tick par secondes*/) + ' /s', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0);
+                this.productionBarText = this.game.add.text(490, 340, roundToTwo(this.currentEmployeeWindow.getProduction() * this.currentEmployeeWindow.getWorkTime() / 3/*3 tick par secondes*/) + ' /s', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
             }
 
         }
@@ -486,19 +486,19 @@ function increaseButton(actionWanted, employee) {
 
 
 function displayWindowProgressBar(game, x, y, percentSize) {
-    let progressbar = game.add.image(x, y, 'infobar').setOrigin(0, 0).setScale(1.35 * percentSize / 100, 0.22).setScrollFactor(0)
+    let progressbar = game.add.image(x, y, 'infobar').setOrigin(0, 0).setScale(1.35 * percentSize / 100, 0.22).setScrollFactor(0).setDepth(21)
 
     return progressbar;
 }
 
 function displayWindowHappinessProgressBar(game, x, y, percentSize) {
-    let progressbar = game.add.image(x, y, 'happinessbar').setOrigin(0, 0).setScale(1.73 * percentSize / 100, 0.22).setScrollFactor(0)
+    let progressbar = game.add.image(x, y, 'happinessbar').setOrigin(0, 0).setScale(1.73 * percentSize / 100, 0.22).setScrollFactor(0).setDepth(21)
 
     return progressbar;
 }
 
 function displayWindowProductionProgressBar(game, x, y, percentSize) {
-    let progressbar = game.add.image(x, y, 'productionbar').setOrigin(0, 0).setScale(1.73 * (percentSize > 200 ? 200 : percentSize) / 200, 0.22).setScrollFactor(0)
+    let progressbar = game.add.image(x, y, 'productionbar').setOrigin(0, 0).setScale(1.73 * (percentSize > 200 ? 200 : percentSize) / 200, 0.22).setScrollFactor(0).setDepth(21)
 
     return progressbar;
 }

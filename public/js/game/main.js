@@ -145,25 +145,25 @@ function update(time, delta) {
 
         if (hud.playerB.length > 0) {
             for (let i = 0; i < hud.playerB.length; i++) {
-                hud.playerB[i].anims.play("back_to_me", true);
+                hud.playerB[i][0].anims.play("back_to_me", true);
             }
         }
 
         if (hud.playerL.length > 0) {
             for (let i = 0; i < hud.playerL.length; i++) {
-                hud.playerL[i].anims.play("left", true);
+                hud.playerL[i][0].anims.play("left", true);
             }
         }
 
         if (hud.playerR.length > 0) {
             for (let i = 0; i < hud.playerR.length; i++) {
-                hud.playerR[i].anims.play("right", true);
+                hud.playerR[i][0].anims.play("right", true);
             }
         }
 
         if (hud.playerF.length > 0) {
             for (let i = 0; i < hud.playerF.length; i++) {
-                hud.playerF[i].anims.play("front_of_me", true);
+                hud.playerF[i][0].anims.play("front_of_me", true);
             }
         }
     }

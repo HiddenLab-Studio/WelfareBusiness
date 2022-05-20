@@ -214,6 +214,9 @@ class welfareBusiness {
                     this.employeesList[i].setCurrentProjectHappiness(this.currentProject.getHappinessImpact())
                     if (isEmployeeWorking(this.employeesList[i].getWorkTime(), this.getTime())) {
                         this.currentProject.updateAmountToProduce(this.employeesList[i].getProduction());
+                        deskManager.employeeGetOut(this.employeesList[i].deskId, false)
+                    } else {
+                        deskManager.employeeGetOut(this.employeesList[i].deskId, true)
                     }
                 }
             }

@@ -150,18 +150,19 @@ let deskManager = (function () {
             if (element.employee !== undefined) {
                 mapManager.getWelfareBusinessGame().addEmployee(element);
                 if(element.level !== 0){
+                    let id = element.id;
                     switch (element.orientation){
                         case 1:
-                            hud.addSprite(pnjPos[0], "characterB", hud.playerB);
+                            hud.addSprite(pnjPos[0], "characterB", hud.playerB, id);
                             break;
                         case 2:
-                            hud.addSprite(pnjPos[0], "characterF", hud.playerF);
+                            hud.addSprite(pnjPos[0], "characterF", hud.playerF, id);
                             break;
                         case 3:
-                            hud.addSprite(pnjPos[0], "characterL", hud.playerL);
+                            hud.addSprite(pnjPos[0], "characterL", hud.playerL, id);
                             break;
                         case 4:
-                            hud.addSprite(pnjPos[0], "characterR", hud.playerR);
+                            hud.addSprite(pnjPos[0], "characterR", hud.playerR, id);
                             break;
                         default:
                             break;
@@ -218,35 +219,34 @@ let deskManager = (function () {
             }
         },
 
-        // Création des listeners des bureaux (onClick)
-        registerEvent() {
-            // Listener quand on clique sur une case
-            instance.input.on("pointerdown", (pos) => {
-                // try catch car la target peut être null (NullPointerException)
-                try {
-                    let target = deskLayer.getTileAtWorldXY(pos.worldX, pos.worldY);
-                    // console.log(target.x, target.y);
-                    let result = undefined;
-                    let id = undefined;
-                    let level = undefined;
-                    let active = undefined;
-                    for (const element of data.desk) {
-                        element.pos.forEach((coordinate) => {
-                            if (coordinate[0] === target.x && coordinate[1] === target.y) {
-                                id = element.id;
-                                level = element.level;
-                                active = element.active;
-                                result = true;
-                            }
-                        })
-                    }
-                    // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
-                    if (result && (!mapManager.getHud().getWindow().isOpened() && !mapManager.getHud().getWindow().isShopOpened())) {
-                        // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
-                        deskManager.openDesk(id);
-                    }
-                } catch (NullPointerException) {}
+        employeeGetOut(id, boolean){
+            let deskData = getDeskById(id)[0];
+            let spriteArray = undefined;
+            switch (deskData.orientation){
+                case 1:
+                    spriteArray = mapManager.getHud().getSprite()[0]
+                    break;
+                case 2:
+                    spriteArray = mapManager.getHud().getSprite()[1]
+                    break;
+                case 3:
+                    spriteArray = mapManager.getHud().getSprite()[2]
+                    break;
+                case 4:
+                    spriteArray = mapManager.getHud().getSprite()[3]
+                    break;
+                default:
+                    return;
+            }
+
+            let sprite = spriteArray.filter((element) => {
+                if(element[1] === id){
+                    return element;
+                }
             })
+
+            sprite[0][0].visible = !boolean;
+
         },
 
         // Permet de débloquer un bureau (embaucher un employé)
@@ -257,18 +257,19 @@ let deskManager = (function () {
 
                 let pnjPos = desk.pnj.pos[0];
                 let hud = mapManager.getHud();
+                let id = desk.id;
                 switch (desk.orientation){
                     case 1:
-                        hud.addSprite(pnjPos, "characterB", hud.playerB);
+                        hud.addSprite(pnjPos, "characterB", hud.playerB, id);
                         break;
                     case 2:
-                        hud.addSprite(pnjPos, "characterF", hud.playerF);
+                        hud.addSprite(pnjPos, "characterF", hud.playerF, id);
                         break;
                     case 3:
-                        hud.addSprite(pnjPos, "characterL", hud.playerL);
+                        hud.addSprite(pnjPos, "characterL", hud.playerL, id);
                         break;
                     case 4:
-                        hud.addSprite(pnjPos, "characterR", hud.playerR);
+                        hud.addSprite(pnjPos, "characterR", hud.playerR, id);
                         break;
                     default:
                         break;
@@ -277,6 +278,7 @@ let deskManager = (function () {
             }
         },
 
+        // Améliore un bureau
         upgradeDesk(deskData) {
             // Conditions pour upgrade un bureau (< au lvl max / le bureau est actif (sécurité))
             if (deskData.level < maxDeskLevel && deskData.active) {
@@ -331,6 +333,37 @@ let deskManager = (function () {
                 deskData.level += 1;
                 dataManager.save(token, data);
             }
+        },
+
+        // Création des listeners des bureaux (onClick)
+        registerEvent() {
+            // Listener quand on clique sur une case
+            instance.input.on("pointerdown", (pos) => {
+                // try catch car la target peut être null (NullPointerException)
+                try {
+                    let target = deskLayer.getTileAtWorldXY(pos.worldX, pos.worldY);
+                    // console.log(target.x, target.y);
+                    let result = undefined;
+                    let id = undefined;
+                    let level = undefined;
+                    let active = undefined;
+                    for (const element of data.desk) {
+                        element.pos.forEach((coordinate) => {
+                            if (coordinate[0] === target.x && coordinate[1] === target.y) {
+                                id = element.id;
+                                level = element.level;
+                                active = element.active;
+                                result = true;
+                            }
+                        })
+                    }
+                    // Si la case cliqué correspond à un bureau on ouvre le popup du bureau!
+                    if (result && (!mapManager.getHud().getWindow().isOpened() && !mapManager.getHud().getWindow().isShopOpened())) {
+                        // Condition: aucune fenêtre actuellement ouverte et le bureau est actif
+                        deskManager.openDesk(id);
+                    }
+                } catch (NullPointerException) {}
+            })
         },
 
         // Affiche le menu du bureau sur lequel on a cliqué

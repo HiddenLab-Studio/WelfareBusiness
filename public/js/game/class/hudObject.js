@@ -27,11 +27,12 @@ class hudObject {
      * @param couple (x,y)
      * @param str orientation
      * @param variable hud.player(B/L/...)
+     * @param id desk ID
      */
-    addSprite(couple, str, variable){
+    addSprite(couple, str, variable, id){
         let allowedString = ["characterB", "characterL", "characterR", "characterF"]
         if(couple.length === 2 && allowedString.includes(str)){
-            variable.push(this.phaser.add.sprite(couple[0], couple[1], str).setScale(1).setDepth(0));
+            variable.push([this.phaser.add.sprite(couple[0], couple[1], str).setScale(1).setDepth(0), id]);
             //console.log(variable, couple);
         }
     }

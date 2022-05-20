@@ -23,6 +23,86 @@ class welfareBusiness {
 
     }
 
+    getAverageSalary() {
+        let averageSalary = 0;
+        for (let i = 0; i < this.employeesList.length; i++) {
+            if (this.employeesList[i] != undefined) {
+                averageSalary += this.employeesList[i].getSalary();
+            }
+        }
+        averageSalary = averageSalary / this.employeesNb;
+        return averageSalary;
+    }
+
+    getAverageSalaryPercent() {
+        let tmpPercent = this.getAverageSalary() - 1300;
+
+        tmpPercent = tmpPercent / 4000 * 100;
+        if (tmpPercent > 100) {
+            tmpPercent = 100
+        }
+        return tmpPercent;
+    }
+
+    increaseAverageSalary() {
+        for (let i = 0; i < this.employeesList.length; i++) {
+            if (this.employeesList[i] != undefined) {
+                this.employeesList[i].increaseWage();
+            }
+        }
+    }
+
+    decreaseAverageSalary() {
+        for (let i = 0; i < this.employeesList.length; i++) {
+            if (this.employeesList[i] != undefined) {
+                if (this.employeesList[i].getSalary() >= 1400) {
+                    this.employeesList[i].decreaseWage();
+                }
+            }
+        }
+    }
+
+
+    getAverageWorkTime() {
+        let averageWorkTime = 0;
+        for (let i = 0; i < this.employeesList.length; i++) {
+            if (this.employeesList[i] != undefined) {
+                averageWorkTime += this.employeesList[i].getWorkTime();
+            }
+        }
+        averageWorkTime = averageWorkTime / this.employeesNb;
+        return averageWorkTime;
+    }
+
+    getAverageWorkTimePercent() {
+        let tmpPercent = this.getAverageWorkTime() - 5;
+
+        tmpPercent = tmpPercent / 7 * 100
+
+        return tmpPercent
+    }
+
+    increaseAverageWorkTime() {
+        for (let i = 0; i < this.employeesList.length; i++) {
+            if (this.employeesList[i] != undefined) {
+                this.employeesList[i].increaseWorkTime();
+            }
+        }
+    }
+
+    decreaseAverageWorkTime() {
+        for (let i = 0; i < this.employeesList.length; i++) {
+            if (this.employeesList[i] != undefined) {
+                if (this.employeesList[i].getWorkTime() >= 6) {
+                    this.employeesList[i].decreaseWorkTime();
+                }
+            }
+        }
+    }
+
+    
+
+
     isProjectFinished() {
         if (this.currentProject.getAmountToProduce() <= 0) {
             return true;
@@ -101,10 +181,6 @@ class welfareBusiness {
 
     payAmount(amount) {
         this.money -= amount;
-    }
-
-    test() {
-        return this.employeesList;
     }
 
     getEmployeeById(id) {

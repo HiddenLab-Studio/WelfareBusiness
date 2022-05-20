@@ -31,7 +31,7 @@ class windowObject {
             mapManager.getHud().shopbtn.setInteractive()
             switch (this.windowType) {
                 case "option":
-                    this.volume.destroy();
+                    this.closeSettingsWindow();
                     break;
 
                 case "projectChoice":
@@ -61,11 +61,95 @@ class windowObject {
         return false;
     }
 
+    isSettingsWindow() {
+        if (this.windowType === "option") {
+            return true;
+        }
+        return false;
+    }
+
     //Fenêtre des settings
     beSettingsWindow() {
         this.windowType = "option";
-        this.volume = this.game.add.image(this.config.width * 0.5 - 125, 200, 'volumeHigh').setScale(0.35).setInteractive({ cursor: "pointer" }).setScrollFactor(0).setDepth(21);
+
+        //Salaire
+        this.generalSalary = {
+            bar: this.game.add.image(423, 125, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
+            textBar: this.game.add.text(500, 105, this.welfareGame.getAverageSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25),
+            icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0).setDepth(21),
+            plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            progressbar: displayWindowProgressBar(this.game, 429, 125, this.welfareGame.getAverageSalaryPercent()).setDepth(21), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
+        }
+
+        this.generalSalary.plusBtn.on("pointerdown", () => {
+            increaseButton('generalWage');
+        })
+
+        this.generalSalary.minusBtn.on("pointerdown", () => {
+            decreaseButton('generalWage');
+        })
+        
+        //Temps de travail
+        this.generalWorkTime = {
+            bar: this.game.add.image(423, 185, 'barre').setOrigin(0, 0).setScale(0.7, 1).setScrollFactor(0).setDepth(21),
+            textBar: this.game.add.text(510, 165, this.welfareGame.getAverageWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),
+            icon: this.game.add.image(340, 164, 'logo_time').setOrigin(0, 0).setScale(0.08).setScrollFactor(0).setDepth(21),
+            plusBtn: this.game.add.image(625, 179, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            minusBtn: this.game.add.image(389, 179, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
+            progressbar: displayWindowProgressBar(this.game, 429, 185, this.welfareGame.getAverageWorkTimePercent()).setDepth(21),
+        }
+
+        this.generalWorkTime.plusBtn.on("pointerdown", () => {
+            increaseButton('generalWorkTime');
+        })
+
+        this.generalWorkTime.minusBtn.on("pointerdown", () => {
+            decreaseButton('generalWorkTime');
+        })
+
+
+        //Indicateur de production moyenne de la boite
+        this.averageProduction = {
+
+        }
+        
     }
+
+    //Supprime les éléments de la fenêtre des settings
+    closeSettingsWindow() {
+        //Salaire moyen
+        this.generalSalary.bar.destroy();
+        this.generalSalary.icon.destroy();
+        this.generalSalary.minusBtn.destroy();
+        this.generalSalary.plusBtn.destroy();
+        this.generalSalary.textBar.destroy();
+        this.generalSalary.progressbar.destroy();
+
+        //Temps de travail moyen
+        this.generalWorkTime.bar.destroy();
+        this.generalWorkTime.icon.destroy();
+        this.generalWorkTime.minusBtn.destroy();
+        this.generalWorkTime.plusBtn.destroy();
+        this.generalWorkTime.textBar.destroy();
+        this.generalWorkTime.progressbar.destroy();
+    }
+
+    updateSettingsWindow(){
+        this.generalSalary.textBar.destroy();
+        this.generalSalary.textBar = this.game.add.text(500, 105, this.welfareGame.getAverageSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(25);
+
+        this.generalSalary.progressbar.destroy();
+        this.generalSalary.progressbar = displayWindowProgressBar(this.game, 429, 125, this.welfareGame.getAverageSalaryPercent()).setDepth(21);
+
+        this.generalWorkTime.textBar.destroy();
+        this.generalWorkTime.textBar = this.game.add.text(510, 165, this.welfareGame.getAverageWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
+
+        this.generalWorkTime.progressbar.destroy();
+        this.generalWorkTime.progressbar = displayWindowProgressBar(this.game, 429, 185, this.welfareGame.getAverageWorkTimePercent()).setDepth(21);
+
+    }
+
 
     beShopWindow() {
         let window = this
@@ -76,27 +160,27 @@ class windowObject {
         this.shop_hud = this.game.add.image(1000 / 2, 510, "shop_hud").setScrollFactor(0).setInteractive().setDepth(10);
 
         // Left
-        this.plant_button = this.game.add.image(1000 / 2 - 100, 515, "bouton_plante").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.plant_button = this.game.add.image(1000 / 2 - 100, 515, "bouton_plante").setInteractive({ cursor: "pointer" }).setScrollFactor(0).setScale(1.4).setDepth(11);
         this.plant_priceTag = this.game.add.text(1000 / 2 - 115, 530, getShopPriceString().plant, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
-        this.water_fountain_button = this.game.add.image(1000 / 2 - 200, 515, "bouton_eau").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.water_fountain_button = this.game.add.image(1000 / 2 - 200, 515, "bouton_eau").setInteractive({ cursor: "pointer" }).setScrollFactor(0).setScale(1.4).setDepth(11);
         this.water_priceTag = this.game.add.text(1000 / 2 - 215, 530, getShopPriceString().water, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
-        this.distributeur_button = this.game.add.image(1000 / 2 - 300, 515, "bouton_cafe").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.distributeur_button = this.game.add.image(1000 / 2 - 300, 515, "bouton_cafe").setInteractive({ cursor: "pointer" }).setScrollFactor(0).setScale(1.4).setDepth(11);
         this.distributeur_priceTag = this.game.add.text(1000 / 2 - 315, 530, getShopPriceString().coffee, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
         // Center
-        this.ping_button = this.game.add.image(1000 / 2, 515, "ping").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.ping_button = this.game.add.image(1000 / 2, 515, "ping").setInteractive({ cursor: "pointer" }).setScrollFactor(0).setScale(1.4).setDepth(11);
         this.ping_priceTag = this.game.add.text(1000 / 2 - 15, 530, getShopPriceString().ping, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
         // Right
-        this.sleep = this.game.add.image(1000 / 2 + 100, 515, "sleep").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.sleep = this.game.add.image(1000 / 2 + 100, 515, "sleep").setInteractive({ cursor: "pointer" }).setScrollFactor(0).setScale(1.4).setDepth(11);
         this.sleep_priceTag = this.game.add.text(1000 / 2 + 80, 530, getShopPriceString().sleep, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
-        this.sport = this.game.add.image(1000 / 2 + 200, 515, "sport").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.sport = this.game.add.image(1000 / 2 + 200, 515, "sport").setInteractive({ cursor: "pointer" }).setScrollFactor(0).setScale(1.4).setDepth(11);
         this.sport_priceTag = this.game.add.text(1000 / 2 + 183, 530, getShopPriceString().sport, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
-        this.kitchen = this.game.add.image(1000 / 2 + 300, 515, "cuisine").setInteractive({cursor: "pointer"}).setScrollFactor(0).setScale(1.4).setDepth(11);
+        this.kitchen = this.game.add.image(1000 / 2 + 300, 515, "cuisine").setInteractive({ cursor: "pointer" }).setScrollFactor(0).setScale(1.4).setDepth(11);
         this.kitchen_priceTag = this.game.add.text(1000 / 2 + 280, 530, getShopPriceString().kitchen, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
 
         // Listeners
@@ -141,7 +225,7 @@ class windowObject {
 
     }
 
-    updateShopWindow(){
+    updateShopWindow() {
         this.plant_priceTag.destroy()
         this.plant_priceTag = this.game.add.text(1000 / 2 - 115, 530, getShopPriceString().plant, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(12);
         this.water_priceTag.destroy()
@@ -174,10 +258,6 @@ class windowObject {
     }
 
 
-    //Supprime les éléments de la fenêtre des settings
-    closeSettingsWindow() {
-        this.volume.destroy();
-    }
 
     //Fenêtre de choix de projet
     beProjectChoiceWindow(proposals) {
@@ -192,7 +272,7 @@ class windowObject {
         this.projectChoice = new Array(3);
 
         for (let i = 0; i < 3; i++) {
-            let projectTitleString = proposals[i].getTitle() + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue()) + "\nHappiness impact :" + (proposals[i].getHappinessImpact() > 0 ? '+' + proposals[i].getHappinessImpact() : proposals[i].getHappinessImpact())  + '%';
+            let projectTitleString = proposals[i].getTitle() + "\nAmount to produce :" + Math.floor(proposals[i].getAmountToProduce()) + "\nRevenue :" + (proposals[i].getRevenue()) + "\nHappiness impact :" + (proposals[i].getHappinessImpact() > 0 ? '+' + proposals[i].getHappinessImpact() : proposals[i].getHappinessImpact()) + '%';
             this.projectChoice[i] = {
                 background: this.game.add.image(350, 90 + i * 130, getRandomProjectChoiceBackground()).setOrigin(0, 0).setScale(0.6).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
                 title: this.game.add.text(370, 115 + i * 130, projectTitleString, { font: "14px Arial", fill: "#ffffff" }).setScrollFactor(0).setDepth(21),
@@ -216,7 +296,7 @@ class windowObject {
         }
     }
 
-    //A MODIFIER QUAND ON AURA LE SYSTEME D EMPLOYES SUR LE JEU
+
     //Fenêtre d'un employé
     beEmployeeWindow(employee, desk) {
         let window = this;
@@ -240,7 +320,7 @@ class windowObject {
                 icon: this.game.add.image(335, 110, 'logo_money').setOrigin(0, 0).setScale(0.40).setScrollFactor(0).setDepth(21),
                 plusBtn: this.game.add.image(625, 119, 'plus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
                 minusBtn: this.game.add.image(389, 119, 'minus').setOrigin(0, 0).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21),
-                progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()).setDepth(21), //this.game.add.image(429, 125, 'infobar').setOrigin(0, 0).setScale(1.36,0.22).setScrollFactor(0),
+                progressbar: displayWindowProgressBar(this.game, 429, 125, employee.getSalaryPercent()).setDepth(21), 
             }
 
             this.employeeParameterGauge[0].plusBtn.on("pointerdown", () => {
@@ -277,7 +357,7 @@ class windowObject {
             this.deskLevelText = this.game.add.text(415, 240, "Level " + desk.level, { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
 
             this.upgradeBtn.on("pointerdown", () => {
-                if(this.welfareGame.getPlayerMoney() >= getNextDeskPrice(employee.getDesk().level)){
+                if (this.welfareGame.getPlayerMoney() >= getNextDeskPrice(employee.getDesk().level)) {
                     this.welfareGame.payAmount(getNextDeskPrice(employee.getDesk().level))
                     deskManager.upgradeDesk(desk);
                     mapManager.getHud().shopbtn.setInteractive()
@@ -376,7 +456,7 @@ class windowObject {
                 this.employeeParameterGauge[0].textBar.destroy();
                 this.employeeParameterGauge[0].textBar = this.game.add.text(500, 105, this.currentEmployeeWindow.getSalary().toString() + '€', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
                 this.employeeParameterGauge[1].textBar.destroy();
-                this.employeeParameterGauge[1].textBar = this.game.add.text(510, 165, this.currentEmployeeWindow.getWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000"  }).setScrollFactor(0).setDepth(21);
+                this.employeeParameterGauge[1].textBar = this.game.add.text(510, 165, this.currentEmployeeWindow.getWorkTime().toString() + 'H', { font: "bold 14px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
                 this.employeeParameterGauge[0].progressbar.destroy();
                 this.employeeParameterGauge[0].progressbar = displayWindowProgressBar(this.game, 429, 125, this.currentEmployeeWindow.getSalaryPercent());
                 this.employeeParameterGauge[1].progressbar.destroy();
@@ -466,6 +546,14 @@ function decreaseButton(actionWanted, employee) {
             employee.decreaseWorkTime();
 
             break;
+
+        case 'generalWage':
+            mapManager.getWelfareBusinessGame().decreaseAverageSalary();
+            break;
+
+        case 'generalWorkTime':
+            mapManager.getWelfareBusinessGame().decreaseAverageWorkTime();
+            break;
     }
 }
 
@@ -480,6 +568,14 @@ function increaseButton(actionWanted, employee) {
         case 'workTime':
             employee.increaseWorkTime();
 
+            break;
+
+        case 'generalWage':
+            mapManager.getWelfareBusinessGame().increaseAverageSalary();
+            break;
+
+        case 'generalWorkTime':
+            mapManager.getWelfareBusinessGame().increaseAverageWorkTime();
             break;
     }
 
@@ -505,8 +601,8 @@ function displayWindowProductionProgressBar(game, x, y, percentSize) {
     return progressbar;
 }
 
-function getNextDeskPrice(level){
-    switch(level){
+function getNextDeskPrice(level) {
+    switch (level) {
         case 1:
             return 100;
 
@@ -521,7 +617,7 @@ function getNextDeskPrice(level){
     }
 }
 
-function getShopPriceString(){
+function getShopPriceString() {
     let data = dataManager.getData();
 
     let coffee = 0;
@@ -532,56 +628,56 @@ function getShopPriceString(){
     let sport = 0;
     let kitchen = 0;
 
-    if(data.shop.coffee.level < 1){
+    if (data.shop.coffee.level < 1) {
         coffee = '400€'
     }
-    else{
+    else {
         coffee = 'MAX'
     }
 
-    if(data.shop.water.level < 3){
+    if (data.shop.water.level < 3) {
         water = '150€'
     }
-    else{
+    else {
         water = 'MAX'
     }
 
-    if(data.shop.plant.level < 6){
+    if (data.shop.plant.level < 6) {
         plant = '300€'
     }
-    else{
+    else {
         plant = 'MAX'
     }
 
-    if(!data.shop.ping.active){
+    if (!data.shop.ping.active) {
         ping = '500€'
     }
-    else{
+    else {
         ping = 'MAX'
     }
 
-    if(!data.shop.sleep.active){
+    if (!data.shop.sleep.active) {
         sleep = '2500€'
     }
-    else{
+    else {
         sleep = ' MAX'
     }
 
-    if(!data.shop.sport.active){
+    if (!data.shop.sport.active) {
         sport = '2000€'
     }
-    else{
+    else {
         sport = 'MAX'
     }
 
-    if(!data.shop.kitchen.active){
+    if (!data.shop.kitchen.active) {
         kitchen = '3500€'
     }
-    else{
+    else {
         kitchen = ' MAX'
     }
 
-    return{
+    return {
         coffee,
         water,
         plant,

@@ -296,6 +296,12 @@ class hudObject {
         }
     }
 
+    updateSettingsWindow(){
+        if(this.window.isOpened && this.window.isSettingsWindow()){
+            this.window.updateSettingsWindow();
+        }
+    }
+
 
     temporaryMessageWageLoop() {
         this.tmpMsgCounter--;

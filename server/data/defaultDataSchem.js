@@ -1,7 +1,12 @@
 module.exports = {
+
+    "system": {
+        "currentTime": 1
+    },
+
     "user": {
         "name": "guest",
-        "money": 100,
+        "money": 3000,
     },
 
     "shop": {
@@ -177,8 +182,4 @@ module.exports = {
             }
         },
     ],
-
-    "system": {
-        "currentTime": 1
-    }
 }

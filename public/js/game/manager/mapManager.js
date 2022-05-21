@@ -54,16 +54,11 @@ let mapManager = (function(){
                 map.createLayer("toilettes", tileSet);
                 let ping = map.createLayer("ping", tileSet);
 
-                /*instance.input.on("pointerdown", (pos) => {
-                    let tile = coffee.getTileAtWorldXY(pos.worldX, pos.worldY);
-                    if(tile !== null){
-                        console.log(tile.x, tile.y);
-                    }
-                })*/
-
                 // On initialise le module qui gère les données
                 dataManager.init(map);
                 await dataManager.load(token).then((response) => {data = response}).then(() => {
+                    welfareBusinessGame.money = data.user.money;
+
                     // Amélioration
                     if(!data.shop.sport.active) sport.visible = false;
                     if(!data.shop.sleep.active) {

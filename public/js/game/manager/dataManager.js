@@ -7,7 +7,7 @@ let dataManager = (function() {
     let username = undefined;
 
     let config = {
-        autoSave: true,
+        autoSave: false,
         interval: 10000,
     }
 

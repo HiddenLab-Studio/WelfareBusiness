@@ -36,7 +36,7 @@ class project {
     }
 
     getTitle(){
-        if(this.title == undefined){
+        if(this.title === undefined){
             return 'Project unnamed'
         }
         else{

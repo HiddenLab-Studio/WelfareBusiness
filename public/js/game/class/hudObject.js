@@ -248,7 +248,6 @@ class hudObject {
     }
 
     updateHappinessCounter(happiness) {
-        console.log();
         this.happinessString = roundToTwo(isNaN(happiness) ? 0 : happiness).toString() + "%";
         this.happinessText.destroy();
         this.happinessText = this.phaser.add.text(237, 20, this.happinessString, { font: "18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(11);

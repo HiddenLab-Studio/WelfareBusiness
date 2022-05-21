@@ -7,20 +7,18 @@ class welfareBusiness {
         this.employeesNb = 0;
         this.updateRate = 1;
         this.started = false;
-        this.money = 1000000;
+        // Modified in mapManager.createMap()
+        this.money = undefined;
         this.realProject = true;
         this.isNewMonthBool = false;
-
-        this.data = dataManager.getData();
 
         this.time = 0;//+1 toutes les secondes
         this.date = {
             day: 1,
             month: 1,
-            year: 2022,
+            year: 2022
         }
         this.generate3ProjectChoices()
-
     }
 
     isGameLost(){
@@ -36,7 +34,7 @@ class welfareBusiness {
     getAverageSalary() {
         let averageSalary = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            if (this.employeesList[i] != undefined) {
+            if (this.employeesList[i] !== undefined) {
                 averageSalary += this.employeesList[i].getSalary();
             }
         }
@@ -56,7 +54,7 @@ class welfareBusiness {
 
     increaseAverageSalary() {
         for (let i = 0; i < this.employeesList.length; i++) {
-            if (this.employeesList[i] != undefined) {
+            if (this.employeesList[i] !== undefined) {
                 this.employeesList[i].increaseWage();
             }
         }
@@ -64,7 +62,7 @@ class welfareBusiness {
 
     decreaseAverageSalary() {
         for (let i = 0; i < this.employeesList.length; i++) {
-            if (this.employeesList[i] != undefined) {
+            if (this.employeesList[i] !== undefined) {
                 if (this.employeesList[i].getSalary() >= 1400) {
                     this.employeesList[i].decreaseWage();
                 }
@@ -76,7 +74,7 @@ class welfareBusiness {
     getAverageWorkTime() {
         let averageWorkTime = 0;
         for (let i = 0; i < this.employeesList.length; i++) {
-            if (this.employeesList[i] != undefined) {
+            if (this.employeesList[i] !== undefined) {
                 averageWorkTime += this.employeesList[i].getWorkTime();
             }
         }
@@ -94,7 +92,7 @@ class welfareBusiness {
 
     increaseAverageWorkTime() {
         for (let i = 0; i < this.employeesList.length; i++) {
-            if (this.employeesList[i] != undefined) {
+            if (this.employeesList[i] !== undefined) {
                 this.employeesList[i].increaseWorkTime();
             }
         }
@@ -102,7 +100,7 @@ class welfareBusiness {
 
     decreaseAverageWorkTime() {
         for (let i = 0; i < this.employeesList.length; i++) {
-            if (this.employeesList[i] != undefined) {
+            if (this.employeesList[i] !== undefined) {
                 if (this.employeesList[i].getWorkTime() >= 6) {
                     this.employeesList[i].decreaseWorkTime();
                 }
@@ -111,10 +109,7 @@ class welfareBusiness {
     }
 
     isProjectFinished() {
-        if (this.currentProject.getAmountToProduce() <= 0) {
-            return true;
-        }
-        else { return false }
+        return this.currentProject.getAmountToProduce() <= 0;
     }
 
     isRealProject() {
@@ -188,6 +183,7 @@ class welfareBusiness {
 
     payAmount(amount) {
         this.money -= amount;
+        dataManager.getData().user.money -= amount;
     }
 
     getEmployeeById(id) {
@@ -196,6 +192,8 @@ class welfareBusiness {
 
     payWage() {
         this.money -= this.getTotalEmployeesCost();
+        dataManager.getData().user.money -= this.getTotalEmployeesCost();
+
     }
 
     updateGame() {
@@ -210,7 +208,11 @@ class welfareBusiness {
     updateProject() {
         if (this.isProjectFinished()) {
             this.realProject = false;
+
+            // Ajout de l'argent
             this.money += this.currentProject.getRevenue();
+            dataManager.getData().user.money += this.currentProject.getRevenue();
+
             mapManager.getHud().generateEndOfProjectMessage(this.currentProject.getRevenue())
             this.generate3ProjectChoices()
             this.currentProject = new project(99999999999, 0, -1);//Projet temporaire inutile en attendant un nouveau choix et malus de 1 de bonheur car ils ne font rien
@@ -243,24 +245,24 @@ class welfareBusiness {
 
         if (this.time === 0) {
             //Changement de mois
-            if (this.date.day == 29) {
-                if (this.date.month == 2) {
+            if (this.date.day === 29) {
+                if (this.date.month === 2) {
                     this.date.month++;
                     this.date.day -= 28;
                     this.isNewMonthBool = true;
                     this.payWage();
                 }
             }
-            if (this.date.day == 31) {
-                if (this.date.month == 4 || this.date.month == 6 || this.date.month == 9 || this.date.month == 11) {
+            if (this.date.day === 31) {
+                if (this.date.month === 4 || this.date.month === 6 || this.date.month === 9 || this.date.month === 11) {
                     this.date.month++;
                     this.date.day -= 30;
                     this.isNewMonthBool = true;
                     this.payWage();
                 }
             }
-            if (this.date.day == 32) {
-                if (this.date.month == 1 || this.date.month == 3 || this.date.month == 5 || this.date.month == 7 || this.date.month == 8 || this.date.month == 10 || this.date.month == 12) {
+            if (this.date.day === 32) {
+                if (this.date.month === 1 || this.date.month === 3 || this.date.month === 5 || this.date.month === 7 || this.date.month === 8 || this.date.month === 10 || this.date.month === 12) {
                     this.date.month++;
                     this.date.day -= 31;
                     this.isNewMonthBool = true;
@@ -269,7 +271,7 @@ class welfareBusiness {
             }
 
             //Changement d'année
-            if (this.date.month == 13) {
+            if (this.date.month === 13) {
                 this.date.day = 1;
                 this.date.month = 1;
                 this.date.year++;
@@ -345,48 +347,31 @@ class welfareBusiness {
         }
     }
 
-    getProjectChoices() {
-        return this.proposals;
-    }
+    getProjectChoices() { return this.proposals; }
 
     generateSafeProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(6, 3), this.getTotalProduction() * 15, 5, 'Short project');
-        return proposal;
+        return new project(this.getTotalProduction() * convertToSec(6, 3), this.getTotalProduction() * 15, 5, 'Short project');
     }
 
     generateNullProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(7, 3), this.getTotalProduction() * 20, 0, 'SQL Project')
-        return proposal;
+        return new project(this.getTotalProduction() * convertToSec(7, 3), this.getTotalProduction() * 20, 0, 'SQL Project');
     }
 
     generateAmbitiousProject() {
-        let proposal = new project(this.getTotalProduction() * 2 * convertToSec(9, 3), this.getTotalProduction() * 75, -15, 'Time consuming project')
-        return proposal;
+        return new project(this.getTotalProduction() * 2 * convertToSec(9, 3), this.getTotalProduction() * 75, -15, 'Time consuming project');
     }
 
     generateEcoProject() {
-        let proposal = new project(this.getTotalProduction() * convertToSec(9, 3), this.getTotalProduction() * 20, 20, 'Ecoproject')
-        return proposal;
+        return new project(this.getTotalProduction() * convertToSec(9, 3), this.getTotalProduction() * 20, 20, 'Ecoproject');
     }
-
 
     chooseNewProject(project) {
         this.realProject = true;
         this.currentProject = project;
         this.generate3ProjectChoices();
     }
-
-
 }
 
-function convertToSec(seconds, updateRate) {
-    return seconds * updateRate;
-}
-
-function isEmployeeWorking(employeeWorkTime, time) {
-    if (employeeWorkTime - time > 0) {
-        return true;
-    }
-    return false;
-}
+function convertToSec(seconds, updateRate) { return seconds * updateRate; }
+function isEmployeeWorking(employeeWorkTime, time) { return employeeWorkTime - time > 0; }
 

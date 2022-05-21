@@ -99,7 +99,6 @@ let deskManager = (function () {
             let c = undefined;
             let count = 0;
             if (element.level !== 1) {
-                console.log(element.level)
                 let upgradeArray = textureIndex.filter((array) => {
                     if (array.orientation === element.orientation) {
                         switch (array.orientation) {
@@ -326,10 +325,7 @@ let deskManager = (function () {
                 }
 
                 // Update de la position du pnj
-                if(deskData.level === 2){
-                    updateSpritePos(deskData);
-                }
-
+                if(deskData.level === 2) updateSpritePos(deskData);
                 deskData.level += 1;
                 dataManager.save(token, data);
             }

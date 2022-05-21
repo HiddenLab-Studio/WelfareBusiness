@@ -1,0 +1,98 @@
+<div id="editModal" class="edit__modal__container" style="display: none;">
+    <div class="edit__container">
+        <div class="close"><i id="closeEditModal" class='bx bx-x'></i></div>
+        <div id="changeUsernameContainer" class="username" style="display: none">
+            <div class="text">
+                <h1>Create a new username</h1>
+                <span>Your new username must be different from previous used username.</span>
+            </div>
+            <% if(changeUsername.error.length > 0){ %>
+                <div class="error">
+                    <i class='bx bx-info-circle'></i>
+                    <ul>
+                        <li>Incorrect username</li>
+                    </ul>
+                </div>
+            <% } %>
+            <form action="/api/changeusername" method="POST" class="form">
+                <div class="element">
+                    <span>Your new username</span>
+                    <label for="newUsername">
+                        <input name="newUsername" id="newUsername" type="text" placeholder="Enter your current password" required>
+                    </label>
+                </div>
+                <div class="submit__btn">
+                    <button type="submit" id="changeUsernameBtn" class="hvr-grow">Change username</button>
+                </div>
+            </form>
+        </div>
+        <div id="changePasswordContainer" class="password" style="display: none">
+            <div class="text">
+                <h1>Create new password</h1>
+                <span>Your new password must be different from previous used passwords.</span>
+            </div>
+            <% if(changePassword.error.length > 0){ %>
+                <div class="error">
+                    <i class='bx bx-info-circle'></i>
+                    <ul>
+                        <% if(changePassword.invalidCurrentPassword.length > 0){ %>
+                            <li>Incorrect current password</li>
+                        <% } %>
+                        <% if(changePassword.currentAndNewPassEqual.length > 0){ %>
+                            <li>New password must be different from previous used passwords</li>
+                        <% } %>
+                        <% if(changePassword.invalidNewPassword.length > 0){ %>
+                            <li>Incorrect new password</li>
+                        <% } %>
+                        <% if(changePassword.invalidConfirmPassword.length > 0){ %>
+                            <li>New password must match with the confirm password input</li>
+                        <% } %>
+                    </ul>
+                </div>
+            <% } %>
+            <form action="/api/changepassword" method="POST" class="form">
+                <div class="element">
+                    <span>Your current password</span>
+                    <label for="currentPassword">
+                        <input name="currentPassword" id="currentPassword" type="text" placeholder="Enter your current password" required>
+                    </label>
+                </div>
+                <div class="element">
+                    <span>Your new password</span>
+                    <label for="newPassword">
+                        <input name="newPassword" id="newPassword" type="text" placeholder="Enter your current password" required>
+                    </label>
+                </div>
+                <div class="element">
+                    <span>Confirm your new password</span>
+                    <label for="confirmNewPassword">
+                        <input name="confirmNewPassword" id="confirmNewPassword" type="text" placeholder="Enter your current password" required>
+                    </label>
+                </div>
+                <div class="submit__btn">
+                    <button type="submit" id="changePasswordBtn" class="hvr-grow">Change password</button>
+                </div>
+            </form>
+        </div>
+        <div id="changeAvatarContainer" class="avatar" style="display: none;">
+            <div class="text">
+                <h1>Change your avatar</h1>
+            </div>
+            <div id="invalidAvatarContainer" class="error" style="display: none;">
+                <i class='bx bx-info-circle'></i>
+                <ul>
+                    <li>Please select a valid avatar!</li>
+                </ul>
+            </div>
+            <div id="avatarSelectionContainer" class="select__avatar">
+                <img data="1" src="../public/assets/img/avatar/Avatar_1.png" alt="Avatar">
+                <img data="2" src="../public/assets/img/avatar/Avatar_2.png" alt="Avatar">
+                <img data="3" src="../public/assets/img/avatar/Avatar_3.png" alt="Avatar">
+                <img data="4" src="../public/assets/img/avatar/Avatar_4.png" alt="Avatar">
+            </div>
+            <div class="submit__btn">
+                <button type="submit" id="changeAvatarBtn" class="hvr-grow">Change avatar</button>
+            </div>
+        </div>
+    </div>
+</div>

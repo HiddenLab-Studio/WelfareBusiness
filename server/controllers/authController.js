@@ -62,22 +62,6 @@ function isUsernameValid(username) {
     return true;
 }
 
-// Dashboard de l'utilisateur
-router.get("/profile", (req, res) => {
-    // Si l'utilisateur est connecté
-    if(req.session.login){
-        // On fait le rendu de notre page en passant en paramètre les différentes informations du joueur
-        res.render(path.join(__dirname, "..", "..", "views", "profile"), {
-            session: req.session.login,
-            username: req.session.username,
-            avatar: req.session.avatar
-        });
-    } else {
-        // On le redirige sur la page home
-        res.redirect("/");
-    }
-})
-
 // POST méthode pour enregistrer un compte
 router.post("/api/register", async (req, res) => {
     // On récupère les données de notre formulaire
@@ -226,6 +210,114 @@ router.post("/api/changeusername", (req, res) => {
     // On récupère les données de notre formulaire
     const newUsername = req.body.newUsername;
     console.log(newUsername)
+    pool.getConnection((error, connection) => {
+        if (error) throw error;
+        pool.query("SELECT username FROM users WHERE username = ?", [newUsername], (error, result) => {
+            if (error) throw error;
+            if(result.length > 0){
+                console.log("Username already used!")
+                req.flash("changeUsernameError", true)
+                connection.release();
+                res.redirect("/profile")
+            } else {
+                pool.query("UPDATE users SET Username = ? WHERE username = ?", [newUsername, req.session.username], (error) => {
+                    if (error) throw error;
+                    console.log("Username changed successfully!")
+                    connection.release();
+                    req.session.username = newUsername;
+                    res.redirect("/profile")
+                })
+            }
+        })
+    })
+})
+
+router.post("/api/changepassword", async (req, res) => {
+    // On récupère les données de notre formulaire
+    const currentPassword = req.body.currentPassword;
+    const newPassword = req.body.newPassword;
+    const confirmPassword = req.body.confirmNewPassword
+    console.log(currentPassword, newPassword, confirmPassword)
+
+    // Boolean qui vérifie si nos inputs correspondent avec nos conditions
+    // Cette variable va nous permettre aussi d'optimiser nos actions sur notre base de données
+    // on vient ainsi limiter l'utilisation des ressources serveur
+    let isInputValid = true;
+
+    // Nos deux mots de passes sont identiques
+    if (!isPasswordValid(newPassword)) {
+        isInputValid = false;
+        console.log("le nouveau mdp ne respecte pas les conditions")
+        req.flash("changePasswordError", true);
+        req.flash("invalidNewPassword", true);
+    }
+    if (newPassword !== confirmPassword) {
+        isInputValid = false;
+        console.log("le nouveau mdp et le confirm ne sont pas identiques")
+        req.flash("changePasswordError", true);
+        req.flash("invalidConfirmPassword", true)
+    }
+
+    // On hash i.e "crypte" notre mot de passe
+    // Tant que l'exécution de la fonction generateHash n'est pas terminée on attend
+    //const newPasswordHashed = await generateHash(newPassword);
+
+    if(isInputValid){
+        pool.getConnection((error, connection) => {
+            if(error) throw error;
+            pool.query("SELECT Password as password FROM users WHERE username = ?", ["aaa"], async (error, result) => {
+                if (error) throw error;
+                if (result.length > 0) {
+                    console.log(result[0].password);
+                    let currentPasswordHashed = result[0].password;
+                    let isNewAndOldPassEqual = await compareHash(newPassword, currentPasswordHashed);
+                    if(!isNewAndOldPassEqual){
+                        let newPasswordHashed = await generateHash(newPassword);
+                        console.log(newPasswordHashed)
+                        pool.query("UPDATE users SET Password = ? WHERE username = ?", [newPasswordHashed, "aaa"], (error) => {
+                            if (error) throw error;
+                            console.log("Password changed successfully!")
+                            connection.release();
+                            res.redirect("/profile")
+                        })
+                    } else {
+                        connection.release();
+                        console.log("Les deux mdp sont identique")
+                        req.flash("changePasswordError", true);
+                        req.flash("invalidNewPasswordAndCurrent", true)
+                        res.redirect("/profile");
+                    }
+                }
+            })
+        })
+    } else {
+        res.redirect("/profile");
+    }
+
+})
+
+// Dashboard de l'utilisateur
+router.get("/profile", (req, res) => {
+    // Si l'utilisateur est connecté
+    if(req.session.login){
+        // On fait le rendu de notre page en passant en paramètre les différentes informations du joueur
+        res.render(path.join(__dirname, "..", "..", "views", "profile"), {
+            session: req.session.login,
+            username: req.session.username,
+            avatar: req.session.avatar,
+            changeUsername: {error: req.flash("changeUsernameError")},
+            changePassword: {
+                error: req.flash("changePasswordError"),
+                invalidCurrentPassword: req.flash("invalidCurrentPassword"),
+                invalidNewPassword: req.flash("invalidNewPassword"),
+                currentAndNewPassEqual: req.flash("invalidNewPasswordAndCurrent"),
+                invalidConfirmPassword: req.flash("invalidConfirmPassword")
+            }
+        });
+    } else {
+        // On le redirige sur la page home
+        res.redirect("/");
+    }
 })
 
 // Page pour se déconnecter (cette page n'existe pas réellement)

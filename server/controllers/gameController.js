@@ -59,7 +59,11 @@ router.post("/api/resetdata", (req, res) => {
     if(req.session.login){
         pool.getConnection((error, connection) => {
             if(error) throw error;
-            pool.query("UPDATE users SET userData = ? WHERE username = ?", [JSON.stringify(defaultDataSchema), req.session.username], (error) => {
+
+            let tmp = defaultDataSchema;
+            tmp.user.name = req.session.username;
+
+            pool.query("UPDATE users SET userData = ? WHERE username = ?", [JSON.stringify(tmp), req.session.username], (error) => {
                 if(error) throw error;
                 connection.release();
                 res.send({text: "Your data has been successfully reset! (" + req.session.username + ")"})

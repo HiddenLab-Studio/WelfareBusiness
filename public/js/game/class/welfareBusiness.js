@@ -28,7 +28,7 @@ class welfareBusiness {
                 this.endWindowInit = true;
                 // On clear la save
                 dataManager.autoSavePause();
-                //dataManager.reset("1");
+                dataManager.reset("1");
                 // Stop game time
                 this.setPause();
                 // Popup de fin de partie

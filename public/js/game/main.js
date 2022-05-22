@@ -129,8 +129,8 @@ function update(time, delta) {
                 if (welfareBusinessGame.isRealProject()) {
                     hud.updateProgressBar(welfareBusinessGame.getCurrentProjectPercentage());
                 }
-            hud.temporaryMessageWageLoop();
-            hud.temporaryMessageEndOfProjectLoop();
+                hud.temporaryMessageWageLoop();
+                hud.temporaryMessageEndOfProjectLoop();
 
             }
 
@@ -147,24 +147,60 @@ function update(time, delta) {
         if (hud.playerB.length > 0) {
             for (let i = 0; i < hud.playerB.length; i++) {
                 hud.playerB[i][0].anims.play("back_to_me", true);
+                if (welfareBusinessGame.getGameSpeed() == 2) {
+                    hud.playerB[i][0].anims.msPerFrame = 75
+                }
+                if (welfareBusinessGame.getGameSpeed() == 1) {
+                    hud.playerB[i][0].anims.msPerFrame = 300
+                }
+                if (welfareBusinessGame.getGameSpeed() == 0) {
+                    hud.playerB[i][0].anims.pause()
+                }
             }
         }
 
         if (hud.playerL.length > 0) {
             for (let i = 0; i < hud.playerL.length; i++) {
                 hud.playerL[i][0].anims.play("left", true);
+                if (welfareBusinessGame.getGameSpeed() == 2) {
+                    hud.playerL[i][0].anims.msPerFrame = 75
+                }
+                if (welfareBusinessGame.getGameSpeed() == 1) {
+                    hud.playerL[i][0].anims.msPerFrame = 300
+                }
+                if (welfareBusinessGame.getGameSpeed() == 0) {
+                    hud.playerL[i][0].anims.pause()
+                }
             }
         }
 
         if (hud.playerR.length > 0) {
             for (let i = 0; i < hud.playerR.length; i++) {
                 hud.playerR[i][0].anims.play("right", true);
+                if (welfareBusinessGame.getGameSpeed() == 2) {
+                    hud.playerR[i][0].anims.msPerFrame = 75
+                }
+                if (welfareBusinessGame.getGameSpeed() == 1) {
+                    hud.playerR[i][0].anims.msPerFrame = 300
+                }
+                if (welfareBusinessGame.getGameSpeed() == 0) {
+                    hud.playerR[i][0].anims.pause()
+                }
             }
         }
 
         if (hud.playerF.length > 0) {
             for (let i = 0; i < hud.playerF.length; i++) {
                 hud.playerF[i][0].anims.play("front_of_me", true);
+                if (welfareBusinessGame.getGameSpeed() == 2) {
+                    hud.playerF[i][0].anims.msPerFrame = 75
+                }
+                if (welfareBusinessGame.getGameSpeed() == 1) {
+                    hud.playerF[i][0].anims.msPerFrame = 300
+                }
+                if (welfareBusinessGame.getGameSpeed() == 0) {
+                    hud.playerF[i][0].anims.pause()
+                }
             }
         }
     }

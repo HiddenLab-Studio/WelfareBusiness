@@ -41,6 +41,15 @@ class windowObject {
                 case "employee":
                     this.closeEmployeeWindow();
                     break;
+                case "pop-up_sport":
+                    this.closepopupSport();
+                    break;
+                case "pop-up_nap":
+                    this.closepopupNap();
+                    break;
+                case "pop-up_cafet":
+                    this.closepopupCafet();
+                    break;
             }
             this.menu.destroy();
             this.closewindowbtn.destroy();
@@ -48,6 +57,77 @@ class windowObject {
         this.windowType = undefined
         this.opened = false;
     }
+    bePopupSport() {
+        let hud = mapManager.getHud();
+        let window = this
+        this.windowType = "pop-up_sport"
+        this.opened = true;
+        this.hud.closeshopdowbtn.destroy()
+        this.menu = this.game.add.image(600, 5, 'windowBack').setOrigin(0, 0).setScale(0.6, 0.8).setScrollFactor(0).setScale(0.65, 0.25);
+        this.sportpopup = this.game.add.text(630, 25, 'The benefits of sport at work :\n \n - Improves team spirit\n - Reduces absenteeism by 30-40% \n - Increases employee s productivity and quality of work\n - Improves the attractiveness of your company to attract \n   the best profiles', { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
+        this.closewindowbtn = this.game.add.image(975, 20, 'closeWindowBtn').setScale(0.4).setInteractive().setScrollFactor(0);
+
+        this.closewindowbtn.on('pointerdown', function () {
+
+            window.closeWindow();
+            hud.pausebtn.setInteractive()
+            hud.playbtn.setInteractive()
+            hud.avancerapidebtn.setInteractive()
+        });
+
+    }
+    closepopupSport() {
+        this.sportpopup.destroy()
+        this.windowType = "shop_hud"
+
+        this.closeShopWindow()
+    }
+
+    bePopupNap() {
+        let hud = mapManager.getHud();
+        let window = this
+        this.windowType = "pop-up_nap"
+        this.opened = true;
+        this.hud.closeshopdowbtn.destroy()
+        this.menu = this.game.add.image(600, 5, 'windowBack').setOrigin(0, 0).setScale(0.6, 0.8).setScrollFactor(0).setScale(0.65, 0.25);
+        this.nappopup = this.game.add.text(630, 25, 'The benefits of napping at work:\n \n - Avoids decline in productivity after 4pm\n - 35% increase in productivity at the end of the day \n - Increases employee s productivity and quality of work\n - right after lunch and the optimal duration is 20 minutes ', { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
+        this.closewindowbtn = this.game.add.image(975, 20, 'closeWindowBtn').setScale(0.4).setInteractive().setScrollFactor(0);
+
+        this.closewindowbtn.on('pointerdown', function () {
+            window.closeWindow();
+            hud.pausebtn.setInteractive()
+            hud.playbtn.setInteractive()
+            hud.avancerapidebtn.setInteractive()
+        });
+    }
+    closepopupNap() {
+        this.nappopup.destroy()
+        this.windowType = "shop_hud"
+
+        this.closeShopWindow()
+    }
+    BePopupCafet(){
+        let hud = mapManager.getHud();
+        let window = this
+        this.windowType = "pop-up_cafet"
+        this.opened = true
+        this.hud.closeshopdowbtn.destroy()
+        this.menu = this.game.add.image(600, 5, 'windowBack').setOrigin(0, 0).setScale(0.6, 0.8).setScrollFactor(0).setScale(0.65, 0.25);
+        this.cafetpopup = this.game.add.text(630, 25, 'The benefits of a cafetaria at work:\n \n - Stress reducting\n -	Strenghening relationships between team members \n - Increase employee hapiness', { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
+        this.closewindowbtn = this.game.add.image(975, 20, 'closeWindowBtn').setScale(0.4).setInteractive().setScrollFactor(0);
+        this.closewindowbtn.on('pointerdown', function () {
+            window.closeWindow();
+            hud.pausebtn.setInteractive()
+            hud.playbtn.setInteractive()
+            hud.avancerapidebtn.setInteractive()
+        });
+    }
+    closepopupCafet(){
+        this.cafetpopup.destroy()
+        this.windowType = "shop_hud"
+        this.closeShopWindow()
+    }
+
 
     //Est ce qu'une fenêtre est ouverte ?
     isOpened() {
@@ -213,9 +293,19 @@ class windowObject {
 
         // Listeners
         this.plant_button.on("pointerdown", () => shopManager.upgradeObject("plant"));
-        this.sleep.on("pointerdown", () => shopManager.buySleep())
-        this.kitchen.on("pointerdown", () => shopManager.buyKitchen())
-        this.sport.on("pointerdown", () => shopManager.buySport())
+        this.sleep.on("pointerdown", function () {
+            window.bePopupNap()
+            shopManager.buySleep()
+
+        })
+        this.kitchen.on("pointerdown", function () {
+            window.BePopupCafet()
+            shopManager.buyKitchen()
+        })
+        this.sport.on("pointerdown", function () {
+            window.bePopupSport()
+            shopManager.buySport()
+        })
         this.ping_button.on("pointerdown", () => shopManager.buyPing())
         this.distributeur_button.on("pointerdown", () => shopManager.upgradeObject("coffee"))
         this.water_fountain_button.on("pointerdown", () => shopManager.upgradeObject("water"))

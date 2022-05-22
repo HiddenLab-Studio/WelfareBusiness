@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- CSS -->
@@ -14,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="./public/css/footer.css">
 
     <!-- LIB CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" type="text/css" href="./public/css/libs/hover/hover.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet" type="text/css">
 
@@ -24,28 +25,63 @@
 
     <title>Welfare Business</title>
 </head>
+
 <body>
 
     <%- include("../views/partials/header") %>
 
-    <% if(!session){ %>
-        <%- include("../views/partials/connectModal") %>
-    <% }%>
+        <% if(!session){ %>
+            <%- include("../views/partials/connectModal") %>
+                <% }%>
 
-    <main>
-        <section class="welcome__container">
-            <h1>Welcome</h1>
-            <p>Lorem ipsum dolor sit amet. Qui porro nihil vel odio quisquam non aperiam ratione ut dignissimos numquam et assumenda atque aut obcaecati omnis qui facere saepe. Qui nobis iste sed soluta nemo in quia illum rem culpa iste dolores sunt et voluptas possimus?</p>
-        </section>
-    </main>
+                    <main>
+                        <section class="welcome__container">
+                            <h1>Welfare at work</h1>
+                            <h2>What is it?</h2>
+                            <p>First, the notion of welfare at work is a concept including the notions of physical and
+                                mental health but not exclusively. It refers to a feeling of satisfaction and
+                                fulfillment at work. Welfare refers to the personal and collective perception of
+                                situations and constraints in the personal sphere. Consequently, welfare at work is
+                                specific to everyone and translates into a certain level of efficiency for the company.
+                            </p>
+                            <h2>What influences welfare at work?</h2>
+                            <P>First, there are the so-called "material" problems which mainly concern the working
+                                environment, and therefore the comfort of the workstation, the brightness, the technical
+                                conditions, and the safety of the employees. But there are also "psychosocial" problems,
+                                such as stress (65% of workers (1)) but also burnout and bore-out, poor job recognition,
+                                moral harassment (31% of workers (2)) but also and mainly the imbalance between private
+                                and professional life. Finally, the sense of mission is also a key element since
+                                employees are more fulfilled in their work if they have the feeling of contributing to
+                                the success of the company and meeting specific needs.</P>
+                            <h2>How to improve the well-being of its employees?</h2>
+                            <p>For a company, the simplest thing to do is to work on the collective welfare. For this
+                                purpose, it is possible to set up various projects to contribute to the improvement of
+                                the physical and mental health of the employees. For example, greening workspaces (20%
+                                of people want it (3 and 4)) increases creativity, welfare, and productivity by 15% for
+                                people sensitive to this project. It is also interesting to set up various common rooms
+                                such as nap rooms, sports halls, and a decent cafeteria. (4, 5 and 6). Although very
+                                popular in recent years, open spaces increase the stress of employees for about 45% of
+                                them (7 and 8). In a world where we care a little more about the environment and
+                                sustainable development every day, it is also beneficial to set up eco projects.</p>
 
-    <%- include("../views/partials/footer") %>
+                            <h2>Why worry about the well-being of its employees?</h2>
+                            <p>First, when an employee is happy to work, he will be 12 to 13% more productive (9) but
+                                also, if the employer cares about the well-being of his employees in the company then
+                                this will contribute to the improvement of the attractiveness of his company and
+                                therefore he will be able to seduce and attract better profiles (10).On the opposite,
+                                poor working conditions cause an increase in absenteeism as well as resignations (10)
+                            </p>
+                        </section>
+                    </main>
 
-    <% if(!session){ %>
-        <script src="./public/js/header/connectionModal.js"></script>
-    <% } else { %>
-        <script src="./public/js/header/accountModal.js"></script>
-    <% } %>
-    <script src="./public/js/header/main.js"></script>
+                    <%- include("../views/partials/footer") %>
+
+                        <% if(!session){ %>
+                            <script src="./public/js/header/connectionModal.js"></script>
+                            <% } else { %>
+                                <script src="./public/js/header/accountModal.js"></script>
+                                <% } %>
+                                    <script src="./public/js/header/main.js"></script>
 </body>
+
 </html>

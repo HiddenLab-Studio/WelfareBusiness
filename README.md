@@ -41,7 +41,7 @@
    ```
 
 5. (FACULTATIF) **Configurer** le **File Watcher** pour le SCSS (Pour la modification du scss)
-6. **Lancer** le serveur avec la commande suivante
+6. **Lancer** le serveur avec la commande suivante (en ayant votre base de donnée MySQL de lancée).
  
    ```
    nodemon app

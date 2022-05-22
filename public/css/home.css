@@ -50,5 +50,22 @@ main .welcome__container p {
   line-height: 1.75rem;
   color: white;
 }
+main .welcome__container ol {
+  padding-left: 25px;
+  margin: 0;
+  color: white;
+}
+main .welcome__container ol li {
+  margin: 5px 0 5px 0;
+  letter-spacing: 1px;
+  font-size: var(--fs-s);
+}
+main .welcome__container ol a {
+  text-decoration: none;
+  color: white;
+}
+main .welcome__container ol a:hover {
+  opacity: 0.5;
+}
 
 /*# sourceMappingURL=home.css.map */

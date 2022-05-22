@@ -55,5 +55,22 @@ main {
       color: white;
     }
 
+    ol {
+      padding-left: 25px;
+      margin: 0;
+      color: white;
+      li {
+        margin: 5px 0 5px 0;
+        letter-spacing: 1px;
+        font-size: var(--fs-s);
+      }
+      a {
+        text-decoration: none;
+        color: white;
+        &:hover {
+          opacity: .5;
+        }
+      }
+    }
   }
 }

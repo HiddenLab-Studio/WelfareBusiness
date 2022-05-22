@@ -29,7 +29,7 @@ class windowObject {
         this.opened = true;
         this.menu = this.game.add.image(this.config.width * 0.5, 270, "windowBack").setScale(0.6, 0.8).setScrollFactor(0).setDepth(20);
         this.restartBtn = this.game.add.image(this.config.width / 2, 255, "hirebtn").setScale(0.75).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21);
-        this.employeeName = this.game.add.text(455, 55, "Game over", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
+        this.endWindowTitle = this.game.add.text(455, 55, "Game over", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
         this.hud.shopbtn.disableInteractive()
 
         this.restartBtn.on("pointerdown", () => {
@@ -76,7 +76,7 @@ class windowObject {
         this.opened = true;
         this.hud.closeshopdowbtn.destroy()
         this.menu = this.game.add.image(600, 5, 'windowBack').setOrigin(0, 0).setScale(0.6, 0.8).setScrollFactor(0).setScale(0.65, 0.25);
-        this.sportpopup = this.game.add.text(630, 25, 'The benefits of sport at work :\n \n - Improves team spirit\n - Reduces absenteeism by 30-40% \n - Increases employee s productivity and quality of work\n - Improves the attractiveness of your company to attract \n   the best profiles', { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
+        this.sportpopup = this.game.add.text(630, 25, "The benefits of sport at work :\n \n - Improves team spirit\n - Reduces absenteeism by 30-40% \n - Increases employee's productivity and quality of work\n - Improves the company's attractiveness to attract \n   the best profiles", { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
         this.closewindowbtn = this.game.add.image(975, 20, 'closeWindowBtn').setScale(0.4).setInteractive().setScrollFactor(0);
 
         this.closewindowbtn.on('pointerdown', function () {
@@ -102,7 +102,7 @@ class windowObject {
         this.opened = true;
         this.hud.closeshopdowbtn.destroy()
         this.menu = this.game.add.image(600, 5, 'windowBack').setOrigin(0, 0).setScale(0.6, 0.8).setScrollFactor(0).setScale(0.65, 0.25);
-        this.nappopup = this.game.add.text(630, 25, 'The benefits of napping at work:\n \n - Avoids decline in productivity after 4pm\n - 35% increase in productivity at the end of the day \n - Increases employee s productivity and quality of work\n - right after lunch and the optimal duration is 20 minutes ', { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
+        this.nappopup = this.game.add.text(630, 25, "The benefits of napping at work:\n \n - Avoids decline in productivity after 4pm\n - 35% increase in productivity at the end of the day \n - Increases employee's productivity and quality of work\n - Right after lunch, the optimal duration is 20 minutes", { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
         this.closewindowbtn = this.game.add.image(975, 20, 'closeWindowBtn').setScale(0.4).setInteractive().setScrollFactor(0);
 
         this.closewindowbtn.on('pointerdown', function () {
@@ -125,7 +125,7 @@ class windowObject {
         this.opened = true
         this.hud.closeshopdowbtn.destroy()
         this.menu = this.game.add.image(600, 5, 'windowBack').setOrigin(0, 0).setScale(0.6, 0.8).setScrollFactor(0).setScale(0.65, 0.25);
-        this.cafetpopup = this.game.add.text(630, 25, 'The benefits of a cafetaria at work:\n \n - Stress reducting\n -	Strenghening relationships between team members \n - Increase employee hapiness', { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
+        this.cafetpopup = this.game.add.text(630, 25, "The benefits of a cafetaria at work:\n \n - Stress reducting\n -	Strengthening relationships between team members \n - Increases employee's hapiness", { font: "14px Arial", fill: "Black" }).setOrigin(0, 0).setScrollFactor(0)
         this.closewindowbtn = this.game.add.image(975, 20, 'closeWindowBtn').setScale(0.4).setInteractive().setScrollFactor(0);
         this.closewindowbtn.on('pointerdown', function () {
             window.closeWindow();
@@ -306,16 +306,13 @@ class windowObject {
         // Listeners
         this.plant_button.on("pointerdown", () => shopManager.upgradeObject("plant"));
         this.sleep.on("pointerdown", function () {
-            window.bePopupNap()
             shopManager.buySleep()
 
         })
         this.kitchen.on("pointerdown", function () {
-            window.BePopupCafet()
             shopManager.buyKitchen()
         })
         this.sport.on("pointerdown", function () {
-            window.bePopupSport()
             shopManager.buySport()
         })
         this.ping_button.on("pointerdown", () => shopManager.buyPing())

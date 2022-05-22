@@ -160,15 +160,18 @@ let shopManager = (function () {
                         break;
                 }
                 dataManager.save(token, data);
-            } 
+            }
         },
 
         // Achat de la salle de sport
         buySport() {
             let isActive = data.shop.sport.active;
             if (!isActive) {
-                if (welfareGame.getPlayerMoney() > 1000) {
-                    welfareGame.payAmount(1000);
+                if (welfareGame.getPlayerMoney() > 2000) {
+                    mapManager.getHud().getWindow().bePopupSport();
+
+
+                    welfareGame.payAmount(2000);
                     data.shop.sport.active = true;
                     sportLayer.visible = true;
                     dataManager.save(token, data);
@@ -182,6 +185,8 @@ let shopManager = (function () {
             if (!isActive) {
                 if (welfareGame.getPlayerMoney() > 3500) {
                     welfareGame.payAmount(3500);
+                    mapManager.getHud().getWindow().BePopupCafet()
+
                     data.shop.kitchen.active = true;
                     kitchenLayer[0].visible = true;
                     kitchenLayer[1].visible = true;
@@ -196,12 +201,15 @@ let shopManager = (function () {
             if (!isActive) {
                 if (welfareGame.getPlayerMoney() > 2500) {
                     welfareGame.payAmount(2500);
+                    mapManager.getHud().getWindow().bePopupNap()
+
+
                     data.shop.sleep.active = true;
                     sleepLayer[0].visible = true;
                     sleepLayer[1].visible = true;
                     dataManager.save(token, data);
                 }
-            } 
+            }
         },
 
         // Achat de la table de ping-pong

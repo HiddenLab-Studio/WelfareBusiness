@@ -39,9 +39,14 @@ class hudObject {
 
     //Initialisation de l'interface utilisateur
     initializeUI() {
+
         let hud = this;
+
+        this.video = this.phaser.add.video(500, 320, 'intro').setScale(0.6).setVolume(0.05);
+        this.video.play();
+
         //Bouton play
-        this.startbtn = this.phaser.add.sprite(this.config.width * 0.5, 300, "button_play").setInteractive({ cursor: "pointer" }).setScrollFactor(0);
+        this.startbtn = this.phaser.add.sprite(this.config.width * 0.5, 350, "button_play").setInteractive({ cursor: "pointer" }).setScrollFactor(0);
         this.startbtn.on("pointerdown", async function () {
             this.destroy(); // Suppression du bouton start
             // Création de la map
@@ -52,6 +57,7 @@ class hudObject {
                 hud.window.closeWindow()
                 hud.welfareGame.startGame();
                 hud.changeActiveSpeed(1)
+                hud.video.destroy();
             });
         });
     }

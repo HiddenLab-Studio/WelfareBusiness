@@ -17,7 +17,7 @@ const config = {
 
 const phaser = new Phaser.Game(config);
 function preload() {
-    this.load.image('button_play', './public/assets/img/game/bouton_play.png');
+    this.load.image('button_play', './public/assets/img/game/hud/bouton_play.png');
     this.load.image('chaise', './public/assets/img/game/chaise_bureau.png');
     this.load.image('windowBack', './public/assets/img/game/HUD/fenetre.png');
     this.load.image('volumeMute', './public/assets/img/game/HUD/son_coupe.png');
@@ -71,6 +71,7 @@ function preload() {
     this.load.image('sport', './public/assets/img/game/hud/bouton_sport.png');
 
     this.load.image('hud_employed', './public/assets/img/game/hud/hud_employed.png');
+    this.load.video('intro', './public/assets/img/game/video.mp4');
 
     this.load.spritesheet('characterL', './public/assets/img/game/hud/perso_test.png', { frameWidth: 61, frameHeight: 50 });
     this.load.spritesheet('characterB', './public/assets/img/game/hud/perso_test.png', { frameWidth: 63, frameHeight: 50 });

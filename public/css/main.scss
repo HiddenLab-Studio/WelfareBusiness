@@ -17,6 +17,10 @@
   --fs-s: 1rem;
 }
 
+::selection {
+  color: lightblue;
+}
+
 @media (max-width: 40em){
   :root {
     --fs-error: 5rem;

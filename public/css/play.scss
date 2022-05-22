@@ -2,9 +2,25 @@
  *                      P L A Y
  *=====================================================*/
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121d27;
+  //background: url("../../public/assets/img/header/mainBackground.png") no-repeat;
+}
+
+body {
+  background-image: url("../assets/img/filter.png");
+  background-position: bottom;
+  background-attachment: fixed;
+}
+
 #phaser {
   display: flex;
   justify-content: center;
   margin: 100px 0 100px 0;
+  canvas {
+    border-radius: 10px;
+  }
 }
 

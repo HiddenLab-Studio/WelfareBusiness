@@ -55,5 +55,21 @@ router.post("/api/savedata", (req, res) => {
     }
 })
 
+router.post("/api/resetdata", (req, res) => {
+    if(req.session.login){
+        pool.getConnection((error, connection) => {
+            if(error) throw error;
+            pool.query("UPDATE users SET userData = ? WHERE username = ?", [JSON.stringify(defaultDataSchema), req.session.username], (error) => {
+                if(error) throw error;
+                connection.release();
+                res.send({text: "Your data has been successfully reset! (" + req.session.username + ")"})
+            })
+        })
+    } else {
+        req.session.guestData = defaultDataSchema;
+        res.send({text: "Your data has been successfully reset! (guest)"})
+    }
+})
+
 
 module.exports = router;

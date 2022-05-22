@@ -7,15 +7,16 @@ let dataManager = (function() {
     let username = undefined;
 
     let config = {
-        autoSave: false,
-        interval: 10000,
+        autoSave: true,
+        pause: false,
+        interval: 30000,
     }
 
     function autoSaveData(){
         if(config.autoSave){
             setInterval(function(){
                 //console.info("Auto save enabled!")
-                saveData(token, data);
+                if(!config.pause) saveData(token, data);
             }, config.interval)
         }
     }
@@ -53,12 +54,26 @@ let dataManager = (function() {
         }
     }
 
+    function resetData(access){
+        if(token === access){
+            fetch("/api/resetdata", {
+                method: "POST",
+                headers: new Headers({"Content-Type": "application/json"}),
+                body: undefined
+            })
+                .then(response => response.json())
+                .then((obj) => {
+                    console.info(obj.text);
+                })
+        }
+    }
+
     return {
         init(tileMap){
             if(!init){
                 map = tileMap;
                 if(config.autoSave) console.info("Auto save enabled!");
-                autoSaveData();
+                autoSaveData(false);
             }
         },
 
@@ -67,6 +82,8 @@ let dataManager = (function() {
         getData: () => data,
 
         // Setters
+        autoSavePause: () => config.pause = true,
+        reset: (access) => resetData(access),
         save: (access, data) => saveData(access, data),
         async load(access) {
             let result;

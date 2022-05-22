@@ -15,6 +15,10 @@
   --fs-s: 1rem;
 }
 
+::selection {
+  color: lightblue;
+}
+
 @media (max-width: 40em) {
   :root {
     --fs-error: 5rem;
@@ -27,7 +31,6 @@
     --fs-s: 0.85rem;
   }
 }
-
 @font-face {
   font-family: "Minecraft";
   src: url("../../public/assets/fonts/Minecraft.ttf") format("truetype");

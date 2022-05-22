@@ -11,6 +11,7 @@ class welfareBusiness {
         this.money = undefined;
         this.realProject = true;
         this.isNewMonthBool = false;
+        this.endWindowInit = false;
 
         this.time = 0;//+1 toutes les secondes
         this.date = {
@@ -22,8 +23,18 @@ class welfareBusiness {
     }
 
     isGameLost(){
-        if(this.money < -10000){
-            console.log("Partie perdue");
+        if(this.money <= -10000){
+            if(!this.endWindowInit) {
+                this.endWindowInit = true;
+                // On clear la save
+                dataManager.autoSavePause();
+                //dataManager.reset("1");
+                // Stop game time
+                this.setPause();
+                // Popup de fin de partie
+                let window = mapManager.getHud().getWindow();
+                window.createEndWindow();
+            }
         }
     }
 

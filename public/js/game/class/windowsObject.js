@@ -25,6 +25,18 @@ class windowObject {
         //this.music.play();
     }
 
+    createEndWindow() {
+        this.opened = true;
+        this.menu = this.game.add.image(this.config.width * 0.5, 270, "windowBack").setScale(0.6, 0.8).setScrollFactor(0).setDepth(20);
+        this.restartBtn = this.game.add.image(this.config.width / 2, 255, "hirebtn").setScale(0.75).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21);
+        this.employeeName = this.game.add.text(455, 55, "Game over", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
+        this.hud.shopbtn.disableInteractive()
+
+        this.restartBtn.on("pointerdown", () => {
+            window.location.href = "/play";
+        })
+    }
+
     //Ferme la fenêtre
     closeWindow() {
         if (this.opened) {
@@ -52,7 +64,7 @@ class windowObject {
                     break;
             }
             this.menu.destroy();
-            this.closewindowbtn.destroy();
+            if(this.closewindowbtn !== undefined) this.closewindowbtn.destroy();
         }
         this.windowType = undefined
         this.opened = false;
@@ -318,6 +330,7 @@ class windowObject {
             hud.pausebtn.setInteractive()
             hud.playbtn.setInteractive()
             hud.avancerapidebtn.setInteractive()
+            hud.settingsbtn.setInteractive();
         })
 
     }

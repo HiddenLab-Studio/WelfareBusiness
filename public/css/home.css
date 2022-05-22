@@ -24,33 +24,30 @@ main {
   margin: auto;
   font-family: "VAGRbLAC", sans-serif;
 }
-
 main .welcome__container {
   width: 75%;
   display: flex;
   flex-direction: column;
   margin: 75px auto 75px auto;
 }
-
 main .welcome__container h1 {
   text-align: center;
   font-size: var(--fs-xxl);
   color: white;
-  letter-spacing: 7px;
+  letter-spacing: 5px;
   font-family: "Minecraft", sans-serif;
 }
-
-h2 {
+main .welcome__container h2 {
   text-align: left;
   font-size: var(--fs-l);
   color: white;
-  letter-spacing: 7px;
+  letter-spacing: 5px;
   font-family: "Minecraft", sans-serif;
 }
-
 main .welcome__container p {
   text-align: justify;
   font-size: var(--fs-sm);
+  line-height: 1.75rem;
   color: white;
 }
 

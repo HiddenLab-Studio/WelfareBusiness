@@ -1,4 +1,5 @@
 window.onload = function(){
+    AOS.init()
     let showPasswordBtn = document.getElementsByClassName("show__password");
     for (const showPasswordBtnElement of showPasswordBtn) {
         showPasswordBtnElement.addEventListener("click", () => {

@@ -46,7 +46,11 @@
    ```
    nodemon app
    ```
-
+   ou 
+   ```
+   node server\app.js
+   ```
+   
 ## Libs
 
 [Animate.css](https://animate.style/)

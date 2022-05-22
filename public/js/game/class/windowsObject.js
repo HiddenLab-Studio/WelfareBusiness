@@ -28,7 +28,7 @@ class windowObject {
     createEndWindow() {
         this.opened = true;
         this.menu = this.game.add.image(this.config.width * 0.5, 270, "windowBack").setScale(0.6, 0.8).setScrollFactor(0).setDepth(20);
-        this.restartBtn = this.game.add.image(this.config.width / 2, 255, "hirebtn").setScale(0.75).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21);
+        this.restartBtn = this.game.add.image(this.config.width / 2, 255, "restartbtn").setScale(0.75).setScrollFactor(0).setInteractive({ cursor: "pointer" }).setDepth(21);
         this.endWindowTitle = this.game.add.text(455, 55, "Game over", { font: "bold 18px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21);
         this.hud.shopbtn.disableInteractive()
 

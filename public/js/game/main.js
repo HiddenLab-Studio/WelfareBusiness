@@ -62,6 +62,7 @@ function preload() {
     this.load.image('bouton_eau', './public/assets/img/game/hud/bouton_eau.png');
     this.load.image('shop_hud', './public/assets/img/game/hud/boutique_hud.png');
     this.load.image('hirebtn', './public/assets/img/game/hud/hireButton.png');
+    this.load.image('restartbtn', './public/assets/img/game/hud/restartButton.png');
     this.load.image('production', './public/assets/img/game/hud/production.png');
 
     this.load.image('sleep', './public/assets/img/game/hud/bouton_detente.png');

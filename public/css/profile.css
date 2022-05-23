@@ -138,5 +138,35 @@ main .profile__container p {
   font-size: var(--fs-sm);
   color: white;
 }
+main .profile__logout__container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 50px 0 50px 0;
+}
+main .profile__logout__container .profile__logout__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+@media (max-width: 40em) {
+  main .profile__logout__container .profile__logout__button {
+    width: 75%;
+  }
+}
+main .profile__logout__container .profile__logout__button button {
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  border: solid #e74c3c 1px;
+  border-radius: 10px;
+  background-color: #e74c3c;
+  color: white;
+  font-size: var(--fs-m);
+  letter-spacing: 2px;
+}
 
 /*# sourceMappingURL=profile.css.map */

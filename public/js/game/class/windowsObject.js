@@ -166,7 +166,7 @@ class windowObject {
 
         //Titre
         this.settingsTitle = this.game.add.text(this.config.width / 2, 55, "General settings", { font: "bold 18px Arial", fill: "#000000" }).setOrigin().setScrollFactor(0).setDepth(21);
-
+    
         //Salaire
         this.generalSalary = {
             title: this.game.add.text(460, 100, "Average salary", { font: "bold 15px Arial", fill: "#000000" }).setScrollFactor(0).setDepth(21),

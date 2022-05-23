@@ -85,6 +85,8 @@ class windowObject {
             hud.pausebtn.setInteractive()
             hud.playbtn.setInteractive()
             hud.avancerapidebtn.setInteractive()
+            hud.settingsbtn.setInteractive();
+
         });
 
     }
@@ -110,6 +112,8 @@ class windowObject {
             hud.pausebtn.setInteractive()
             hud.playbtn.setInteractive()
             hud.avancerapidebtn.setInteractive()
+            hud.settingsbtn.setInteractive();
+
         });
     }
     closepopupNap() {
@@ -132,6 +136,8 @@ class windowObject {
             hud.pausebtn.setInteractive()
             hud.playbtn.setInteractive()
             hud.avancerapidebtn.setInteractive()
+            hud.settingsbtn.setInteractive();
+
         });
     }
     closepopupCafet(){

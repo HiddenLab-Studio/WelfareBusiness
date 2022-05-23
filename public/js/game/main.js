@@ -31,7 +31,7 @@ function preload() {
     this.load.image('pause', './public/assets/img/game/HUD/bouton_pause.png');
     this.load.image('pause_actif', './public/assets/img/game/HUD/bouton_pause_actif.png');
     this.load.image('play_actif', './public/assets/img/game/HUD/bouton_play_actif.png');
-    this.load.image('play', './public/assets/img/game/HUD/bouton_play.png');
+    this.load.image('play', './public/assets/img/game/HUD/bouton_play_temps.png');
     this.load.image('avance_rapide_actif', './public/assets/img/game/HUD/bouton_acc_actif.png');
     this.load.image('avance_rapide', './public/assets/img/game/HUD/bouton_acc.png');
     this.load.image('closeWindowBtn', './public/assets/img/game/HUD/croix.png');

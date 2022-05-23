@@ -133,18 +133,19 @@ function update(time, delta) {
                 }
                 hud.temporaryMessageWageLoop();
                 hud.temporaryMessageEndOfProjectLoop();
+                welfareBusinessGame.isGameLost();
+                hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
+                hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
+                hud.updateDate(welfareBusinessGame.getDate());
+
 
             }
 
 
         }
-        hud.updateMoneyCounter(welfareBusinessGame.getPlayerMoney());
-        hud.updateHappinessCounter(welfareBusinessGame.getGlobalHappiness());
-        hud.updateDate(welfareBusinessGame.getDate());
         hud.updateEmployeeWindow();
         hud.updateShopWindow();
         hud.updateSettingsWindow();
-        welfareBusinessGame.isGameLost();
 
         if (hud.playerB.length > 0) {
             for (let i = 0; i < hud.playerB.length; i++) {
